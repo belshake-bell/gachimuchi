@@ -1125,30 +1125,108 @@
 %% 楽譜上の文字(graphicx，musixtex依存)
 %%==============================================================================
 %    \end{macrocode}
+% \begin{macro}{\zchar}
+%   \changes{v1.1}{2020/02/23}{\file{gachimuchipatch.dtx}から説明を移植．
+%                              また定義済みかを確認しないように
+%                             （実際これが先に読まれるので）．}
+% \cmd{\zchar}は次のように定義されています．
+% \begin{verbatim}
+% \def\zchar#1#2{\check@staff\raise#1\internote\rlap{#2}\fi}
+% \end{verbatim}
+%
+% しかしこの定義では第2引数を受け取る前にカテゴリーコードが確定してしまうため，
+% \file{pxrubrica}パッケージでのルビがうまくいきませんでした．
+% これを修正します．
+% また内部動作を分離することで再利用しやすくします．
 %    \begin{macrocode}
-\ifx\@zchar\@undefined
-  \def\zchar{\check@staff\begingroup\endcatcodesmusic\@zchar}
-  \def\lchar{\check@staff\begingroup\endcatcodesmusic\@lchar}
-  \def\cchar{\check@staff\begingroup\endcatcodesmusic\@cchar}
-  \def\@zchar#1#2{\raise#1\internote\rlap{#2}\endgroup\fi}
-  \def\@lchar#1#2{\raise#1\internote\llap{#2}\endgroup\fi}
-  \def\@cchar#1#2{\hroff{\raise#1\internote\lrlap{#2}}\endgroup\fi}
-\fi
+\def\zchar{\check@staff\begingroup\endcatcodesmusic\@zchar}
 %    \end{macrocode}
-% \begin{macro}{\zchars}
-% \begin{macro}{\lchars}
-% \begin{macro}{\cchars}
-% \begin{macro}{\lrchars}
+% \end{macro}
+% \begin{macro}{\@zchar}
+% \cmd{\zchar}の内部動作です．
 %    \begin{macrocode}
-\newcommand{\zchars}{\check@staff\begingroup\endcatcodesmusic\small\@zchar}
-\newcommand{\lchars}{\check@staff\begingroup\endcatcodesmusic\small\@lchar}
-\newcommand{\cchars}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
-\newcommand{\lrchars}{\check@staff\begingroup\endcatcodesmusic\small\@lrchar}
+\def\@zchar#1#2{\raise#1\internote\rlap{#2}\endgroup\fi}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lchar}
+% \cmd{\lchar}も同様に内部動作を分離します．
+%    \begin{macrocode}
+\def\lchar{\check@staff\begingroup\endcatcodesmusic\@lchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@lchar}
+% \cmd{\lchar}の内部動作です．
+%    \begin{macrocode}
+\def\@lchar#1#2{\raise#1\internote\llap{#2}\endgroup\fi}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\cchar}
+% \cmd{\cchar}も同様に内部動作を分離します．
+%    \begin{macrocode}
+\def\cchar{\check@staff\begingroup\endcatcodesmusic\@cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@cchar}
+% \cmd{\cchar}の内部動作です．
+%    \begin{macrocode}
+\def\@cchar#1#2{\hroff{\raise#1\internote\lrlap{#2}}\endgroup\fi}
 
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\lrchar}\marg{pitch}\marg{\&-separated-text}\par\noindent
+% タブ記号\verb!&!で分割したテキストに対して，その前後で右詰め・左詰めにした
+% テキストを出力します．
+% 動作としては\cmd{\lchar}\marg{pitch}\marg{left-text}%
+% \cmd{\zchar}\marg{pitch}\marg{right-text}とほぼ同じです
+% （ただし\meta{left-text}および\meta{right-text}は
+%   それぞれ\verb!&!の左・右のテキスト）
+%    \begin{macrocode}
+\newcommand{\lrchar}{\begingroup\endcatcodesmusic\catcode\`&=4\@lrchar}
+%    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\@lrchar}
+%    \begin{macrocode}
+\newcommand{\@lrchar}[2]{%
+  \def\reserved@a{#1}\def\reserved@b{#2}%
+  \expandafter\bell@lrchar\reserved@b\af@char
+  \endgroup\fi%
+}
+%    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\bell@lrchar}
+%    \begin{macrocode}
+\def\bell@lrchar#1&#2\af@char{\lchar{\reserved@a}{#1}\zchar{\reserved@a}{#2}}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\zchars}
+% \cmd{\zchar}の\cmd{\small}版です．
+% 内部で\cmd{@zchar}を読み込んでいます．
+%    \begin{macrocode}
+\newcommand{\zchars}{\check@staff\begingroup\endcatcodesmusic\small\@zchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lchars}
+% \cmd{\lchar}の\cmd{\small}版です．
+% 内部で\cmd{@lchar}を読み込んでいます．
+%    \begin{macrocode}
+\newcommand{\lchars}{\check@staff\begingroup\endcatcodesmusic\small\@lchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\cchars}
+% \cmd{\cchar}の\cmd{\small}版です．
+% 内部で\cmd{@cchar}を読み込んでいます．
+%    \begin{macrocode}
+\newcommand{\cchars}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lrchars}
+% \cmd{\lrchar}の\cmd{\small}版です．
+% 内部で\cmd{@lrchar}を読み込んでいます．
+%    \begin{macrocode}
+\newcommand{\lrchars}{\check@staff\begingroup\endcatcodesmusic\small\@lrchar}
+
+%    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\gcmc@Factory@chars}
 %    \begin{macrocode}
@@ -1168,25 +1246,38 @@
 }
 
 %    \end{macrocode}
+%    \begin{macrocode}
+\gcmc@Factory@chars{z}
+\gcmc@Factory@chars{l}
+\gcmc@Factory@chars{c}
+\gcmc@Factory@chars{lr}
+
+%    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\zcharsc}
-% \begin{macro}{\lcharsc}
-% \begin{macro}{\ccharsc}
-% \begin{macro}{\lrcharsc}
 %    \begin{macrocode}
 \newcommand{\zcharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lcharsc}
+%    \begin{macrocode}
 \newcommand{\lcharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ccharsc}
+%    \begin{macrocode}
 \newcommand{\ccharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lrcharsc}
+%    \begin{macrocode}
 \newcommand{\lrcharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchar}
 
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \end{macro}
 % \begin{macro}{\gcmc@Factory@charsc}
 %    \begin{macrocode}
@@ -1208,46 +1299,37 @@
 %    \end{macrocode}
 % \end{macro}
 %    \begin{macrocode}
-\gcmc@Factory@chars{z}
-\gcmc@Factory@chars{l}
-\gcmc@Factory@chars{c}
-\gcmc@Factory@chars{lr}
-
 \gcmc@Factory@charsc{z}
 \gcmc@Factory@charsc{l}
 \gcmc@Factory@charsc{c}
 \gcmc@Factory@charsc{lr}
 
 %    \end{macrocode}
-% \begin{macro}{\lrchar}
-% \begin{macro}{\@lrchar}
-% \begin{macro}{\bell@lrchar}
-%    \begin{macrocode}
-\newcommand{\lrchar}{\begingroup\endcatcodesmusic\catcode\`&=4\@lrchar}
-\newcommand{\@lrchar}[2]{%
-  \def\reserved@a{#1}\def\reserved@b{#2}%
-  \expandafter\bell@lrchar\reserved@b\af@char
-  \endgroup\fi%
-}
-\def\bell@lrchar#1&#2\af@char{\lchar{\reserved@a}{#1}\zchar{\reserved@a}{#2}}
-
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
+% \begin{macro}{\Startpiece}
 %    \begin{macrocode}
 \newcommand{\Startpiece}{\startpiece\addspace\afterruleskip}
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\octnumberup}
 %    \begin{macrocode}
 \def\octnumberup{%
   \octnumberdefault\scalebox{0.8}{\txtfont va}\vrule width 0pt height2ex}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\octnumberdefault}
+%    \begin{macrocode}
 \def\octnumberdefault{%
   \smallppff8\nobreak}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\octnumberdown}
+%    \begin{macrocode}
 \def\octnumberdown{%
   \octnumberdefault\scalebox{0.8}{\txtfont vb}\vrule width 0pt depth \Internote}
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\ZCHORD}
 %    \begin{macrocode}
 %%==============================================================================
