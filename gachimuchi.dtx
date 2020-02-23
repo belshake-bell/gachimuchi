@@ -1,0 +1,653 @@
+% ^^A -*- japanese-latex -*-
+%
+\ifx\epTeXinputencoding\undefined\else
+  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
+\fi
+%
+% \iffalse
+%
+%   gachimuchi.dtx
+%
+%<*driver>
+\documentclass[uplatex,a4paper,12Q,dvipdfmx]{jsarticle}
+\usepackage{doc}
+\usepackage{ifptex}
+\ifptex
+  \xspcode"5C=1 %% \
+  \xspcode"22=1 %% "
+\fi
+\addtolength{\textwidth}{-1in}
+\addtolength{\evensidemargin}{1in}
+\addtolength{\oddsidemargin}{1in}
+\addtolength{\marginparwidth}{1in}
+\setlength\marginparpush{0pt}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{hyperref}
+\ifptex
+  \usepackage{pxjahyper}
+\fi
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\definecolor{myblue}{rgb}{0,0,0.75}
+\definecolor{mygreen}{rgb}{0,0.45,0}
+\hypersetup{colorlinks,hyperfootnotes=false,linkcolor=myblue,urlcolor=mygreen}
+\CodelineNumbered
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges % Gather update information
+\setcounter{StandardModuleDepth}{1}
+
+\newrobustcmd*\file[1]{\mbox{\ttfamily#1}}
+\newcommand*{\Lcount}[1]{\textsl{\small#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\newcounter{@clineno}
+\def\mlineplus#1{\setcounter{@clineno}{\arabic{CodelineNo}}%
+   \addtocounter{@clineno}{#1}\arabic{@clineno}}
+\def\cmd#1{\cs{\expandafter\cmd@to@cs\string#1}}
+\def\cmd@to@cs#1#2{\char\number`#2\relax}
+\DeclareRobustCommand{\cs}[1]{\texttt{\char`\\#1}}
+\providecommand{\marg}[1]{%
+  {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
+\providecommand{\oarg}[1]{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}}
+
+\GetFileInfo{gachimuchi.dtx}
+\begin{document}
+  \DocInput{gachimuchi.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%  \changes{v1.0}{2019/10/29}
+%    {make this .dtx file}
+% \iffalse jsarticle/jsbook commands \fi
+% \DoNotIndex{\@M,\@afterindextrue,\@chapapp,\@chappos,\@dotsep}
+% \DoNotIndex{\@dottedtocline,\@evenfoot,\@evenhead,\@oddfoot,\@oddhead}
+% \DoNotIndex{\@gobbletwo}
+% \DoNotIndex{\@highpenalty}
+% \DoNotIndex{\@listI,\@listi,\@lnumwidth,\@pnumwidth}
+% \DoNotIndex{\@makechapterhead,\@makeschapterhead}
+% \DoNotIndex{\@minus,\@plus,\@mkboth}
+% \DoNotIndex{\@nobreaktrue,\@nobreakfalse}
+% \DoNotIndex{\@restonecoltrue,\@restonecolfalse}
+% \DoNotIndex{\@starttoc}
+% \DoNotIndex{\chapter,\section,\subsection,\subsubsection}
+%
+% \DoNotIndex{\Cdp,\Cvs}
+% \DoNotIndex{\if@twocolumn}
+% \DoNotIndex{\headfont,\inv@mag,\jsc@mmm,\jsc@mpt}
+% \DoNotIndex{\textbullet}
+%
+% \DoNotIndex{\counterwithout}
+%
+% \iffalse etoolbox commands \fi
+% \DoNotIndex{\newrobustcmd}
+%
+% \iffalse BibLaTeX commands \fi
+% \DoNotIndex{\addcolon}
+% \DoNotIndex{\bibpagerefpunct}
+% \DoNotIndex{\DeclareBibliographyDriver,\DeclareFieldFormat}
+% \DoNotIndex{\DefineBibliographyStrings}
+% \DoNotIndex{\iffieldundef}
+% \DoNotIndex{\mkbibacro}
+% \DoNotIndex{\mkbibbold}
+% \DoNotIndex{\newblock,\newunit}
+% \DoNotIndex{\printdelim,\printfield,\printlist}
+% \DoNotIndex{\setunit}
+% \DoNotIndex{\usebibmacro}
+%
+% \iffalse MusiXTeX commands \fi
+% \DoNotIndex{\setmaxinstruments,\setmaxgroups,\setmaxinstruments}
+% \DoNotIndex{\setmaxslurs}
+% \DoNotIndex{\maxinstruments}
+%
+% \iffalse TeX commands \fi
+% \DoNotIndex{\ ,\-,\/}
+% \DoNotIndex{\above,\abovedisplayshortskip,\abovedisplayskip}
+% \DoNotIndex{\abovewithdelims,\accent,\adjdemerits}
+% \DoNotIndex{\advance,\afterassignment,\aftergroup}
+% \DoNotIndex{\atop,\atopwithdelims}
+% \DoNotIndex{\badness,\baselineskip,\batchmode}
+% \DoNotIndex{\begingroup,\belowdisplayshortskip,\belowdisplayskip}
+% \DoNotIndex{\binoppenalty,\botmark,\box}
+% \DoNotIndex{\boxmaxdepth,\brokenpenalty}
+% \DoNotIndex{\catcode,\char,\chardef}
+% \DoNotIndex{\cleaders,\closein,\closeout}
+% \DoNotIndex{\clubpenalty,\copy,\count}
+% \DoNotIndex{\countdef,\cr,\crcr,\csname}
+% \DoNotIndex{\day,\cr,\crcr,\csname}
+% \DoNotIndex{\countdef,\deadcycles,\def,\defaulthyphenchar}
+% \DoNotIndex{\defaultskewchar,\delcode,\delimiter,\delimiterfactor}
+% \DoNotIndex{\delimitershortfall,\dimen,\dimendef,\discretionary}
+% \DoNotIndex{\displayindent,\displaylimits,\displaystyle,\displaywidowpenalty}
+% \DoNotIndex{\displaywidth,\divide,\doublehyphendemerits,\dp,\dump}
+% \DoNotIndex{\edef,\else,\emergencystretch,\end}
+% \DoNotIndex{\endcsname,\endgroup,\endinput,\endlinechar}
+% \DoNotIndex{\eqno,\errhelp,\errmessage,\errorcontextlines}
+% \DoNotIndex{\errorstopmode,\escapechar,\everycr,\everydisplay}
+% \DoNotIndex{\everyhbox,\everyjob,\everymath,\everypar}
+% \DoNotIndex{\everyvbox,\exhyphenpenalty,\expandafter}
+% \DoNotIndex{\fam,\fi,\finalhyphendemerits,\firstmark}
+% \DoNotIndex{\floatingpenalty,\font,\fontdimen,\fontname,\futurelet}
+% \DoNotIndex{\gdef,\global,\globaldefs}
+% \DoNotIndex{\halign,\hangafter,\hangindent,\hbadness}
+% \DoNotIndex{\hbox,\hfil,\hfill,\hfilneg}
+% \DoNotIndex{\hfuzz,\hoffset,\holdinginserts,\hrule}
+% \DoNotIndex{\hsize,\hskip,\hss,\ht}
+% \DoNotIndex{\hyphenation,\hyphenchar,\hyphenpenalty}
+% \DoNotIndex{\if,\ifcase,\ifcat,\ifdim}
+% \DoNotIndex{\ifeof,\iffalse,\ifhbox,\ifhmode}
+% \DoNotIndex{\ifinner,\ifmmode,\ifnum,\ifodd}
+% \DoNotIndex{\iftrue,\ifvbox,\ifvmode,\ifvoid}
+% \DoNotIndex{\ifx,\ignorespaces,\immediate,\indent}
+% \DoNotIndex{\input,\inputlineno,\insert,\insertpenalties,\interlinepenalty}
+% \DoNotIndex{\jobname}
+% \DoNotIndex{\kern}
+% \DoNotIndex{\language,\lastbox,\lastkern,\lastpenalty}
+% \DoNotIndex{\lastskip,\lccode,\leaders,\left}
+% \DoNotIndex{\lefthyphenmin,\leftskip,\leqno,\let}
+% \DoNotIndex{\limits,\linepenalty,\lineskip,\lineskiplimit}
+% \DoNotIndex{\long,\looseness,\lower,\lowercase}
+% \DoNotIndex{\mag,\mark,\mathaccent,\mathbin}
+% \DoNotIndex{\mathchar,\mathchardef,\mathchoice,\mathclose}
+% \DoNotIndex{\mathcode,\mathinner,\mathop,\mathopen}
+% \DoNotIndex{\mathord,\mathpunct,\mathrel,\mathsurround}
+% \DoNotIndex{\maxdeadcycles,\maxdepth,\meaning,\medmuskip}
+% \DoNotIndex{\message,\mkern,\month,\moveleft}
+% \DoNotIndex{\moveright,\mskip,\multiply,\muskip,\muskipdef}
+% \DoNotIndex{\newlinechar,\noalign,\noboundary,\noexpand}
+% \DoNotIndex{\noindent,\nolimits,\nonscript,\nonstopmode}
+% \DoNotIndex{\nulldelimiterspace,\nullfont,\number}
+% \DoNotIndex{\omit,\openin,\openout,\or}
+% \DoNotIndex{\outer,\output,\outputpenalty,\over}
+% \DoNotIndex{\overfullrule,\overline,\overwithdelims}
+% \DoNotIndex{\pagedepth,\pagefilllstretch,\pagefillstretch,\pagefilstretch}
+% \DoNotIndex{\pagegoal,\pageshrink,\pagestretch,\pagetotal}
+% \DoNotIndex{\par,\parfillskip,\parindent,\parshape}
+% \DoNotIndex{\parskip,\patterns,\pausing,\penalty}
+% \DoNotIndex{\postdisplaypenalty,\predisplaypenalty,\predisplaysize}
+% \DoNotIndex{\pretolerance,\prevdepth,\prevgraf}
+% \DoNotIndex{\radical,\raise,\read,\relax}
+% \DoNotIndex{\relpenalty,\right,\righthyphenmin,\rightskip,\romannumeral}
+% \DoNotIndex{\scriptfont,\scriptscriptfont,\scriptscriptstyle,\scriptspace}
+% \DoNotIndex{\scriptstyle,\scrollmode,\setbox,\setlanguage}
+% \DoNotIndex{\sfcode,\shipout,\show,\showbox}
+% \DoNotIndex{\showboxbreadth,\showboxdepth,\showlists,\showthe}
+% \DoNotIndex{\skewchar,\skip,\skipdef,\spacefactor}
+% \DoNotIndex{\spaceskip,\span,\special,\splitbotmark}
+% \DoNotIndex{\splitfirstmark,\splitmaxdepth,\splittopskip,\string}
+% \DoNotIndex{\tabskip,\textfont,\textstyle,\the}
+% \DoNotIndex{\thickmuskip,\thinmuskip,\time,\toks}
+% \DoNotIndex{\toksdef,\tolerance,\topmark,\topskip}
+% \DoNotIndex{\tracingcommands,\tracinglostchars,\tracingmacros,\tracingonline}
+% \DoNotIndex{\tracingoutput,\tracingpages,\tracingparagraphs,\tracingrestores}
+% \DoNotIndex{\tracingstats}
+% \DoNotIndex{\uccode,\uchyph,\underline,\unhbox}
+% \DoNotIndex{\unhcopy,\unkern,\unpenalty,\unskip}
+% \DoNotIndex{\unvbox,\unvcopy,\uppercase}
+% \DoNotIndex{\vadjust,\valign,\vbadness,\vbox}
+% \DoNotIndex{\vcenter,\vfil,\vfill,\vfilneg}
+% \DoNotIndex{\vfuzz,\voffset,\vrule,\vsize}
+% \DoNotIndex{\vskip,\vsplit,\vss,\vtop}
+% \DoNotIndex{\wd,\widowpenalty,\write}
+% \DoNotIndex{\xdef,\xleaders,\xspaceskip}
+% \DoNotIndex{\year}
+
+% \iffalse e-TeX commands \fi
+% \DoNotIndex{\protected,\detokenize,\unexpanded}
+% \DoNotIndex{\readline,\scantokens}
+% \DoNotIndex{\eTeXrevision,\eTeXversion,\currentgrouplevel,\currentgrouptype}
+% \DoNotIndex{\ifcsname,\ifdefined,\lastnodetype}
+% \DoNotIndex{\marks}
+% \DoNotIndex{\beginL,\beginR,\endL,\endR}
+% \DoNotIndex{\TeXXeTstate,\predisplaydirection}
+% \DoNotIndex{\interactionmode,\showgroups,\showtokens}
+% \DoNotIndex{\tracingscantokens,\tracinggroups}
+% \DoNotIndex{\everyeof,\middle,\unless}
+%
+% \iffalse LaTeX commands \fi
+% \DoNotIndex{\LoadClassWithOptions,\RequirePackage,\DeclareOption,\ProcessOptions}
+% \DoNotIndex{\NeedsTeXFormat,\ProvidesClass}
+% \DoNotIndex{\newcommand,\renewcommand,\newif}
+% \DoNotIndex{\DeclareTextFontCommand,\fontfamily,\fontseries}
+% \DoNotIndex{\quad,\newif}
+% \DoNotIndex{\addtolength}
+%
+% \DoNotIndex{\@,\@@par,\@beginparpenalty,\@empty}
+% \DoNotIndex{\@flushglue,\@gobble,\@input}
+% \DoNotIndex{\@makefnmark,\@makeother,\@maketitle}
+% \DoNotIndex{\@namedef,\@ne,\@spaces,\@tempa}
+% \DoNotIndex{\@tempb,\@tempswafalse,\@tempswatrue}
+% \DoNotIndex{\@thanks,\@thefnmark,\@topnum}
+% \DoNotIndex{\@@,\@elt,\@forloop,\@fortmp,\@gtempa,\@totalleftmargin}
+% \DoNotIndex{\",\/,\@ifundefined,\@nil,\@verbatim,\@vobeyspaces}
+% \DoNotIndex{\|,\~,\ ,\active,\advance,\aftergroup,\if@inlabel,\if@tempswa,\if@twocolumn}
+% \DoNotIndex{\bgroup,\egroup,\begingroup,\endgroup}
+% \DoNotIndex{\endtrivlist,\documentstyle,\dospecials,\fnsymbol,\futurelet}
+% \DoNotIndex{\ignorespaces,\index,\item}
+% \DoNotIndex{\jobname,\kern,\leavevmode,\leftskip,\llap,\lower}
+% \DoNotIndex{\m@ne,\next,\newpage,\nobreak,\noexpand,\nonfrenchspacing}
+% \DoNotIndex{\obeylines,\or,\protect,\raggedleft,\rightskip,\rm,\sc}
+% \DoNotIndex{\setcounter,\small,\space,\strut}
+% \DoNotIndex{\strutbox}
+% \DoNotIndex{\thefootnote,\thispagestyle,\topmargin,\trivlist,\tt}
+% \DoNotIndex{\twocolumn,\vss,\vtop,\xdef,\z@}
+% \DoNotIndex{\,,\@bsphack,\@esphack,\@noligs,\@vobeyspaces,\@xverbatim}
+% \DoNotIndex{\`,\catcode,\end,\escapechar,\frenchspacing,\glossary}
+% \DoNotIndex{\hangindent,\hfil,\hfill,\hskip,\hspace,\ht,\it,\langle}
+% \DoNotIndex{\leaders,\long,\makelabel,\marginpar,\markboth,\mathcal,\mathcode}
+% \DoNotIndex{\mathsurround,\mbox,\newcount,\newdimen,\newskip}
+% \DoNotIndex{\nopagebreak}
+% \DoNotIndex{\parfillskip,\parindent,\parskip,\penalty,\raise,\rangle}
+% \DoNotIndex{\section,\setlength,\TeX,\topsep,\underline,\unskip,\verb}
+% \DoNotIndex{\vskip,\vspace,\widetilde,\\,\%,\@date,\@defpar}
+% \DoNotIndex{\[,\{,\},\]}
+% \DoNotIndex{\count@,\loop,\today,\uppercase,\uccode}
+% \DoNotIndex{\baselineskip,\begin,\tw@}
+% \DoNotIndex{\a,\b,\c,\d,\e,\f,\g,\h,\i,\j,\k,\l,\m,\n,\o,\p,\q}
+% \DoNotIndex{\r,\s,\t,\u,\v,\w,\x,\y,\z,\A,\B,\C,\D,\E,\F,\G,\H}
+% \DoNotIndex{\I,\J,\K,\L,\M,\N,\O,\P,\Q,\R,\S,\T,\U,\V,\W,\X,\Y,\Z}
+% \DoNotIndex{\1,\2,\3,\4,\5,\6,\7,\8,\9,\0}
+% \DoNotIndex{\!,\#,\$,\&,\',\(,\),\+,\.,\:,\;,\<,\=,\>,\?,\_,\ }
+% \DoNotIndex{\discretionary,\immediate,\makeatletter,\makeatother}
+% \DoNotIndex{\meaning,\newenvironment,\par,\relax,\renewenvironment}
+% \DoNotIndex{\repeat,\scriptsize,\selectfont,\the,\undefined}
+% \DoNotIndex{\arabic,\do,\makeindex,\null,\number,\show,\write,\@ehc}
+% \DoNotIndex{\@author,\@ehc,\@ifstar,\@sanitize,\@title,\everypar}
+% \DoNotIndex{\if@minipage,\if@restonecol}
+% \DoNotIndex{\lccode,\newtoks,\onecolumn,\openin,\p@,\SelfDocumenting}
+% \DoNotIndex{\settowidth,\@resetonecoltrue,\@resetonecolfalse,\bf}
+% \DoNotIndex{\clearpage,\closein,\lowercase,\@inlabelfalse}
+% \DoNotIndex{\selectfont,\mathcode,\newmathalphabet}
+% \DoNotIndex{\rmdefault,\bfdefault}
+%
+%
+% \title{gachimuchi}
+% \author{bell}
+% \date{\filedate}
+% \maketitle
+% \tableofcontents
+%
+% \MakeShortVerb{\|}
+%
+% \section*{はじめに}
+%
+%
+% \StopEventually{}
+%
+%
+% 
+%
+%    \begin{macrocode}
+%<*class>
+%%=============================================================================%
+%%                                                                             %
+%%   GGGGG          A          CCCCC    H       H    IIIII                     %
+%%  G     G        A A        C     C   H       H      I                       %
+%% G       G      A   A      C       C  H       H      I                       %
+%% G             A     A     C          H       H      I                       %
+%% G            A       A    C          HHHHHHHHH      I     --------          %
+%% G     GGGG   AAAAAAAAA    C          H       H      I                       %
+%% G       G    A       A    C       C  H       H      I                       %
+%%  G     GG    A       A     C     C   H       H      I                       %
+%%   GGGGG G    A       A      CCCCC    H       H    IIIII                     %
+%%                                                                             %
+%%                M         M   UUU     UUU    CCCCC    H       H    IIIII     %
+%%                MM       MM    U       U    C     C   H       H      I       %
+%%                M M     M M    U       U   C       C  H       H      I       %
+%%                M M     M M    U       U   C          H       H      I       %
+%%                M  M   M  M    U       U   C          HHHHHHHHH      I       %
+%%                M  M   M  M    U       U   C          H       H      I       %
+%%                M   M M   M    U       U   C       C  H       H      I       %
+%%                M   M M   M     U     U     C     C   H       H      I       %
+%%                M    M    M      UUUUU       CCCCC    H       H    IIIII     %
+%%                                                                             %
+%%=============================================================================%
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesClass{gachimuchi}[2020/01/21 Gachimuchi Koza Class]
+%    \end{macrocode}
+% \section{おまじないとか}
+%    \begin{macrocode}
+\LoadClassWithOptions{jsbook}
+
+\RequirePackage{iftex}
+\RequirePackage{ifptex}
+\RequirePackage{chngcntr}
+\RequirePackage{comment}
+\ifptex
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage{lmodern}
+  \RequirePackage[deluxe]{otf}
+\fi
+\ifluatex
+  \RequirePackage[no-math]{fontspec}
+  \usepackage{luatexja-fontspec}
+\fi
+
+\newif\ifgcmc@fourty \gcmc@fourtyfalse
+\newif\ifgcmc@defaultbook \gcmc@defaultbookfalse
+\DeclareOption{loadMacro}{\RequirePackage{gachimuchimacro}}
+\DeclareOption{loadPatch}{\AtEndPreamble{\RequirePackage{gachimuchipatch}}}
+\DeclareOption{fourty}{\gcmc@fourtytrue}
+\DeclareOption{defaultbook}{\gcmc@defaultbooktrue}
+\ProcessOptions\relax
+
+%    \end{macrocode}
+% \section{マクロ定義}
+%    \begin{macrocode}
+%%==============================================================================
+%% マクロ定義
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\@seccntformat}
+% 節見出しの形式を再定義します．
+%    \begin{macrocode}
+% \def\@seccntformat#1{\csname the#1\endcsname\quad}% from latex.ltx
+\renewcommand{\@seccntformat}[1]{%
+  \csname pre#1name\endcsname
+  \csname the#1\endcsname
+  \csname post#1name\endcsname\quad
+}
+%    \end{macrocode}
+% \end{macro}
+% \section{ebgaramond関係のマクロ定義}
+%    \begin{macrocode}
+%%==============================================================================
+%% ebgaramond関係のマクロ定義
+%%==============================================================================
+\newcommand*{\EBGaramond@scale}{1.2}
+\newcommand*{\ebgaramond}
+            {\fontfamily{EBGaramond-OsF}\fontseries{regular}\selectfont}
+\DeclareTextFontCommand{\textGaramond}{\ebgaramond}
+\newcommand*{\ebgaramondT}
+            {\fontfamily{EBGaramond-TOsF}\fontseries{regular}\selectfont}
+\DeclareTextFontCommand{\textGaramondT}{\ebgaramondT}
+
+%    \end{macrocode}
+% \section{jsbook余白とか補正}
+%    \begin{macrocode}
+%%==============================================================================
+%% jsbook余白とか補正
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\@ifclassloaded{jsbook}{
+%% A4 8.27in x 11.69in (210mm x 297mm)
+%% B5 8.27in x 11.69in (182mm x 257mm)
+  \setlength\baselineskip{10pt}
+  
+  \setlength\fullwidth{\paperwidth}
+  \addtolength\fullwidth{-36\jsc@mmm}
+% \addtolength\fullwidth{-.5in}
+  \if@twocolumn \@tempdima=2zw \else \@tempdima=1zw \fi
+  \divide\fullwidth\@tempdima
+  \multiply\fullwidth\@tempdima
+  \setlength\textwidth{\fullwidth}
+  \ifgcmc@fourty
+    \ifdim\textwidth>42zw \setlength\textwidth{42zw}\fi
+  \fi
+  
+  \ifgcmc@defaultbook
+  \else
+    \setlength{\topmargin}{0in}
+    \setlength{\headsep}{0in}
+    \setlength{\headheight}{0in}
+    \setlength\footskip{0.03367\paperheight}
+    \ifdim\footskip<4\baselineskip
+      \setlength\footskip{4\baselineskip}
+    \fi
+  \fi
+  
+%    \end{macrocode}
+%    \begin{macrocode}
+  \setlength{\textheight}{\paperheight}
+  \addtolength{\textheight}{-1in}
+  \addtolength{\textheight}{-\headheight}
+  \addtolength{\textheight}{-\headsep}
+  \addtolength{\textheight}{-\footskip}
+  \addtolength{\textheight}{-\topskip}
+  \addtolength{\textheight}{-.5in}
+  \divide\textheight\baselineskip
+  \multiply\textheight\baselineskip
+  \addtolength{\textheight}{\topskip}
+  \addtolength{\textheight}{0.1\jsc@mpt}
+  
+  \setlength{\oddsidemargin}{\paperwidth}
+  \addtolength{\oddsidemargin}{-\fullwidth}
+  \setlength{\oddsidemargin}{.5\oddsidemargin}
+  \iftombow
+    \addtolength{\oddsidemargin}{-1in}
+  \else
+    \addtolength{\oddsidemargin}{-\inv@mag in}
+  \fi
+  \setlength{\evensidemargin}{\oddsidemargin}
+  \if@mparswitch
+    \addtolength{\evensidemargin}{\fullwidth}
+    \addtolength{\evensidemargin}{-\textwidth}
+  \fi
+  
+  \setlength{\skip\footins}{16\jsc@mpt \@plus 10\jsc@mpt \@minus 2\jsc@mpt}
+  
+  \renewcommand*{\descriptionlabel}[1]{%
+    \textbullet\normalfont\headfont\quad#1\hfil}
+  
+  \def\ps@gcmcfoot{%
+    \let\@mkboth\@gobbletwo
+    \let\@oddhead\@empty
+    \def\@oddfoot{\hfil-- \textGaramond{\thepage}\ --\hfil}%
+    \let\@evenhead\@empty
+    \let\@evenfoot\@oddfoot}
+  \let\ps@plainfoot\ps@gcmcfoot
+  
+  \def\ps@gcmchead{%
+    \let\@mkboth\@gobbletwo
+    \let\@oddfoot\@empty
+    \let\@evenfoot\@empty
+    \def\@evenhead{%
+      \if@mparswitch \hss \fi
+      \hbox to \fullwidth{\textGaramond{\thepage}\hfil}%
+      \if@mparswitch\else \hss \fi}%
+    \def\@oddhead{%
+      \hbox to \fullwidth{\hfil\textGaramond{\thepage}}\hss}}
+  \let\ps@plainhead\ps@gcmchead
+  
+  \def\ps@gcmcheadings{%
+    \let\@oddfoot\@empty
+    \let\@evenfoot\@empty
+    \def\@evenhead{%
+      \if@mparswitch \hss \fi
+      \underline{\hbox to \fullwidth{\autoxspacing
+          \textGaramond{\thepage}\hfil\leftmark}}%
+      \if@mparswitch\else \hss \fi}%
+    \def\@oddhead{%
+      \underline{%
+        \hbox to \fullwidth{\autoxspacing
+                             {\if@twoside\rightmark\else\leftmark\fi}%
+                            \hfil\textGaramond{\thepage}}}\hss}%
+    \let\@mkboth\markboth
+    \def\chaptermark##1{\markboth{%
+      \ifnum \c@secnumdepth >\m@ne
+        \if@mainmatter
+          \if@omit@number\else
+            \@chapapp\thechapter\@chappos\hskip1zw
+          \fi
+        \fi
+      \fi
+      ##1}{}}%
+    \def\sectionmark##1{\markright{%
+      \ifnum \c@secnumdepth >\z@ \thesection \hskip1zw\fi
+      ##1}}}%
+  
+  
+  \ifgcmc@defaultbook
+    \pagestyle{gcmcheadings}
+  \else
+    \pagestyle{plainfoot}
+  \fi
+  
+%    \end{macrocode}
+%    \begin{macrocode}
+  \def\@makechapterhead#1{%
+    \vspace*{.2\Cvs}% 欧文は50pt
+    \begingroup
+      \parindent \z@ \raggedright \normalfont
+      \ifnum \c@secnumdepth >\m@ne
+        \if@mainmatter
+          \huge\headfont \@chapapp\thechapter\@chappos
+          \par\nobreak
+          \vskip .2\Cvs % 欧文は20pt
+        \fi
+      \fi
+    \interlinepenalty\@M
+    \Huge \headfont #1\par\nobreak
+    \vskip 0.5\Cvs
+    \endgroup
+  } % 欧文は40pt
+  
+  \def\@makeschapterhead#1{%
+    \vspace*{.2\Cvs}% 欧文は50pt
+    \begingroup
+      \parindent \z@ \raggedright \normalfont
+      \interlinepenalty\@M
+      \Huge \headfont #1\par\nobreak
+      \vskip .5\Cvs
+    \endgroup
+  } % 欧文は40pt
+  
+  \if@twocolumn
+    \renewcommand{\section}{%
+      \@startsection{section}{1}{\z@}%
+      {0.6\Cvs}{0.4\Cvs}%
+      {\normalfont\large\headfont\raggedright}}
+    \renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+      {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
+      {\normalfont\normalsize\headfont}}
+    \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+      {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
+      {\normalfont\normalsize\headfont}}
+  \else
+    \renewcommand{\section}{%
+      \if@slide\clearpage\fi
+      \@startsection{section}{1}{\z@}%
+      {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+      {.25\Cvs \@plus.3\Cdp}% 後アキ;
+      {\normalfont\Large\headfont\raggedright}}
+    \renewcommand{\subsection}{%
+      \@startsection{subsection}{2}{\z@}%
+      {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ;
+      {.25\Cvs \@plus.3\Cdp}% 後アキ;
+      {\normalfont\large\headfont}}
+    \renewcommand{\subsubsection}{%
+      \@startsection{subsubsection}{3}{\z@}%
+      {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ;
+      {\if@slide .25\Cvs \@plus.3\Cdp \else \z@ \fi}% 後アキ;
+      {\normalfont\normalsize\headfont}}
+  \fi
+  
+  \if@twocolumn
+    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+      {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
+      {\normalfont\normalsize\headfont\jsParagraphMark}}
+  \else
+    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+      {0.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}%前アキ;
+      {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
+      {\normalfont\normalsize\headfont\jsParagraphMark}}
+  \fi
+  \def\@listi{\leftmargin\leftmargini
+    \parsep \z@
+    \partopsep \z@
+    \topsep .25\Cvs
+    \itemsep \z@ \relax}
+  \let\@listI\@listi
+  \@listi
+  \setcounter{tocdepth}{1}
+}{}
+%    \end{macrocode}
+% \section{Table of contents まわり}
+%    \begin{macrocode}
+%%==============================================================================
+%% Table of contents まわり
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\renewcommand*{\l@part}[2]{%
+  \ifnum \c@tocdepth >-2\relax
+    \addpenalty{-\@highpenalty}%
+    \addvspace{2.25em \@plus\jsc@mpt}%
+    \begingroup
+      \parindent \z@
+      \rightskip \@tocrmarg
+      \parfillskip -\rightskip
+      {\leavevmode
+        \large \headfont
+        \setlength\@lnumwidth{4zw}%
+%       #1\hfil \hb@xt@\@pnumwidth{\hss #2}}\par % -bell
+        #1\hfil \hb@xt@\@pnumwidth{\hss\ebgaramond#2}}\par % +bell
+      \nobreak
+    \global\@nobreaktrue
+    \everypar{\global\@nobreakfalse\everypar{}}%
+    \endgroup
+  \fi}
+\renewcommand*{\l@chapter}[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \addvspace{1.0em \@plus\jsc@mpt}
+    \begingroup
+      \parindent\z@
+      \rightskip\@tocrmarg
+      \parfillskip-\rightskip
+      \leavevmode\headfont
+      % \if@english\setlength\@lnumwidth{5.5em}%
+      % \else\setlength\@lnumwidth{4.683zw}\fi
+      \setlength\@lnumwidth{\jsc@tocl@width}\advance\@lnumwidth 2.683zw
+      \advance\leftskip\@lnumwidth \hskip-\leftskip
+%     #1\nobreak\hfil\nobreak\hbox to\@pnumwidth{\hss#2}\par % -bell
+      #1\nobreak\hfil\nobreak\hbox to\@pnumwidth{\hss\ebgaramond#2}\par % +bell
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+\def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
+  \vskip \z@ \@plus.2\jsc@mpt
+  {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+    \parindent #2\relax\@afterindenttrue
+   \interlinepenalty\@M
+   \leavevmode
+   \@lnumwidth #3\relax
+   \advance\leftskip \@lnumwidth \null\nobreak\hskip -\leftskip
+    {#4}\nobreak
+    \leaders\hbox{$\m@th \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+       mu$}\hfill \nobreak\hb@xt@\@pnumwidth{%
+%        \hfil\normalfont \normalcolor #5}\par}\fi} % -bell
+         \hfil\ebgaramond \normalcolor #5}\par}\fi} % +bell
+
+%    \end{macrocode}
+% \section{初期設定}
+%    \begin{macrocode}
+%%==============================================================================
+%% 初期設定
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\ifx\c@chapter\undefined\else
+  \counterwithout*{footnote}{chapter}%
+\fi
+
+%</class>
+%    \end{macrocode}
+%
+% 以上で終わりです.
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
+%
+% ^^A \endinput の後に \CharacterTable を書いておけば，子ファイルには
+% ^^A 出力されません。チェックは *.dtx を処理したときにしてくれます。
+% ^^A [2016-09-03] →削除しました。
+%
+% \Finale \PrintIndex \PrintChanges \endinput
+

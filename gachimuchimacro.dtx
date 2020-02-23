@@ -1,0 +1,2002 @@
+% ^^A -*- japanese-latex -*-
+%
+\ifx\epTeXinputencoding\undefined\else
+  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
+\fi
+%
+% \iffalse
+%
+%   gachimuchi.dtx
+%
+%<*driver>
+\documentclass[uplatex,a4paper,12Q,dvipdfmx]{jsarticle}
+\usepackage{doc}
+\usepackage{metalogo}
+\providecommand*{\eTeX}{$\varepsilon$-\TeX}
+\providecommand*{\pLaTeX}{p\kern-.05em\LaTeX}
+\providecommand*{\pLaTeXe}{p\kern-.05em\LaTeXe}
+\providecommand*{\upTeX}{u\pTeX}
+\providecommand*{\XeTeX}{XeTeX}
+\usepackage{ifptex}
+\ifptex
+  \xspcode"5C=1 %% \
+  \xspcode"22=1 %% "
+\fi
+\addtolength{\textwidth}{-1.2in}
+%% \addtolength{\evensidemargin}{1.5in}
+\addtolength{\oddsidemargin}{1.5in}
+%% \addtolength{\marginparwidth}{1.5in}
+\setlength\marginparpush{0pt}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{hyperref}
+\ifptex
+  \usepackage{pxjahyper}
+\fi
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\definecolor{myblue}{rgb}{0,0,0.75}
+\definecolor{mygreen}{rgb}{0,0.45,0}
+\hypersetup{colorlinks,
+            hyperfootnotes=false,
+            linkcolor=myblue,
+            urlcolor=mygreen}
+\CodelineNumbered
+\EnableCrossrefs
+% \CodelineIndex
+% \RecordChanges                  % Gather update information
+\setcounter{StandardModuleDepth}{1}
+
+\usepackage{gachimuchimacro}
+
+\makeatletter
+
+\newcommand*{\file}[1]{\texttt{#1}}
+\newcommand*{\Lcount}[1]{\textsl{\small#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\newcounter{@clineno}
+\def\mlineplus#1{\setcounter{@clineno}{\arabic{CodelineNo}}%
+   \addtocounter{@clineno}{#1}\arabic{@clineno}}
+\def\cmd#1{\cs{\expandafter\cmd@to@cs\string#1}}
+\def\cmd@to@cs#1#2{\char\number`#2\relax}
+\DeclareRobustCommand{\cs}[1]{\texttt{\char`\\#1}}
+\DeclareRobustCommand{\env}[1]{\texttt{#1}}
+\providecommand{\marg}[1]{%
+  {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
+\providecommand{\oarg}[1]{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}}
+\makeatother
+
+\GetFileInfo{gachimuchimacro.dtx}
+\begin{document}
+  \DocInput{gachimuchimacro.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+% \changes{v1.0}{2019/10/29}
+%   {make this .dtx file}
+% \iffalse TeX commands \fi
+% \DoNotIndex{\ ,\-,\/}
+% \DoNotIndex{\above,\abovedisplayshortskip,\abovedisplayskip}
+% \DoNotIndex{\abovewithdelims,\accent,\adjdemerits}
+% \DoNotIndex{\advance,\afterassignment,\aftergroup}
+% \DoNotIndex{\atop,\atopwithdelims}
+% \DoNotIndex{\badness,\baselineskip,\batchmode}
+% \DoNotIndex{\begingroup,\belowdisplayshortskip,\belowdisplayskip}
+% \DoNotIndex{\binoppenalty,\botmark,\box}
+% \DoNotIndex{\boxmaxdepth,\brokenpenalty}
+% \DoNotIndex{\catcode,\char,\chardef}
+% \DoNotIndex{\cleaders,\closein,\closeout}
+% \DoNotIndex{\clubpenalty,\copy,\count}
+% \DoNotIndex{\countdef,\cr,\crcr,\csname}
+% \DoNotIndex{\day,\cr,\crcr,\csname}
+% \DoNotIndex{\countdef,\deadcycles,\def,\defaulthyphenchar}
+% \DoNotIndex{\defaultskewchar,\delcode,\delimiter,\delimiterfactor}
+% \DoNotIndex{\delimitershortfall,\dimen,\dimendef,\discretionary}
+% \DoNotIndex{\displayindent,\displaylimits,\displaystyle,\displaywidowpenalty}
+% \DoNotIndex{\displaywidth,\divide,\doublehyphendemerits,\dp,\dump}
+% \DoNotIndex{\edef,\else,\emergencystretch,\end}
+% \DoNotIndex{\endcsname,\endgroup,\endinput,\endlinechar}
+% \DoNotIndex{\eqno,\errhelp,\errmessage,\errorcontextlines}
+% \DoNotIndex{\errorstopmode,\escapechar,\everycr,\everydisplay}
+% \DoNotIndex{\everyhbox,\everyjob,\everymath,\everypar}
+% \DoNotIndex{\everyvbox,\exhyphenpenalty,\expandafter}
+% \DoNotIndex{\fam,\fi,\finalhyphendemerits,\firstmark}
+% \DoNotIndex{\floatingpenalty,\font,\fontdimen,\fontname,\futurelet}
+% \DoNotIndex{\gdef,\global,\globaldefs}
+% \DoNotIndex{\halign,\hangafter,\hangindent,\hbadness}
+% \DoNotIndex{\hbox,\hfil,\hfill,\hfilneg}
+% \DoNotIndex{\hfuzz,\hoffset,\holdinginserts,\hrule}
+% \DoNotIndex{\hsize,\hskip,\hss,\ht}
+% \DoNotIndex{\hyphenation,\hyphenchar,\hyphenpenalty}
+% \DoNotIndex{\if,\ifcase,\ifcat,\ifdim}
+% \DoNotIndex{\ifeof,\iffalse,\ifhbox,\ifhmode}
+% \DoNotIndex{\ifinner,\ifmmode,\ifnum,\ifodd}
+% \DoNotIndex{\iftrue,\ifvbox,\ifvmode,\ifvoid}
+% \DoNotIndex{\ifx,\ignorespaces,\immediate,\indent}
+% \DoNotIndex{\input,\inputlineno,\insert,\insertpenalties,\interlinepenalty}
+% \DoNotIndex{\jobname}
+% \DoNotIndex{\kern}
+% \DoNotIndex{\language,\lastbox,\lastkern,\lastpenalty}
+% \DoNotIndex{\lastskip,\lccode,\leaders,\left}
+% \DoNotIndex{\lefthyphenmin,\leftskip,\leqno,\let}
+% \DoNotIndex{\limits,\linepenalty,\lineskip,\lineskiplimit}
+% \DoNotIndex{\long,\looseness,\lower,\lowercase}
+% \DoNotIndex{\mag,\mark,\mathaccent,\mathbin}
+% \DoNotIndex{\mathchar,\mathchardef,\mathchoice,\mathclose}
+% \DoNotIndex{\mathcode,\mathinner,\mathop,\mathopen}
+% \DoNotIndex{\mathord,\mathpunct,\mathrel,\mathsurround}
+% \DoNotIndex{\maxdeadcycles,\maxdepth,\meaning,\medmuskip}
+% \DoNotIndex{\message,\mkern,\month,\moveleft}
+% \DoNotIndex{\moveright,\mskip,\multiply,\muskip,\muskipdef}
+% \DoNotIndex{\newlinechar,\noalign,\noboundary,\noexpand}
+% \DoNotIndex{\noindent,\nolimits,\nonscript,\nonstopmode}
+% \DoNotIndex{\nulldelimiterspace,\nullfont,\number}
+% \DoNotIndex{\omit,\openin,\openout,\or}
+% \DoNotIndex{\outer,\output,\outputpenalty,\over}
+% \DoNotIndex{\overfullrule,\overline,\overwithdelims}
+% \DoNotIndex{\pagedepth,\pagefilllstretch,\pagefillstretch,\pagefilstretch}
+% \DoNotIndex{\pagegoal,\pageshrink,\pagestretch,\pagetotal}
+% \DoNotIndex{\par,\parfillskip,\parindent,\parshape}
+% \DoNotIndex{\parskip,\patterns,\pausing,\penalty}
+% \DoNotIndex{\postdisplaypenalty,\predisplaypenalty,\predisplaysize}
+% \DoNotIndex{\pretolerance,\prevdepth,\prevgraf}
+% \DoNotIndex{\radical,\raise,\read,\relax}
+% \DoNotIndex{\relpenalty,\right,\righthyphenmin,\rightskip,\romannumeral}
+% \DoNotIndex{\scriptfont,\scriptscriptfont,\scriptscriptstyle,\scriptspace}
+% \DoNotIndex{\scriptstyle,\scrollmode,\setbox,\setlanguage}
+% \DoNotIndex{\sfcode,\shipout,\show,\showbox}
+% \DoNotIndex{\showboxbreadth,\showboxdepth,\showlists,\showthe}
+% \DoNotIndex{\skewchar,\skip,\skipdef,\spacefactor}
+% \DoNotIndex{\spaceskip,\span,\special,\splitbotmark}
+% \DoNotIndex{\splitfirstmark,\splitmaxdepth,\splittopskip,\string}
+% \DoNotIndex{\tabskip,\textfont,\textstyle,\the}
+% \DoNotIndex{\thickmuskip,\thinmuskip,\time,\toks}
+% \DoNotIndex{\toksdef,\tolerance,\topmark,\topskip}
+% \DoNotIndex{\tracingcommands,\tracinglostchars,\tracingmacros,\tracingonline}
+% \DoNotIndex{\tracingoutput,\tracingpages,\tracingparagraphs,\tracingrestores}
+% \DoNotIndex{\tracingstats}
+% \DoNotIndex{\uccode,\uchyph,\underline,\unhbox}
+% \DoNotIndex{\unhcopy,\unkern,\unpenalty,\unskip}
+% \DoNotIndex{\unvbox,\unvcopy,\uppercase}
+% \DoNotIndex{\vadjust,\valign,\vbadness,\vbox}
+% \DoNotIndex{\vcenter,\vfil,\vfill,\vfilneg}
+% \DoNotIndex{\vfuzz,\voffset,\vrule,\vsize}
+% \DoNotIndex{\vskip,\vsplit,\vss,\vtop}
+% \DoNotIndex{\wd,\widowpenalty,\write}
+% \DoNotIndex{\xdef,\xleaders,\xspaceskip}
+% \DoNotIndex{\year}
+
+% \iffalse e-TeX commands \fi
+% \DoNotIndex{\protected,\detokenize,\unexpanded}
+% \DoNotIndex{\readline,\scantokens}
+% \DoNotIndex{\eTeXrevision,\eTeXversion,\currentgrouplevel,\currentgrouptype}
+% \DoNotIndex{\ifcsname,\ifdefined,\lastnodetype}
+% \DoNotIndex{\marks}
+% \DoNotIndex{\beginL,\beginR,\endL,\endR}
+% \DoNotIndex{\TeXXeTstate,\predisplaydirection}
+% \DoNotIndex{\interactionmode,\showgroups,\showtokens}
+% \DoNotIndex{\tracingscantokens,\tracinggroups}
+% \DoNotIndex{\everyeof,\middle,\unless}
+%
+% \def\Omaginai{おまじないとか前提スタイル・ファイルとか}
+% \def\TemporalVar{局所変数定義}
+% \def\Commandlabel{ラベル定義}
+% \def\Gakufu{楽譜環境}
+% \def\Carret{キャレット付き数字表記}
+% \def\Accidental{臨時記号}
+% \def\Subscription{添え字}
+% \def\UsefulMacros{便利なマクロ}
+% \def\ChordSymbols{コードシンボル}
+% \def\ZCHAR{楽譜上の文字}
+% \def\ZCHORD{和声記号配置}
+% \def\FigureBass{数字付き低音}
+% \def\Tenni{転位記号}
+% \def\Harmonie{ドイツ式和声記号}
+% \def\ChordProg{Chord Progressionの表記}
+% \def\MusicSymbols{譜面上の記号}
+% \def\Resets{初期設定}
+%
+% \title{gachimuchi}
+% \author{bell}
+% \date{\filedate}
+% \maketitle
+% \tableofcontents
+%
+% \MakeShortVerb{\|}
+%
+% \section{はじめに}
+% \section{概要}
+% \subsection{\Omaginai}
+% \subsection{\TemporalVar}
+% \subsection{\Commandlabel}
+% \subsection{\Gakufu}
+% \subsection{\Carret}
+% \subsection{\Accidental}
+% \subsection{\Subscription}
+% \subsection{\UsefulMacros}
+% \subsection{\ChordSymbols}
+% \subsection{\ZCHAR}
+% \subsection{\ZCHORD}
+% \subsection{\FigureBass}
+% \subsection{\Tenni}
+% \subsection{\Harmonie}
+% \subsection{\ChordProg}
+% \subsection{\MusicSymbols}
+% \subsection{\Resets}
+%
+%
+% \StopEventually{}
+% \clearpage
+% \section{実装}
+% \changes{v1.1}{2020/01/23}
+%    {依存部分を減らし，また条件分けすることで\pLaTeX を
+%     前提としなくした（不完全）．}
+%
+%    \begin{macrocode}
+%<*macro>
+%%=============================================================================%
+%%                                                                             %
+%%   GGGGG          A          CCCCC    H       H    IIIII                     %
+%%  G     G        A A        C     C   H       H      I                       %
+%% G       G      A   A      C       C  H       H      I                       %
+%% G             A     A     C          H       H      I                       %
+%% G            A       A    C          HHHHHHHHH      I     --------          %
+%% G     GGGG   AAAAAAAAA    C          H       H      I                       %
+%% G       G    A       A    C       C  H       H      I                       %
+%%  G     GG    A       A     C     C   H       H      I                       %
+%%   GGGGG G    A       A      CCCCC    H       H    IIIII                     %
+%%                                                                             %
+%%                M         M   UUU     UUU    CCCCC    H       H    IIIII     %
+%%                MM       MM    U       U    C     C   H       H      I       %
+%%                M M     M M    U       U   C       C  H       H      I       %
+%%                M M     M M    U       U   C          H       H      I       %
+%%                M  M   M  M    U       U   C          HHHHHHHHH      I       %
+%%                M  M   M  M    U       U   C          H       H      I       %
+%%                M   M M   M    U       U   C       C  H       H      I       %
+%%                M   M M   M     U     U     C     C   H       H      I       %
+%%                M    M    M      UUUUU       CCCCC    H       H    IIIII     %
+%%                                                                             %
+%%=============================================================================%
+%\NeedsTeXFormat{pLaTeX2e}% -bell 2020-01-23
+\NeedsTeXFormat{LaTeX2e}% +bell 2020-01-23
+\ProvidesPackage{gachimuchimacro}[2020/01/16 Gachimuchi Koza Macro set]
+%    \end{macrocode}
+% \subsection{\Omaginai}
+% いくつかのスタイル・ファイルを前提として読み込んでいます．
+% また，\file{biblatex}と\file{musixtex}は\cmd{\addspace}命令で，
+% \changes{v1.1}{2020/01/23}
+%    {\file{luatexja}と\file{musixtex}の競合の解決}
+% \file{luatexja}と\file{musixtex}は\cmd{\zh}命令および\cmd{\zw}命令で
+% 競合を起こすので，
+% \file{musixtex}の命令を\env{Music}環境内でのみ戻すことで対処しています．
+%
+%    \begin{macrocode}
+%%==============================================================================
+%% 依存パッケージの読み込み
+%%==============================================================================
+\RequirePackage{noconflict}
+\RequirePackage{multirow}
+\RequirePackage{etoolbox}
+\RequirePackageWithOptions{graphicx}
+% \RequirePackage{pxghost}% -bell 2020-01-23
+\RequirePackage{bxghost}% +bell 2020-01-23
+\RequirePackage{tikz}
+\RequirePackageWithOptions{hyperref}
+\RequirePackage{ifptex}
+\ifptex
+  \RequirePackageWithOptions{pxjahyper}
+\fi
+\RequirePackage{everyhook}
+\RequirePackage{xkeyval}
+
+\@ifpackageloaded
+  {biblatex}%
+  {\message{Loaded biblatex^^J}\save{biblatex}{addspace}}%
+  {}
+
+\ifdefined\zw
+  \message{defined \noexpand\zw^^J}%
+  \save{luatexja}{zw,zh}%
+\fi% +bell 2020-01-23
+
+\ifptex
+% bellmacros.styと同じ定義
+  \def\bell@zw{zw}
+  \def\bell@zh{zh}
+\fi
+
+\RequirePackage{musixtex}
+\input{musixdbr}
+\input{musixper}
+\input{musixlmd}
+\save{musixtex}{addspace}
+\save{musixtex}{zh}% +bell 2020-01-23
+\save{musixtex}{zw}% +bell 2020-01-23
+
+\@ifpackageloaded
+  {biblatex}%
+  {\restore{biblatex}}%
+  {}
+
+\ifdefined\luatexjazw
+  \message{redefined \noexpand\zw^^J}%
+  \restore{luatexja}%
+\fi% +bell 2020-01-23
+
+%    \end{macrocode}
+% 
+% \subsection{\TemporalVar}
+%    \begin{macrocode}
+%%==============================================================================
+%% 局所変数定義
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\gcmc@test@temptoka}
+% テンポラリなトークンレジスタを確保しています．
+% 
+%    \begin{macrocode}
+\newtoks\gcmc@test@temptoka
+\def\thr@@qu@rt{.75}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{\Commandlabel}
+%    \begin{macrocode}
+%%==============================================================================
+%% ラベル定義
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\piecelabel}
+% \changes{v1.1}{2020/01/21}
+%    {\cmd{\Piecelabel}から\cmd{\piecelabel}へ}
+% \begin{macro}{\pieceref}
+% \changes{v1.1}{2020/01/21}
+%    {\cmd{\Pieceref}から\cmd{\pieceref}へ}
+% 楽譜環境用のラベルと参照の命令を定義しています．
+% 
+%    \begin{macrocode}
+\newcommand{\piecelabel}[1]{\label{piece:#1}}
+\newcommand{\pieceref}[1]{譜例\ref{piece:#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\c@piececnt}
+% \changes{v1.1}{2020/01/21}
+%    {\cmd{\c@pieceNum}から\cmd{\c@piececnt}へ}
+% \begin{macro}{\thepiececnt}
+% \changes{v1.1}{2020/01/21}
+%    {\cmd{\thepieceNum}から\cmd{\thepiececnt}へ}
+% 同時に使用されるであろうカウンタを設定します．
+%    \begin{macrocode}
+\newcounter{piececnt}
+\renewcommand{\thepiececnt}{\arabic{piececnt}}
+
+\setcounter{piececnt}{0}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \subsection{\Gakufu}
+% \file{musixtex}に依存しています．
+% 
+%    \begin{macrocode}
+%%==============================================================================
+%% 楽譜番号
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\piece@num}
+% \cmd{\c@piececnt}カウンタを進め，引数を印刷してカウンタを表示します．
+%    \begin{macrocode}
+\newcommand{\piece@num}[1]{%
+  \refstepcounter{piececnt}#1\thepiececnt
+  \xdef\bell@refcnt{\@currentlabel}%
+}
+\def\bell@piecenumbers{\nobarnumbers\let\bell@piecenum\@ne}
+\def\nopiecenumbers{\nobarnumbers\let\bell@piecenum\z@}
+\let\piecenumbers\bell@piecenumbers
+
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+%%==============================================================================
+%% 楽譜環境(musixtex依存)
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\bell@resolve@musixtex@conflicts}
+% \changes{v1.1}{2020/01/23}
+%    {\file{luatexja}と\file{musixtex}の競合の解決}
+% \cmd{\addspace}命令，\cmd{\zh}命令および\cmd{\zw}命令を
+% \file{musixtex}のものに戻します．
+%    \begin{macrocode}
+\def\bell@resolve@musixtex@conflicts{% +bell 2020-01-23
+  \let\addspace\musixtexaddspace% <-biblatexとのマクロ競合回避のため
+  \let\zh\musixtexzh \let\zw\musixtexzw% +bell 2020-01-23
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@envMusic@default}
+% 楽譜環境の先頭で初期化するための諸々を入れてます．
+% \changes{v1.1}{2020/01/23}
+%    {\file{luatexja}と\file{musixtex}の競合の解決.}
+% \changes{v1.1}{2020/01/23}
+%    {\file{bxjaprnind}対策にhookを設定.}
+% またここで\cmd{\addspace}命令，\cmd{\zh}命令および\cmd{\zw}命令を
+% \file{musixtex}のものに戻しています．
+%    \begin{macrocode}
+\def\bell@envMusic@default#1{%
+  \parindent\z@
+  \y@\linewidth \advance\y@-#1 \y@\h@lf\y@
+  \leftmargin\y@ \rightmargin\y@
+  \advance\linewidth -\rightmargin
+  \advance\linewidth -\leftmargin
+  \advance\@totalleftmargin \leftmargin
+  \bell@piecenumbers
+  \SavePostHook{par}{\bell@reserved@MusicPostHook}% +bell 2020-01-29
+  \ClearPostHook{par}% +bell 2020-01-29
+  \PushPostHook{par}{\parshape\@ne \@totalleftmargin\linewidth \ignorespaces}%
+  \def\comp@internote{%
+    \comput@specifics
+    \n@loop
+    \internote\csname staffspacing\romannumeral\noinstrum@nt\endcsname\Internote
+    \repeat
+    %\line@width\hsize% <-これがアレっぽそう
+    \setlength{\line@width}{\linewidth}% <-変えてみた
+  }% \let\addspace\musixtexaddspace% -bell 2020-01-23
+  \bell@resolve@musixtex@conflicts% +bell 2020-01-23
+}
+\def\bell@envMusic@restore{% +bell 2020-01-29
+% \RestorePostHook{par}{\bell@reserved@MusicPostHook}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{environment}{Music}
+% 楽譜環境です．
+% 上下に余白を設けています．
+% 先に定義した\cmd{\bell@envMusic@default}を呼び出しています．
+% 引数は楽譜の横幅で，規定値は|.85\linewidth|としています．
+% \env{music}環境を内部的に呼び出してます．
+%    \begin{macrocode}
+\newenvironment{Music}[1][.85\linewidth]{%
+  \par\penalty\@M\vspace{0.5\Cht}%
+  \bell@envMusic@default{#1}%
+  \begin{music}}
+ {\end{music}%
+  \bell@envMusic@restore% +bell 2020-01-29
+  \vspace{\h@lf\Cvs}\par}
+%    \end{macrocode}
+% \end{environment}
+% \begin{environment}{floatMusic}\oarg{key-val opt.}\par
+% floatな楽譜環境を定義します．
+%
+% まずオプション引数をKey-val式で与えられるようにします．
+% \begin{description}
+% \item[\meta{pos}] floatの位置を指定します. 規定は\Lopt{ht}．
+% \item[\meta{width}] 楽譜の横幅を指定します. 規定は|.85\linewidth|．
+% \end{description}
+%    \begin{macrocode}
+
+\define@cmdkey[bell]{floatMusic}{pos}[ht]{}
+\define@cmdkey[bell]{floatMusic}{width}[.85\linewidth]{}
+\presetkeys[bell]{floatMusic}{pos,width}{}
+
+%    \end{macrocode}
+% \begin{macro}{\c@scorefigure}
+% float楽譜環境のためにカウンタを定義します．
+%    \begin{macrocode}
+\ifx\c@chapter\undefined
+  \newcounter{scorefigure}
+\else
+  \newcounter{scorefigure}[chapter]
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\thescorefigure}
+%    \begin{macrocode}
+\renewcommand{\thescorefigure}
+     {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@scorefigure}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fps@scorefigure}
+% \begin{macro}{\ftype@scorefigure}
+% \begin{macro}{\ext@scorefigure}
+% \begin{macro}{\fnum@scorefigure}
+%    \begin{macrocode}
+\def\fps@scorefigure{tbp}
+\def\ftype@scorefigure{1}
+\def\ext@scorefigure{lop}
+\def\fnum@scorefigure{\scorefigure\nobreak\thefigure}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\bell@scorefig}
+%    \begin{macrocode}
+\def\bell@scorefig{\@float{scorefigure}}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\newenvironment{floatMusic}[1][]{%
+  \setkeys[bell]{floatMusic}{#1}%
+  \expandafter\bell@scorefig\expandafter[\cmdbell@floatMusic@pos]%
+  \bell@envMusic@default{\cmdbell@floatMusic@width}%
+  \begin{music}%
+}{%
+  \end{music}%
+  \bell@envMusic@restore% +bell 2020-01-29
+  \end@float}
+
+%    \end{macrocode}
+% \end{environment}
+% \begin{macro}{\piecetitle}\oarg{composer}\marg{piece title}\par
+% 楽譜のタイトルを表示します．
+%    \begin{macrocode}
+\newcommand*{\piecetitle}[2][\empty]{%
+%  \begin{center}#2\end{center}\vspace{-1ex}%
+  \par\begingroup\centering #2\par\endgroup\vspace{-1ex}%
+  \def\reserved@a{#1}%
+  \ifx\empty\reserved@a\else
+    \hfill\begingroup #1\par\endgroup
+  \fi\vspace{1ex}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Piecetitle}\oarg{composer}\marg{piece title}\par
+% タイトルを\cmd{\huge}\cmd{\sffamily}で表示する\cmd{\piecetitle}です．
+% もしかしたら\cmd{\piecetitle}の|*|変種でもいいかもしれません．
+%    \begin{macrocode}
+\newcommand*{\Piecetitle}[2][\empty]{\piecetitle[#1]{\huge\sffamily #2}}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\piececaption}
+% \begin{macro}{\@piececaption}
+% \cmd{\piececaption}\oarg{not used}\marg{caption}の形で
+% 楽譜環境にキャプションをつけます．
+% オプション引数は使われている形跡がありません……どうしようとしたのでしょう？
+%    \begin{macrocode}
+\newcommand*{\piececaption}{\@dblarg{\@piececaption}}
+\def\@piececaption[#1]#2{%
+  \addcontentsline{lop}{piece}%
+    {\protect\numberline{\thepiececnt}{\ignorespaces #2}}%
+  \par\nopagebreak\begingroup
+  \centering 譜例 \thepiececnt: #2\par
+  \endgroup\vspace{-1ex}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\notesintext}\marg{music expr.}\par
+% インラインで音符などの構成要素のみを表示するマクロを定義します．
+%    \begin{macrocode}
+\newcommand{\notesintext}[1]{%
+  \bgroup\let\extractline\relax%
+  \bell@resolve@musixtex@conflicts
+  \setlines{1}{0}\smallmusicsize \nobarnumbers \nostartrule%
+  \staffbotmarg0pt \setclefsymbol1\empty \global\clef@skip0pt \relax%
+  \startextract\addspace{-\afterruleskip}#1\zendextract%
+  \egroup
+}%
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{environment}{staffintext}
+% インラインで楽譜を表示する環境を定義します．
+%    \begin{macrocode}
+\newenvironment{staffintext}{%
+  \bgroup\let\extractline\relax%
+  \bell@resolve@musixtex@conflicts
+  \smallmusicsize \nobarnumbers \nostartrule%
+  \staffbotmarg0pt \relax%
+  \startextract\addspace{-\afterruleskip}%
+}{%
+  \zendextract\egroup%
+}
+
+%    \end{macrocode}
+% \end{environment}
+% \begin{macro}{\writebarno}
+% \cmd{\writebarno}を再定義して，描画のフォーマットを指定しています．
+%    \begin{macrocode}
+\def\writebarno{\textbf{\small\the\barno\barnoadd}}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\listofpiece}
+%    \begin{macrocode}
+\newcommand{\listofpiece}{%
+  \if@twocolumn\@restonecoltrue\onecolumn
+  \else\@restonecolfalse\fi
+  \chapter*{\listpiecename}%
+  \@mkboth{\listpiecename}{}%
+  \@starttoc{lop}%
+  \if@restonecol\twocolumn\fi
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\listpiecename}
+%    \begin{macrocode}
+\def\listpiecename{譜例}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\l@piece}
+%    \begin{macrocode}
+\newcommand*{\l@piece}{\@dottedtocline{1}{1zw}{3.683zw}}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{\Carret}
+%    \begin{macrocode}
+%%==============================================================================
+%% キャレット付き数字表記
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\CrtNum}\marg{number}\par
+% キャレットをつけた数字を出力します．
+% アメリカでは単音の音高を度数で表す際に用いるようです．
+%    \begin{macrocode}
+\newcommand{\CrtNum}[1]{\^{#1}}
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{\Accidental}
+%    \begin{macrocode}
+%%==============================================================================
+%% 臨時記号(musixtex依存)
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\qu@rtsmallvalue}
+% \begin{macro}{\tw@smallvalue}
+% \begin{macro}{\thr@@smallvalue}
+% \begin{macro}{\h@lfsmallvalue}
+% \begin{macro}{\@neh@lfsmallvalue}
+% \begin{macro}{\tw@h@lfsmallvalue}
+% \begin{macro}{\thr@@h@lfsmallvalue}
+% 数字定数マクロを定義します．
+%    \begin{macrocode}
+\newcommand{\qu@rtsmallvalue}{.2}
+\newcommand{\tw@smallvalue}{1.6}
+\newcommand{\thr@@smallvalue}{2.4}
+\newcommand{\h@lfsmallvalue}{.4}
+\newcommand{\@neh@lfsmallvalue}{1.2}
+\newcommand{\tw@h@lfsmallvalue}{2.0}
+\newcommand{\thr@@h@lfsmallvalue}{2.8}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\accidentaloffs@tunit}
+%    \begin{macrocode}
+\newdimen\accidentaloffs@tunit
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\calc@accidentaloffs@tunit}
+% \cmd{\accidentaloffs@tunit}に臨時記号のオフセット単位長を代入します．
+%    \begin{macrocode}
+\newcommand{\calc@accidentaloffs@tunit}{%
+  \accidentaloffs@tunit \qu@rtsmallvalue \dimexpr \qn@width \relax
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Flat}
+% \begin{macro}{\dFlat}
+% \begin{macro}{\Sharp}
+% \begin{macro}{\dSharp}
+% \begin{macro}{\Natural}
+%    \begin{macrocode}
+\newcommand{\Flat}  {\nobreak\supsc{\txFlat}\nobreak}
+\newcommand{\dFlat} {\nobreak\supsc{\txdFlat}\nobreak}
+\newcommand{\Sharp} {\nobreak\supsc{\txSharp}\nobreak}
+\newcommand{\dSharp}{\nobreak\supsc{\txdSharp}\nobreak}
+\newcommand{\Natural}{\nobreak\supsc{\txNatural}\nobreak}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\txFlat}
+% \begin{macro}{\txdFlat}
+% \begin{macro}{\txSharp}
+% \begin{macro}{\txdSharp}
+% \begin{macro}{\txNatural}
+%    \begin{macrocode}
+\newcommand{\txFlat}{\ensuremath{\flat}}
+\newcommand{\txSharp}{\ensuremath{\sharp}}
+%\newcommand{\txdFlat}{\txFlat\hspace{-.1zw}\txFlat}%-bell 2020-01-23
+\newcommand{\txdFlat}{\txFlat\hspace{-.1em}\txFlat}%+bell 2020-01-23
+\newcommand{\txdSharp}{%
+  %\settoheight{\@tempdima}{\musixchar53}%
+  \settodepth{\@tempdimb}{\musixchar53}%
+  %\advance\@tempdima\@tempdimb
+  \eghostguarded{\raisebox{\@tempdimb}{\musixchar53}}%
+}
+\newcommand{\txNatural}{\ensuremath{\natural}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\txCirc}
+% \begin{macro}{\txTri}
+% \begin{macro}{\txSqr}
+%    \begin{macrocode}
+\newcommand{\txCirc}{\ensuremath{\bigcirc}}
+\newcommand{\txTri}{\ensuremath{\triangle}}
+\newcommand{\txSqr}{\ensuremath{\square}}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\c@bell@shiftAccidentals}
+% \begin{macro}{\iftok@remain}
+%    \begin{macrocode}
+\newcounter{bell@shiftAccidentals}
+\newif\iftok@remain
+\tok@remainfalse
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\bell@getshift}\marg{offset chars}|\relax|\par
+% 臨時記号のオフセットを指定して\cmd{\c@bell@shiftAccidentals}カウンタに代入します．
+% \meta{offset chars}は\texttt{l, r, h, q}からなる文字列であり，
+%    \begin{macrocode}
+\def\bell@getshift#1\relax{%
+  \setcounter{bell@shiftAccidentals}{0}%
+  \@tempcnta0\relax%
+  \def\@rgs{#1}%
+  \loop
+    \edef\t@ruc{\expandafter\f@tok \@rgs\relax\af@tok}%
+    \edef\s@uite{\expandafter\s@tok \@rgs\empty\af@tok}%
+    \ifcat a\t@ruc
+      \n@i\expandafter`\t@ruc\relax
+      \ifnum\n@i=`l\relax% left
+        \ifnum\@tempcnta=0\relax
+          \addtocounter{bell@shiftAccidentals}{4}%
+        \else
+          \addtocounter{bell@shiftAccidentals}{\@tempcnta}%
+        \fi
+        \@tempcnta0\relax%
+      \fi
+      \ifnum\n@i=`r\relax% right
+        \ifnum\@tempcnta=0\relax
+          \addtocounter{bell@shiftAccidentals}{-4}%
+        \else
+          \addtocounter{bell@shiftAccidentals}{-\@tempcnta}%
+        \fi
+        \@tempcnta0\relax%
+      \fi
+      \ifnum\n@i=`h\relax% half
+        \advance\@tempcnta2\relax%
+      \fi
+      \ifnum\n@i=`q\relax% quart
+        \advance\@tempcnta1\relax%
+      \fi
+    \fi
+    \ifx\s@uite\empty \tok@remainfalse
+    \else \tok@remaintrue
+    \fi
+    \iftok@remain \let\@rgs\s@uite%
+  \repeat%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\na}
+% \begin{macro}{\fl}
+% \begin{macro}{\sh}
+% \begin{macro}{\dfl}
+% \begin{macro}{\dsh}
+%    \begin{macrocode}
+\let\orig@na\na
+\let\orig@fl\fl
+\let\orig@sh\sh
+\let\orig@dfl\dfl
+\let\orig@dsh\dsh
+\renewcommand{\na}[2][]{%
+  \bell@getshift#1\relax%
+  \bgroup
+  \edef\s@o@{\value{bell@shiftAccidentals}\accidentaloffs@tunit}%
+  \offs@t{\orig@na{#2}}%
+  \egroup
+}
+\renewcommand{\fl}[2][]{%
+  \bell@getshift#1\relax%
+  \bgroup
+  \edef\s@o@{\value{bell@shiftAccidentals}\accidentaloffs@tunit}%
+  \offs@t{\orig@fl{#2}}%
+  \egroup
+}
+\renewcommand{\sh}[2][]{%
+  \bell@getshift#1\relax%
+  \bgroup
+  \edef\s@o@{\value{bell@shiftAccidentals}\accidentaloffs@tunit}%
+  \offs@t{\orig@sh{#2}}%
+  \egroup
+}
+\renewcommand{\dfl}[2][]{%
+  \bell@getshift#1\relax%
+  \bgroup
+  \edef\s@o@{\value{bell@shiftAccidentals}\accidentaloffs@tunit}%
+  \offs@t{\orig@dfl{#2}}%
+  \egroup
+}
+\renewcommand{\dsh}[2][]{%
+  \bell@getshift#1\relax%
+  \bgroup
+  \edef\s@o@{\value{bell@shiftAccidentals}\accidentaloffs@tunit}%
+  \offs@t{\orig@dsh{#2}}%
+  \egroup
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\hna}[1]{\loffset{\h@lfsmallvalue}{\na{#1}}}
+\newcommand{\hfl}[1]{\loffset{\h@lfsmallvalue}{\fl{#1}}}
+\newcommand{\hsh}[1]{\loffset{\h@lfsmallvalue}{\sh{#1}}}
+\newcommand{\hdfl}[1]{\loffset{\h@lfsmallvalue}{\dfl{#1}}}
+\newcommand{\hdsh}[1]{\loffset{\h@lfsmallvalue}{\dsh{#1}}}
+
+\newcommand{\lhna}[1]{\loffset{\@neh@lfsmallvalue}{\na{#1}}}
+\newcommand{\lhfl}[1]{\loffset{\@neh@lfsmallvalue}{\fl{#1}}}
+\newcommand{\lhsh}[1]{\loffset{\@neh@lfsmallvalue}{\sh{#1}}}
+\newcommand{\lhdfl}[1]{\loffset{\@neh@lfsmallvalue}{\dfl{#1}}}
+\newcommand{\lhdsh}[1]{\loffset{\@neh@lfsmallvalue}{\dsh{#1}}}
+
+\newcommand{\llna}[1]{\loffset{\tw@smallvalue}{\na{#1}}}
+\newcommand{\llfl}[1]{\loffset{\tw@smallvalue}{\fl{#1}}}
+\newcommand{\llsh}[1]{\loffset{\tw@smallvalue}{\sh{#1}}}
+\newcommand{\lldfl}[1]{\loffset{\tw@smallvalue}{\dfl{#1}}}
+\newcommand{\lldsh}[1]{\loffset{\tw@smallvalue}{\dsh{#1}}}
+
+\newcommand{\llhna}[1]{\loffset{\tw@h@lfsmallvalue}{\na{#1}}}
+\newcommand{\llhfl}[1]{\loffset{\tw@h@lfsmallvalue}{\fl{#1}}}
+\newcommand{\llhsh}[1]{\loffset{\tw@h@lfsmallvalue}{\sh{#1}}}
+\newcommand{\llhdfl}[1]{\loffset{\tw@h@lfsmallvalue}{\dfl{#1}}}
+\newcommand{\llhdsh}[1]{\loffset{\tw@h@lfsmallvalue}{\dsh{#1}}}
+
+\newcommand{\lllna}[1]{\loffset{\thr@@smallvalue}{\na{#1}}}
+\newcommand{\lllfl}[1]{\loffset{\thr@@smallvalue}{\fl{#1}}}
+\newcommand{\lllsh}[1]{\loffset{\thr@@smallvalue}{\sh{#1}}}
+\newcommand{\llldfl}[1]{\loffset{\thr@@smallvalue}{\dfl{#1}}}
+\newcommand{\llldsh}[1]{\loffset{\thr@@smallvalue}{\dsh{#1}}}
+
+\newcommand{\parna}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\na{#1}}}
+\newcommand{\parfl}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\fl{#1}}}
+\newcommand{\parsh}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\sh{#1}}}
+\newcommand{\pardfl}[1]{\loffset{2.0}{\lpar{#1}\rpar{#1}}\loffset{.4}{\dfl{#1}}}
+\newcommand{\pardsh}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\dsh{#1}}}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\aFlat}{\nobreak\Flat}
+\newcommand{\adFlat}{\nobreak\dFlat}
+\newcommand{\aSharp}{\nobreak\Sharp}
+\newcommand{\adSharp}{\nobreak\dSharp}
+\newcommand{\aNatural}{\nobreak\Natural}
+\newcommand{\bFlat}{\Flat\nobreak}
+\newcommand{\bdFlat}{\dFlat\nobreak}
+\newcommand{\bSharp}{\Sharp\nobreak}
+\newcommand{\bdSharp}{\dSharp\nobreak}
+\newcommand{\bNatural}{\Natural\nobreak}
+\newcommand{\atxFlat}{\nobreak\txFlat}
+\newcommand{\atxdFlat}{\nobreak\txdFlat}
+\newcommand{\atxSharp}{\nobreak\txSharp}
+\newcommand{\atxdSharp}{\nobreak\txdSharp}
+\newcommand{\atxNatural}{\nobreak\txNatural}
+\newcommand{\btxFlat}{\txFlat\nobreak}
+\newcommand{\btxdFlat}{\txdFlat\nobreak}
+\newcommand{\btxSharp}{\txSharp\nobreak}
+\newcommand{\btxdSharp}{\txdSharp\nobreak}
+\newcommand{\btxNatural}{\txNatural\nobreak}
+
+%    \end{macrocode}
+% \subsection{\Subscription}
+%    \begin{macrocode}
+%%==============================================================================
+%% 添え字(graphicx，hyperref依存)
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\newlength{\subsclength}%
+\newlength{\supsclength}%
+\newlength{\sclength}%
+%    \end{macrocode}
+% \begin{macro}{\subsc}\marg{text}\par
+% コード・シンボルなどの下付き文字を出力します．
+% 通常の下付き文字なら\LaTeX カーネルの\cmd{\textsubscript}を
+% 使った方が良いんじゃないかと思います．
+%    \begin{macrocode}
+\DeclareRobustCommand{\subsc}[1]{%
+  \texorpdfstring{%TeX
+    \nobreak\eghostguarded{\raisebox{-0.1zh}{\scalebox{0.8}{#1}}}%
+  }{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\supsc}\marg{text}\par
+% コード・シンボルなどの上付き文字を出力します．
+% 通常の上付き文字なら\LaTeX カーネルの\cmd{\textsuperscript}を
+% 使った方が良いんじゃないかと思います．
+%    \begin{macrocode}
+\DeclareRobustCommand{\supsc}[1]{%
+  \texorpdfstring{%TeX
+    \nobreak\eghostguarded{\raisebox{0.5zh}{\scalebox{0.8}{#1}}}%
+  }{#1}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\subsupsc}\marg{sub-text}\marg{sup-text}\par
+% 古典和声記号や芸大和声式の和音記号用の下付き・上付き文字を出力します．
+%    \begin{macrocode}
+\DeclareRobustCommand{\subsupsc}[2]{%
+  \texorpdfstring{%TeX
+    \settowidth{\subsclength}{\scalebox{0.7}{#1}}%
+    \settowidth{\supsclength}{\scalebox{0.7}{#2}}%
+    \ifdim\subsclength<\supsclength\setlength{\sclength}{\supsclength}%
+    \else\setlength{\sclength}{\subsclength}\fi%
+    \nobreak\eghostguarded{%
+      \hspace{\h@lf\sclength}%\hspace{-0.2em}%
+      \makebox[0pt][c]{\raisebox{-0.2zh}{\scalebox{0.7}{#1}}}%
+      \makebox[0pt][c]{\raisebox{0.5zh}{\scalebox{0.7}{#2}}}%
+      \hspace{\h@lf\sclength}%
+    }%
+  }{#1#2}%
+}% 古典記法
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lhsc}\marg{sub-text}\marg{sup-text}\par
+% コード・シンボル用の下付き・上付き文字を出力します．
+% それぞれのテキストは古典和声記号や芸大和声式の和音記号の数字と違い
+% 同じ水平位置から始まる必要が無いので，ただ\cmd{\subsc}と\cmd{\supsc}を
+% 並べただけです．
+%    \begin{macrocode}
+\DeclareRobustCommand{\lhsc}[2]{%
+  \subsc{#1}\supsc{#2}%
+}% コードネーム記法
+
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\newlength{\lowsclength}%
+\newlength{\midsclength}%
+\newlength{\hisclength}%
+\newlength{\lmhsclength}%
+%    \end{macrocode}
+% \begin{macro}{\lowsc}
+% \begin{macro}{\midsc}
+% \begin{macro}{\hisc}
+% \begin{macro}{\lmhsc}
+%    \begin{macrocode}
+\DeclareRobustCommand{\lowsc}[1]
+  {\nobreak\eghostguarded{\raisebox{-0.4zh}{\scalebox{0.6}{#1}}}}
+\DeclareRobustCommand{\midsc}[1]
+  {\nobreak\eghostguarded{\raisebox{0.2zh}{\scalebox{0.6}{#1}}}}
+\DeclareRobustCommand{\hisc}[1]
+  {\nobreak\eghostguarded{\raisebox{0.8zh}{\scalebox{0.6}{#1}}}}
+\DeclareRobustCommand{\lmhsc}[3]{%
+  \texorpdfstring{%TeX
+    \settowidth{\lowsclength}{\raisebox{-0.4zh}{\scalebox{0.6}{#1}}}%
+    \settowidth{\midsclength}{\raisebox{0.2zh}{\scalebox{0.6}{#2}}}%
+    \settowidth{\hisclength}{\raisebox{0.8zh}{\scalebox{0.6}{#3}}}%
+    \ifdim\lowsclength<\midsclength\setlength{\lmhsclength}{\midsclength}%
+    \else\setlength{\lmhsclength}{\lowsclength}\fi%
+    \ifdim\lmhsclength<\hisclength\setlength{\lmhsclength}{\hisclength}\fi%
+    \nobreak\eghostguarded{%
+      \hspace{0.5\lmhsclength}%\hspace{-0.2em}
+      \makebox[0pt][c]{\raisebox{-0.4zh}{\scalebox{0.6}{#1}}}%
+      \makebox[0pt][c]{\raisebox{0.2zh}{\scalebox{0.6}{#2}}}%
+      \makebox[0pt][c]{\raisebox{0.8zh}{\scalebox{0.6}{#3}}}%
+      \hspace{0.5\lmhsclength}%
+    }%
+  }{#1#2#3}%
+}% 三段堆積
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \subsection{\UsefulMacros}
+%    \begin{macrocode}
+%%==============================================================================
+%% 便利なマクロ(musixtex依存)
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\setatnextbar}
+%    \begin{macrocode}
+\newcommand{\setatnextbar}[1]
+  {\long\def\atnextbar{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\setatnextcenterbar}
+%    \begin{macrocode}
+\newcommand{\setatnextcenterbar}[1]
+  {\long\def\atnextbar{\znotes\centerbar{#1}\en}}
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{\ChordSymbols}
+%    \begin{macrocode}
+%%==============================================================================
+%% コードシンボル(graphicx，hyperref依存)
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareRobustCommand{\Maj}
+  {\nobreak\textrm{M}}% Major
+\DeclareRobustCommand{\Min}
+  {\nobreak\textrm{m}}% Minor
+\DeclareRobustCommand{\Dim}
+  {\nobreak\eghostguarded{\raisebox{-.1zh}{$\circ$}}}% Diminish
+\DeclareRobustCommand{\Dimt}
+  {\nobreak\eghostguarded{\raisebox{.4zh}{$\circ$}}}% Diminish triad
+\DeclareRobustCommand{\hDim}
+  {\nobreak\eghostguarded{\scalebox{0.9}{\o}}}% Half diminish
+\DeclareRobustCommand{\Aug}
+  {\nobreak\eghostguarded{\raisebox{.4zh}{\scalebox{0.6}{\Plus}}}}
+\DeclareRobustCommand{\Triad}
+  {\nobreak\eghostguarded{\subsc\txTri}}
+\DeclareRobustCommand{\Sus}{%
+  \texorpdfstring{% TeX
+    \nobreak\eghostguarded{\textrm{sus}}%
+  }{sus}% PDF
+}% sus
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\Minus}{%
+  \texorpdfstring{% TeX
+    \eghostguarded{\raisebox{.1zh}{%
+      \ifmmode%
+        -%
+      \else%
+        $-$%
+      \fi%
+    }}%
+  }{-}% PDF
+}
+\newcommand{\Plus}{%
+  \texorpdfstring{% TeX
+    \eghostguarded{\raisebox{.1zh}{%
+      \ifmmode%
+        +%
+      \else%
+        $+$%
+      \fi%
+    }}%
+  }{+}% PDF
+}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareRobustCommand{\Slash}[1]{%
+  \texorpdfstring{%TeX
+    \settowidth{\@tempdima}{#1}%
+    \settoheight{\@tempdimb}{#1}%
+    \settodepth{\@tempdimc}{#1}%
+    \addtolength{\@tempdimb}{\@tempdimc}%
+    \eghostguarded{%
+      \makebox[\@tempdima][c]{%
+        \makebox[0pt][l]{%
+          \tikz[baseline=\@tempdimc]
+            {\draw (0,.3\@tempdimb)--+(\@tempdima,.4\@tempdimb);}%
+        }#1%
+      }%
+    }%
+  }{\bell@Slash@onPDF}%
+}
+\def\bell@Slash@onPDF{根音省略}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareRobustCommand{\chordfrac}[2]{$\dfrac{\text{#1}}{\text{#2}}$}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\Mdline}{\eghostguarded{\rule{1em}{.4pt}}}
+\newcommand{\Muline}{%
+  \@tempdima\baselineskip\advance\@tempdima-.4pt\relax
+  \eghostguarded{\rule[\@tempdima]{1em}{.4pt}}}
+\newcommand{\Mcline}{%
+  \@tempdima\h@lf\baselineskip\advance\@tempdima-.4pt\relax
+  \eghostguarded{\rule[\@tempdima]{1em}{.4pt}}}
+
+%    \end{macrocode}
+% \subsection{\ZCHAR}
+%    \begin{macrocode}
+%%==============================================================================
+%% 楽譜上の文字(graphicx，musixtex依存)
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\ifx\@zchar\@undefined
+  \def\zchar{\check@staff\begingroup\endcatcodesmusic\@zchar}
+  \def\lchar{\check@staff\begingroup\endcatcodesmusic\@lchar}
+  \def\cchar{\check@staff\begingroup\endcatcodesmusic\@cchar}
+  \def\@zchar#1#2{\raise#1\internote\rlap{#2}\endgroup\fi}
+  \def\@lchar#1#2{\raise#1\internote\llap{#2}\endgroup\fi}
+  \def\@cchar#1#2{\hroff{\raise#1\internote\lrlap{#2}}\endgroup\fi}
+\fi
+%    \end{macrocode}
+% \begin{macro}{\zchars}
+% \begin{macro}{\lchars}
+% \begin{macro}{\cchars}
+% \begin{macro}{\lrchars}
+%    \begin{macrocode}
+\newcommand{\zchars}{\check@staff\begingroup\endcatcodesmusic\small\@zchar}
+\newcommand{\lchars}{\check@staff\begingroup\endcatcodesmusic\small\@lchar}
+\newcommand{\cchars}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
+\newcommand{\lrchars}{\check@staff\begingroup\endcatcodesmusic\small\@lrchar}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\gcmc@Factory@chars}
+%    \begin{macrocode}
+\def\gcmc@Factory@chars#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka charsl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka charsll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka charslll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka charsu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka charsuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka charsuuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\zcharsc}
+% \begin{macro}{\lcharsc}
+% \begin{macro}{\ccharsc}
+% \begin{macro}{\lrcharsc}
+%    \begin{macrocode}
+\newcommand{\zcharsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchar}
+\newcommand{\lcharsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lchar}
+\newcommand{\ccharsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
+\newcommand{\lrcharsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchar}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\gcmc@Factory@charsc}
+%    \begin{macrocode}
+\def\gcmc@Factory@charsc#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka charscl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charsc\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka charscll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charsc\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka charsclll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charsc\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka charscu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charsc\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka charscuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charsc\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka charscuuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charsc\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\gcmc@Factory@chars{z}
+\gcmc@Factory@chars{l}
+\gcmc@Factory@chars{c}
+\gcmc@Factory@chars{lr}
+
+\gcmc@Factory@charsc{z}
+\gcmc@Factory@charsc{l}
+\gcmc@Factory@charsc{c}
+\gcmc@Factory@charsc{lr}
+
+%    \end{macrocode}
+% \begin{macro}{\lrchar}
+% \begin{macro}{\@lrchar}
+% \begin{macro}{\bell@lrchar}
+%    \begin{macrocode}
+\newcommand{\lrchar}{\begingroup\endcatcodesmusic\catcode\`&=4\@lrchar}
+\newcommand{\@lrchar}[2]{%
+  \def\reserved@a{#1}\def\reserved@b{#2}%
+  \expandafter\bell@lrchar\reserved@b\af@char
+  \endgroup\fi%
+}
+\def\bell@lrchar#1&#2\af@char{\lchar{\reserved@a}{#1}\zchar{\reserved@a}{#2}}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\newcommand{\Startpiece}{\startpiece\addspace\afterruleskip}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\octnumberup{%
+  \octnumberdefault\scalebox{0.8}{\txtfont va}\vrule width 0pt height2ex}
+\def\octnumberdefault{%
+  \smallppff8\nobreak}
+\def\octnumberdown{%
+  \octnumberdefault\scalebox{0.8}{\txtfont vb}\vrule width 0pt depth \Internote}
+
+%    \end{macrocode}
+% \subsection{\ZCHORD}
+%    \begin{macrocode}
+%%==============================================================================
+%% 和声記号配置(musixtex依存)
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\zchord}{\check@staff\begingroup\endcatcodesmusic\@zchord}
+\newcommand{\lchord}{\check@staff\begingroup\endcatcodesmusic\@lchord}
+\newcommand{\cchord}{\cchar}
+\newcommand{\lrchord}{%
+  \check@staff\begingroup\endcatcodesmusic\catcode\`&=4\@lrchord}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\zchords}{\check@staff\begingroup\endcatcodesmusic\small\@zchord}
+\newcommand{\lchords}{\check@staff\begingroup\endcatcodesmusic\small\@lchord}
+\newcommand{\cchords}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
+\newcommand{\lrchords}{\check@staff\begingroup\endcatcodesmusic\small\@lrchord}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\zchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchord}
+\newcommand{\lchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lchord}
+\newcommand{\cchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
+\newcommand{\lrchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchord}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\gcmc@Factory@chords#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka chordsl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka chordsll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka chordslll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka chordsu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka chordsuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka chordsuuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\gcmc@Factory@chords{z}
+\gcmc@Factory@chords{l}
+\gcmc@Factory@chords{c}
+\gcmc@Factory@chords{lr}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\gcmc@Factory@chordsc#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka chordscl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordsc\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka chordscll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordsc\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka chordsclll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordsc\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka chordscu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordsc\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka chordscuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordsc\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka chordscuuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordsc\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\gcmc@Factory@chordsc{z}
+\gcmc@Factory@chordsc{l}
+\gcmc@Factory@chordsc{c}
+\gcmc@Factory@chordsc{lr}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\@lrchord}[2]{%
+  \def\reserved@a{#1}\def\reserved@b{#2}%
+  \expandafter\bell@lrchord\reserved@b\af@chord
+  \endgroup\fi%
+}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\@zchord}[2]{\@zchar{#1}{\hspace{-.1\wn@width}#2}}
+\newcommand{\@lchord}[2]{\@lchar{#1}{#2\hspace{.1\wn@width}}}
+\def\bell@lrchord#1&#2\af@chord{%
+  \lchord{\reserved@a}{#1}\zchord{\reserved@a}{#2}}
+
+%    \end{macrocode}
+% \subsection{\FigureBass}
+%    \begin{macrocode}
+%%==============================================================================
+%% 数字付き低音(graphicx依存)
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcount\figbass@cnta% 低音数字の配列のイテレータ
+\newdimen\figbass@dima%
+\newdimen\figbass@dimb%
+\newdimen\figbass@dimc%
+\def\figbass@coefficientOfSize{0.65}% 数字の大きさのスケーリング
+\figbass@dimb2.3\internote % 数字同士の縦の間隔
+%    \end{macrocode}
+%    \begin{macrocode}
+%% \figbass[#1][#2]...[#n-1]{#n}
+%% #1,...,#n-1: figure number
+%% #n: height of figure number [internote]
+\newcommand{\figbass}{\figbass@dima\z@\bell@figbass}
+\newcommand{\figbassu}{\figbass@dima8.5\internote\bell@figbass}
+\newcommand{\figbassuu}{\figbass@dima10.5\internote\bell@figbass}
+\newcommand{\figbassuuu}{\figbass@dima12.5\internote\bell@figbass}
+\newcommand{\figbassuuuu}{\figbass@dima14.5\internote\bell@figbass}
+\newcommand{\figbassl}{\figbass@dima-2.5\internote\bell@figbass}
+\newcommand{\figbassll}{\figbass@dima-4.5\internote\bell@figbass}
+\newcommand{\figbasslll}{\figbass@dima-6.5\internote\bell@figbass}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\bell@figbass{\check@staff\begingroup\endcatcodesmusic\bell@figb@ss}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\bell@figb@ss{%
+  \@ifnextchar[{%
+    \@figbass@% 低音数字の配列
+  }{%
+    \ifnum\figbass@dima=\z@
+      \expandafter\expandafter\expandafter\@figbass@nocnt@% 場所指定の数字付き
+    \else
+      \expandafter\expandafter\expandafter\@figbass@cnt@% 数字付き
+    \fi\fi
+%   \ifnum\figbass@dima>\z@
+%     \let\@figb@ss\@figbass@cnt@% 上に数字付き
+%   \else\ifnum\figbass@dima<\z@
+%     \let\@figb@ss\@figbass@cnt@% 下に数字付き
+%   \else
+%     \let\@figb@ss\@figbass@nocnt@% 場所指定の数字付き
+%   \fi\fi\fi\@figb@ss
+  }%
+}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\@figbass@[#1]{%
+  \advance\figbass@cnta\@ne
+  \csdef{@figb@ss@\romannumeral\figbass@cnta}{\normalsize #1}%
+  \bell@figb@ss
+}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\@figbass@cnt@{\@figbass@@}% 上(下)に数字付き
+\def\@figbass@nocnt@#1{\figbass@dima#1\internote\@figbass@@}% 場所指定の数字付き
+\def\@figbass@@{% 数字付き低音の出力
+  \figbass@dimc\figbass@dimb \multiply\figbass@dimc\figbass@cnta
+  \ifnum\figbass@dima>\z@ \advance\figbass@dima\figbass@dimc \fi
+  \loop\ifnum\figbass@cnta>0\relax
+    \advance\figbass@dima-\figbass@dimb
+    \@figbass@char{\figbass@dima}
+                  {\scalebox
+                    {\figbass@coefficientOfSize}
+                    {\csname @figb@ss@\romannumeral\figbass@cnta\endcsname}%
+                  }% 0.540727 = 2\internote/ 1zh
+    \advance\figbass@cnta\m@ne
+  \repeat
+  \endgroup\figbass@dima\z@
+}
+\def\@figbass@char#1#2{\roffset{0.8}{\raise#1\llap{#2}}}
+
+%    \end{macrocode}
+% \subsection{\Tenni}
+%    \begin{macrocode}
+%%==============================================================================
+%% 転位記号
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\newdimen\gcmc@dPos@skip
+\newdimen\gcmc@Posparaboraheighta
+\newdimen\gcmc@Posparaboraheightb
+\def\gcmc@Posparabora@coeff{.5ex}
+\gcmc@dPos@skip=1pt
+
+\newcommand{\dPos}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \eghostguarded{%
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}{\gcmc@Posparabora@coeff}%
+      \draw (0,0)
+        parabola[parabola height=-\gcmc@Posparaboraheighta]
+        +(\@tempdima,0);}}#1}}}
+
+\newcommand{\uPos}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \settoheight{\@tempdimb}{#1}%
+  \eghostguarded{%
+    \advance\@tempdimb\gcmc@dPos@skip\relax
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=-\@tempdimb]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}{\gcmc@Posparabora@coeff}%
+      \draw (0,0)
+        parabola[parabola height=\gcmc@Posparaboraheighta]
+        +(\@tempdima,0);}}#1}}}
+
+\newcommand{\ddPos}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \eghostguarded{%
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}{\gcmc@Posparabora@coeff}%
+      \pgfmathsetlength{\gcmc@Posparaboraheightb}{\gcmc@Posparaboraheighta*3/5}%
+      \draw (0,0) parabola[parabola height=-\gcmc@Posparaboraheighta]
+            +(\@tempdima,0);
+      \draw (.2\@tempdima,0) parabola[parabola height=-\gcmc@Posparaboraheightb]
+            +(.6\@tempdima,0);}}#1}}}
+
+\newcommand{\duPos}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \eghostguarded{%
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}%
+                       {\gcmc@Posparabora@coeff}%
+      \pgfmathsetlength{\gcmc@Posparaboraheightb}%
+                       {\gcmc@Posparaboraheighta*16/25}% .333*16/25
+      \draw (0,0)
+        parabola[parabola height=-\gcmc@Posparaboraheighta] +(\@tempdima,0);
+      \draw ($(.2\@tempdima,-\gcmc@Posparaboraheighta)
+              -(0, -\gcmc@Posparaboraheightb)$)
+              parabola[parabola height=\gcmc@Posparaboraheightb]
+              +(.6\@tempdima,0);}}#1}}}
+
+\newcommand{\uuPos}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \settoheight{\@tempdimb}{#1}%
+  \eghostguarded{%
+    \advance\@tempdimb\gcmc@dPos@skip\relax
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=-\@tempdimb]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}%
+                       {\gcmc@Posparabora@coeff}%
+      \pgfmathsetlength{\gcmc@Posparaboraheightb}%
+                       {\gcmc@Posparaboraheighta*3/5}% .32*3/5
+      \draw (0,0) parabola[parabola height=\gcmc@Posparaboraheighta]
+              +(\@tempdima,0);
+      \draw (.2\@tempdima,0) parabola[parabola height=\gcmc@Posparaboraheightb]
+              +(.6\@tempdima,0);}}#1}}}
+
+\newcommand{\udPos}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \settoheight{\@tempdimb}{#1}%
+  \eghostguarded{%
+    \advance\@tempdimb\gcmc@dPos@skip\relax
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=-\@tempdimb]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}%
+                       {\gcmc@Posparabora@coeff}%
+      \pgfmathsetlength{\gcmc@Posparaboraheightb}%
+                       {\gcmc@Posparaboraheighta*16/25}%
+      \draw (0,0) parabola[parabola height=\gcmc@Posparaboraheighta]
+              +(\@tempdima,0);
+      \draw ($(.2\@tempdima,\gcmc@Posparaboraheighta)
+               - (0, \gcmc@Posparaboraheightb)$)
+            parabola[parabola height=-\gcmc@Posparaboraheightb]
+              +(.6\@tempdima,0);}}#1}}}
+
+\newcommand{\dPosdAlt}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \eghostguarded{%
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}%
+                       {\gcmc@Posparabora@coeff}%
+      \draw (0,0)
+              parabola[parabola height=-\gcmc@Posparaboraheighta]
+              +(\@tempdima,0);
+      \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
+            (.5\@tempdima,0) -- +(0,-\gcmc@Posparaboraheighta);}}#1}}}
+
+\newcommand{\dPosuAlt}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \eghostguarded{%
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}%
+                       {\gcmc@Posparabora@coeff}%
+      \draw (0,0)
+              parabola[parabola height=-\gcmc@Posparaboraheighta]
+              +(\@tempdima,0);
+      \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
+            (.5\@tempdima,-\gcmc@Posparaboraheighta)
+              -- +(0,\gcmc@Posparaboraheighta);}}#1}}}
+\newcommand{\uPosdAlt}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \settoheight{\@tempdimb}{#1}%
+  \eghostguarded{%
+    \advance\@tempdimb\gcmc@dPos@skip\relax
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=-\@tempdimb]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}%
+                       {\gcmc@Posparabora@coeff}%
+      \draw (0,0) parabola[parabola height=\gcmc@Posparaboraheighta]
+              +(\@tempdima,0);
+      \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
+            (.5\@tempdima,\gcmc@Posparaboraheighta)
+              -- +(0,-\gcmc@Posparaboraheighta);}}#1}}}
+
+\newcommand{\uPosuAlt}[1]{%
+  \settowidth{\@tempdima}{#1}%
+  \settoheight{\@tempdimb}{#1}%
+  \eghostguarded{%
+    \advance\@tempdimb\gcmc@dPos@skip\relax
+    \hbox\@to\@tempdima{\rlap{\tikz[baseline=-\@tempdimb]{%
+      \pgfmathsetlength{\gcmc@Posparaboraheighta}%
+                       {\gcmc@Posparabora@coeff}%
+      \draw (0,0) parabola[parabola height=\gcmc@Posparaboraheighta]
+            +(\@tempdima,0);
+      \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
+            (.5\@tempdima,0)
+              -- +(0,\gcmc@Posparaboraheighta);}}#1}}}
+%    \end{macrocode}
+% \subsection{\Harmonie}
+%    \begin{macrocode}
+%%==============================================================================
+%% ドイツ式和声記号
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\Funktion}{\begingroup\bell@Funktion}%
+\def\bell@Funktion#1{#1\endgroup}%
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\WechselD{%
+  \settowidth{\@tempdima}{D}\raisebox{.5ex}{D}\hspace{-\thr@@qu@rt\@tempdima}D%
+}% Wechseldominante
+\def\WechselS{%
+  \settowidth{\@tempdima}{S}\raisebox{.5ex}{S}\hspace{-\smallvalue\@tempdima}S%
+}% Wechselsubdominante
+\def\Wechsels{%
+  \settowidth{\@tempdima}{s}\raisebox{1ex}{\Funktion ss}%
+}% Wechselsubdominante
+\def\tiefalt{\eghostguarded{\scalebox{.5}[1]{$>$}}}%変変化音 tiefalteriert
+\def\hochalt{\eghostguarded{\scalebox{.5}[1]{$<$}}}%嬰変化音 hochalteriert
+%    \end{macrocode}
+% \begin{macro}{\Stellung}
+% \marg{chord}\marg{bass}の形で低音を指定した和音表記をします．
+%    \begin{macrocode}
+\def\Stellung#1#2{%
+  \eghostguarded{%
+    \settowidth{\@tempdima}{#1}%
+    \makebox[\@tempdima][c]{%
+      \rlap{%
+        \settowidth{\@tempdima}{#1}%
+        \settowidth{\@tempdimb}{\scalebox{.7}{#2}}%
+        \advance\@tempdima-\@tempdimb
+        \hspace{\h@lf\@tempdima}%
+        \settoheight{\@tempdimb}{\scalebox{.7}{#2}}%
+        \raisebox{-1\qu@rt\@tempdimb}{\scalebox{.7}{#2}}%
+      }#1%
+    }%
+  }%
+}% バス音指定 Die Stellung
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Hochgestellt}
+% 右上の添え字を表記します．
+%    \begin{macrocode}
+\def\Hochgestellt#1{\supsc{#1}}% 右上添え字 
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{\ChordProg}
+% \paragraph{概要}
+%    \begin{macrocode}
+%%==============================================================================
+%% Chord Progressionの表記のため
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\CProg}
+% コード進行を表記するマクロです．
+% |\CProg{|\meta{arg}|}|を基本形としますが，
+% |\CProg*|, |\CProg-|, |\CProg*-|の形もあります．
+% それぞれは次のように使い分けます．
+% \begin{itemize}
+% \item |\CProg|は長調に対して使います. 音度記号も同時に出力します．
+% \item |\CProg*|は短調に対して使います. 音度記号も同時に出力します．
+% \item |\CProg-|は音度記号を出力しない形です．
+% \item |\CProg*-|は|\CProg-|と同じ？
+% \end{itemize}
+% 
+% \meta{arg}は次の方法で記述されます．
+% \begin{itemize}
+% \item 音度記号が必要なら，\meta{degree\_Symbol}|:|\meta{chord\_Symbol}|;|を
+%       連結させていきます．
+% \item 音度記号が不要な場合は\meta{chord\_Symbol}|;|を連結させていきます．
+% \end{itemize}
+%
+% \begin{macro}{\CProgl}
+% 同様の記述方法で，インラインで使うための|\CProgl|が使用可能です．
+% \end{macro}
+% \paragraph{実装}
+%    \begin{macrocode}
+\newif\if@vCProg
+\newif\if@lCProg
+\@lCProgfalse
+% 多分トークンレジスタ使った方が素直な実装になる気がする．
+\def\CProg{\@ifstar{\def\tmp@CP@tokA{Minor: }\@CProg}%
+                   {\def\tmp@CP@tokA{Major: }\@CProg}}
+\def\CProgl{\@lCProgtrue\CProg}
+\def\@CProg{\@ifnextchar-{\let\tmp@CP@tokA\relax\@vCProgtrue\@@CProg}%
+                         {\@vCProgfalse\@@CProg-}}
+\def\@@CProg#1#2{%
+  \begingroup
+    \if@lCProg\else \par\centering \fi
+    \tmp@CP@tokA\h@CProg#2;\relax;%
+    \if@lCProg\else \par \fi
+  \endgroup
+  \@lCProgfalse
+}
+\def\h@CProg#1;#2;{%
+  \def\@CProg@a{#1:}\def\@CProg@b{#2}%
+  \if@vCProg
+    \fbox{\strut\expandafter\v@CProg@var\@CProg@a}%
+  \else
+    \fbox{\strut\expandafter\v@CProg\@CProg@a}%
+  \fi
+  \expandafter\expandafter\expandafter
+  \ifx\expandafter\f@tok\@CProg@b\af@tok\relax
+    \let\n@xt\relax
+  \else
+    \ \Arrowright\ %
+    \let\n@xt\h@CProg\def\@CProg@b{#2;}%
+  \fi
+  \expandafter\n@xt\@CProg@b%
+}%
+\def\v@CProg#1:#2:{%
+  \raise-.5\baselineskip\vbox{\hbox{#1}\hbox{#2}}%
+}
+\def\v@CProg@var#1:{#1}
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{\MusicSymbols}
+%    \begin{macrocode}
+%%==============================================================================
+%% 譜面上の記号
+%%==============================================================================
+%    \end{macrocode}
+% \subsubsection{over/under square bracket}
+% \paragraph{概要}
+% \begin{macro}{\Jovbkt}
+% \oarg{text}\marg{height}\marg{length}\oarg{ﾑﾆｬ}\marg{slope}の形で上付き,\par
+% \begin{macro}{\Junbkt}
+% \oarg{text}\marg{height}\marg{length}\oarg{ﾑﾆｬ}\marg{slope}の形で
+% 下付きの角括弧を作ります．
+% \begin{itemize}
+% \item 第1引数(optional)は角括弧の真ん中，上付きなら上に・
+%       下付きなら下に，引数に与えた文字を出します．
+% \item 第2引数は角括弧の始点の高さ[\meta{exp\_note}]を与えます．
+% \item 第3引数は角括弧の長さ[|noteskip|]を与えます．
+% \item 第4引数(optional)はﾑﾆｬ……．
+% \item 第5引数は角括弧の始点からの相対的な終点の高さ[|internote|]を与えます．
+% \end{itemize}
+%
+% \paragraph{実装}
+% 内部的には後述する\cmd{\bell@bkt}を使っています．
+% \cmd{\Jovbkt}と\cmd{\Junbkt}の違いは，内部で\cmd{\reserved@e}に与えている
+% 数字の違いだけです．
+%    \begin{macrocode}
+%% over/under square bracket                                                  %%
+%% \Jovbkt, \Junbkt #1=text(optional)   #2=height[\internote]                 %%
+%%                  #3=length[noteskip] #4=slope [\internote]                 %%
+\newcommand{\Jovbkt}[3][]{%
+  \inhgetn@i#2\relax%
+  \def\reserved@e{1}%
+  \@ifnextchar[{\bell@bkt[#1]{\n@i}{#3}}%
+               {\bell@bkt[#1]{\n@i}{#3}[0pt]}%
+}
+\newcommand{\Junbkt}[3][]{%
+  \inhgetn@i#2\relax%
+  \def\reserved@e{0}%
+  \@ifnextchar[{\bell@bkt[#1]{\n@i}{#3}}%
+               {\bell@bkt[#1]{\n@i}{#3}[0pt]}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\bell@bkt}
+% \oarg{text}\marg{height}\marg{length}\oarg{ﾑﾆｬ}\marg{slope}の形で
+%    \begin{macrocode}
+%% bell@bkt #1=text(optional) #2=height[\internote] #3=length[noteskip]       %%
+%%          #4=slope(differ)[\internote] #5=bkt over/under[+1/-1]             %%
+\def\bell@bkt[#1]#2#3[#4]#5{%
+  \y@ii#3\noteskip \y@iii#5\internote
+  \advance\y@ii-.3\qn@width
+  \advance\y@ii#4\relax
+  \expandafter\ifnum\reserved@e>0\relax% bracket over
+    \y@i\internote
+    \settodepth{\y@iv}{#1}%
+  \else% bracket under
+    \y@i-\internote
+    \settoheight{\y@iv}{#1}%
+    \y@iv\m@ne\y@iv
+  \fi
+  \zchars{#2}{%
+    \hspace{.65\qn@width}%
+    \tikz[baseline=0.0ex]{\draw[semithick]
+         (0,\y@i) -- ++(0,\y@i) -- ++(\y@ii,\y@iii) -- ++(0,-\y@i);}%
+    \y@iii\h@lf\y@iii \advance\y@iii\tw@\y@i \advance\y@iii\y@iv
+    \hspace{-.5\y@ii}\raisebox{\y@iii}{\lrlap{#1}}%
+  }%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{left/right square bracket}
+% 音符の左・右に角括弧を作ります．
+% \begin{macro}{\Lbracket}
+% \begin{macro}{\Rbracket}
+% 上付き・下付きの角括弧を作ります．
+% \begin{itemize}
+% \item 第1引数は角括弧の下端の高さ[\meta{exp\_note}]を与えます．
+% \item 第2引数は角括弧の上端の高さ[|internote|]を与えます．
+% \end{itemize}
+% 内部的には後述する|\bell@bracket|を使っています．
+%    \begin{macrocode}
+%% left/right square bracket                                                  %%
+%% \Lbracket, \Rbracket                                                       %%
+%% #1: bottom height[\internote], #2: height length[internote]                %%
+\newcommand{\Lbracket}{\bell@bracket{\@ne}}
+\newcommand{\Rbracket}{\bell@bracket{\m@ne}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\bell@bkt}
+%    \begin{macrocode}
+\newcommand{\bell@bracket}[3]{%
+  %\inhgetn@i#2\relax
+  \y@iii#3\internote
+  \ifnum#1>0\relax% bracket Left
+    \lchars{#2}{%
+      \tikz[baseline=0.0ex]{%
+        \draw[semithick]
+          (\qu@rt\qn@width,0) --++ (-\qu@rt\wn@width,0)
+          --++ (0,\y@iii) --++(\qu@rt\wn@width,0);}%
+      \hspace{\qu@rt\wn@width}%
+    }%
+  \else% bracket Right
+    \zchars{#2}{%
+      \hspace{1\qu@rt\wn@width}%
+      \tikz[baseline=0.0ex]{%
+        \draw[semithick]
+          (0,0) --++ (\qu@rt\wn@width,0)
+          --++ (0,\y@iii) --++(-\qu@rt\wn@width,0);}%
+    }%
+  \fi
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{lines}
+% \begin{macro}{\Mline}
+% \oarg{add\_length}\marg{height}\marg{length}\marg{slope}の形で
+% 線を引きます．
+% 星付きのバージョンもあります．
+% \begin{itemize}
+% \item 第1引数(opt.)は追加の線の長さ[|dimen|]を与えます．
+% \item 第2引数は線の始点の高さ[|internote|]を与えます．
+% \item 第3引数は線の長さ[|noteskip|]．
+% \item 第4引数は線の終点の:
+% \begin{itemize}
+%   \item 線の始点からの相対的な高さを与えます(星なし)．
+%   \item 絶対的な高さを与えます(星あり)．
+% \end{itemize}
+% \end{itemize}
+% 内部的には後述する|\bell@MlineTikz|を使っています．
+% \begin{macro}{\MlineC}
+% \oarg{add\_length}\marg{height}\marg{slope}\par
+% \begin{macro}{\MlineB}
+% \oarg{add\_length}\marg{height}\marg{slope}\par
+% 同様にして，\marg{length}に1を与えた変種として\cmd{\MlineC}および
+% \marg{length}に1を与え,かつ\oarg{add\_length}に\cmd{\afterruleskip}を加える
+% 変種として\cmd{\MlineB}を定義します．
+%    \begin{macrocode}
+%% lines                                                                      %%
+%% Mline  #1=height[\internote] #2=length[noteskip] #3=slope(diff.)[\internote]
+%% Mline* #1=height[\internote] #2=length[noteskip] #3=slope [\internote]
+\newcommand{\Mline}{\@ifstar{\bell@MlineTikzS}{\bell@MlineTikz}}
+\newcommand{\MlineC}{\@ifstar{\bell@MlineCTikzS}{\bell@MlineCTikz}}
+\newcommand{\MlineB}{\@ifstar{\bell@MlineBTikzS}{\bell@MlineBTikz}}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+%% \bell@MlineTikz                                                            %%
+%%   #1=additional length[dimen](opt.)                                        %%
+%%   #2=height[\internote]                                                    %%
+%%   #3=length[noteskip]                                                      %%
+%%   #4=slope(differ) [\internote]                                            %%
+\newcommand{\bell@MlineTikz}[4][0pt]{%
+  \y@i#2\internote
+  \y@ii#3\noteskip
+  \y@iii#4\internote
+  \advance\y@ii-1\thr@@qu@rt\qn@width
+  \advance\y@ii#1%
+  \zchar{#2}{%
+    \hspace{1\h@lf\qn@width}%
+    \tikz[baseline=0.0ex]{\draw[semithick] (0,0) -- (\y@ii,\y@iii);}%
+  }%
+}
+\newcommand{\bell@MlineCTikz}[3][0pt]{%
+  \bell@MlineTikz[#1]{#2}{1}{#3}%
+}
+\newcommand{\bell@MlineBTikz}[3][0pt]{%
+  \@tempdima\afterruleskip
+  \advance\@tempdima#1%
+  \bell@MlineTikz[\@tempdima]{#2}{1}{#3}%
+}
+
+\newcommand{\bell@MlineTikzS}[4][0pt]{%
+  \n@i#2\relax
+  \n@iii#4\relax
+  \advance\n@iii-\n@i%
+  \bell@MlineTikz[#1]{#2}{#3}{\n@iii}%
+}
+\newcommand{\bell@MlineCTikzS}[3][0pt]{%
+  \bell@MlineTikzS[#1]{#2}{1}{#3}%
+}
+\newcommand{\bell@MlineBTikzS}[3][0pt]{%
+  \@tempdima\afterruleskip
+  \advance\@tempdima#1%
+  \bell@MlineTikzS[\@tempdima]{#2}{1}{#3}%
+}
+
+%    \end{macrocode}
+% \subsubsection{parentheses}
+%    \begin{macrocode}
+%% parentheses                                                                %%
+%% Mparenl/Mparenr                                                            %%
+%% #1=additional space[\wn@width](optional)                                   %%
+%% #2=bottom height[\internote] #3=top height[\internote]                     %%
+\newcommand{\Mparenl}[3][0]{%
+  \y@i#2\internote
+  \y@ii#3\internote
+  \advance\y@ii-\y@i%
+  \settodepth{\@tempdima}{(}%
+  \settowidth{\y@iii}{(}%
+  \y@i#1\wn@width \advance\y@i\h@lf\wn@width
+  \lchar{#2}{\resizebox{\y@iii}{\y@ii}{\raisebox{\@tempdima}{(}}\hspace{\y@i}}%
+}
+\newcommand{\Mparenr}[3][0]{%
+  \y@i#2\internote
+  \y@ii#3\internote
+  \advance\y@ii-\y@i%
+  \settodepth{\@tempdima}{)}%
+  \settowidth{\y@iii}{)}%
+  \y@i#1\wn@width \advance\y@i1\h@lf\wn@width
+  \zchar{#2}{\hspace{\y@i}\resizebox{\y@iii}{\y@ii}{\raisebox{\@tempdima}{)}}}%
+}
+
+%    \end{macrocode}
+% \subsubsection{miscellaneous}
+% \begin{macro}{\Mryaku}\oarg{height}\par
+% 省略記号を出力します．
+% \begin{itemize}
+% \item 第1引数(opt.)は出力される高さ[|internote|]を与えます．
+%       既定は3です．
+% \end{itemize}
+%    \begin{macrocode}
+%% miscellaneous                                                              %%
+\newcommand{\Mryaku}[1][3]{\shake{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Loffset}\marg{offset}\marg{exp.}\par
+% \begin{macro}{\Roffset}\marg{offset}\marg{exp.}\par
+% 全音符単位の\marg{offset}[|number|]を指定します．
+%    \begin{macrocode}
+\def\Loffset#1{\edef\s@o@{#1\wn@width}\offs@t}
+\def\Roffset#1{\edef\s@o@{-#1\wn@width}\offs@t}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\Roff}\marg{exp.}\par
+% \begin{macro}{\Loff}\marg{exp.}\par
+% \begin{macro}{\hRoff}\marg{exp.}\par
+% \begin{macro}{\hLoff}\marg{exp.}\par
+% それぞれ\cmd{\roff}，\cmd{\loff}，\cmd{\hroff}および\cmd{\hloff}の全音符版です．
+%    \begin{macrocode}
+\def\Roff{\Roffset\@ne}
+\def\Loff{\Loffset\@ne}
+\def\hRoff{\Roffset\h@lf}
+\def\hLoff{\Loffset\h@lf}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
+\def\qroff{\roffset\qu@rt}
+\def\qloff{\loffset\qu@rt}
+\def\qhroff{\roffset\thr@@qu@rt}
+\def\qhloff{\loffset\thr@@qu@rt}
+%    \end{macrocode}
+% \begin{macro}{\doubleBAR}\par
+% 終止線を出力します．
+%    \begin{macrocode}
+\def\doubleBAR{\setdoubleBAR\bar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Mhshift}\marg{offset}\marg{exp.}\par
+% \meta{dimen}単位でオフセットする命令．
+%    \begin{macrocode}
+\newcommand{\Mhshift}[2]{\rlap{\hspace{#1\noteskip}#2\hspace{-#1\noteskip}}}
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{\Resets}
+%    \begin{macrocode}
+%%==============================================================================
+%% 初期設定
+%%==============================================================================
+%    \end{macrocode}
+%    \begin{macrocode}
+\smallmusicsize
+\geometricskipscale
+\setlength{\afterruleskip}{2\elemskip}%
+
+\calc@accidentaloffs@tunit
+
+\newlength{\flwidth}
+\newlength{\shwidth}
+\newlength{\nawidth}
+\newlength{\dflwidth}
+\newlength{\dshwidth}
+\settowidth{\flwidth}{\musixchar50}
+\settowidth{\shwidth}{\musixchar52}
+\settowidth{\nawidth}{\musixchar54}
+\settowidth{\dflwidth}{\musixchar51}
+\settowidth{\dshwidth}{\musixchar53}
+\let\QNwidth\qn@width
+\let\WNwidth\wn@width
+
+\def\raisevolta{\tw@\internote}
+\def\gen@setvolta#1{\def\volta@text{\footnotesize #1}}
+%</macro>
+%    \end{macrocode}
+%
+% 以上で終わりです．
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
+%
+% \Finale
+% \PrintIndex \PrintChanges

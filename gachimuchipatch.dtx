@@ -1,0 +1,1695 @@
+% ^^A -*- japanese-latex -*-
+%
+\ifx\epTeXinputencoding\undefined\else
+  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
+\fi
+%
+% \iffalse
+%
+%   gachimuchi.dtx
+%
+%<*driver>
+\documentclass[uplatex,a4paper,12Q,dvipdfmx]{jsarticle}
+\usepackage{doc}
+\usepackage{metalogo}
+\providecommand*{\eTeX}{$\varepsilon$-\TeX}
+\providecommand*{\pLaTeX}{p\kern-.05em\LaTeX}
+\providecommand*{\pLaTeXe}{p\kern-.05em\LaTeXe}
+\providecommand*{\upTeX}{u\pTeX}
+\providecommand*{\XeTeX}{XeTeX}
+\usepackage{ifptex}
+\ifptex
+  \xspcode"5C=1 %% \
+  \xspcode"22=1 %% "
+\fi
+\addtolength{\textwidth}{-1in}
+\addtolength{\evensidemargin}{1in}
+\addtolength{\oddsidemargin}{1in}
+\addtolength{\marginparwidth}{1in}
+\setlength\marginparpush{0pt}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\definecolor{myblue}{rgb}{0,0,0.75}
+\definecolor{mygreen}{rgb}{0,0.45,0}
+\hypersetup{colorlinks,hyperfootnotes=false,linkcolor=myblue,urlcolor=mygreen}
+\CodelineNumbered
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges                  % Gather update information
+\setcounter{StandardModuleDepth}{1}
+
+\makeatletter
+\def\TikZ{Ti\emph{k}Z}
+\newcommand*{\file}[1]{\texttt{#1}}
+\newcommand*{\Lcount}[1]{\textsl{\small#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\newcounter{@clineno}
+\def\mlineplus#1{\setcounter{@clineno}{\arabic{CodelineNo}}%
+   \addtocounter{@clineno}{#1}\arabic{@clineno}}
+\def\cmd#1{\cs{\expandafter\cmd@to@cs\string#1}}
+\def\cmd@to@cs#1#2{\char\number`#2\relax}
+\DeclareRobustCommand{\cs}[1]{\texttt{\char`\\#1}}
+\providecommand{\marg}[1]{%
+  {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
+\providecommand{\oarg}[1]{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}}
+\makeatother
+
+\GetFileInfo{gachimuchipatch.dtx}
+\begin{document}
+  \DocInput{gachimuchipatch.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%  \changes{v1.0}{2019/10/29}
+%    {make this .dtx file}
+% \DoNotIndex{\@,\@@par,\@beginparpenalty,\@empty}
+% \DoNotIndex{\@flushglue,\@gobble,\@input}
+% \DoNotIndex{\@makefnmark,\@makeother,\@maketitle}
+% \DoNotIndex{\@namedef,\@ne,\@spaces,\@tempa}
+% \DoNotIndex{\@tempb,\@tempswafalse,\@tempswatrue}
+% \DoNotIndex{\@thanks,\@thefnmark,\@topnum}
+% \DoNotIndex{\@@,\@elt,\@forloop,\@fortmp,\@gtempa,\@totalleftmargin}
+% \DoNotIndex{\",\/,\@ifundefined,\@nil,\@verbatim,\@vobeyspaces}
+% \DoNotIndex{\|,\~,\ ,\active,\advance,\aftergroup,\begingroup,\bgroup}
+% \DoNotIndex{\mathcal,\csname,\def,\documentstyle,\dospecials,\edef}
+% \DoNotIndex{\egroup}
+% \DoNotIndex{\else,\endcsname,\endgroup,\endinput,\endtrivlist}
+% \DoNotIndex{\expandafter,\fi,\fnsymbol,\futurelet,\gdef,\global}
+% \DoNotIndex{\hbox,\hss,\if,\if@inlabel,\if@tempswa,\if@twocolumn}
+% \DoNotIndex{\ifcase}
+% \DoNotIndex{\ifcat,\iffalse,\ifx,\ignorespaces,\index,\input,\item}
+% \DoNotIndex{\jobname,\kern,\leavevmode,\leftskip,\let,\llap,\lower}
+% \DoNotIndex{\m@ne,\next,\newpage,\nobreak,\noexpand,\nonfrenchspacing}
+% \DoNotIndex{\obeylines,\or,\protect,\raggedleft,\rightskip,\rm,\sc}
+% \DoNotIndex{\setbox,\setcounter,\small,\space,\string,\strut}
+% \DoNotIndex{\strutbox}
+% \DoNotIndex{\thefootnote,\thispagestyle,\topmargin,\trivlist,\tt}
+% \DoNotIndex{\twocolumn,\typeout,\vss,\vtop,\xdef,\z@}
+% \DoNotIndex{\,,\@bsphack,\@esphack,\@noligs,\@vobeyspaces,\@xverbatim}
+% \DoNotIndex{\`,\catcode,\end,\escapechar,\frenchspacing,\glossary}
+% \DoNotIndex{\hangindent,\hfil,\hfill,\hskip,\hspace,\ht,\it,\langle}
+% \DoNotIndex{\leaders,\long,\makelabel,\marginpar,\markboth,\mathcode}
+% \DoNotIndex{\mathsurround,\mbox,\newcount,\newdimen,\newskip}
+% \DoNotIndex{\nopagebreak}
+% \DoNotIndex{\parfillskip,\parindent,\parskip,\penalty,\raise,\rangle}
+% \DoNotIndex{\section,\setlength,\TeX,\topsep,\underline,\unskip,\verb}
+% \DoNotIndex{\vskip,\vspace,\widetilde,\\,\%,\@date,\@defpar}
+% \DoNotIndex{\[,\{,\},\]}
+% \DoNotIndex{\count@,\ifnum,\loop,\today,\uppercase,\uccode}
+% \DoNotIndex{\baselineskip,\begin,\tw@}
+% \DoNotIndex{\a,\b,\c,\d,\e,\f,\g,\h,\i,\j,\k,\l,\m,\n,\o,\p,\q}
+% \DoNotIndex{\r,\s,\t,\u,\v,\w,\x,\y,\z,\A,\B,\C,\D,\E,\F,\G,\H}
+% \DoNotIndex{\I,\J,\K,\L,\M,\N,\O,\P,\Q,\R,\S,\T,\U,\V,\W,\X,\Y,\Z}
+% \DoNotIndex{\1,\2,\3,\4,\5,\6,\7,\8,\9,\0}
+% \DoNotIndex{\!,\#,\$,\&,\',\(,\),\+,\.,\:,\;,\<,\=,\>,\?,\_}
+% \DoNotIndex{\discretionary,\immediate,\makeatletter,\makeatother}
+% \DoNotIndex{\meaning,\newenvironment,\par,\relax,\renewenvironment}
+% \DoNotIndex{\repeat,\scriptsize,\selectfont,\the,\undefined}
+% \DoNotIndex{\arabic,\do,\makeindex,\null,\number,\show,\write,\@ehc}
+% \DoNotIndex{\@author,\@ehc,\@ifstar,\@sanitize,\@title,\everypar}
+% \DoNotIndex{\if@minipage,\if@restonecol,\ifeof,\ifmmode}
+% \DoNotIndex{\lccode,\newtoks,\onecolumn,\openin,\p@,\SelfDocumenting}
+% \DoNotIndex{\settowidth,\@resetonecoltrue,\@resetonecolfalse,\bf}
+% \DoNotIndex{\clearpage,\closein,\lowercase,\@inlabelfalse}
+% \DoNotIndex{\selectfont,\mathcode,\newmathalphabet,\rmdefault}
+% \DoNotIndex{\bfdefault}
+%
+%
+% \title{gachimuchi}
+% \author{bell}
+% \date{\filedate}
+% \maketitle
+% \tableofcontents
+%
+% \MakeShortVerb{\|}
+%
+% \section*{はじめに}
+%
+%
+% \StopEventually{}
+%
+%
+% 
+%
+%    \begin{macrocode}
+%<*patch>
+%%=============================================================================%
+%%                                                                             %
+%%   GGGGG          A          CCCCC    H       H    IIIII                     %
+%%  G     G        A A        C     C   H       H      I                       %
+%% G       G      A   A      C       C  H       H      I                       %
+%% G             A     A     C          H       H      I                       %
+%% G            A       A    C          HHHHHHHHH      I     --------          %
+%% G     GGGG   AAAAAAAAA    C          H       H      I                       %
+%% G       G    A       A    C       C  H       H      I                       %
+%%  G     GG    A       A     C     C   H       H      I                       %
+%%   GGGGG G    A       A      CCCCC    H       H    IIIII                     %
+%%                                                                             %
+%%                M         M   UUU     UUU    CCCCC    H       H    IIIII     %
+%%                MM       MM    U       U    C     C   H       H      I       %
+%%                M M     M M    U       U   C       C  H       H      I       %
+%%                M M     M M    U       U   C          H       H      I       %
+%%                M  M   M  M    U       U   C          HHHHHHHHH      I       %
+%%                M  M   M  M    U       U   C          H       H      I       %
+%%                M   M M   M    U       U   C       C  H       H      I       %
+%%                M   M M   M     U     U     C     C   H       H      I       %
+%%                M    M    M      UUUUU       CCCCC    H       H    IIIII     %
+%%                                                                             %
+%%=============================================================================%
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesPackage{gachimuchipatch}[2020/01/16 Gachimuchi Koza patch set]
+%    \end{macrocode}
+% \section{MusiXTeXのパッチ}
+%    \begin{macrocode}
+%%==============================================================================
+%% MusiXTeX package
+%%==============================================================================
+\ifdefined\startpiece
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+
+\newif\ifuseTikzSlur
+%\ifdefined\if@DEBUG\else
+\newif\if@DEBUG
+%\fi
+
+\newtoks\bell@gcmc@tmptoka
+
+%    \end{macrocode}
+% \subsection{楽譜左端の縦線の修正}
+% \subsubsection{楽譜番号}
+% \paragraph{概説}
+% \DescribeMacro{\piecenumbers}
+% \DescribeMacro{\nopiecenumbers}
+% \cmd{\piecenumbers}は音部記号の上に譜例番号を描画します.
+% \cmd{\nopiecenumbers}は描画しません.
+% 
+% \paragraph{実装}
+%    \begin{macrocode}
+\def\bell@raisepieceno{\f@ur\internote}
+\let\bell@shiftpieceno\z@
+% \def\bell@shiftpieceno{2.5\Interligne}
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\bell@writepieceno{\textit{\normalsize\piece@num}}
+
+%    \end{macrocode}
+% \subsubsection{startbarruleに分割機能の追加}
+% \paragraph{概説}
+% \DescribeMacro{\stdstartbarrules}
+% \DescribeMacro{\sepstartbarrules}
+% \DescribeMacro{\indivstartbarrules}
+% 楽譜左端の縦線を分割可能にする命令を追加します.
+% 実際に分割可能にするには\file{musixdbr.tex}を読み込む必要があります.
+% \begin{itemize}
+% \item \cmd{\stdstartbarrules}は通常通り, 分割不能な縦線にします.
+% \item \cmd{\sepstartbarrules}はムニャ…….
+% \item \cmd{\indivstartbarrules}は分割可能な縦線にします.
+% \end{itemize}
+% \paragraph{実装}
+%    \begin{macrocode}
+%% startbarruleに分割機能の追加 %%
+\def\stdstartbarrules{\let\writ@startrule\rul@full }
+\def\sepstartbarrules{\let\writ@startrule\rul@sep }
+\def\indivstartbarrules{\let\writ@startrule\rul@indiv }
+\stdstartbarrules
+
+%    \end{macrocode}
+% \DescribeMacro{\writ@staffs}
+% \cmd{\writ@staffs}は楽譜開始時に呼び出される内部命令です.
+% 縦線の描画を内部でコーディングするのではなく, 外部の描画命令に
+% 任せることで分割機能をもたせました.
+% また, 譜例番号を音部記号の上に出せるように命令を付け足しました.
+%    \begin{macrocode}
+% musixtex.tex
+\def\writ@staffs{%
+  \y@\staffbotmarg \global\altplancher\staffbotmarg
+  \rlap{\n@loop\w@st\repeat
+% beginning vertical rule
+  \systemheight\y@
+  \advance\systemheight-\altplancher
+  \C@Inter \global\advance\systemheight-\stem@skip
+  \ifx\empty\b@rule
+%   \raise\altplancher\rlap{% -bell
+%   \vrule\@depth\hlthick\@height\systemheight\@width\lthick}% -bell
+    \writ@startrule\lthick\addspace{-\lthick}% +bell
+  \fi
+% 'Akkoladenklammer' don't know the english word
+  \g@loop
+   \ifnum\uppersonginstrum<\lowersonginstrum
+   \else
+    \noinstrum@nt\uppersonginstrum\s@l@ctinstr\C@Inter
+    \global\advance\g@h-\stem@skip \global\advance\g@h-\g@b
+    \global\advance\g@h\Interligne \global\advance\g@b-\Internote
+    \raise\g@b\llap{\uplap{\offinterlineskip
+      \set@normalnotesize\hbox{\musixfont\fourt@@n}\hbox{\vrule\@height\g@h
+        \@width\internote}\hbox{\musixfont\fiv@t@@n}}\kern\internote}%
+   \fi
+  \repeat
+% systembarnumbers
+  \ifx\lin@bar\@ne \y@\altplancher \advance\y@\systemheight
+    \advance\y@\raisebarno \raise\y@\rlap{\kern\shiftbarno\writebarno}\fi
+% strut
+  \advance\stafftopmarg\staffbotmarg
+  \raise\stafftopmarg\hbox{\vrule\@height\systemheight\@width\z@}}}%
+% for "multiple left curly brackets"
+\let\origin@lwrit@staffs\writ@staffs
+\def\writ@staffs{%
+  \origin@lwrit@staffs
+  \ifx\br@cks\empty\else\expandafter\@bracks\br@cks\ende\fi
+% PieceNumをClefの上に出す.
+  \ifx\bell@piecenum\@ne
+    \y@\altplancher \advance\y@\systemheight
+    \advance\y@\bell@raisepieceno
+    \raise\y@\rlap{\kern\bell@shiftpieceno\bell@writepieceno}%
+    \edef\@currentlabel{\bell@refcnt}%
+    \nopiecenumbers%
+  \fi
+% ここまで(PieceNumをClefの上に出す)
+}
+
+%    \end{macrocode}
+% \DescribeMacro{\write@volta}
+% \cmd{\write@volta}は\cmd{\bar}を始めとする多くの縦線命令で呼び出されます.
+%    \begin{macrocode}
+\def\write@volta{% writes the requested |n. and moves the things for further use
+  \ifx\volta@type\empty\else\errmessage{/setvolta collision!}\fi
+  \y@\altplancher \advance\y@\systemheight
+  \advance\y@\raisevolta
+  \settoheight{\@tempdima}{\volta@text}\advance\@tempdima\internote% +bell
+% \setbox\writ@volta@box\rlap{\vrule %   \musixfont\sixt@@n  %-simick
+%   \rm\ \vphantom{\^{\volta@text}\strut gq}\volta@text\voltadot}%  %-simick
+% \setbox\writ@volta@box\rlap{\vrule\rm\strut\ \volta@text\voltadot}%  %+simick
+  \setbox\writ@volta@box\rlap{% +bell
+    \vrule\@height\@tempdima\@depth\raisevolta% +bell
+    \rmfamily\ \volta@text\voltadot}% +bell
+  \xdef\thevolta@boxheight{\the\ht\writ@volta@box}%
+  \xdef\thevolta@boxdepth{\the\dp\writ@volta@box}%
+  \ifx\volta@cut\empty \else\setbox\writ@volta@box\null
+  \fi   % if continuation, make writ@volta@box null
+  \kernm\volta@startcor\raise\y@\llap{\box\writ@volta@box}%
+  \kern\volta@startcor%+simick
+  \let\volta@type\volta@set
+  \let\volta@set\empty
+  \let\volta@cut\empty
+  \init@volta@pos\lin@pos \advance\init@volta@pos-\volta@startcor  %+simick
+}%
+
+
+%    \end{macrocode}
+% \subsection{\cmd{\ha}, \cmd{\qa}などが正常動作しなかった不具合のpatch}
+% \paragraph{概説}
+% \DescribeMacro{\xgetn@i}
+% \cmd{\xgetn@i}|#1\relax|を再定義しています.
+% 修正点は次の通り.
+% \begin{itemize}
+% \item 引数が完全展開されたものをパースするように変更.
+% \item \DescribeMacro{\ifHelmholzPitchNote}\cmd{\ifHelmholzPitchNote}の新設;
+%       科学ピッチ記法に対応.
+% \item それに応じてオクターブ変更の影響を一音ごとに変更.
+% \end{itemize}
+% \paragraph{実装}
+%    \begin{macrocode}
+%% \ha, \qa などが正常動作しなかった不具合のpatch %%
+
+\newif\ifHelmholzPitchNote
+\HelmholzPitchNotetrue
+\def\xgetn@i#1\relax{%
+  \edef\bell@gcmc@reserved@a{#1}% +bell, 2018-09-01
+  \n@viii\z@ \n@i\maxdimen % par defaut
+%  \edef\t@ruc{\f@tok #1\relax\af@tok}%
+%  \edef\s@uite{\s@tok #1\empty\af@tok}% -bell, 2018-09-01
+  \edef\t@ruc{\expandafter\f@tok
+              \bell@gcmc@reserved@a\relax\af@tok}% +bell, 2018-09-01
+  \edef\s@uite{\expandafter\s@tok
+               \bell@gcmc@reserved@a\empty\af@tok}% +bell, 2018-09-01
+%% pas lettre
+  \ifcat a\t@ruc \n@i\expandafter`\t@ruc\relax
+%% ramener au E (position zero en clef de sol, ut@ref=0)
+    \ifnum\n@i>96\advance\n@i-101%
+    \else\advance\n@i-\@lxxxiii % ramener au S= E + 14
+    \fi
+    \ifHelmholzPitchNote% +bell
+      \ifnum\n@i>96\advance\n@i-\s@v@n\fi
+      \ifnum\expandafter`\t@ruc=65\relax%A
+      \advance\n@i\s@v@n
+      \fi\ifnum\expandafter`\t@ruc=66\relax%B
+      \advance\n@i\s@v@n
+      \fi\ifnum\expandafter`\t@ruc=97\relax%a
+      \advance\n@i\s@v@n
+      \fi\ifnum\expandafter`\t@ruc=98\relax%b
+      \advance\n@i\s@v@n
+      \fi
+    \fi
+    \advance\n@i\ut@ref \advance\n@i\ut@ref \advance\n@i\transpose
+    \ifHelmholzPitchNote \transpose\normaltranspose \fi% +bell
+    \edef\ss@uite{\noexpand\n@fon{\s@uite}}%
+%% cas active character dont chiffre
+  \else
+    \let\ss@uite\empty
+    \let\alt@suite\empty
+    \ifcat 1\t@ruc
+      \if =\t@ruc \let\@TI\na  \C@GET \fi
+      \if *\t@ruc \sk \C@Get \fi
+      \if .\t@ruc \let\@TI\pt   \C@GET \fi
+      \if >\t@ruc \let\@TI\dsh \C@GET \fi
+      \if <\t@ruc \let\@TI\dfl \C@GET \fi
+      \if !\t@ruc \transpose\normaltranspose \C@Get \fi
+      \if '\t@ruc \advance\transpose\s@v@n   \C@Get \fi
+      \if `\t@ruc \advance\transpose-\s@v@n  \C@Get \fi
+%     \ifnum\n@viii<\maxdimen \n@i#1\fi% -bell
+      \ifnum\n@viii<\maxdimen \n@i#1 \fi% +bell
+    \else
+      \if ^\t@ruc \let\@TI\sh \C@GET \fi
+      \if _\t@ruc \let\@TI\fl \C@GET \fi
+    \fi\alt@suite
+  \fi
+}
+
+
+%    \end{macrocode}
+% \subsection{\cmd{\hap}, \cmd{\happ}, \cmd{\qap}, \cmd{\qapp}の定義}
+% \paragraph{概説}
+% \DescribeMacro{\hap}
+% \DescribeMacro{\happ}
+% \DescribeMacro{\qap}
+% \DescribeMacro{\qapp}
+% \cmd{\qap}および\cmd{\qapp}はversion 1.25で,
+% \cmd{\hap}および\cmd{\happ}はversion 1.27で新設されています.
+% \begin{verbatim}
+% \def\hap#1{\pt{#1}\ha{#1}}      % 1.27  RDT
+% \def\happ#1{\ppt{#1}\ha{#1}}    % 1.27  RDT
+% \def\qap#1{\pt{#1}\qa{#1}}    % 1.25  RDT
+% \def\qapp#1{\ppt{#1}\qa{#1}}  % 1.25  RDT
+% \end{verbatim}
+% ただし, 何か困ることがあったと思うので次のように定義しています.
+% 
+% \paragraph{実装}
+%    \begin{macrocode}
+%% \hap, \happ, \qap, \qappの定義 %%
+%% in version 1.25, we have defined \qap, \qapp; 
+%% in version 1.27, we have defined \hap, \happ; 
+\def\@qap#1{\getn@i#1\relax
+  \ifnum\n@i>\thr@@
+    \let\st@m\downst@m
+  \else
+    \let\st@m\upst@m
+  \fi
+  \check@staff
+    \let\n@fon\@qap \let\n@sym\q@up \y@v\qn@width \writ@note
+  \fi}
+\def\@qapp#1{\getn@i#1\relax
+  \ifnum\n@i>\thr@@
+    \let\st@m\downst@m
+  \else
+    \let\st@m\upst@m
+  \fi
+  \check@staff
+    \let\n@fon\@qapp \let\n@sym\q@upp \y@v\qn@width \writ@note
+  \fi}
+\def\qap{\q@symbol\@qap}
+\def\qapp{\q@symbol\@qapp}
+
+\def\hap{\h@symbol\@qap}
+\def\happ{\h@symbol\@happ}
+
+%    \end{macrocode}
+% \subsection{\cmd{\Dqb}, \cmd{\Tqb}, \cmd{\Qqb}のpatch}
+% \paragraph{概説}
+% \file{musixtex.tex}では次のように定義されています.
+% \begin{verbatim}
+% \def\C@Dq#1#2{\B@i0{#1}{#2}1\qb0{#1}\B@ii0{#2}}
+% \def\C@Tq#1#2#3{\B@i0{#1}{#3}2\qb0{#1#2}\B@ii0{#3}}
+% \def\C@Qq#1#2#3#4{\B@i0{#1}{#4}3\qb0{#1#2#3}\B@ii0{#4}}
+% \end{verbatim}
+%
+% しかしこの定義では数字で音程を指定したときに期待通りの動作をしません.
+% これを修正します.
+% \paragraph{実装}
+%    \begin{macrocode}
+%% \Dqb*, \Tqb*, \Qqb* のpatch %%
+\def\C@Dq#1#2{\B@i0{#1}{#2}1\qb{0}{#1}\B@ii0{#2}}
+\def\C@Tq#1#2#3{\B@i0{#1}{#3}2\qb{0}{#1}\qb{0}{#2}\B@ii0{#3}}
+\def\C@Qq#1#2#3#4{\B@i0{#1}{#4}3\qb{0}{#1}\qb{0}{#2}\qb{0}{#3}\B@ii0{#4}}
+
+%    \end{macrocode}
+% \subsection{\cmd{\rqb}, \cmd{\lqb}の実装}
+% \paragraph{概説}
+% \DescribeMacro{\rqb}
+% \DescribeMacro{\lqb}
+% \cmd{\rqb}, \cmd{\lqb}はそれぞれ\cmd{\rq}, \cmd{\lq}の連桁版です.
+% 引数は\cmd{\qb}の時と同様です.
+%
+% \paragraph{実装}
+% \begin{macro}{\inv@beamst@m}
+% \cmd{\beamst@m}を参考に\cmd{\inv@beamst@m}を定義します.
+% これは通常とは逆方向に符尾を出すもので,
+% 上向きの符尾では通常符頭の右側から出るのを左側から出るようにします.
+%    \begin{macrocode}
+%% \rqb, \lqbのpatch %%
+\def\inv@beamst@m{% queue de note vers une poutre
+  \getcurpos \advance\y@v-\b@x
+  \y@ii\b@p\y@v \divide\y@ii\tw@nty \advance\y@ii\b@z
+  \ifdim\y@ii>\st@top % la poutre est au-dessus
+    \stem@skip\z@
+    \advance\y@ii .285\interbeam%  version 1.18  RDT
+    \ifnum\b@n>\z@ \advance\y@ii\b@n\interbeam \advance\y@ii-\interbeam \fi
+    \st@top\y@ii % a mettre a jour avec la pente ulterieurement
+  \else
+    \stem@skip\qd@skip \comp@slope\stem@skip \advance\y@ii\s@lope
+    \advance\y@ii-.285\interbeam%  version 1.18  RDT
+    \ifdim\y@ii<\st@bot
+      \ifnum\b@n<\z@ \advance\y@ii\b@n\interbeam \advance\y@ii\interbeam \fi
+      \st@bot\y@ii \fi \fi
+  \C@stem}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@lqb}
+% \begin{macro}{\@rqb}
+% \begin{macro}{\@lqb}
+% \begin{macro}{\@rqb}
+% 
+%    \begin{macrocode}
+\def\@lqb#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
+              \advancefalse\kernm\qd@skip\g@q{#2}\kern\qd@skip}
+\def\@rqb#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
+              \advancefalse\kern\qd@skip\g@q{#2}\kernm\qd@skip}
+\def\lqb{\q@symbol\@lqb}
+\def\rqb{\q@symbol\@rqb}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\@lqbp}
+% \begin{macro}{\@rqbp}
+% \begin{macro}{\lqbp}
+% \begin{macro}{\rqbp}
+%    \begin{macrocode}
+\def\@lqbp#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
+               \advancefalse\kernm\qd@skip\g@qp{#2}\kern\qd@skip}
+\def\@rqbp#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
+               \advancefalse\kern\qd@skip\g@qp{#2}\kernm\qd@skip}
+\def\lqbp{\q@symbol\@lqbp}%
+\def\rqbp{\q@symbol\@rqbp}%
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\@lqbpp}
+% \begin{macro}{\@rqbpp}
+% \begin{macro}{\lqbpp}
+% \begin{macro}{\rqbpp}
+%    \begin{macrocode}
+\def\@lqbpp#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
+                \advancefalse\kernm\qd@skip\g@qp{#2}\kern\qd@skip}
+\def\@rqbpp#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
+                \advancefalse\kern\qd@skip\g@qp{#2}\kernm\qd@skip}
+\def\lqbpp{\q@symbol\@lqbpp}%
+\def\rqbpp{\q@symbol\@rqbpp}%
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% 
+%    \begin{macrocode}
+
+%    \end{macrocode}
+% \subsection{pxrubrica対応のため}
+% \paragraph{概説}
+% \cmd{\zchar}は次のように定義されています.
+% \begin{verbatim}
+% \def\zchar#1#2{\check@staff\raise#1\internote\rlap{#2}\fi}
+% \end{verbatim}
+%
+% しかしこの定義では第二引数を受け取る前にカテゴリーコードが確定してしまうため,
+% \file{pxrubrica}パッケージでのルビがうまくいきませんでした.
+% これを修正します.
+% また内部動作を分離することで再利用しやすくします.
+% \paragraph{実装}
+%    \begin{macrocode}
+%% pxrubrica対応のため %%
+
+\def\zchar{\check@staff\begingroup\endcatcodesmusic\@zchar}
+\def\lchar{\check@staff\begingroup\endcatcodesmusic\@lchar}
+\def\cchar{\check@staff\begingroup\endcatcodesmusic\@cchar}
+\def\@zchar#1#2{\raise#1\internote\rlap{#2}\endgroup\fi}
+\def\@lchar#1#2{\raise#1\internote\llap{#2}\endgroup\fi}
+\def\@cchar#1#2{\hroff{\raise#1\internote\lrlap{#2}}\endgroup\fi}
+
+
+%    \end{macrocode}
+% \subsection{skipscale改修}
+% \paragraph{概説}
+% 等差数列的スキップ・スケールおよび幾何数列的スキップ・スケールに
+% いろいろ付け足します.
+% \paragraph{実装}
+%    \begin{macrocode}
+%% skipscale改修 %%
+
+\expandafter\def\expandafter\arithmeticskipscale\expandafter{%
+  \arithmeticskipscale%
+  \def\NOTES{\undefined}%
+  \def\notesp{\vnotes2.58\elemskip}% 16th point=8 trio
+  \def\Notesp{\vnotes3.58\elemskip}% 8th point=4 trio
+  \def\NOtesp{\vnotes4.58\elemskip}% 4th point
+  \def\NOTesp{\vnotes5.58\elemskip}% 2th point
+  \def\NOTEsp{\vnotes6.58\elemskip}%
+  \def\nnotest{\vnotes0.42\elemskip}% 32 trio
+  \def\notest{\vnotes1.42\elemskip}% 16 trio
+  \def\Notest{\vnotes2.42\elemskip}% 8 trio
+  \def\NOtest{\vnotes3.42\elemskip}% 4 trio
+  \def\NOTest{\vnotes4.42\elemskip}% 2 trio
+  \def\NOTEst{\vnotes5.42\elemskip}%
+}%
+
+\expandafter\def\expandafter\geometricskipscale\expandafter{%
+  \geometricskipscale%
+  \def\nnotest{\vnotes1.15\elemskip}% 32 trio
+  \def\notest{\vnotes1.63\elemskip}% 16 trio
+  \def\Notest{\vnotes2.31\elemskip}% 8 trio
+  \def\NOtest{\vnotes3.26\elemskip}% 4 trio
+  \def\NOTest{\vnotes4.62\elemskip}% 2 trio
+  \def\NOTEst{\undefined}% 1 trio
+}%
+\arithmeticskipscale
+
+%    \end{macrocode}
+% \subsection{スラー周りの調節}
+% \paragraph{概説}
+% \DescribeMacro{\setmaxslurs}
+% \cmd{\setmaxslurs}を改修して, いくつかの新しいパラメータを使えるようにします.
+% 元々あったパラメータは
+% \begin{itemize}
+% \item \cmd{\s@x}: 始点でのスラーの水平位置[dimen].
+% \item \cmd{\s@s}: スラーの向き(u, d)およびスラーが使用中ではないことを意味する
+%                 フラグ(x).
+% \item \cmd{\s@Y}: スラーの垂直方向のオフセット
+% \item \cmd{\s@a}: スラー開始時の\cmd{\altportee}.
+% \item \cmd{\s@y}: 始点でのスラーの垂直位置[steps of internote]
+% \item \cmd{\s@N}: スラーの使われている楽器の番号
+% \item \cmd{\s@z}: スラーが\cmd{\breakslur}により中断されたときに
+% \item \cmd{\s@d}: 点線のスラーかどうか; もしそうならば``d''に定義される.
+% \end{itemize}
+% 
+% 新設するパラメータは
+% \begin{itemize}
+% \item \cmd{\s@V}: 終点でのスラーの高さのオフセット;
+%                 それに伴い\cmd{\s@Y}は始点での垂直方向の
+%                 オフセットとして扱われる.
+% \item \cmd{\s@ib}: 始点が符尾の高さを考慮したスラーかどうか
+% \item \cmd{\s@eb}: 終点が符尾の高さを考慮したスラーかどうか
+% \item \cmd{\s@hgt}: スラーの高さ係数のパラメータ
+% \end{itemize}
+%
+% \paragraph{実装}
+% \begin{macro}{\setmaxslurs}
+% 古い\cmd{\setmaxslurs}を\cmd{\bell@old@setmaxslurs}に\cmd{\let}し, 新しい
+% \cmd{\setmaxslurs}を定義します.
+%    \begin{macrocode}
+%% スラー周りの調節 %%
+
+\let\bell@old@setmaxslurs\setmaxslurs
+\def\setmaxslurs#1{%
+  \bell@old@setmaxslurs#1\relax
+  \bell@patch@setmaxslurs#1\relax
+}%
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@patch@setmaxslurs}
+% \cmd{\bell@patch@setmaxslurs}で新しいパラメータを導入します.
+%    \begin{macrocode}
+\def\bell@patch@setmaxslurs#1{%
+  \ifnum#1>\patch@oldmaxslurs
+    \chardef\patch@oldmaxslurs=\z@\relax
+    \chardef\maxslurs=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements is limited to \the\@c}%
+      \chardef\maxslurs=\@c
+    \fi
+    \count@\patch@oldmaxslurs \loop
+      \advance\count@ by\@ne
+      %++bell:  end vertical offset of slur
+      \expandafter \noexpand@newdimsk \csname s@V\roman@c@\endcsname
+      %++bell: beam slur indicator for pending slurs
+      \expandafter \noexpand@newtoks  \csname s@ib\roman@c@\endcsname
+      \expandafter \noexpand@newtoks  \csname s@eb\roman@c@\endcsname
+      %++bell: height codfficient
+      \expandafter \noexpand@newtoks  \csname s@hgt\roman@c@\endcsname
+      \csname s@hgt\roman@c@\endcsname={\the\tw@}%
+    \ifnum\count@<\maxslurs\repeat
+    \expandafter\message\expandafter{maxslurs=\the\maxslurs}% <-?
+    \chardef\patch@oldmaxslurs=\maxslurs\relax%
+  \fi
+}%
+\chardef\patch@oldmaxslurs=\z@
+\setmaxslurs\maxinstruments
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\s@l@ctslur}
+% パラメータを追加したので, \cmd{\s@l@ctslur}を改修します.
+%    \begin{macrocode}
+\def\s@l@ctslur#1\relax{%
+  \n@i#1\relax\test@slurnum% [version 1.15] make it independent from beams
+  \edef\s@a{\csname s@a\roman@n@i}%  dimen (altportee)
+  \edef\s@x{\csname s@x\roman@n@i}%  dimen (horizontal start pos)
+  \edef\s@y{\csname s@y\roman@n@i}%  count (startnote [internote])
+  \edef\s@N{\csname s@N\roman@n@i}%  count (instrument number)
+  \edef\s@z{\csname s@z\roman@n@i}%  count (endnote [internote])
+  \edef\s@Y{\csname s@Y\roman@n@i}%  dimen (start voffset)
+  \edef\s@V{\csname s@V\roman@n@i}%  dimen (end voffset) +bell
+  \edef\s@d{\csname s@d\roman@n@i}%  token (dotted) +ickd
+  \edef\s@ib{\csname s@ib\roman@n@i}%  token (start beam slur)(x, u or d) +bell
+  \edef\s@eb{\csname s@eb\roman@n@i}%  token (end beam slur)(x, u or d) +bell
+  \edef\s@hgt{\csname s@hgt\roman@n@i}%token (height coefficient)(f, n, h or H) +bell
+  \edef\s@s{\csname s@s\roman@n@i}%  token (sense)
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\i@slur}
+% \begin{macro}{\@i@slur}
+% \cmd{\@i@slur}\oarg{beam}\marg{hoffset}\marg{voffset}\ignorespaces
+%             \marg{sense}\marg{ID}\marg{pitch};
+% 
+% パラメータを追加したので, それを引数で指定できるよう\cmd{\i@slur}を改修します.
+% \cmd{\@ifnextchar}を使ったので内部動作を新しく別の命令\cmd{\@i@slur}にしました.
+%    \begin{macrocode}
+\def\i@slur{\@ifnextchar[{\@i@slur}{\@i@slur[x]}}
+\def\@i@slur[#1]#2#3#4#5#6{%
+  \check@staff
+    \global\advance\N@s\@ne % update slurcounter
+    \s@l@ctslur#5\relax
+    % test for already invoked \islur
+    \if x\the\s@s \else\errmessage{\@mis\noexpand\tslur#5}\fi
+    \global\s@Y#3%            store voffset (abs. dim. to rel. height)
+    \global\s@s{#4}%          store sense (u,d)
+    \global\s@ib{#1}% <- Added code: bell, 2017-11-04
+    \ifx\dott@d\empty \global\s@d{}\else\global\s@d{d}\fi %+ickd
+    \let\dott@d\empty %               set dotted indicator +ickd
+    \expandafter\global\expandafter\s@hgt\expandafter{\the\@slurHGT}%
+    \normalslur%              set slurHGT indicator +bell
+    \global\s@N\noinstrum@nt% store instrument number
+    \inhgetn@i#6\relax
+    \global\s@y\n@i %         start vpos (steps of internote)
+    \global\s@a\altportee %   store altportee of current slur
+    \getcurpos
+    \advance\y@v#2\qn@width
+    \global\s@x\y@v %         start hpos
+  \fi% start hpos (current pos including hoffset)
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\ibsluru}
+% \begin{macro}{\ibslurd}
+% それに伴い, \cmd{\ibsluru}および\cmd{\ibslurd}を再定義します.
+%    \begin{macrocode}
+\def\ibsluru{\y@i\stemfactor\interbeam
+             \advance\y@i\h@lf\internote \i@slur[u]1\y@i u}
+\def\ibslurd{\y@i\stemfactor\interbeam
+             \advance\y@i\h@lf\internote \y@i-\y@i \i@slur[d]0\y@i d}
+
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\t@slur}
+% \begin{macro}{\@t@slur}
+% \cmd{\@t@slur}\oarg{beam}\marg{hoffset}\marg{ID}\marg{pitch};
+% 
+% パラメータを追加したので, それを引数で指定できるよう\cmd{t@slur}を改修します.
+% \cmd{\@ifnextchar}を使ったので内部動作を新しく別の命令\cmd{@t@slur}にしました.
+% また\cmd{@t@slur}では実際のスラーの描画を\TikZ{}にするかの
+% 分岐を入れています.
+%
+% \oarg{beam}はu, d, xのいずれかであり, それぞれ上向き連桁の上に付く, 
+% 下向き連桁の下に付く, 普通のスラー, を表します.
+%    \begin{macrocode}
+\def\t@slur{\@ifnextchar[{\@t@slur}{\@t@slur[x]}}
+\def\@t@slur[#1]#2#3#4{%
+  \check@staff
+  \s@l@ctslur#3\relax
+  \y@iv#2\qn@width
+  \global\s@eb{#1}% +bell
+  \def\@sense{\the\s@s}%
+  \edef\@dotted{\the\s@d}%+ickd
+%% test for missing \islur
+  \if x\@sense \errmessage{\@mis\noexpand\islur#3}\fi
+%% test for \invertslur
+  \if D\@sense \s@s{u}%
+    \let\@invert\@ne
+  \fi
+  \if U\@sense \s@s{d}%
+    \let\@invert\@ne
+  \fi
+%% compute length
+  \getcurpos
+  \advance\y@v\y@iv
+%% eoline
+  \y@eol\advance\y@-\beforeruleskip
+%% clip slur at eoline
+  \ifdim\y@v>\y@ \y@v\y@ \advance\y@v\beforeruleskip \y@iv\beforeruleskip \fi
+  \advance\y@v-\s@x
+%% if tie or not; 
+  \ifx\T@i\@c \n@i\s@y \else \inhgetn@i#4\relax \fi
+%    \end{macrocode}
+% \TikZ{}を用いてスラーを描画する場合の場合分けをここでしています.
+%    \begin{macrocode}
+  \ifuseTikzSlur% <-------------------------------- added code: bell, 2017-11-04
+    \bell@slur@sethgt% height coefficient
+    \if u\the\s@eb
+      \s@V\stemfactor\interbeam \advance\s@V\qu@rt\internote
+    \fi
+    \if d\the\s@eb
+      \s@V-\stemfactor\interbeam \advance\s@V-\qu@rt\internote
+    \fi
+    \if x\the\s@eb
+      \ifx\T@i\@c
+        \s@V\s@Y
+      \else
+        \if u\@sense \s@V1\p@seven\internote
+        \else\s@V-1\p@seven\internote
+        \fi
+      \fi
+    \fi
+    \Tikz@writ@slur{\s@y}{\n@i}{\y@v}{-\y@iv}%
+  \else
+    \if \the\s@ib\the\s@eb \else
+      \y@i\stemfactor\interbeam
+      \n@vi\y@i \divide\n@vi\internote
+      \if u\the\s@eb \advance\n@i\n@vi \fi
+      \if d\the\s@eb \advance\n@i-\n@vi \fi
+      \if u\the\s@ib \advance\n@i-\n@vi \fi
+      \if d\the\s@ib \advance\n@i\n@vi \fi
+    \fi
+    \writ@slur{\s@y}{\n@i}{\y@v}{-\y@iv}%
+  \fi% <------------------------------------------- added code: bell, 2017-11-04
+%    \end{macrocode}
+%    \begin{macrocode}
+%% reset sense of slur
+  \global\s@s{x}\let\T@i\empty
+  \global\s@hgt{n}% +bell
+  \global\advance\N@s\m@ne
+  \fi%\tracingmacros0\tracingcommands0%
+}% update slur counter
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\tubslur}
+% \begin{macro}{\tdbslur}
+% \begin{macro}{\tbsluru}
+% \begin{macro}{\tbslurd}
+% また, \cmd{\tubslur}, \cmd{\tdbslur}, \cmd{\tbsluru}および\cmd{\tbslurd}を再定義します.
+%    \begin{macrocode}
+\def\tubslur{\t@slur[u]1}
+\def\tdbslur{\t@slur[d]0}
+\def\tbsluru{\t@slur[u]1}
+\def\tbslurd{\t@slur[d]0}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \subsection{\TikZ{}を用いたスラーの設計}
+% \paragraph{概説}
+% \file{musixps.tex}を参考に, \TikZ{}でスラーを描画する命令を作りました.
+% 大体同じように動作すると思いますが, 実はまだ未完成です.
+%
+% \paragraph{実装}
+% \begin{macro}{\slurHGT}
+% \begin{macro}{\FLATslur}
+% \begin{macro}{\Flatslur}
+% \begin{macro}{\flatslur}
+% \begin{macro}{\normalslur}
+% \begin{macro}{\highslur}
+% \begin{macro}{\Highslur}
+% \begin{macro}{\HIGHslur}
+% スラーの高さを設定する各種命令です.
+% 既定は\cmd{\normalslur}です.
+%    \begin{macrocode}
+\newtoks\@slurHGT
+\def\slurHGT#1{\@slurHGT{#1}}
+\newcommand{\FLATslur}{\slurHGT{0.2}}
+\newcommand{\Flatslur}{\slurHGT{0.4}}
+\newcommand{\flatslur}{\slurHGT{0.7}}
+\newcommand{\normalslur}{\slurHGT{1}}
+\newcommand{\highslur}{\slurHGT{1.6}}
+\newcommand{\Highslur}{\slurHGT{2.2}}
+\newcommand{\HIGHslur}{\slurHGT{2.8}}
+\normalslur
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\bell@slur@sethgt}
+% \cmd{\t@slur}の中で呼び出されます.
+%    \begin{macrocode}
+\def\bell@slur@sethgt{% height coefficient
+  \edef\bell@slur@hgt{\the\s@hgt}%
+}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+%%
+%% \n@i   vertical offset of first  note (number); temporary
+%% \n@ii  vertical offset of second note (number); temporary
+%% \n@iii meet note
+%% \n@iv  first note
+%% \n@v   temp. character
+%% \n@vi  last note
+%% \n@vii right halfslur length
+%% \n@viii   don't touch
+%% \y@    complete length of slur - allowed overlap (4pt), temp. length
+%% \y@i   abs. height of slur
+%% \y@ii  abs. height of slur
+%% \y@iii complete length of slur
+%% \y@iv  don't touch
+%% \y@v   don't touch
+%%
+%% \@sense{u,d}
+%%
+%% if \curve (\midslur) is used
+%%   \@meet{}
+%%   \l@length{}
+%%   \r@length{}
+%%
+%% #1 start pitch #2 end pitch #3 length #4 right hoffset
+%%  in \t@slur, #1 = \s@y, #2 = \n@i, #3 = \y@v, #4 = {-\y@iv}
+%%
+%    \end{macrocode}
+% \begin{macro}{\Tikz@writ@slur}
+% \cmd{\Tikz@writ@slur}\ignorespaces
+%   \marg{start picth}\marg{end pitch}\ignorespaces
+%   \marg{length}\marg{right hoffset}\ignorespaces
+% の形で使われます.
+% \begin{itemize}
+% \item \cmd{\n@i}: vertical offset of first note (number); temporary
+% \item \cmd{\n@ii}: vertical offset of second note (number); temporary
+% \item \cmd{\n@iii}: meet note
+% \item \cmd{\n@iv}: first note
+% \item \cmd{\n@v}: temp. character
+% \item \cmd{\n@vi}: last note
+% \item \cmd{\n@vii}: right halfslur length
+% \item \cmd{\n@viii}: don't touch
+% \item \cmd{\y@}: complete length of slur - allowed overlap (4pt), temp. length
+% \item \cmd{\y@i}: abs. height of slur
+% \item \cmd{\y@ii}: abs. height of slur
+% \item \cmd{\y@iii}: complete length of slur
+% \item \cmd{\y@iv}: don't touch
+% \item \cmd{\y@v}: don't touch
+% \end{itemize}
+%    \begin{macrocode}
+\newcount\@slope
+\def\Tikz@writ@slur#1#2#3#4{\check@staff
+  \ifx\s@N\undefined \relax
+  \else
+    \edef\internote{\csname i@n\romannumeral\s@N\endcsname}%
+  \fi
+  \n@iv#1%
+  \n@vi#2%
+  \y@iii#3%
+%    \end{macrocode}
+% \begin{verbatim}
+%   Get note vertical offsets
+%   \n@iv=   vertical offset of first  note(n@i temp);
+%   \n@vi=   vertical offset of second note(n@ii temp);
+%   \y@i =   reference height of first note (pt);
+%   \y@ii=   reference height of end note (pt);
+% \end{verbatim}
+%    \begin{macrocode}
+  \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
+  \n@i\n@iv \pl@base %                     \y@i = initial height
+  \advance\y@i\s@Y \advance\y@ii\s@V%      add the voffsets
+  \ifx\@Ti\@ne% call from cutslur
+    \advance\y@i\s@a \advance\y@ii\s@a \let\@Ti\empty \fi
+%    \end{macrocode}
+% \begin{verbatim}
+% Set \n@i to the vertical difference index
+% setup \n@iii(meetnote)
+% \end{verbatim}
+%    \begin{macrocode}
+  \ifdim\y@ii=\y@i % Slope is zero
+    \n@iii\y@i \n@i\internote
+    \multiply\n@iii\tw@ \advance\n@iii\n@i \divide\n@iii\n@i
+    \if u\@sense
+      \ifx\T@i\@c \advance\n@iii\tw@
+      \else \advance\n@iii\thr@@
+      \fi
+    \else
+      \ifx\T@i\@c \advance\n@iii-\tw@
+      \else \advance\n@iii-\thr@@
+      \fi
+    \fi
+    \def\@slope{x}\y@ii\z@
+  \else
+    \ifdim\y@ii<\y@i % Slope is negative
+      \Tikzslur@C@csl\y@i\y@ii\def\@slope{d}% compute @meet height for slurs
+    \else % Slope is positive
+      \Tikzslur@C@csl\y@ii\y@i\def\@slope{u}% compute @meet height for slurs
+    \fi
+  \fi
+%
+% setup meet height of slur
+%
+  \ifx\empty\@meet
+  \else
+    \n@iii\n@iv
+    \advance\n@iii\@meet
+  \fi
+  \edef\@meet{\the\n@iii}%
+%
+% draw slur
+%
+  \llap{\bell@slur@drawslur\relax\kern#4}%
+%
+% reset slurcurve
+%
+  \global\let\@meet\empty
+  \let\l@length\empty
+  \let\@invert\empty
+\fi} % end writ@slur
+
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\newdimen\bell@slur@axi
+\newdimen\bell@slur@axii
+\newdimen\bell@slur@ayi
+\newdimen\bell@slur@ayii
+\newdimen\bell@slur@xii
+\newdimen\bell@slur@HeightOfSlur
+\newdimen\bell@slur@b
+%\newdimen\bell@slur@m
+\newdimen\bell@slur@slh
+
+%%% \bell@slur@drawslur
+% n@i   firstslur
+% n@ii  lastslur
+% n@iii meet[internote]
+% \bell@slur@hgt height coefficient
+% y@i   start vpos
+% y@ii  differrence of start vpos and end vpos
+% y@iii length
+%%%
+%    \end{macrocode}
+% \begin{macro}{\bell@slur@drawslur}
+% スラーを実際に描画するためにパラメータの設定をします.
+% \file{psslur.pro}の|/DS|前半部分に大体相当します.
+%    \begin{macrocode}
+\def\bell@slur@drawslur{%-(\y@i>\y@ii?\y@ii:\y@i)
+  \begin{tikzpicture}[baseline=0.0pt]%
+    \ifx\T@i\@c% if slur be called in ttie, max height of slur is 2\internote. 
+      \pgfmathsetlengthmacro {\bell@slur@m} {1.7\internote}% maxheight =30pt
+      \pgfmathsetlengthmacro {\bell@slur@maxe}    {4bp}% maxangle = 40
+%      \if u\@sense 
+%        \advance\y@i-\h@lf\internote
+%      \else
+%        \advance\y@i \h@lf\internote
+%      \fi
+    \else% in other case, max height of slur is 3\internote. 
+      \pgfmathsetlengthmacro {\bell@slur@m} {2.2\internote}% maxheight =30pt
+      \pgfmathsetlengthmacro {\bell@slur@maxe}    {9bp}% maxangle = 90
+    \fi
+    \coordinate (startPoint) at (0,\y@i);%
+    \coordinate (endPoint) at ($(\y@iii,\y@ii) + (0,\y@i)$);%
+    \pgfmathsetmacro {\bell@slur@e}           {0.17}%  angle    = 0.17
+    \pgfmathsetlengthmacro {\bell@slur@b}% b =min(max(3,2*sqrt(\y@iii)),maxheight)
+      {min( max( 3pt, 2pt*sqrt( scalar(\y@iii) ) ),\bell@slur@m)}
+    \pgfmathsetmacro {\bell@slur@rotate}
+      {atan2(\y@ii, \y@iii)}% s (range: 0-180)
+    \pgfmathsetlength{\bell@slur@HeightOfSlur}
+      {\bell@slur@hgt*\bell@slur@b/cos(\bell@slur@rotate)}% aa: height of the slur
+    \if d\@sense
+      \bell@slur@HeightOfSlur=-\bell@slur@HeightOfSlur
+    \fi 
+%    \pgfmathsetlength{\bell@slur@HeightOfSlur}% height of the slur
+%      {\@meet\internote}
+    \pgfmathsetlength{\bell@slur@xii}% length of the slur
+      {\y@iii * cos(-\bell@slur@rotate) - \y@ii * sin(-\bell@slur@rotate)}
+    \pgfmathsetmacro {\bell@slur@e}
+      {\bell@slur@e * \bell@slur@xii > \bell@slur@maxe
+        ? \bell@slur@maxe/\bell@slur@xii : \bell@slur@e}%
+    \pgfmathsetmacro {\bell@slur@beta}
+      {atan2(\bell@slur@e*\bell@slur@xii,\bell@slur@HeightOfSlur)}%
+    \pgfmathsetmacro {\bell@slur@beta}
+      {\bell@slur@beta>90 ? 180-\bell@slur@beta : \bell@slur@beta}%
+    \pgfmathsetlength{\bell@slur@axi} {\bell@slur@e * \bell@slur@xii}%
+    \pgfmathsetlength{\bell@slur@ayi} {\bell@slur@HeightOfSlur}%
+    \pgfmathsetlength{\bell@slur@axii}{(1.0-\bell@slur@e) * \bell@slur@xii}%
+    \pgfmathsetlength{\bell@slur@ayii}{\bell@slur@HeightOfSlur}%
+    \pgfmathsetlengthmacro{\bell@slur@shift}{\z@}%
+%
+% check if the starting and endin vector stay in desired quadrants
+    \Tikzslur@checkquadrants
+% align the slur to the staff lines
+    \Tikzslur@pathseg%
+%    \Tikzslur@alignslur
+% Draw segments
+    \pgfmathsetlengthmacro{\Tikzslur@linew}{0.02 * \internote}%
+    \pgfmathsetlengthmacro{\Tikzslur@setlinew}{4 * \Tikzslur@linew}%
+    \Tikzslur@drawseg
+    \pgfresetboundingbox
+    \useasboundingbox (MainSlurBox.south west) rectangle (MainSlurBox.north east);
+%    \fill[green, opacity=0.2](current bounding box.south west) rectangle (current bounding box.north east);
+  \end{tikzpicture}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Tikzslur@checkquadrants}
+% スラーの象限を確認してるっぽいです.
+%    \begin{macrocode}
+%%% \Tikzslur@checkquadrants
+% if beta < abs(rotate){
+%    b = abs(HeightOfSlur) * sin ( abs(rotate) + 2 ) / cos ( abs(rotate) + 2 )
+%    if rotate * HeightOfSlur < 0{
+%       if cos(rotate) < 0.75{
+%          axi  = axi - b * (1 - cos(rotate)) * 0.5,
+%          ayi = ayi * cos(rotate) *0.8
+%       }
+%       axii = xii - b
+%    }else{
+%       axi = b
+%       if cos(rotate) < 0.75{
+%          axii = axii + b * (1 - cos(rotate)) * 0.5,
+%          ayii = ayii * cos(rotate) *0.8
+%       }
+%    }
+% }
+%%%
+\def\Tikzslur@checkquadrants{%
+  \pgfmathsetmacro{\bell@slur@checkquadrantsi}
+    {\bell@slur@beta<abs(\bell@slur@rotate)}%
+  \pgfmathsetmacro{\bell@slur@checkquadrantsii} {0}%
+  \pgfmathsetmacro{\bell@slur@checkquadrantsiii}{0}%
+  \ifnum 1=\bell@slur@checkquadrantsi\relax
+    \pgfmathsetlength{\bell@slur@b}{
+      abs(\bell@slur@HeightOfSlur)
+      * sin(abs(\bell@slur@rotate) + 2)
+      / cos(abs(\bell@slur@rotate) + 2)
+    }%
+    \pgfmathsetmacro{\bell@slur@checkquadrantsii}
+      {\bell@slur@rotate * \bell@slur@HeightOfSlur < 0}%
+    \pgfmathsetmacro{\bell@slur@checkquadrantsiii}
+      {cos(\bell@slur@rotate)< 0.75}%
+    \ifnum 1=\bell@slur@checkquadrantsii\relax
+      \pgfmathsetlength{\bell@slur@axii}{\bell@slur@xii-\bell@slur@b}%
+      \ifnum 1=\bell@slur@checkquadrantsiii\relax
+        \pgfmathsetlength{\bell@slur@axi}
+          {\bell@slur@axi - (\bell@slur@b* (1 - cos(\bell@slur@rotate)) / 2)}%
+        \pgfmathsetlength{\bell@slur@ayi}
+          {\bell@slur@ayi * cos(\bell@slur@rotate) * 0.8}%
+      \else
+      \fi
+    \else
+      \pgfmathsetlength{\bell@slur@axi}{\bell@slur@b}%
+      \ifnum 1=\bell@slur@checkquadrantsiii\relax
+        \pgfmathsetlength{\bell@slur@axii}
+          {\bell@slur@axii+(\bell@slur@b* (1-cos(\bell@slur@rotate)) /2)}%
+        \pgfmathsetlength{\bell@slur@ayii}
+          {\bell@slur@ayii*cos(\bell@slur@rotate)*0.8}%
+      \else
+      \fi
+    \fi
+  \fi
+}
+%%%関数に調整必要
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Tikzslur@pathseg}
+% 描画するスラーのパスをとって大きさを確認しています.
+% ただし\TikZ{}のbounding box取得方法の制約により,
+% 正確なものよりも少し大きくとられてしまいます.
+%    \begin{macrocode}
+\def\Tikzslur@pathseg{%
+  \path%[shift=(startPoint), rotate=\bell@slur@rotate]%
+    coordinate (a1)  at   (\bell@slur@axi ,\bell@slur@ayi )
+    coordinate (a2)  at   (\bell@slur@axii,\bell@slur@ayii);
+  \begin{scope}[local bounding box=slhBox]
+    \path%[shift=(startPoint),rotate=\bell@slur@rotate]
+      (0,0) .. controls (a1) and ($(a1)!0.4!(a2)$) .. ($(a1)!0.5!(a2)$)%
+      ($(a1)!0.5!(a2)$) .. controls  ($(a1)!0.4!(a2)$) and (a2) .. (\bell@slur@xii,0);%
+  \end{scope}%
+% for debug
+%  \fill[blue, opacity=0.2](slhBox.south west) rectangle (slhBox.north east);
+%  \Tikz@coordinate@rotation{\pgfpointanchor{slhBox}{south west}}
+%                           {\bell@slur@rotate}
+%                           {(rotated slhBox south west)}%
+%  \Tikz@coordinate@rotation{\pgfpointanchor{slhBox}{south east}}
+%                           {\bell@slur@rotate}
+%                           {(rotated slhBox south east)}%
+%  \Tikz@coordinate@rotation{\pgfpointanchor{slhBox}{north east}}
+%                           {\bell@slur@rotate}
+%                           {(rotated slhBox north east)}%
+%  \Tikz@coordinate@rotation{\pgfpointanchor{slhBox}{north west}}
+%                           {\bell@slur@rotate}
+%                           {(rotated slhBox north west)}%
+%  \draw[red]
+%    ($(rotated slhBox south west)+(startPoint)$) -- 
+%    ($(rotated slhBox south east)+(startPoint)$) -- 
+%    ($(rotated slhBox north east)+(startPoint)$) -- 
+%    ($(rotated slhBox north west)+(startPoint)$) --cycle;
+%  \Tikz@coordinate@rotation{\pgfpointanchor{a1}{center}}
+%                           {\bell@slur@rotate} {(rotated a1)}%
+%  \Tikz@coordinate@rotation{\pgfpointanchor{a2}{center}}
+%                           {\bell@slur@rotate}{(rotated a2)}%
+%  \fill%[shift=(startPoint), rotate=\bell@slur@rotate]%
+%    [green]($(rotated a1)+(startPoint)$) circle (1pt);
+%  \fill%[shift=(startPoint), rotate=\bell@slur@rotate]%
+%    [blue]($(rotated a2)+(startPoint)$) circle (1pt);
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Tikzslur@alignslur}
+% スラーの補正だったと思います.
+%    \begin{macrocode}
+\def\Tikzslur@alignslur{%
+  \pgfextracty{\bell@slur@slh}{%
+    \pgfpointdiff{\pgfpointanchor{slhBox}{south west}}
+                 {\pgfpointanchor{slhBox}{north east}}}%
+  \pgfmathsetlengthmacro{\bell@slur@yr}{%
+    \bell@slur@rotate * \bell@slur@HeightOfSlur >= 0
+      ? \y@i/\internote : \y@ii/\internote}%
+  \pgfmathsetlengthmacro{\bell@slur@Nslh}  {\bell@slur@HeightOfSlur > 0 
+      ? (\bell@slur@slh /\internote + \bell@slur@yr)/2
+      : (\bell@slur@slh /\internote - \bell@slur@yr)/2}%
+  \pgfmathsetmacro{\bell@slur@checki}
+    {(\bell@slur@Nslh < 4.45) && (\bell@slur@Nslh > -0.5)}%
+  \ifnum 1=\bell@slur@checki
+    \pgfmathsetlengthmacro{\bell@slur@Nslh}
+      {\bell@slur@Nslh - floor(\bell@slur@Nslh)}%
+    \pgfmathsetlengthmacro{\bell@slur@Nslh}
+      {\bell@slur@HeightOfSlur>0 ? 1-\bell@slur@Nslh: \bell@slur@Nslh}%
+    \pgfmathsetlengthmacro{\bell@slur@shift}
+      {\bell@slur@Nslh<0.45 ? 0.45-\bell@slur@Nslh : \bell@slur@shift}%
+    \pgfmathsetlengthmacro{\bell@slur@shift}
+      {\bell@slur@Nslh<0.85 && (\bell@slur@Nslh>0.7)
+         ? 0.7-\bell@slur@Nslh : \bell@slur@shift}%
+    \pgfmathsetlengthmacro{\bell@slur@shift}
+      {\bell@slur@Nslh>=0.85  ? 1.45-\bell@slur@Nslh : \bell@slur@shift}%
+  \fi
+  \pgfmathsetlengthmacro{\bell@slur@shift}
+    {\bell@slur@HeightOfSlur>0 ? -\bell@slur@shift : \bell@slur@shift}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Tikzslur@drawseg}
+% スラーを実際に描画します.
+%    \begin{macrocode}
+\def\Tikzslur@drawseg{\begin{scope}[local bounding box=MainSlurBox]%
+  \coordinate (StartPoint) at ($(startPoint)-8*(0,\bell@slur@shift)$);%
+  \draw[shift=(StartPoint), rotate=\bell@slur@rotate,
+        line width=\Tikzslur@setlinew, line cap=round]%
+        \if d\@dotted [dash pattern=on 0.8\internote off 0.5\internote] \fi%
+        coordinate (a1 0)  at  (\bell@slur@axi ,\bell@slur@ayi )
+        coordinate (a2 0)  at  (\bell@slur@axii,\bell@slur@ayii)
+        coordinate (a1 -0) at  (a1 0)
+        coordinate (a2 -0) at  (a2 0)
+        (0,0).. controls (a1 0) and ($(a1 0)!0.4!(a2 0)$)
+             .. ($(a1 0)!0.5!(a2 0)$)%
+             .. controls ($(a1 0)!0.6!(a2 0)$) and (a2 0)
+             .. (\bell@slur@xii,0)%
+        \foreach \x [remember=\x as \lastx (initially 0)] in {1,2,...,9}{%
+            coordinate (a1 \x)  at ($(a1 \lastx)  +(0,\Tikzslur@linew)$)
+            coordinate (a2 \x)  at ($(a2 \lastx)  +(0,\Tikzslur@linew)$)
+            coordinate (a1 -\x) at ($(a1 -\lastx) -(0,\Tikzslur@linew)$)
+            coordinate (a2 -\x) at ($(a2 -\lastx) -(0,\Tikzslur@linew)$)
+        }%
+        \foreach \x in {1,2,...,9}{%
+          (0,0).. controls (a1 \x)  and ($(a1 \x)!0.4!(a2 \x)$)
+               .. ($(a1 \x)!0.5!(a2 \x)$)%
+               .. controls ($(a1 \x)!0.6!(a2 \x)$) and (a2 \x)
+               .. (\bell@slur@xii,0)%
+          (0,0).. controls (a1 -\x) and ($(a1 -\x)!0.4!(a2 -\x)$)
+               .. ($(a1 -\x)!0.5!(a2 -\x)$)%
+               .. controls ($(a1 -\x)!0.6!(a2 -\x)$) and (a2 -\x)
+               .. (\bell@slur@xii,0)%
+        }%
+%        coordinate (ad1) at ($(a1 0) -(0,\Tikzslur@linew)$)
+%        coordinate (ad2) at ($(a2 0) -(0,\Tikzslur@linew)$)
+%        coordinate (aD1) at ($(ad1)  -(0,\Tikzslur@linew)$)
+%        coordinate (aD2) at ($(ad2)  -(0,\Tikzslur@linew)$)
+%        coordinate (au1) at ($(a1 0) +(0,\Tikzslur@linew)$)
+%        coordinate (au2) at ($(a2 0) +(0,\Tikzslur@linew)$)
+%        coordinate (aU1) at ($(au1)  +(0,\Tikzslur@linew)$)
+%        coordinate (aU2) at ($(au2)  +(0,\Tikzslur@linew)$)
+%        (0,0).. controls (ad1) and ($(ad1)!0.4!(ad2)$) .. ($(ad1)!0.5!(ad2)$)%
+%             .. controls ($(ad1)!0.6!(ad2)$) and (ad2) .. (\bell@slur@xii,0)%
+%        (0,0).. controls (au1) and ($(au1)!0.4!(au2)$) .. ($(au1)!0.5!(au2)$)%
+%             .. controls ($(au1)!0.6!(au2)$) and (au2) .. (\bell@slur@xii,0)%
+%        (0,0).. controls (aD1) and ($(aD1)!0.4!(aD2)$) .. ($(aD1)!0.5!(aD2)$)%
+%             .. controls ($(aD1)!0.6!(aD2)$) and (aD2) .. (\bell@slur@xii,0)%
+%        (0,0).. controls (aU1) and ($(aU1)!0.4!(aU2)$) .. ($(aU1)!0.5!(aU2)$)%
+%             .. controls ($(aU1)!0.6!(aU2)$) and (aU2) .. (\bell@slur@xii,0)%
+  ;%
+  \end{scope}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Tikzslur@C@csl}
+%    \begin{macrocode}
+\def\Tikzslur@C@csl#1#2{% compute meet height for slurs
+  \n@i\internote
+  \if u\@sense\relax
+    \n@iii#1\multiply\n@iii\tw@ \advance\n@iii\n@i
+    \divide\n@iii\n@i \divide\n@iii\tw@
+    \advance\n@iii\tw@
+  \else
+    \n@iii#2\multiply\n@iii\tw@ \advance\n@iii\n@i
+    \divide\n@iii\n@i \divide\n@iii\tw@
+    \advance\n@iii-\tw@
+  \fi
+  \ifx\@invert\@ne
+    \n@iii#1\advance\n@iii-#2\divide\n@iii\tw@
+    \advance\n@iii#2\divide\n@iii\n@i
+  \fi
+  \advance\y@ii-\y@i
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Tikz@coordinate@rotation}
+% 傾きに応じてスラーを回転させます.
+%    \begin{macrocode}
+\newdimen\Tikz@coordinate@rotation@tempx
+\newdimen\Tikz@coordinate@rotation@tempy
+\def\Tikz@coordinate@rotation#1#2#3{%
+  \pgfextractx{\Tikz@coordinate@rotation@tempx}{#1}%
+  \pgfextracty{\Tikz@coordinate@rotation@tempy}{#1}%
+  \pgfmathsetlengthmacro{\Tikz@coordinate@rotation@newx}
+    {  \Tikz@coordinate@rotation@tempx * cos(#2)
+     + \Tikz@coordinate@rotation@tempy *-sin(#2)}%
+  \pgfmathsetlengthmacro{\Tikz@coordinate@rotation@newy}
+    {  \Tikz@coordinate@rotation@tempx * sin(#2)
+     + \Tikz@coordinate@rotation@tempy * cos(#2)}%
+  \coordinate #3
+    at (\Tikz@coordinate@rotation@newx, \Tikz@coordinate@rotation@newy);
+}
+
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{bracketの追加}
+% \paragraph{概説}
+% \paragraph{実装}
+%    \begin{macrocode}
+%% bracketの追加
+%% registers for bracket
+\newcount\N@bracket
+\def\test@bracketnum{%
+  \ifnum\n@i<\z@ \n@i\@c \fi
+  \ifnum\n@i<\maxbrackets \else
+    \count@\maxbrackets \advance\count@\m@ne
+    \errmessage{Wrong bracket reference number \the\n@i!
+                (valid: 0 to \the\count@)}% [version 1.15]
+    \n@i\z@% [version 1.15]
+  \fi
+  \advance\n@i\@ne}%
+
+\def\setmaxbrackets#1{%
+  \ifnum#1>\@oldmaxbrackets
+    \chardef\maxbrackets=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements
+                  is limited to \the\@c}
+      \chardef\maxbrackets=\@c
+    \fi
+    \count@\@oldmaxbrackets\loop
+      \advance\count@ by\@ne
+      % horizontal start position of bracket
+      \expandafter \noexpand@newdimsk \csname bracket@x\roman@c@\endcsname
+      %
+      % sense u,d and x (flag) for pending bracket
+      \expandafter \noexpand@newtoks  \csname bracket@s\roman@c@\endcsname
+      \csname bracket@s\roman@c@\endcsname={x}%
+      %
+      % vertical offset of bracket
+      \expandafter \noexpand@newdimsk \csname bracket@Y\roman@c@\endcsname
+      %
+      % altportee of bracket
+      \expandafter \noexpand@newskip  \csname bracket@a\roman@c@\endcsname
+      %
+      % vertical start position of slur [steps of internote]
+      \expandafter \noexpand@newcount \csname bracket@y\roman@c@\endcsname
+      %
+      % instrument number of that slur (to retrieve internote)
+      \expandafter \noexpand@newcount \csname bracket@N\roman@c@\endcsname
+      %
+      % vertical end position of slur [steps of internote], used from 
+      % \breakslur.  the value \maxdimen is used to decide, if 
+      % \breakslur is used or not (flag)
+      \expandafter \noexpand@newcount \csname bracket@z\roman@c@\endcsname
+      \csname bracket@z\roman@c@\endcsname\maxdimen
+      %
+      % text token
+      \expandafter \noexpand@newtoks  \csname bracket@t\roman@c@\endcsname
+      %
+      %
+      % open left/right token
+      \expandafter \noexpand@newtoks  \csname bracket@o\roman@c@\endcsname
+      \csname bracket@o\roman@c@\endcsname={x}%
+      %
+    \ifnum\count@<\maxbrackets\repeat
+    \expandafter\message\expandafter{maxbrackets=\the\maxbrackets}%
+    \chardef\@oldmaxbrackets=\maxbrackets\relax%
+    \normalnotesize\resetlayout
+  \fi}%
+
+\chardef\@oldmaxbrackets=\z@
+\def\s@l@ctbracket#1\relax{%
+  \n@i#1\relax\test@bracketnum% [version 1.15] make it independent from beams
+  \edef\bracket@a{\csname bracket@a\roman@n@i}%  dimen (altportee)
+  \edef\bracket@x{\csname bracket@x\roman@n@i}%  dimen (hor start pos)
+  \edef\bracket@y{\csname bracket@y\roman@n@i}%  count (startnote [internote])
+  \edef\bracket@N{\csname bracket@N\roman@n@i}%  count (instrument number)
+  \edef\bracket@z{\csname bracket@z\roman@n@i}%  count (endnote [internote])
+  \edef\bracket@Y{\csname bracket@Y\roman@n@i}%  dimen (voffset)
+  \edef\bracket@t{\csname bracket@t\roman@n@i}%  token (text)
+  \edef\bracket@s{\csname bracket@s\roman@n@i}%  token (sense)
+  \edef\bracket@o{\csname bracket@o\roman@n@i}%  token (sense)
+}
+
+%% \ibktu/d #1=text(optional) #2=bracket id #3=height[\internote]
+\newcommand{\ibktu}[1][]{\@i@bkt[#1]\h@lf{1\p@seven\internote}u}
+\newcommand{\ibktd}[1][]{\@i@bkt[#1]\h@lf{-1\p@seven\internote}d}
+%% \@i@bkt #1=text #2=hoffset[\qn@width] #3=voffset
+%%         #4=bracket sence(u,d) #5=bracket id #6=height[\internote]
+\def\@i@bkt[#1]#2#3#4#5#6{%
+  \check@staff
+    \global\advance\N@bracket\@ne % update bracket counter
+    \s@l@ctbracket#5\relax
+    % test for already invoked \islur
+    \if x\the\bracket@s \else\errmessage{\@mis\noexpand\tbkt#5}\fi
+    \global\bracket@Y#3%            store voffset (abs. dim. to rel. height)
+    \global\bracket@s{#4}%          store sense (u,d)
+    \global\bracket@t{#1}%          store text
+    \global\bracket@N\noinstrum@nt% store instrument number
+    \inhgetn@i#6\relax
+    \global\bracket@y\n@i %         start vpos (steps of internote)
+    \global\bracket@a\altportee %   store altportee of current slur
+    \getcurpos
+    \advance\y@v#2\qn@width
+    \global\bracket@x\y@v %         start hpos
+  \fi% start hpos (current pos including hoffset)
+}
+
+\def\tbkt{\t@bkt\h@lf}
+% #1 hoffset #2 reference number #3 end note
+\def\t@bkt#1#2#3{%
+  \check@staff
+    \s@l@ctbracket#2\relax
+    \y@iv#1\qn@width
+    \def\@sense{\the\bracket@s}%
+% test for missing \ibkt
+    \if x\@sense \errmessage{\@mis\noexpand\ibkt#2}\fi
+% compute length
+    \getcurpos
+    \advance\y@v\y@iv
+% eoline
+    \y@eol\advance\y@-\beforeruleskip
+% clip bracket at eoline
+    \ifdim\y@v>\y@ \y@v\y@ \advance\y@v\beforeruleskip \y@iv\beforeruleskip \fi
+    \advance\y@v-\bracket@x
+    \if r\the\bracket@o \bracket@o{l}\fi
+    \inhgetn@i#3\relax
+    \writ@bkt{\bracket@y}{\n@i}{\y@v}{-\y@iv}%
+% reset sense of bracket
+    \global\bracket@s{x}\let\T@i\empty
+    \global\bracket@o{x}\let\T@i\empty
+    \global\advance\N@bracket\m@ne% update slur counter
+  \fi
+}
+
+% #1 start pitch #2 end pitch #3 length #4 right hoffset
+\def\writ@bkt#1#2#3#4{\check@staff %  modified: sld... into slurd...   12.04.95 ick
+  \ifx\bracket@N\undefined
+    \relax % 
+  \else
+    \edef\internote{\csname i@n\romannumeral\bracket@N\endcsname}%
+  \fi
+%  \immediate\write16{\noexpand\writ@slur internote:\the\internote}%
+  \n@iv#1%
+  \n@vi#2%
+  \y@iii#3%
+%%
+%%   Get note vertical offsets
+%%   \n@iv=   vertical offset of first  note(n@i temp);
+%%   \n@vi=   vertical offset of second note(n@ii temp);
+%%   \y@i =   reference height of first note (pt);
+%%   \y@ii=   reference height of end note (pt);
+%%
+  \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
+  \n@i\n@iv \pl@base % \y@i = initial height
+  \advance\y@i\bracket@Y \advance\y@ii\bracket@Y% add the voffsets
+  \ifx\@Ti\@ne \advance\y@i\bracket@a \advance\y@ii\bracket@a \let\@Ti\empty \fi% call from cutslur
+%%
+%% draw bracket
+%%
+  \llap{%
+    \if u\the\bracket@s
+      \tikz[baseline=0.0ex]{%
+        \draw[semithick]
+           \if l\the\bracket@o\else (0,\y@i)
+           --\fi($(0,\y@i)+(0,\internote)$)
+           --   ($(\y@iii,\y@ii)+(0,\internote)$)
+           \if r\the\bracket@o\else-- (\y@iii,\y@ii)\fi;
+        \node at ($(\h@lf\y@iii,\y@ii)+(0,\internote)$)
+           [above] {\the\bracket@t};
+      }%
+    \else
+      \tikz[baseline=0.0ex]{%
+        \draw[semithick]
+           \if l\the\bracket@o\else (0,\y@i)
+           --\fi($(0,\y@i)+(0,-\internote)$)
+           --   ($(\y@iii,\y@ii)+(0,-\internote)$)
+           \if r\the\bracket@o\else-- (\y@iii,\y@ii)\fi;
+        \node at ($(\h@lf\y@iii,\y@ii)+(0,-\internote)$)
+           [below] {\the\bracket@t};
+      }%
+    \fi
+    \hspace{-\y@iv}%
+  }%
+\fi} % end writ@bracket
+\setmaxbrackets6
+
+%    \end{macrocode}
+% \subsection{\cmd{\z@suspend}へのpatch}
+% \paragraph{概説}
+% \paragraph{実装}
+%    \begin{macrocode}
+%% z@suspendへのpatch %%
+
+\let\bell@oldsuspend=\z@suspend
+
+\def\z@suspend{%
+% cut tikz slurs
+%  \tracingmacros2%
+  \ifnum\N@s>\z@%     % any pending slurs ?
+    \n@viii\maxslurs % test all possible slur numbers [version 1.15] (Hiroaki)
+    \advance\n@viii\m@ne
+    \loop\ifnum\n@viii>\m@ne
+      \s@l@ctslur\n@viii\relax
+      \edef\@sense{\the\s@s}%
+      \edef\@dotted{\the\s@d}%
+      \if x\@sense%     % sense flag
+      \else%            % found slur
+        \y@v\lin@pos % get current position
+        \advance\y@v-\s@x % slurlength = currentpos - startpos
+        \let\@Ti\@ne    % set flag for \writ@slur (\staffbotmarg)
+        \ifnum\s@z=\maxdimen \s@z\s@y \fi % flag (\breakslur not used -> tie)
+        \ifuseTikzSlur
+          \bell@slur@sethgt% height coefficient
+          \ifx\T@i\@c % if tie or not; 
+            \s@V\s@Y
+          \else
+            \if u\@sense \s@V1\p@seven\internote
+            \else\s@V-1\p@seven\internote
+            \fi
+          \fi
+          \Tikz@writ@slur{\s@y}{\s@z}{\y@v}{\p@}%
+        \else
+          \if \the\s@ib\the\s@eb \else
+            \y@i\stemfactor\interbeam
+            \n@vi\y@i \divide\n@vi\internote
+            \if u\the\s@eb \advance\n@i\n@vi \fi
+            \if d\the\s@eb \advance\n@i-\n@vi \fi
+            \if u\the\s@ib \advance\n@i-\n@vi \fi
+            \if d\the\s@ib \advance\n@i\n@vi \fi
+          \fi
+          \writ@slur{\s@y}{\s@z}{\y@v}{\p@}%
+        \fi% <- Added code: bell, 2017-11-04
+        \s@x\z@% reset startpos for next line
+        \s@z\maxdimen% reset breakslur
+      \fi
+    \advance\n@viii\m@ne \repeat
+  \fi
+  \edef\oldN@s{\the\N@s}\N@s\z@%
+% cut tikz bracket
+  \ifnum\N@bracket>\z@%     % any pending slurs ?
+    \n@viii\maxbrackets % test all possible slur numbers [version 1.15] (Hiroaki)
+    \advance\n@viii\m@ne
+    \loop\ifnum\n@viii>\m@ne
+      \s@l@ctbracket\n@viii\relax
+      \edef\@sense{\the\bracket@s}%
+      \if x\@sense%     % sense flag
+      \else%            % found slur
+        \y@v\lin@pos % get current position
+        \advance\y@v-\bracket@x % slurlength = currentpos - startpos
+        \let\@Ti\@ne    % set flag for \writ@slur (\staffbotmarg)
+        \ifnum\bracket@z=\maxdimen
+          \bracket@z\bracket@y \fi % flag (\breakbracket not used -> tie)
+        \bracket@o{r}%
+        \writ@bkt{\bracket@y}{\bracket@z}{\y@v}{\p@}%
+        \bracket@x\z@% reset startpos for next line
+        \bracket@z\maxdimen% reset breakslur
+      \fi
+    \advance\n@viii\m@ne \repeat
+  \fi
+% do all other mxtex stuff
+  \bell@oldsuspend\N@s\oldN@s%\tracingmacros0%
+}
+
+%    \end{macrocode}
+% \subsection{\cmd{\alaligne}で調号を変えたときにmx1ファイルへの変更通知が行っていなかった件の修正.}
+% \paragraph{概説}
+% \paragraph{実装}
+%    \begin{macrocode}
+%% alaligneで調号を変えたときにmx1ファイルへの変更通知が行っていなかった件の修正.
+\let\old@alaligne\alaligne
+\def\alaligne{\fil@signs\old@alaligne}
+
+\def\barre{\T@bil \@bar\else \stoppiec@\contpiece \fi}
+
+\fi% \ifdefined\startpiece
+%    \end{macrocode}
+% \section{\texttt{biblatex}のパッチ}
+%    \begin{macrocode}
+%%==============================================================================
+%% biblatex用のアレコレ
+%%==============================================================================
+\@ifpackageloaded{biblatex}{
+  \@ifpackageloaded{ebgaramond}{%
+    \DeclareTextFontCommand{\textGaramond}{\ebgaramond}
+    \newcommand*{\ebgaramondT}{\fontfamily{EBGaramond-TOsF}\fontseries{regular}\selectfont}
+    \DeclareTextFontCommand{\textGaramondT}{\ebgaramondT}
+  }{%
+    \ifdefined\textGaramond\relax% gachimuchi.cls から呼び出されているときはなにもしない
+    \else% そうでないとき
+      \newcommand*{\EBGaramond@scale}{1.2}
+      \newcommand*{\ebgaramond}{\fontfamily{EBGaramond-OsF}\fontseries{regular}\selectfont}
+      \DeclareTextFontCommand{\textGaramond}{\ebgaramond}
+      \newcommand*{\ebgaramondT}{\fontfamily{EBGaramond-TOsF}\fontseries{regular}\selectfont}
+      \DeclareTextFontCommand{\textGaramondT}{\ebgaramondT}
+    \fi
+  }
+  \newrobustcmd*{\mkbibGaramond}{\textGaramond}
+  \newrobustcmd*{\mkbibGaramondT}{\textGaramondT}
+  \DeclareFieldFormat{title}{\mkbibbold{#1}}
+  \DeclareFieldFormat{date}{\mkbibGaramond{#1}}
+  \DeclareFieldFormat{labelnumber}{\mkbibGaramondT{#1}}
+  \DeclareFieldFormat{isbn}{\mkbibacro{ISBN}\addcolon\space \mkbibGaramond{#1}}
+  \DeclareFieldFormat{isrn}{\mkbibacro{ISRN}\addcolon\space \mkbibGaramond{#1}}
+  \DeclareFieldFormat{issn}{\mkbibacro{ISSN}\addcolon\space \mkbibGaramond{#1}}
+
+  \DefineBibliographyStrings{english}{%
+    bibliography     = {参考文献},
+    references       = {引用文献},
+    shorthands       = {略語},
+    editor           = {編\addcolon},
+    editors          = {編\addcolon},
+    translator       = {訳\addcolon},
+    translators      = {訳\addcolon},
+    byeditor         = {編\addcolon},
+    bytranslator     = {訳\addcolon},
+  }
+  \DefineBibliographyStrings{japanese}{%
+    bibliography     = {参考文献},
+    references       = {引用文献},
+    shorthands       = {略語},
+    editor           = {編\addcolon},
+    editors          = {編\addcolon},
+    translator       = {訳\addcolon},
+    translators      = {訳\addcolon},
+    byeditor         = {編\addcolon},
+    bytranslator     = {訳\addcolon},
+  }
+  \DeclareBibliographyDriver{book}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author/editor+others/translator+others}%
+    \setunit{\printdelim{nametitledelim}}%
+    \newblock
+    \usebibmacro{maintitle+title}%
+    \newunit
+    \newunit\newblock
+    \usebibmacro{byauthor}% by 著者
+    \newunit\newblock
+    \usebibmacro{byeditor+others}% by 編集
+    \newunit\newblock
+    \printfield{edition}% 版の表示
+    \newunit
+    \iffieldundef{maintitle}
+      {\printfield{volume}%
+       \printfield{part}}
+      {}%
+    \newunit
+    \printfield{volumes}%
+    \newunit\newblock
+    \usebibmacro{series+number}%
+    \newunit\newblock
+    \printfield{note}%
+    \newunit\newblock
+    \usebibmacro{publisher+location+date}%
+    \newunit\newblock
+    \usebibmacro{chapter+pages}%
+    \newunit
+    \printfield{pagetotal}%
+    \newunit\newblock
+    \iftoggle{bbx:isbn}
+      {\printfield{isbn}}%
+      {}% ISBN
+    \newunit\newblock
+    \usebibmacro{doi+eprint+url}%
+    \newunit\newblock
+    \usebibmacro{addendum+pubstate}%
+    \setunit{\bibpagerefpunct}\newblock
+    \usebibmacro{pageref}%
+    \newunit\newblock
+    \iftoggle{bbx:related}
+      {\usebibmacro{related:init}%
+       \usebibmacro{related}}
+      {}%
+    \usebibmacro{finentry}}
+}{}
+
+%</patch>
+%    \end{macrocode}
+%
+% 以上で終わりです.
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
+%
+%
+% \Finale
+% \PrintIndex \PrintChanges
