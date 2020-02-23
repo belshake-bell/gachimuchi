@@ -47,7 +47,7 @@
 \CodelineNumbered
 \EnableCrossrefs
 % \CodelineIndex
-% \RecordChanges                  % Gather update information
+\RecordChanges                  % Gather update information
 \setcounter{StandardModuleDepth}{1}
 
 \usepackage{gachimuchimacro}
@@ -1180,22 +1180,27 @@
 % \cmd{\zchar}\marg{pitch}\marg{right-text}とほぼ同じです
 % （ただし\meta{left-text}および\meta{right-text}は
 %   それぞれ\verb!&!の左・右のテキスト）
+% \changes{v1.1}{2020/02/23}%
+%         {Bug fix, remove unnecessary commands.}
 %    \begin{macrocode}
-\newcommand{\lrchar}{\begingroup\endcatcodesmusic\catcode\`&=4\@lrchar}
+\newcommand{\lrchar}{\check@staff\begingroup\endcatcodesmusic\@lrchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\@lrchar}
+% \changes{v1.1}{2020/02/23}
+%         {Remove unnecessary commands. Change this to be defined by \noexpand\cmd{\def}.}
 %    \begin{macrocode}
-\newcommand{\@lrchar}[2]{%
-  \def\reserved@a{#1}\def\reserved@b{#2}%
-  \expandafter\bell@lrchar\reserved@b\af@char
+\def\@lrchar#1#2{%
+  \bell@lrchar{#1}#2\af@char
   \endgroup\fi%
 }
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\bell@lrchar}
+% \changes{v1.1}{2020/02/23}
+%         {Change this definition.}
 %    \begin{macrocode}
-\def\bell@lrchar#1&#2\af@char{\lchar{\reserved@a}{#1}\zchar{\reserved@a}{#2}}
+\def\bell@lrchar#1#2&#3\af@char{\lchar{#1}{#2}\zchar{#1}{#3}}
 
 %    \end{macrocode}
 % \end{macro}
