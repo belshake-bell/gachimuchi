@@ -1233,6 +1233,32 @@
 
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\gcmc@Factory@char}
+%    \begin{macrocode}
+\def\gcmc@Factory@char#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka charl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka charll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka charlll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka charu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka charuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka charuuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\gcmc@Factory@char{z}
+\gcmc@Factory@char{l}
+\gcmc@Factory@char{c}
+\gcmc@Factory@char{lr}
+
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\gcmc@Factory@chars}
 %    \begin{macrocode}
 \def\gcmc@Factory@chars#1{\gcmc@test@temptoka{#1}%
@@ -1365,6 +1391,30 @@
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
 \newcommand{\lrchordsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchord}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\gcmc@Factory@chord#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka chordl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka chordll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka chordlll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka chordu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka chorduu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka chorduuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\gcmc@Factory@chord{z}
+\gcmc@Factory@chord{l}
+\gcmc@Factory@chord{c}
+\gcmc@Factory@chord{lr}
 
 %    \end{macrocode}
 %    \begin{macrocode}
