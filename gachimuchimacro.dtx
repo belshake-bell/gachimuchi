@@ -1718,7 +1718,13 @@
 % \end{macro}
 % \begin{macro}{\bell@Funktion}
 %    \begin{macrocode}
-\def\bell@Funktion#1{#1\endgroup}%
+\def\bell@Funktion#1{\bell@Funktionstyle#1\endgroup}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@Funktionstyle}
+%    \begin{macrocode}
+\def\bell@Funktionstyle{}%
+
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\WechselD}
