@@ -68,6 +68,7 @@
   {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
 \providecommand{\oarg}[1]{%
   {\ttfamily[}\meta{#1}{\ttfamily]}}
+\def\TODO{\par\textsf{To Do:\ }}%
 \makeatother
 
 \GetFileInfo{gachimuchimacro.dtx}
@@ -1706,24 +1707,56 @@
 %% ドイツ式和声記号
 %%==============================================================================
 %    \end{macrocode}
+% \begin{macro}{\Funktion}
+% \cmd{\Funktion}\marg{funktion-name}の形で
+% 主にドイツにて使われる機能和声表示を用いるためのコマンドです．
+% \TODO
+% いくつかのエイリアスを実装して使いやすくしたいです．
 %    \begin{macrocode}
 \newcommand{\Funktion}{\begingroup\bell@Funktion}%
-\def\bell@Funktion#1{#1\endgroup}%
-
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@Funktion}
+%    \begin{macrocode}
+\def\bell@Funktion#1{#1\endgroup}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\WechselD}
+% Doppeldominanteです．
 %    \begin{macrocode}
 \def\WechselD{%
   \settowidth{\@tempdima}{D}\raisebox{.5ex}{D}\hspace{-\thr@@qu@rt\@tempdima}D%
 }% Wechseldominante
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\WechselS}
+% Doppelsubdominanteです．
+%    \begin{macrocode}
 \def\WechselS{%
   \settowidth{\@tempdima}{S}\raisebox{.5ex}{S}\hspace{-\smallvalue\@tempdima}S%
 }% Wechselsubdominante
-\def\Wechsels{%
-  \settowidth{\@tempdima}{s}\raisebox{1ex}{\Funktion ss}%
-}% Wechselsubdominante
-\def\tiefalt{\eghostguarded{\scalebox{.5}[1]{$>$}}}%変変化音 tiefalteriert
-\def\hochalt{\eghostguarded{\scalebox{.5}[1]{$<$}}}%嬰変化音 hochalteriert
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Wechsels}
+% Doppelsubdominanteです．
+%    \begin{macrocode}
+\def\Wechsels{%
+  \settowidth{\@tempdima}{s}\raisebox{1ex}{ss}%
+}% Wechselsubdominante
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\tiefalt}
+% Tiefalteration (chromatische Erniedrigung)です．
+%    \begin{macrocode}
+\def\tiefalt{\eghostguarded{\scalebox{.5}[1]{$>$}}}%変変化音 Tiefalteration
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\hochalt}
+% Hochalteration (chromatische Erhöhung)です．
+%    \begin{macrocode}
+\def\hochalt{\eghostguarded{\scalebox{.5}[1]{$<$}}}%嬰変化音 Hochalteration
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\Stellung}
 % \marg{chord}\marg{bass}の形で低音を指定した和音表記をします．
 %    \begin{macrocode}
