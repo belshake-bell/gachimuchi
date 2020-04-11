@@ -946,6 +946,12 @@
 % \end{macro}
 % \begin{macro}{\subsupsc}\marg{sub-text}\marg{sup-text}\par
 % 古典和声記号や芸大和声式の和音記号用の下付き・上付き文字を出力します．
+%
+% [2020-04-11] 芸大方式の下付き・上付き文字は中央揃えであるよりも左揃えの方が
+% 好ましいかも．
+% またドイツの機能和声方式では左揃えの方が好ましいかも．
+% というわけで，左揃えを標準として組み直しました．
+% また単位\texttt{zh}を\cmd{\bell@zh}に変更しました．
 %    \begin{macrocode}
 \DeclareRobustCommand{\subsupsc}[2]{%
   \texorpdfstring{%TeX
@@ -954,10 +960,13 @@
     \ifdim\subsclength<\supsclength\setlength{\sclength}{\supsclength}%
     \else\setlength{\sclength}{\subsclength}\fi%
     \nobreak\eghostguarded{%
-      \hspace{\h@lf\sclength}%\hspace{-0.2em}%
-      \makebox[0pt][c]{\raisebox{-0.2zh}{\scalebox{0.7}{#1}}}%
-      \makebox[0pt][c]{\raisebox{0.5zh}{\scalebox{0.7}{#2}}}%
-      \hspace{\h@lf\sclength}%
+      \rlap{\raisebox{-0.2\bell@zh}{\scalebox{0.7}{#1}}}%
+      \rlap{\raisebox{0.5\bell@zh}{\scalebox{0.7}{#2}}}%
+      \hspace{\sclength}%
+%     \hspace{\h@lf\sclength}%\hspace{-0.2em}%
+%     \makebox[0pt][c]{\raisebox{-0.2zh}{\scalebox{0.7}{#1}}}%
+%     \makebox[0pt][c]{\raisebox{0.5zh}{\scalebox{0.7}{#2}}}%
+%     \hspace{\h@lf\sclength}%
     }%
   }{#1#2}%
 }% 古典記法
