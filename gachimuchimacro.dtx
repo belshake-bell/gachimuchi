@@ -1495,11 +1495,22 @@
 \def\figbass@coefficientOfSize{0.65}% 数字の大きさのスケーリング
 \figbass@dimb2.3\internote % 数字同士の縦の間隔
 %    \end{macrocode}
+% \begin{macro}{\figbass}
+% \cmd{\figbass}\oarg{figure-number 1}\oarg{figure-number 2}$\ddots$%
+%               \oarg{figure-number n}\marg{height}の形で
+% 数字付き低音を表示します．
+% \oarg{figure-number n}は下から$n$番目の数字です．
+% \marg{height}は表示する高さをinternote単位で指定します．
+% このとき正であれば指定した高さから上へ積み重ね，
+% 負であれば指定した高さが最も上になるよう下から上へ積み上げます．
 %    \begin{macrocode}
 %% \figbass[#1][#2]...[#n-1]{#n}
 %% #1,...,#n-1: figure number
 %% #n: height of figure number [internote]
 \newcommand{\figbass}{\figbass@dima\z@\bell@figbass}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
 \newcommand{\figbassu}{\figbass@dima8.5\internote\bell@figbass}
 \newcommand{\figbassuu}{\figbass@dima10.5\internote\bell@figbass}
 \newcommand{\figbassuuu}{\figbass@dima12.5\internote\bell@figbass}
@@ -1508,9 +1519,17 @@
 \newcommand{\figbassll}{\figbass@dima-4.5\internote\bell@figbass}
 \newcommand{\figbasslll}{\figbass@dima-6.5\internote\bell@figbass}
 %    \end{macrocode}
+% \begin{macro}{\bell@figbass}
+% カテゴリーコードを通常に戻して内部処理を進めます．
 %    \begin{macrocode}
 \def\bell@figbass{\check@staff\begingroup\endcatcodesmusic\bell@figb@ss}
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@figb@ss}
+% 数字が残っているかどうかで処理を分けます．
+% 残っていれば\cmd{\@figbass@}でそれを処理し，残っていない場合は
+% 高さを指定する(\cmd{\@figbass@nocnt@})か，
+% あるいは既に指定されている場合はそれを使用します(\cmd{\@figbass@cnt@})．
 %    \begin{macrocode}
 \def\bell@figb@ss{%
   \@ifnextchar[{%
@@ -1531,6 +1550,10 @@
   }%
 }
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@figbass@}
+% 疑似配列マクロ\cmd{\@figb@ss<roman-number>}に数字を定義します．
+% 出力時にこれは参照されます．
 %    \begin{macrocode}
 \def\@figbass@[#1]{%
   \advance\figbass@cnta\@ne
@@ -1538,9 +1561,24 @@
   \bell@figb@ss
 }
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@figbass@cnt@}
+% 単純に\cmd{\@figbass@@}を呼び出して数字を出力します．
 %    \begin{macrocode}
 \def\@figbass@cnt@{\@figbass@@}% 上(下)に数字付き
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@figbass@nocnt@}\marg{height}\par
+% \cmd{\figbass@dima}に\meta{height}を代入してから
+% \cmd{\@figbass@@}を呼び出します．
+%    \begin{macrocode}
 \def\@figbass@nocnt@#1{\figbass@dima#1\internote\@figbass@@}% 場所指定の数字付き
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@figbass@@}
+% 実際に数字付き低音の出力をします．
+% 文字の縮小は\cmd{\scalebox}で行っているので\file{graphicx}パッケージ依存です．
+%    \begin{macrocode}
 \def\@figbass@@{% 数字付き低音の出力
   \figbass@dimc\figbass@dimb \multiply\figbass@dimc\figbass@cnta
   \ifnum\figbass@dima>\z@ \advance\figbass@dima\figbass@dimc \fi
@@ -1555,9 +1593,15 @@
   \repeat
   \endgroup\figbass@dima\z@
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@figbass@char}
+% 出力される数字を右揃えにするためのマクロです．
+%    \begin{macrocode}
 \def\@figbass@char#1#2{\roffset{0.8}{\raise#1\llap{#2}}}
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\Tenni}
 %    \begin{macrocode}
 %%==============================================================================
