@@ -1314,10 +1314,18 @@
 % \subsection{bracketの追加}
 % \paragraph{概説}
 % \paragraph{実装}
+% \begin{macro}{\N@bracket}
+% bracketのID用のカウンタ・レジスタを用意します．
 %    \begin{macrocode}
 %% bracketの追加
 %% registers for bracket
 \newcount\N@bracket
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\test@bracketnum}
+% 参照すべきbracket IDが範囲外であるときに
+% エラー・メッセージを出す用のテストマクロです．
+%    \begin{macrocode}
 \def\test@bracketnum{%
   \ifnum\n@i<\z@ \n@i\@c \fi
   \ifnum\n@i<\maxbrackets \else
@@ -1328,6 +1336,17 @@
   \fi
   \advance\n@i\@ne}%
 
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@oldmaxbrackets}
+% 現在のbracket IDを保持します．
+%    \begin{macrocode}
+\chardef\@oldmaxbrackets=\z@
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\setmaxbrackets}\marg{max-ID number}\par
+% \meta{max-ID number}でbracket IDの最大値を設定します．
+%    \begin{macrocode}
 \def\setmaxbrackets#1{%
   \ifnum#1>\@oldmaxbrackets
     \chardef\maxbrackets=#1\relax
@@ -1377,7 +1396,11 @@
     \normalnotesize\resetlayout
   \fi}%
 
-\chardef\@oldmaxbrackets=\z@
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\s@l@ctbracket}\marg{bracket ID}\par
+% IDが\meta{bracket ID}であるbracketのパラメータを取得します．
+%    \begin{macrocode}
 \def\s@l@ctbracket#1\relax{%
   \n@i#1\relax\test@bracketnum% [version 1.15] make it independent from beams
   \edef\bracket@a{\csname bracket@a\roman@n@i}%  dimen (altportee)
@@ -1391,9 +1414,46 @@
   \edef\bracket@o{\csname bracket@o\roman@n@i}%  token (sense)
 }
 
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ibktu}\oarg{text}\marg{id}\marg{height}\par
+% 上向きbracketの始点を設定します．
+% \begin{itemize}
+% \item \meta{text}はbracketの上に出力される文字を設定します．
+% \item \meta{id}は参照するbracket IDを設定します．
+% \item \meta{height}はbracketの出力される高さを設定します．
+% \end{itemize}
+%    \begin{macrocode}
 %% \ibktu/d #1=text(optional) #2=bracket id #3=height[\internote]
 \newcommand{\ibktu}[1][]{\@i@bkt[#1]\h@lf{1\p@seven\internote}u}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ibktd}\oarg{text}\marg{id}\marg{height}\par
+% 下向きbracketの始点を設定します．
+% \begin{itemize}
+% \item \meta{text}はbracketの下に出力される文字を設定します．
+% \item \meta{id}は参照するbracket IDを設定します．
+% \item \meta{height}はbracketの出力される高さを設定します．
+% \end{itemize}
+%    \begin{macrocode}
 \newcommand{\ibktd}[1][]{\@i@bkt[#1]\h@lf{-1\p@seven\internote}d}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@i@bkt}\oarg{text}\marg{hoffset}\marg{voffset}%
+%              \marg{sence}\marg{id}\marg{height}\par
+% bracketの始点を設定する内部マクロです．
+% \begin{itemize}
+% \item \meta{text}はbracketの上または下に出力される文字を設定します．
+% \item \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
+%       単位は符頭の長さ\cmd{\qn@width}です．
+% \item \meta{voffset}は始点の高さから上へずらす長さを設定します．
+% \item \meta{sence}はbracketの上下の向きを設定します．
+% \item \meta{id}は参照するbracket IDを設定します．
+% \item \meta{height}はbracketの出力される始点の高さを設定します．
+% \end{itemize}
+% 設定されたパラメータは\cmd{\bracket@}から始まる
+% 各マクロあるいはレジスタに（グローバルに）定義あるいは代入されます．
+%    \begin{macrocode}
 %% \@i@bkt #1=text #2=hoffset[\qn@width] #3=voffset
 %%         #4=bracket sence(u,d) #5=bracket id #6=height[\internote]
 \def\@i@bkt[#1]#2#3#4#5#6{%
@@ -1415,8 +1475,16 @@
   \fi% start hpos (current pos including hoffset)
 }
 
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\tbkt}
+%    \begin{macrocode}
 \def\tbkt{\t@bkt\h@lf}
-% #1 hoffset #2 reference number #3 end note
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\t@bkt}
+%    \begin{macrocode}
+%% \t@bkt #1=hoffset #2=reference number #3=end note
 \def\t@bkt#1#2#3{%
   \check@staff
     \s@l@ctbracket#2\relax
@@ -1442,6 +1510,10 @@
   \fi
 }
 
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\writ@bkt}
+%    \begin{macrocode}
 % #1 start pitch #2 end pitch #3 length #4 right hoffset
 \def\writ@bkt#1#2#3#4{\check@staff %  modified: sld... into slurd...   12.04.95 ick
   \ifx\bracket@N\undefined
@@ -1495,6 +1567,7 @@
 \setmaxbrackets6
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\cmd{\z@suspend}へのpatch}
 % \paragraph{概説}
 % \paragraph{実装}
