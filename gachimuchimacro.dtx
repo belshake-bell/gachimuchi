@@ -2047,81 +2047,183 @@
 % \end{macro}
 % \subsubsection{lines}
 % \begin{macro}{\Mline}
-% \oarg{add\_length}\marg{height}\marg{length}\marg{slope}の形で
+% %\oarg{add\_length}\marg{height}\marg{length}\marg{slope}の形で
+% \oarg{add.~height}\marg{height}\oarg{add.~length}\marg{length}\marg{slope}の形で
 % 線を引きます．
 % 星付きのバージョンもあります．
 % \begin{itemize}
-% \item 第1引数(opt.)は追加の線の長さ[|dimen|]を与えます．
-% \item 第2引数は線の始点の高さ[|internote|]を与えます．
-% \item 第3引数は線の長さ[|noteskip|]．
-% \item 第4引数は線の終点の:
+% \item \meta{add.~height}は線の始点の高さのオフセット[\texttt{internote}]を与えます．
+% \item \meta{height}は線の始点の高さ[\texttt{note pitch}]を与えます．
+% \item \meta{add.~length}は追加の線の長さ[\texttt{dimen.}]を与えます．
+% \item \meta{length}は線の長さ[\texttt{noteskip}]を与えます．
+% \item \meta{slope}は線の終点の:
 % \begin{itemize}
-%   \item 線の始点からの相対的な高さを与えます(星なし)．
-%   \item 絶対的な高さを与えます(星あり)．
+%   \item 線の始点からの相対的な高さ[\texttt{internote}]を与えます(星なし)．
+%   \item 絶対的な高さ[\texttt{internote}]を与えます(星あり)．
 % \end{itemize}
 % \end{itemize}
-% 内部的には後述する|\bell@MlineTikz|を使っています．
-% \begin{macro}{\MlineC}
-% \oarg{add\_length}\marg{height}\marg{slope}\par
-% \begin{macro}{\MlineB}
-% \oarg{add\_length}\marg{height}\marg{slope}\par
-% 同様にして，\marg{length}に1を与えた変種として\cmd{\MlineC}および
-% \marg{length}に1を与え,かつ\oarg{add\_length}に\cmd{\afterruleskip}を加える
-% 変種として\cmd{\MlineB}を定義します．
+% 内部的には後述する\cmd{\bell@MlineTikz}を使っています．
+% \changes{2020/04/20}{2020/04/20}
+%    {定義の\textbf{破壊的}変化．}
 %    \begin{macrocode}
 %% lines                                                                      %%
 %% Mline  #1=height[\internote] #2=length[noteskip] #3=slope(diff.)[\internote]
 %% Mline* #1=height[\internote] #2=length[noteskip] #3=slope [\internote]
 \newcommand{\Mline}{\@ifstar{\bell@MlineTikzS}{\bell@MlineTikz}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\MlineC}
+% \oarg{add\_length}\marg{height}\marg{slope}\par
+% \marg{length}に1を与えた変種として\cmd{\MlineC}を定義します．
+%    \begin{macrocode}
 \newcommand{\MlineC}{\@ifstar{\bell@MlineCTikzS}{\bell@MlineCTikz}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\MlineB}
+% \oarg{add\_length}\marg{height}\marg{slope}\par
+% 同様にして，\marg{length}に1を与え,かつ\oarg{add\_length}に
+% \cmd{\afterruleskip}を加える変種として\cmd{\MlineB}を定義します．
+%    \begin{macrocode}
 \newcommand{\MlineB}{\@ifstar{\bell@MlineBTikzS}{\bell@MlineBTikz}}
 
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
+% \begin{macro}{\bell@MlineTikz}
+% \changes{2020/04/20}{2020/04/20}
+%    {定義の\textbf{破壊的}変化．}
 %    \begin{macrocode}
 %% \bell@MlineTikz                                                            %%
-%%   #1=additional length[dimen](opt.)                                        %%
-%%   #2=height[\internote]                                                    %%
-%%   #3=length[noteskip]                                                      %%
-%%   #4=slope(differ) [\internote]                                            %%
-\newcommand{\bell@MlineTikz}[4][0pt]{%
-  \y@i#2\internote
-  \y@ii#3\noteskip
-  \y@iii#4\internote
-  \advance\y@ii-1\thr@@qu@rt\qn@width
-  \advance\y@ii#1%
-  \zchar{#2}{%
-    \hspace{1\h@lf\qn@width}%
-    \tikz[baseline=0.0ex]{\draw[semithick] (0,0) -- (\y@ii,\y@iii);}%
-  }%
+%%   #1=additional height[\internote](opt.)                                   %%
+%%   #2=height[pitch]                                                         %%
+%%   #3=additional length[dimen](opt.)                                        %%
+%%   #4=length[noteskip]                                                      %%
+%%   #5=slope(differ) [\internote]                                            %%
+\def\bell@MlineTikz{%
+  \@ifnextchar[{\bell@MlineTikz@a}{\bell@MlineTikz@a[0]}%
 }
-\newcommand{\bell@MlineCTikz}[3][0pt]{%
-  \bell@MlineTikz[#1]{#2}{1}{#3}%
+\def\bell@MlineTikz@a[#1]#2{%
+  \y@i#1\internote\relax
+  \inhgetn@i#2\relax
+  \advance\y@i\n@i\internote
+  \y@iv\z@
+  \@ifnextchar[{\bell@MlineTikz@b}{\bell@MlineTikz@b[\z@]}%
 }
-\newcommand{\bell@MlineBTikz}[3][0pt]{%
-  \@tempdima\afterruleskip
-  \advance\@tempdima#1%
-  \bell@MlineTikz[\@tempdima]{#2}{1}{#3}%
+\def\bell@MlineTikz@b[#1]#2#3{%
+  \y@ii#1\relax
+  \y@iii#2\noteskip
+  \advance\y@iii\y@ii
+  \advance\y@iv#3\internote
+% line lenght offset of note head
+  \advance\y@iii-1\thr@@qu@rt\qn@width
+  \check@staff
+    \raise\y@i\rlap{%
+      \hspace{1\h@lf\qn@width}% to start drawing line at right of note head
+      \tikz[baseline=0.0ex]{\draw[semithick] (0,0) -- (\y@iii,\y@iv);}%
+    }%
+  \fi
 }
-
-\newcommand{\bell@MlineTikzS}[4][0pt]{%
-  \n@i#2\relax
-  \n@iii#4\relax
-  \advance\n@iii-\n@i%
-  \bell@MlineTikz[#1]{#2}{#3}{\n@iii}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineTikzS}
+%    \begin{macrocode}
+\def\bell@MlineTikzS{%
+  \@ifnextchar[{\bell@MlineTikzS@a}{\bell@MlineTikzS@a[0]}%
 }
-\newcommand{\bell@MlineCTikzS}[3][0pt]{%
-  \bell@MlineTikzS[#1]{#2}{1}{#3}%
+\def\bell@MlineTikzS@a[#1]#2{%
+  \y@i#1\internote\relax
+  \inhgetn@i#2\relax
+  \advance\y@i\n@i\internote
+  \y@iv-\n@i\internote
+  \@ifnextchar[{\bell@MlineTikz@b}{\bell@MlineTikz@b[\z@]}%
 }
-\newcommand{\bell@MlineBTikzS}[3][0pt]{%
-  \@tempdima\afterruleskip
-  \advance\@tempdima#1%
-  \bell@MlineTikzS[\@tempdima]{#2}{1}{#3}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineCTikz}
+%    \begin{macrocode}
+\def\bell@MlineCTikz{%
+  \@ifnextchar[{\bell@MlineCTikz@a}{\bell@MlineCTikz@a[0]}%
+}
+\def\bell@MlineCTikz@a[#1]#2{%
+  \y@i#1\internote\relax
+  \inhgetn@i#2\relax
+  \advance\y@i\n@i\internote
+  \y@iv\z@
+  \@ifnextchar[{\bell@MlineCTikz@b}{\bell@MlineCTikz@b[\z@]}%
+}
+\def\bell@MlineCTikz@b[#1]#2{%
+  \y@ii#1\relax
+  \y@iii\noteskip
+  \advance\y@iii\y@ii
+  \advance\y@iv#2\internote
+% line lenght offset of note head
+  \advance\y@iii-1\thr@@qu@rt\qn@width
+  \check@staff
+    \raise\y@i\rlap{%
+      \hspace{1\h@lf\qn@width}% to start drawing line at right of note head
+      \tikz[baseline=0.0ex]{\draw[semithick] (0,0) -- (\y@iii,\y@iv);}%
+    }%
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineBTikz}
+%    \begin{macrocode}
+\def\bell@MlineBTikz{%
+  \@ifnextchar[{\bell@MlineCTikz@a}{\bell@MlineCTikz@a[0]}%
+}
+\def\bell@MlineBTikz@a[#1]#2{%
+  \y@i#1\internote\relax
+  \inhgetn@i#2\relax
+  \advance\y@i\n@i\internote
+  \y@iv\z@
+  \@ifnextchar[{\bell@MlineBTikz@b}{\bell@MlineBTikz@b[\z@]}%
+}
+\def\bell@MlineBTikz@b[#1]#2{%
+  \y@ii#1\relax
+  \advance\y@ii\afterruleskip
+  \y@iii\noteskip
+  \advance\y@iii\y@ii
+  \advance\y@iv#2\internote
+% line lenght offset of note head
+  \advance\y@iii-1\thr@@qu@rt\qn@width
+  \check@staff
+    \raise\y@i\rlap{%
+      \hspace{1\h@lf\qn@width}% to start drawing line at right of note head
+      \tikz[baseline=0.0ex]{\draw[semithick] (0,0) -- (\y@iii,\y@iv);}%
+    }%
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineCTikzS}
+%    \begin{macrocode}
+\def\bell@MlineCTikzS{%
+  \@ifnextchar[{\bell@MlineCTikzS@a}{\bell@MlineCTikzS@a[0]}%
+}
+\def\bell@MlineCTikzS@a[#1]#2{%
+  \y@i#1\internote\relax
+  \inhgetn@i#2\relax
+  \advance\y@i\n@i\internote
+  \y@iv-\n@i\internote
+  \@ifnextchar[{\bell@MlineCTikz@b}{\bell@MlineCTikz@b[\z@]}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineBTikzS}
+%    \begin{macrocode}
+\def\bell@MlineBTikzS{%
+  \@ifnextchar[{\bell@MlineCTikzS@a}{\bell@MlineCTikzS@a[0]}%
+}
+\def\bell@MlineBTikzS@a[#1]#2{%
+  \y@i#1\internote\relax
+  \inhgetn@i#2\relax
+  \advance\y@i\n@i\internote
+  \y@iv-\n@i\internote
+  \@ifnextchar[{\bell@MlineBTikz@b}{\bell@MlineBTikz@b[\z@]}%
 }
 
 %    \end{macrocode}
+% \end{macro}
 % \subsubsection{parentheses}
 %    \begin{macrocode}
 %% parentheses                                                                %%

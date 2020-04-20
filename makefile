@@ -74,6 +74,7 @@ clean:
 	$(addsuffix .gls,$(DOCTARGET)) \
 	$(addsuffix .aux,$(DOCTARGET)) \
 	$(addsuffix .toc,$(DOCTARGET)) \
+	$(addsuffix .mx1,$(DOCTARGET)) \
 	$(addsuffix .log,$(DOCTARGET))
 
 cleanall:
