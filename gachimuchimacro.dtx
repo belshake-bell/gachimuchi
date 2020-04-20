@@ -2108,11 +2108,14 @@
   \y@iv\z@
   \@ifnextchar[{\bell@MlineTikz@b}{\bell@MlineTikz@b[\z@]}%
 }
-\def\bell@MlineTikz@b[#1]#2#3{%
+\def\bell@MlineTikz@b[#1]{%
   \y@ii#1\relax
-  \y@iii#2\noteskip
+  \bell@MlineTikz@c
+}
+\def\bell@MlineTikz@c#1#2{%
+  \y@iii#1\noteskip
   \advance\y@iii\y@ii
-  \advance\y@iv#3\internote
+  \advance\y@iv#2\internote
 % line lenght offset of note head
   \advance\y@iii-1\thr@@qu@rt\qn@width
   \check@staff
@@ -2152,17 +2155,7 @@
 }
 \def\bell@MlineCTikz@b[#1]#2{%
   \y@ii#1\relax
-  \y@iii\noteskip
-  \advance\y@iii\y@ii
-  \advance\y@iv#2\internote
-% line lenght offset of note head
-  \advance\y@iii-1\thr@@qu@rt\qn@width
-  \check@staff
-    \raise\y@i\rlap{%
-      \hspace{1\h@lf\qn@width}% to start drawing line at right of note head
-      \tikz[baseline=0.0ex]{\draw[semithick] (0,0) -- (\y@iii,\y@iv);}%
-    }%
-  \fi
+  \bell@MlineTikz@c{1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2181,17 +2174,7 @@
 \def\bell@MlineBTikz@b[#1]#2{%
   \y@ii#1\relax
   \advance\y@ii\afterruleskip
-  \y@iii\noteskip
-  \advance\y@iii\y@ii
-  \advance\y@iv#2\internote
-% line lenght offset of note head
-  \advance\y@iii-1\thr@@qu@rt\qn@width
-  \check@staff
-    \raise\y@i\rlap{%
-      \hspace{1\h@lf\qn@width}% to start drawing line at right of note head
-      \tikz[baseline=0.0ex]{\draw[semithick] (0,0) -- (\y@iii,\y@iv);}%
-    }%
-  \fi
+  \bell@MlineTikz@c{1}%
 }
 %    \end{macrocode}
 % \end{macro}
