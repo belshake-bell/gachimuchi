@@ -683,14 +683,17 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\i@slur}
+% パラメータを追加したので, それを引数で指定できるよう\cmd{\i@slur}を改修します.
+%    \begin{macrocode}
+\def\i@slur{\@ifnextchar[{\@i@slur}{\@i@slur[x]}}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\@i@slur}
 % \cmd{\@i@slur}\oarg{beam}\marg{hoffset}\marg{voffset}\ignorespaces
 %             \marg{sense}\marg{ID}\marg{pitch};
 % 
-% パラメータを追加したので, それを引数で指定できるよう\cmd{\i@slur}を改修します.
 % \cmd{\@ifnextchar}を使ったので内部動作を新しく別の命令\cmd{\@i@slur}にしました.
 %    \begin{macrocode}
-\def\i@slur{\@ifnextchar[{\@i@slur}{\@i@slur[x]}}
 \def\@i@slur[#1]#2#3#4#5#6{%
   \check@staff
     \global\advance\N@s\@ne % update slurcounter
@@ -715,24 +718,29 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
 % \begin{macro}{\ibsluru}
-% \begin{macro}{\ibslurd}
 % それに伴い, \cmd{\ibsluru}および\cmd{\ibslurd}を再定義します.
 %    \begin{macrocode}
 \def\ibsluru{\y@i\stemfactor\interbeam
              \advance\y@i\h@lf\internote \i@slur[u]1\y@i u}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ibslurd}
+%    \begin{macrocode}
 \def\ibslurd{\y@i\stemfactor\interbeam
              \advance\y@i\h@lf\internote \y@i-\y@i \i@slur[d]0\y@i d}
 
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
 % \begin{macro}{\t@slur}
+% パラメータを追加したので, それを引数で指定できるよう\cmd{\t@slur}を改修します.
+%    \begin{macrocode}
+\def\t@slur{\@ifnextchar[{\@t@slur}{\@t@slur[x]}}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\@t@slur}
 % \cmd{\@t@slur}\oarg{beam}\marg{hoffset}\marg{ID}\marg{pitch};
 % 
-% パラメータを追加したので, それを引数で指定できるよう\cmd{t@slur}を改修します.
 % \cmd{\@ifnextchar}を使ったので内部動作を新しく別の命令\cmd{@t@slur}にしました.
 % また\cmd{@t@slur}では実際のスラーの描画を\TikZ{}にするかの
 % 分岐を入れています.
@@ -740,7 +748,6 @@
 % \oarg{beam}はu, d, xのいずれかであり, それぞれ上向き連桁の上に付く, 
 % 下向き連桁の下に付く, 普通のスラー, を表します.
 %    \begin{macrocode}
-\def\t@slur{\@ifnextchar[{\@t@slur}{\@t@slur[x]}}
 \def\@t@slur[#1]#2#3#4{%
   \check@staff
   \s@l@ctslur#3\relax
@@ -808,7 +815,6 @@
   \fi%\tracingmacros0\tracingcommands0%
 }% update slur counter
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % \begin{macro}{\tubslur}
 % \begin{macro}{\tdbslur}
