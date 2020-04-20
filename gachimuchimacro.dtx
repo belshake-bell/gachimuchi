@@ -2047,7 +2047,6 @@
 % \end{macro}
 % \subsubsection{lines}
 % \begin{macro}{\Mline}
-% %\oarg{add\_length}\marg{height}\marg{length}\marg{slope}の形で
 % \oarg{add.~height}\marg{height}\oarg{add.~length}\marg{length}\marg{slope}の形で
 % 線を引きます．
 % 星付きのバージョンもあります．
@@ -2065,6 +2064,8 @@
 % 内部的には後述する\cmd{\bell@MlineTikz}を使っています．
 % \changes{2020/04/20}{2020/04/20}
 %    {定義の\textbf{破壊的}変化．}
+% 2020/04/20より前は\oarg{add\_length}\marg{height}%
+%                   \marg{length}\marg{slope}の形でした
 %    \begin{macrocode}
 %% lines                                                                      %%
 %% Mline  #1=height[\internote] #2=length[noteskip] #3=slope(diff.)[\internote]
@@ -2101,6 +2102,10 @@
 \def\bell@MlineTikz{%
   \@ifnextchar[{\bell@MlineTikz@a}{\bell@MlineTikz@a[0]}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineTikz@a}
+%    \begin{macrocode}
 \def\bell@MlineTikz@a[#1]#2{%
   \y@i#1\internote\relax
   \inhgetn@i#2\relax
@@ -2108,10 +2113,18 @@
   \y@iv\z@
   \@ifnextchar[{\bell@MlineTikz@b}{\bell@MlineTikz@b[\z@]}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineTikz@b}
+%    \begin{macrocode}
 \def\bell@MlineTikz@b[#1]{%
   \y@ii#1\relax
   \bell@MlineTikz@c
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineTikz@c}
+%    \begin{macrocode}
 \def\bell@MlineTikz@c#1#2{%
   \y@iii#1\noteskip
   \advance\y@iii\y@ii
@@ -2132,6 +2145,10 @@
 \def\bell@MlineTikzS{%
   \@ifnextchar[{\bell@MlineTikzS@a}{\bell@MlineTikzS@a[0]}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineTikzS@a}
+%    \begin{macrocode}
 \def\bell@MlineTikzS@a[#1]#2{%
   \y@i#1\internote\relax
   \inhgetn@i#2\relax
@@ -2146,6 +2163,10 @@
 \def\bell@MlineCTikz{%
   \@ifnextchar[{\bell@MlineCTikz@a}{\bell@MlineCTikz@a[0]}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineCTikz@a}
+%    \begin{macrocode}
 \def\bell@MlineCTikz@a[#1]#2{%
   \y@i#1\internote\relax
   \inhgetn@i#2\relax
@@ -2153,27 +2174,12 @@
   \y@iv\z@
   \@ifnextchar[{\bell@MlineCTikz@b}{\bell@MlineCTikz@b[\z@]}%
 }
-\def\bell@MlineCTikz@b[#1]{%
-  \y@ii#1\relax
-  \bell@MlineTikz@c{1}%
-}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\bell@MlineBTikz}
+% \begin{macro}{\bell@MlineCTikz@b}
 %    \begin{macrocode}
-\def\bell@MlineBTikz{%
-  \@ifnextchar[{\bell@MlineBTikz@a}{\bell@MlineBTikz@a[0]}%
-}
-\def\bell@MlineBTikz@a[#1]#2{%
-  \y@i#1\internote\relax
-  \inhgetn@i#2\relax
-  \advance\y@i\n@i\internote
-  \y@iv\z@
-  \@ifnextchar[{\bell@MlineBTikz@b}{\bell@MlineBTikz@b[\z@]}%
-}
-\def\bell@MlineBTikz@b[#1]{%
+\def\bell@MlineCTikz@b[#1]{%
   \y@ii#1\relax
-  \advance\y@ii\afterruleskip
   \bell@MlineTikz@c{1}%
 }
 %    \end{macrocode}
@@ -2183,6 +2189,10 @@
 \def\bell@MlineCTikzS{%
   \@ifnextchar[{\bell@MlineCTikzS@a}{\bell@MlineCTikzS@a[0]}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineCTikzS@a}
+%    \begin{macrocode}
 \def\bell@MlineCTikzS@a[#1]#2{%
   \y@i#1\internote\relax
   \inhgetn@i#2\relax
@@ -2192,11 +2202,42 @@
 }
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\bell@MlineBTikz}
+%    \begin{macrocode}
+\def\bell@MlineBTikz{%
+  \@ifnextchar[{\bell@MlineBTikz@a}{\bell@MlineBTikz@a[0]}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineBTikz@a}
+%    \begin{macrocode}
+\def\bell@MlineBTikz@a[#1]#2{%
+  \y@i#1\internote\relax
+  \inhgetn@i#2\relax
+  \advance\y@i\n@i\internote
+  \y@iv\z@
+  \@ifnextchar[{\bell@MlineBTikz@b}{\bell@MlineBTikz@b[\z@]}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineBTikz@b}
+%    \begin{macrocode}
+\def\bell@MlineBTikz@b[#1]{%
+  \y@ii#1\relax
+  \advance\y@ii\afterruleskip
+  \bell@MlineTikz@c{1}%
+}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\bell@MlineBTikzS}
 %    \begin{macrocode}
 \def\bell@MlineBTikzS{%
   \@ifnextchar[{\bell@MlineBTikzS@a}{\bell@MlineBTikzS@a[0]}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@MlineBTikzS@a}
+%    \begin{macrocode}
 \def\bell@MlineBTikzS@a[#1]#2{%
   \y@i#1\internote\relax
   \inhgetn@i#2\relax
