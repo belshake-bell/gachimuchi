@@ -831,35 +831,53 @@
 % 大体同じように動作すると思いますが, 実はまだ未完成です.
 %
 % \paragraph{実装}
+% \begin{macro}{\@slurHGT}
+%    \begin{macrocode}
+\newtoks\@slurHGT
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\slurHGT}
-% \begin{macro}{\FLATslur}
-% \begin{macro}{\Flatslur}
-% \begin{macro}{\flatslur}
-% \begin{macro}{\normalslur}
-% \begin{macro}{\highslur}
-% \begin{macro}{\Highslur}
-% \begin{macro}{\HIGHslur}
 % スラーの高さを設定する各種命令です.
 % 既定は\cmd{\normalslur}です.
 %    \begin{macrocode}
-\newtoks\@slurHGT
 \def\slurHGT#1{\@slurHGT{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\FLATslur}
+%    \begin{macrocode}
 \newcommand{\FLATslur}{\slurHGT{0.2}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Flatslur}
+%    \begin{macrocode}
 \newcommand{\Flatslur}{\slurHGT{0.4}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\flatslur}
+%    \begin{macrocode}
 \newcommand{\flatslur}{\slurHGT{0.7}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\normalslur}
+%    \begin{macrocode}
 \newcommand{\normalslur}{\slurHGT{1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\highslur}
+%    \begin{macrocode}
 \newcommand{\highslur}{\slurHGT{1.6}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Highslur}
+%    \begin{macrocode}
 \newcommand{\Highslur}{\slurHGT{2.2}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\HIGHslur}
+%    \begin{macrocode}
 \newcommand{\HIGHslur}{\slurHGT{2.8}}
 \normalslur
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \end{macro}
 % \begin{macro}{\bell@slur@sethgt}
 % \cmd{\t@slur}の中で呼び出されます.
