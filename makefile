@@ -18,6 +18,10 @@ endef
 all: $(STRIPTARGET) $(PDFTARGET)
 strip: $(STRIPTARGET)
 doc: $(PDFTARGET)
+
+class: gachimuchi.cls gachimuchi.pdf
+macro: gachimuchimacro.sty gachimuchimacro.pdf
+patch: gachimuchipatch.sty gachimuchipatch.pdf
 .PHONY: install clean cleanstrip cleanall cleandoc movelog
 
 
