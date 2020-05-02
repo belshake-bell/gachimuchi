@@ -886,6 +886,7 @@
 % \end{macro}
 % \end{macro}
 % \end{macro}
+% ここからobsoluteなコマンドです．
 %    \begin{macrocode}
 \newcommand{\hna}[1]{\loffset{\h@lfsmallvalue}{\na{#1}}}
 \newcommand{\hfl}[1]{\loffset{\h@lfsmallvalue}{\fl{#1}}}
@@ -917,6 +918,9 @@
 \newcommand{\llldfl}[1]{\loffset{\thr@@smallvalue}{\dfl{#1}}}
 \newcommand{\llldsh}[1]{\loffset{\thr@@smallvalue}{\dsh{#1}}}
 
+%    \end{macrocode}
+% ここまでobsoluteなコマンドです．
+%    \begin{macrocode}
 \newcommand{\parna}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\na{#1}}}
 \newcommand{\parfl}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\fl{#1}}}
 \newcommand{\parsh}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\sh{#1}}}
@@ -924,6 +928,7 @@
 \newcommand{\pardsh}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\dsh{#1}}}
 
 %    \end{macrocode}
+% 
 %    \begin{macrocode}
 \newcommand{\aFlat}{\nobreak\Flat}
 \newcommand{\adFlat}{\nobreak\dFlat}
