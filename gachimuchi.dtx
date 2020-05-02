@@ -383,13 +383,23 @@
 %    \end{macrocode}
 % \begin{macro}{\@seccntformat}
 % 節見出しの形式を再定義します．
+% 既存のものは：
+% \iffalse
+%<*example>
+% \fi
+\begin{lstlisting}[gobble=2]
+  \def\@seccntformat#1{\csname the#1\endcsname\quad}% from latex.ltx
+\end{lstlisting}
+% \iffalse
+%</example>
+% \fi
 %    \begin{macrocode}
-% \def\@seccntformat#1{\csname the#1\endcsname\quad}% from latex.ltx
 \renewcommand{\@seccntformat}[1]{%
   \csname pre#1name\endcsname
   \csname the#1\endcsname
   \csname post#1name\endcsname\quad
 }
+
 %    \end{macrocode}
 % \end{macro}
 % \section{ebgaramond関係のマクロ定義}
@@ -397,15 +407,42 @@
 %%==============================================================================
 %% ebgaramond関係のマクロ定義
 %%==============================================================================
-\newcommand*{\EBGaramond@scale}{1.2}
+%    \end{macrocode}
+% \begin{macro}{\EBGaramond@scale}
+% ebgaramodは小さいので，それをスケーリングする係数を定義しておきます．
+% この係数が\file{T1EBGaramond-OsF.fd}や\file{T1EBGaramond-TOsF.fd}内で
+% スケーリング用に読み込まれます．
+%    \begin{macrocode}
+\def\EBGaramond@scale{1.2}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ebgaramond}
+% フォントをebgaramondに変えます．
+%    \begin{macrocode}
 \newcommand*{\ebgaramond}
-            {\fontfamily{EBGaramond-OsF}\fontseries{regular}\selectfont}
+            {\fontfamily{EBGaramond-OsF}\fontseries{m}\selectfont}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\textGaramond}
+% ebgaramondのテキスト・フォント・コマンドです．
+%    \begin{macrocode}
 \DeclareTextFontCommand{\textGaramond}{\ebgaramond}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ebgaramondT}
+% フォントをebgaramondTに変えます(T$=$Tabular Numbers)．
+%    \begin{macrocode}
 \newcommand*{\ebgaramondT}
-            {\fontfamily{EBGaramond-TOsF}\fontseries{regular}\selectfont}
+            {\fontfamily{EBGaramond-TOsF}\fontseries{m}\selectfont}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\textGaramondT}
+% ebgaramondTのテキスト・フォント・コマンドです．
+%    \begin{macrocode}
 \DeclareTextFontCommand{\textGaramondT}{\ebgaramondT}
 
 %    \end{macrocode}
+% \end{macro}
 % \section{jsbook余白とか補正}
 %    \begin{macrocode}
 %%==============================================================================
