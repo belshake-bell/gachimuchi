@@ -834,16 +834,8 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\na}
-% \begin{macro}{\fl}
-% \begin{macro}{\sh}
-% \begin{macro}{\dfl}
-% \begin{macro}{\dsh}
 %    \begin{macrocode}
 \let\orig@na\na
-\let\orig@fl\fl
-\let\orig@sh\sh
-\let\orig@dfl\dfl
-\let\orig@dsh\dsh
 \renewcommand{\na}[2][]{%
   \bell@getshift#1\relax%
   \bgroup
@@ -851,6 +843,11 @@
   \offs@t{\orig@na{#2}}%
   \egroup
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fl}
+%    \begin{macrocode}
+\let\orig@fl\fl
 \renewcommand{\fl}[2][]{%
   \bell@getshift#1\relax%
   \bgroup
@@ -858,6 +855,11 @@
   \offs@t{\orig@fl{#2}}%
   \egroup
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\sh}
+%    \begin{macrocode}
+\let\orig@sh\sh
 \renewcommand{\sh}[2][]{%
   \bell@getshift#1\relax%
   \bgroup
@@ -865,6 +867,11 @@
   \offs@t{\orig@sh{#2}}%
   \egroup
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dfl}
+%    \begin{macrocode}
+\let\orig@dfl\dfl
 \renewcommand{\dfl}[2][]{%
   \bell@getshift#1\relax%
   \bgroup
@@ -872,6 +879,11 @@
   \offs@t{\orig@dfl{#2}}%
   \egroup
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dsh}
+%    \begin{macrocode}
+\let\orig@dsh\dsh
 \renewcommand{\dsh}[2][]{%
   \bell@getshift#1\relax%
   \bgroup
@@ -881,10 +893,6 @@
 }
 
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \end{macro}
 % ここからobsoluteなコマンドです．
 %    \begin{macrocode}
@@ -928,7 +936,7 @@
 \newcommand{\pardsh}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\dsh{#1}}}
 
 %    \end{macrocode}
-% 
+%
 %    \begin{macrocode}
 \newcommand{\aFlat}{\nobreak\Flat}
 \newcommand{\adFlat}{\nobreak\dFlat}
