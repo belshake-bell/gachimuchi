@@ -404,36 +404,38 @@
 %% jsbook余白とか補正
 %%==============================================================================
 %    \end{macrocode}
+% パラメタをそのまま計算させて代入するなんてアレですね．
+% 次のようにパラメタを設定します：
+% \begin{itemize}
+% \item \kern0pt\cmd{\topmargin}: \SI{0}{pt}\\
+%   \SI{1}{inch}+\cmd{\voffset}からヘッダ上端までの距離．
+% \item \kern0pt\cmd{\headheight}: \SI{0}{pt}\\
+%   ヘッダの高さ．
+% \item \kern0pt\cmd{\headsep}: \SI{0}{pt}\\
+%   ヘッダ下端から本文領域上端までの距離．
+% \item \cmd{\textheight}:
+%   \begin{multline}
+%     \text{\cmd{\paperheight}} - \SI{1}{inch} \\
+%    -\text{\cmd{\headheight}} -\text{\cmd{\headsep}}-\text{\cmd{\footskip}}\\
+%    -\text{\cmd{\topskip}} - \SI{0.5}{inch}
+%   \end{multline}
+%   を\cmd{\baselineskip}単位に切り捨てて，\cmd{\topskip}と\SI{0.1}{pt}を加える．
+% \item \kern0pt\cmd{\footskip}: $\min (0.03367\text{\cmd{\paperheight}},
+%                                     4\text{\cmd{\baselineskip}})$\\
+%   本文領域下端からフッタ下端までの距離．
+% \end{itemize}
+% \[
+%   \SI{1}{inch}+\text{\cmd{\voffset}}+\text{\cmd{\topmargin}}
+%     +\text{\cmd{\headsep}}+\text{\cmd{\headheight}}
+% \]
+% が上端から本文までの余白になります．
 %    \begin{macrocode}
-\@ifclassloaded{jsbook}{
-%% A4 8.27in x 11.69in (210mm x 297mm)
-%% B5 8.27in x 11.69in (182mm x 257mm)
-  \setlength\baselineskip{10pt}
-  
-  \setlength\fullwidth{\paperwidth}
-  \addtolength\fullwidth{-36\jsc@mmm}
-% \addtolength\fullwidth{-.5in}
-  \if@twocolumn \@tempdima=2zw \else \@tempdima=1zw \fi
-  \divide\fullwidth\@tempdima
-  \multiply\fullwidth\@tempdima
-  \setlength\textwidth{\fullwidth}
-  \ifgcmc@fourty
-    \ifdim\textwidth>42zw \setlength\textwidth{42zw}\fi
-  \fi
-  
-  \ifgcmc@defaultbook
-  \else
-    \setlength{\topmargin}{0in}
-    \setlength{\headsep}{0in}
-    \setlength{\headheight}{0in}
-    \setlength\footskip{0.03367\paperheight}
-    \ifdim\footskip<4\baselineskip
-      \setlength\footskip{4\baselineskip}
-    \fi
-  \fi
-  
-%    \end{macrocode}
-%    \begin{macrocode}
+\def\reserved@a{jsbook}
+\ifx\reserved@a\gcmc@loadclass
+  \setlength{\topmargin}{0in}
+  \setlength{\headsep}{0in}
+  \setlength{\headheight}{0in}
+
   \setlength{\textheight}{\paperheight}
   \addtolength{\textheight}{-1in}
   \addtolength{\textheight}{-\headheight}
@@ -445,15 +447,43 @@
   \multiply\textheight\baselineskip
   \addtolength{\textheight}{\topskip}
   \addtolength{\textheight}{0.1\jsc@mpt}
+
+  \setlength\footskip{0.03367\paperheight}
+  \ifdim\footskip<4\baselineskip
+    \setlength\footskip{4\baselineskip}
+  \fi
+
+%    \end{macrocode}
+% \begin{itemize}
+% \item \kern0pt\cmd{\fullwidth}: $\text{\cmd{\paperwidth}} \SI{-40}{truemm}$を
+%       全角単位に切り捨て
+%      （\texttt{twocolumn}では倍角単位に切り捨て）．\\
+%   js/bxjsclassではこの幅をヘッダの幅としています．
+%   \SI{40}{truemm}は「大和声学教程」から（両側のマージンがそれぞれ\SI{20}{mm}）．
+% \item \kern0pt\cmd{\textwidth}: $\min(\text{\cmd{\fullwidth}},40zw)$
+%   js/bxjsclassではこの幅を本文領域の幅としています．
+% \item \cmd{\oddsidemargin}:
+%   $(\text{\cmd{\paperwidth}}-\cmd{\fullwidth}/2) - \SI{1}{truein}$
+% \item \cmd{\evensidemargin}: \textsf{mparswitch}が真のときは
+%   $\text{\cmd{\oddsidemargin}}+\cmd{\fullwidth}-\textwidth$です．
+% \item \cmd{\footins}: $\SI{16}{pt}(+\SI{10}{pt},-\SI{2}{pt})$
+% \end{itemize}
+% \[
+%   \SI{1}{inch}+\text{\cmd{\hoffset}}+\text{\cmd{\oddsidemargin}}
+% \]
+% が左端から本文までの余白になります．
+%    \begin{macrocode}
+  \setlength\fullwidth{\paperwidth}
+  \addtolength\fullwidth{-40truemm}
+  \if@twocolumn \@tempdima=2zw \else \@tempdima=1zw \fi
+  \divide\fullwidth\@tempdima \multiply\fullwidth\@tempdima
+  \setlength\textwidth{\fullwidth}
+  \ifdim\textwidth>40zw \textwidth40zw\fi
   
   \setlength{\oddsidemargin}{\paperwidth}
   \addtolength{\oddsidemargin}{-\fullwidth}
   \setlength{\oddsidemargin}{.5\oddsidemargin}
-  \iftombow
-    \addtolength{\oddsidemargin}{-1in}
-  \else
-    \addtolength{\oddsidemargin}{-\inv@mag in}
-  \fi
+  \addtolength{\oddsidemargin}{-1in}
   \setlength{\evensidemargin}{\oddsidemargin}
   \if@mparswitch
     \addtolength{\evensidemargin}{\fullwidth}
@@ -461,142 +491,193 @@
   \fi
   
   \setlength{\skip\footins}{16\jsc@mpt \@plus 10\jsc@mpt \@minus 2\jsc@mpt}
-  
-  \renewcommand*{\descriptionlabel}[1]{%
-    \textbullet\normalfont\headfont\quad#1\hfil}
-  
-  \def\ps@gcmcfoot{%
-    \let\@mkboth\@gobbletwo
-    \let\@oddhead\@empty
-    \def\@oddfoot{\hfil-- \textGaramond{\thepage}\ --\hfil}%
-    \let\@evenhead\@empty
-    \let\@evenfoot\@oddfoot}
-  \let\ps@plainfoot\ps@gcmcfoot
-  
-  \def\ps@gcmchead{%
-    \let\@mkboth\@gobbletwo
-    \let\@oddfoot\@empty
-    \let\@evenfoot\@empty
-    \def\@evenhead{%
-      \if@mparswitch \hss \fi
-      \hbox to \fullwidth{\textGaramond{\thepage}\hfil}%
-      \if@mparswitch\else \hss \fi}%
-    \def\@oddhead{%
-      \hbox to \fullwidth{\hfil\textGaramond{\thepage}}\hss}}
-  \let\ps@plainhead\ps@gcmchead
-  
-  \def\ps@gcmcheadings{%
-    \let\@oddfoot\@empty
-    \let\@evenfoot\@empty
-    \def\@evenhead{%
-      \if@mparswitch \hss \fi
-      \underline{\hbox to \fullwidth{\autoxspacing
-          \textGaramond{\thepage}\hfil\leftmark}}%
-      \if@mparswitch\else \hss \fi}%
-    \def\@oddhead{%
-      \underline{%
-        \hbox to \fullwidth{\autoxspacing
-                             {\if@twoside\rightmark\else\leftmark\fi}%
-                            \hfil\textGaramond{\thepage}}}\hss}%
-    \let\@mkboth\markboth
-    \def\chaptermark##1{\markboth{%
-      \ifnum \c@secnumdepth >\m@ne
-        \if@mainmatter
-          \if@omit@number\else
-            \@chapapp\thechapter\@chappos\hskip1zw
-          \fi
-        \fi
-      \fi
-      ##1}{}}%
-    \def\sectionmark##1{\markright{%
-      \ifnum \c@secnumdepth >\z@ \thesection \hskip1zw\fi
-      ##1}}}%
-  
-  
-  \ifgcmc@defaultbook
-    \pagestyle{gcmcheadings}
-  \else
-    \pagestyle{plainfoot}
-  \fi
-  
+\fi
 %    \end{macrocode}
+% \section{(bx)jsbookのマクロ修正}
 %    \begin{macrocode}
-  \def\@makechapterhead#1{%
-    \vspace*{.2\Cvs}% 欧文は50pt
-    \begingroup
-      \parindent \z@ \raggedright \normalfont
-      \ifnum \c@secnumdepth >\m@ne
-        \if@mainmatter
-          \huge\headfont \@chapapp\thechapter\@chappos
-          \par\nobreak
-          \vskip .2\Cvs % 欧文は20pt
+%%==============================================================================
+%% jsbookのマクロ修正
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\descriptionlabel}
+%    \begin{macrocode}
+\renewcommand*{\descriptionlabel}[1]{%
+  \textbullet\normalfont\headfont\quad#1\hfil}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ps@gcmcfoot}
+%    \begin{macrocode}
+\def\ps@gcmcfoot{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddhead\@empty
+  \def\@oddfoot{\hfil-- \textGaramond{\thepage}\ --\hfil}%
+  \let\@evenhead\@empty
+  \let\@evenfoot\@oddfoot}
+\let\ps@plainfoot\ps@gcmcfoot
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ps@gcmchead}
+%    \begin{macrocode}
+\def\ps@gcmchead{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddfoot\@empty
+  \let\@evenfoot\@empty
+  \def\@evenhead{%
+    \if@mparswitch \hss \fi
+    \hbox to \fullwidth{\textGaramond{\thepage}\hfil}%
+    \if@mparswitch\else \hss \fi}%
+  \def\@oddhead{%
+    \hbox to \fullwidth{\hfil\textGaramond{\thepage}}\hss}}
+\let\ps@plainhead\ps@gcmchead
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ps@gcmcheadings}
+%    \begin{macrocode}
+\def\ps@gcmcheadings{%
+  \let\@oddfoot\@empty
+  \let\@evenfoot\@empty
+  \def\@evenhead{%
+    \if@mparswitch \hss \fi
+    \underline{\hbox to \fullwidth{\autoxspacing
+        \textGaramond{\thepage}\hfil\leftmark}}%
+    \if@mparswitch\else \hss \fi}%
+  \def\@oddhead{%
+    \underline{%
+      \hbox to \fullwidth{\autoxspacing
+                           {\if@twoside\rightmark\else\leftmark\fi}%
+                          \hfil\textGaramond{\thepage}}}\hss}%
+  \let\@mkboth\markboth
+  \def\chaptermark##1{\markboth{%
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \if@omit@number\else
+          \@chapapp\thechapter\@chappos\hskip1zw
         \fi
       \fi
+    \fi
+    ##1}{}}%
+  \def\sectionmark##1{\markright{%
+    \ifnum \c@secnumdepth >\z@ \thesection \hskip1zw\fi
+    ##1}}}%
+
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\ifgcmc@defaultbook
+  \pagestyle{gcmcheadings}
+\else
+  \pagestyle{plainfoot}
+\fi
+
+%    \end{macrocode}
+% \begin{macro}{\@makechapterhead}
+%    \begin{macrocode}
+\def\@makechapterhead#1{%
+  \vspace*{.2\Cvs}% 欧文は50pt
+  \begingroup
+    \parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \huge\headfont \@chapapp\thechapter\@chappos
+        \par\nobreak
+        \vskip .2\Cvs % 欧文は20pt
+      \fi
+    \fi
+  \interlinepenalty\@M
+  \Huge \headfont #1\par\nobreak
+  \vskip 0.5\Cvs
+  \endgroup
+} % 欧文は40pt
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@makeschapterhead}
+%    \begin{macrocode}
+\def\@makeschapterhead#1{%
+  \vspace*{.2\Cvs}% 欧文は50pt
+  \begingroup
+    \parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
     \Huge \headfont #1\par\nobreak
-    \vskip 0.5\Cvs
-    \endgroup
-  } % 欧文は40pt
-  
-  \def\@makeschapterhead#1{%
-    \vspace*{.2\Cvs}% 欧文は50pt
-    \begingroup
-      \parindent \z@ \raggedright \normalfont
-      \interlinepenalty\@M
-      \Huge \headfont #1\par\nobreak
-      \vskip .5\Cvs
-    \endgroup
-  } % 欧文は40pt
-  
-  \if@twocolumn
-    \renewcommand{\section}{%
-      \@startsection{section}{1}{\z@}%
-      {0.6\Cvs}{0.4\Cvs}%
-      {\normalfont\large\headfont\raggedright}}
-    \renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
-      {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
-      {\normalfont\normalsize\headfont}}
-    \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
-      {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
-      {\normalfont\normalsize\headfont}}
-  \else
-    \renewcommand{\section}{%
-      \if@slide\clearpage\fi
-      \@startsection{section}{1}{\z@}%
-      {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
-      {.25\Cvs \@plus.3\Cdp}% 後アキ;
-      {\normalfont\Large\headfont\raggedright}}
-    \renewcommand{\subsection}{%
-      \@startsection{subsection}{2}{\z@}%
-      {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ;
-      {.25\Cvs \@plus.3\Cdp}% 後アキ;
-      {\normalfont\large\headfont}}
-    \renewcommand{\subsubsection}{%
-      \@startsection{subsubsection}{3}{\z@}%
-      {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ;
-      {\if@slide .25\Cvs \@plus.3\Cdp \else \z@ \fi}% 後アキ;
-      {\normalfont\normalsize\headfont}}
-  \fi
-  
-  \if@twocolumn
-    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
-      {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
-      {\normalfont\normalsize\headfont\jsParagraphMark}}
-  \else
-    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
-      {0.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}%前アキ;
-      {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
-      {\normalfont\normalsize\headfont\jsParagraphMark}}
-  \fi
-  \def\@listi{\leftmargin\leftmargini
-    \parsep \z@
-    \partopsep \z@
-    \topsep .25\Cvs
-    \itemsep \z@ \relax}
-  \let\@listI\@listi
-  \@listi
-  \setcounter{tocdepth}{1}
-}{}
+    \vskip .5\Cvs
+  \endgroup
+} % 欧文は40pt
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\section}
+%    \begin{macrocode}
+\if@twocolumn
+  \renewcommand{\section}{%
+    \@startsection{section}{1}{\z@}%
+    {0.6\Cvs}{0.4\Cvs}%
+    {\normalfont\large\headfont\raggedright}}
+\else
+  \renewcommand{\section}{%
+    \if@slide\clearpage\fi
+    \@startsection{section}{1}{\z@}%
+    {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+    {.25\Cvs \@plus.3\Cdp}% 後アキ;
+    {\normalfont\Large\headfont\raggedright}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\subsection}
+%    \begin{macrocode}
+\if@twocolumn
+  \renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
+    {\normalfont\normalsize\headfont}}
+\else
+  \renewcommand{\subsection}{%
+    \@startsection{subsection}{2}{\z@}%
+    {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ;
+    {.25\Cvs \@plus.3\Cdp}% 後アキ;
+    {\normalfont\large\headfont}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\subsubsection}
+%    \begin{macrocode}
+\if@twocolumn
+  \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else \z@ \fi}%
+    {\normalfont\normalsize\headfont}}
+\else
+  \renewcommand{\subsubsection}{%
+    \@startsection{subsubsection}{3}{\z@}%
+    {.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}% 前アキ;
+    {\if@slide .25\Cvs \@plus.3\Cdp \else \z@ \fi}% 後アキ;
+    {\normalfont\normalsize\headfont}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\paragraph}
+%    \begin{macrocode}
+\if@twocolumn
+  \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+    {\z@}{\if@slide .4\Cvs \else -1zw\fi}% 改行せず 1zw のアキ
+    {\normalfont\normalsize\headfont\jsParagraphMark}}
+\else
+  \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+    {0.25\Cvs \@plus.5\Cdp \@minus.2\Cdp}%前アキ;
+    {\if@slide .5\Cvs \@plus.3\Cdp \else -1zw\fi}% 改行せず 1zw のアキ
+    {\normalfont\normalsize\headfont\jsParagraphMark}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@listi}
+%    \begin{macrocode}
+\def\@listi{\leftmargin\leftmargini
+  \parsep \z@
+  \partopsep \z@
+  \topsep .25\Cvs
+  \itemsep \z@ \relax}
+\let\@listI\@listi
+\@listi
+\setcounter{tocdepth}{1}
+
 %    \end{macrocode}
 % \section{Table of contents まわり}
 %    \begin{macrocode}
