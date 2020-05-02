@@ -302,7 +302,8 @@
 
 \ifdefined\zw
   \message{defined \noexpand\zw^^J}%
-  \save{luatexja}{zw,zh}%
+  \let\bell@zw\zw \let\bell@zh\zh
+  \save{bell@otherpkg}{zw,zh}%
 \fi% +bell 2020-01-23
 
 \ifptex
@@ -324,9 +325,9 @@
   {\restore{biblatex}}%
   {}
 
-\ifdefined\luatexjazw
+\ifdefined\bell@otherpkg@zw
   \message{redefined \noexpand\zw^^J}%
-  \restore{luatexja}%
+  \restore{bell@otherpkg}
 \fi% +bell 2020-01-23
 
 %    \end{macrocode}
