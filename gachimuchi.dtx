@@ -45,7 +45,10 @@
 \RecordChanges % Gather update information
 \setcounter{StandardModuleDepth}{1}
 
+\makeatletter
 \newrobustcmd*\file[1]{\mbox{\ttfamily#1}}
+\newcommand{\jghost}{\jghostguarded{}}
+\newcommand{\eghost}{\eghostguarded{}}
 \newcommand*{\Lcount}[1]{\textsl{\small#1}}
 \newcommand*{\Lopt}[1]{\textsf{#1}}
 \newcounter{@clineno}
@@ -58,6 +61,7 @@
   {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
 \providecommand{\oarg}[1]{%
   {\ttfamily[}\meta{#1}{\ttfamily]}}
+\makeatother
 
 \GetFileInfo{gachimuchi.dtx}
 \begin{document}
@@ -467,9 +471,9 @@
 % \item \kern0pt\cmd{\textwidth}: $\min(\text{\cmd{\fullwidth}},40zw)$
 %   js/bxjsclassではこの幅を本文領域の幅としています．
 % \item \cmd{\oddsidemargin}:
-%   $(\text{\cmd{\paperwidth}}-\cmd{\fullwidth}/2) - \SI{1}{truein}$
+%   $(\text{\cmd{\paperwidth}}-\text{\cmd{\fullwidth}}/2) - \SI{1}{truein}$
 % \item \cmd{\evensidemargin}: \textsf{mparswitch}が真のときは
-%   $\text{\cmd{\oddsidemargin}}+\cmd{\fullwidth}-\textwidth$です．
+%   $\text{\cmd{\oddsidemargin}}+\text{\cmd{\fullwidth}}-\text{\cmd{\textwidth}}$です．
 % \item \cmd{\footins}: $\SI{16}{pt}(+\SI{10}{pt},-\SI{2}{pt})$
 % \end{itemize}
 % \[
@@ -683,6 +687,7 @@
 \setcounter{tocdepth}{1}
 
 %    \end{macrocode}
+% \end{macro}
 % \section{Table of contents まわり}
 %    \begin{macrocode}
 %%==============================================================================
