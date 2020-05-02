@@ -307,34 +307,64 @@
 %%                M    M    M      UUUUU       CCCCC    H       H    IIIII     %
 %%                                                                             %
 %%=============================================================================%
-\NeedsTeXFormat{pLaTeX2e}
-\ProvidesClass{gachimuchi}[2020/01/21 Gachimuchi Koza Class]
 %    \end{macrocode}
 % \section{おまじないとか}
 %    \begin{macrocode}
-\LoadClassWithOptions{jsbook}
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesClass{gachimuchi}
+  [2020/01/21 Gachimuchi Koza Class]
+%    \end{macrocode}
+% \section{オプション}
+% \subsection{基底クラス}
+% \begin{itemize}
+% \item \texttt{bxjsbook}：
+%   \texttt{bxjsbook}オプションは基底クラスを\texttt{bxjsbook}にします．
+%   デフォルトではこれです．
+% \item \texttt{jsbook}：
+%   \texttt{jsbook}オプションは基底クラスを\texttt{jsbook}にします．
+% \end{itemize}
+% \begin{macro}{\gcmc@loadclass}
+% 読み込む基底クラスの名前を定義します．
+%    \begin{macrocode}
+\DeclareOption{bxjsbook}{\def\gcmc@loadclass{bxjsbook}}
+\DeclareOption{jsbook}{\def\gcmc@loadclass{jsbook}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gcmc@loadclass}}
+\ExecuteOptions{bxjsbook}
+\ProcessOptions\relax
+%    \end{macrocode}
+% 基底クラスを読み込みます．
+%    \begin{macrocode}
+\LoadClass{\gcmc@loadclass}
 
+%    \end{macrocode}
+% \end{macro}
+% \section{必要パッケージの読み込み}
+% \paragraph{\jghost\texttt{iftex}}
+% 将来的な対象エンジンの一般化に向けて．
+%    \begin{macrocode}
 \RequirePackage{iftex}
+%    \end{macrocode}
+% \paragraph{\jghost\texttt{ifptex}}
+%    \begin{macrocode}
 \RequirePackage{ifptex}
-\RequirePackage{chngcntr}
-\RequirePackage{comment}
+%    \end{macrocode}
+% \paragraph{\jghost\texttt{fontenc},\ \texttt{lmodern},\ \texttt{otf}}
+% \pLaTeX ではあった方が良いでしょう．
+%    \begin{macrocode}
 \ifptex
   \RequirePackage[T1]{fontenc}
   \RequirePackage{lmodern}
   \RequirePackage[deluxe]{otf}
 \fi
+%    \end{macrocode}
+% \paragraph{\jghost\texttt{fontspec},\ \texttt{luatexja-fontspec}}
+% \LuaLaTeX ではあった方が良いでしょう．
+%    \begin{macrocode}
 \ifluatex
   \RequirePackage[no-math]{fontspec}
   \usepackage{luatexja-fontspec}
 \fi
 
-\newif\ifgcmc@fourty \gcmc@fourtyfalse
-\newif\ifgcmc@defaultbook \gcmc@defaultbookfalse
-\DeclareOption{loadMacro}{\RequirePackage{gachimuchimacro}}
-\DeclareOption{loadPatch}{\AtEndPreamble{\RequirePackage{gachimuchipatch}}}
-\DeclareOption{fourty}{\gcmc@fourtytrue}
-\DeclareOption{defaultbook}{\gcmc@defaultbooktrue}
-\ProcessOptions\relax
 
 %    \end{macrocode}
 % \section{マクロ定義}
