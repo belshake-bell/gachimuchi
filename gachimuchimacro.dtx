@@ -269,6 +269,34 @@
 %    \end{macrocode}
 % \subsection{\Omaginai}
 % いくつかのスタイル・ファイルを前提として読み込んでいます．
+% \begin{itemize}
+% \item \file{noconflict}:
+%   競合するコマンドを退避するため．
+% \item \file{multirow}:
+%   多分使ってないので削除できそう．
+% \item \file{etoolbox}:
+%   確かコマンドを使っていると思うので．
+% \item \file{graphicx}:
+%   文字の拡大・縮小のため．
+% \item \file{bxghost}:
+%   ゴースト文字のため．
+% \item \file{tikz}:
+%   様々な描画のため．
+% \item \file{hyperref}:
+%   \cmd{\texorpdfstring}のため．
+%   これさえどうにかなればなぁ．
+% \item \file{ifptex}:
+%   \pTeX 系列を判定するため．
+% \item \file{pxjahyper}(\pTeX 系列のときのみ):
+%   \file{hyperref}のパッチのため．
+% \item \file{everyhook}:
+%   Hookを設定するため．
+% \item \file{xkeyval}:
+%   Key-val方式でのオプションを与えるコマンドのため．
+% \item \file{musixtex}:
+%   楽譜のため．
+% \item \file{musixdbr},\ \file{musixper},\ \file{musixlmd}
+% \end{itemize}
 % また，\file{biblatex}と\file{musixtex}は\cmd{\addspace}命令で，
 % \changes{v1.1}{2020/01/23}
 %    {\file{luatexja}と\file{musixtex}の競合の解決}
@@ -355,31 +383,34 @@
 % \begin{macro}{\piecelabel}
 % \changes{v1.1}{2020/01/21}
 %    {\cmd{\Piecelabel}から\cmd{\piecelabel}へ}
+% 楽譜環境用のラベルの命令を定義しています．
+%    \begin{macrocode}
+\newcommand{\piecelabel}[1]{\label{piece:#1}}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\pieceref}
 % \changes{v1.1}{2020/01/21}
 %    {\cmd{\Pieceref}から\cmd{\pieceref}へ}
-% 楽譜環境用のラベルと参照の命令を定義しています．
+% 楽譜環境用の参照の命令を定義しています．
 % 
 %    \begin{macrocode}
-\newcommand{\piecelabel}[1]{\label{piece:#1}}
 \newcommand{\pieceref}[1]{譜例\ref{piece:#1}}
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % \begin{macro}{\c@piececnt}
 % \changes{v1.1}{2020/01/21}
 %    {\cmd{\c@pieceNum}から\cmd{\c@piececnt}へ}
+%    \begin{macrocode}
+\newcounter{piececnt}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\thepiececnt}
 % \changes{v1.1}{2020/01/21}
 %    {\cmd{\thepieceNum}から\cmd{\thepiececnt}へ}
 % 同時に使用されるであろうカウンタを設定します．
 %    \begin{macrocode}
-\newcounter{piececnt}
 \renewcommand{\thepiececnt}{\arabic{piececnt}}
-
-\setcounter{piececnt}{0}
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % \subsection{\Gakufu}
 % \file{musixtex}に依存しています．
@@ -470,7 +501,7 @@
   \vspace{\h@lf\Cvs}\par}
 %    \end{macrocode}
 % \end{environment}
-% \begin{environment}{floatMusic}\oarg{key-val opt.}\par
+% \paragraph{floatMusic}\oarg{key-val opt.}\par
 % floatな楽譜環境を定義します．
 %
 % まずオプション引数をKey-val式で与えられるようにします．
@@ -502,24 +533,31 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\fps@scorefigure}
-% \begin{macro}{\ftype@scorefigure}
-% \begin{macro}{\ext@scorefigure}
-% \begin{macro}{\fnum@scorefigure}
 %    \begin{macrocode}
 \def\fps@scorefigure{tbp}
-\def\ftype@scorefigure{1}
-\def\ext@scorefigure{lop}
-\def\fnum@scorefigure{\scorefigure\nobreak\thefigure}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\ftype@scorefigure}
+%    \begin{macrocode}
+\def\ftype@scorefigure{1}
+%    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\ext@scorefigure}
+%    \begin{macrocode}
+\def\ext@scorefigure{lop}
+%    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\fnum@scorefigure}
+%    \begin{macrocode}
+\def\fnum@scorefigure{\scorefigure\nobreak\thefigure}
+%    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\bell@scorefig}
 %    \begin{macrocode}
 \def\bell@scorefig{\@float{scorefigure}}
 %    \end{macrocode}
 % \end{macro}
+% \begin{environment}{floatMusic}\oarg{key-val opt.}\par
 %    \begin{macrocode}
 \newenvironment{floatMusic}[1][]{%
   \setkeys[bell]{floatMusic}{#1}%
