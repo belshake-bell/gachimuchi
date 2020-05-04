@@ -193,6 +193,7 @@
 % \def\Subscription{添え字}
 % \def\UsefulMacros{便利なマクロ}
 % \def\ChordSymbols{コードシンボル}
+% \def\GeidaiSymbols{芸大和声の表記}
 % \def\ZCHAR{楽譜上の文字}
 % \def\ZCHORD{和声記号配置}
 % \def\FigureBass{数字付き低音}
@@ -221,6 +222,7 @@
 % \subsection{\Subscription}
 % \subsection{\UsefulMacros}
 % \subsection{\ChordSymbols}
+% \subsection{\GeidaiSymbols}
 % \subsection{\ZCHAR}
 % \subsection{\ZCHORD}
 % \subsection{\FigureBass}
@@ -1191,6 +1193,126 @@
   \@tempdima\h@lf\baselineskip\advance\@tempdima-.4pt\relax
   \eghostguarded{\rule[\@tempdima]{1em}{.4pt}}}
 
+%    \end{macrocode}
+% \subsection{\GeidaiSymbols}
+%   \changes{v1.2}{2020/05/04}{芸大和声から移植．}
+% 芸大和声の表記法のためのマクロ群です．
+%    \begin{macrocode}
+%%==============================================================================
+%% 和声表記 (hyperref依存)
+%%==============================================================================
+%    \end{macrocode}
+% \begin{macro}{\onChordsc}\marg{chord}\marg{borrow key}\par
+% 借用和音表記（e.g. \onChordsc{\Gnv\subsc7}{\Gnv}）のためのマクロです．
+%    \begin{macrocode}
+\DeclareRobustCommand{\onChordsc}[2]{%
+  \texorpdfstring{%TeX
+    \settowidth{\@tempdima}{#1}%
+    \settoheight{\@tempdimb}{#1}%
+    \nobreak\eghostguarded{%
+      \hspace{0.5\@tempdima}%\hspace{-0.2em}%
+      \makebox[0pt][c]{\bgroup#1\egroup}%
+      \makebox[0pt][c]{\raisebox{\@tempdimb}{\scalebox{0.5}{\bgroup#2\egroup}}}%
+      \hspace{0.5\@tempdima}%
+    }%
+  }{%PDF
+    #2度の#1度%
+  }%
+}% 借用和音
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Junko}
+% 準固有和音表記のためのマクロです．
+% 実態は\Junko を出力するだけのものです．
+%    \begin{macrocode}
+\DeclareRobustCommand{\Junko}{%
+  \texorpdfstring{%TeX
+    \ifmmode%
+      \nobreak\circ%
+    \else%
+      \nobreak$\circ$%
+    \fi%
+  }{%PDF
+    o%
+  }%
+}% 準固有和音
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@ht}
+% 変位を含む和音の表記のための\cmd{\dimen}レジスタで，
+% 文字の深さと高さを合わせた値を持たせるために使っています．
+% 多分テンポラリなレジスタでもいい気がします．
+%    \begin{macrocode}
+\newdimen\bell@ht
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\uAlt}
+% 上方変位された和音（e.g. \uAlt{\Gnv}）を表記するために使います．
+%    \begin{macrocode}
+\DeclareRobustCommand{\uAlt}[1]{%
+  \texorpdfstring{%TeX
+    \tikz[inner sep=0pt,outer sep=0pt]{%
+      \node[anchor=west] (T) at (0,0){#1};
+      \pgfextracty{\bell@ht}%
+                  {\pgfpointdiff{\pgfpointanchor{T}{south}}%
+                                {\pgfpointanchor{T}{north}}}%
+      \draw (T.north west) -- +(.1em,0.33\bell@ht);
+    }%
+  }{上方変位#1%
+  }%
+}% 上方変位(upword Altered)
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dAlt}
+% 下方変位された和音（e.g. \dAlt{\Gnv}）を表記するために使います．
+%    \begin{macrocode}
+\DeclareRobustCommand{\dAlt}[1]{%
+  \texorpdfstring{%TeX
+%    \makebox[0em]{\textsf{'}}\nobreak%
+    \tikz[inner sep=0pt,outer sep=0pt]{%
+      \node[anchor=west] (T) at (0,0){#1};
+      \pgfextracty{\bell@ht}%
+                  {\pgfpointdiff{\pgfpointanchor{T}{south}}%
+                                {\pgfpointanchor{T}{north}}}%
+      \draw (T.north west) -- +(-0.1em,-0.33\bell@ht);
+    }%
+  }{下方変位#1%
+  }%
+}% 下方変位(downword Altered)
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\uAltD}
+% 上方変位音度の矢印\uAltD を表記します．
+%    \begin{macrocode}
+\DeclareRobustCommand{\uAltD}{\Arrowup%
+}% 上方変位音度 (upword Altered degree)
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dAltD}
+% 下方変位音度の矢印\dAltD を表記します．
+%    \begin{macrocode}
+\DeclareRobustCommand{\dAltD}{\Arrowdown%
+}% 下方変位音度 (downword Altered degree)
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\txSquare}
+% 任意の数字が入る箇所で使われる\txSquare を表記します．
+%    \begin{macrocode}
+\newcommand{\txSquare}{%
+  \texorpdfstring{%TeX
+    \ifmmode
+      \square
+    \else
+      $\square$%
+    \fi
+  }{%PDF
+    □%
+  }%
+}
 %    \end{macrocode}
 % \subsection{\ZCHAR}
 %    \begin{macrocode}
