@@ -371,6 +371,7 @@
 %    \end{macrocode}
 % \paragraph{\jghost\texttt{fontenc},\ \texttt{lmodern},\ \texttt{otf}}
 % \pLaTeX ではあった方が良いでしょう．
+% \iffalse \par [2020/05/05] \file{otf}を取り除いてみました． \fi
 %    \begin{macrocode}
 \ifptex
   \RequirePackage[T1]{fontenc}
@@ -550,6 +551,20 @@
   
   \setlength{\skip\footins}{16\jsc@mpt \@plus 10\jsc@mpt \@minus 2\jsc@mpt}
 \fi
+
+%    \end{macrocode}
+% \section{bxjsbook余白とか補正}
+% \file{geometry}が使えるのでそれを利用します．
+% パラメタは大和声学教程を参考にしました．
+%    \begin{macrocode}
+\setpagelayout*{%
+  vmargin=20truemm,%
+  hmargin={28truemm,18truemm},%
+  headheight=\z@,%
+  headsep=\z@,%
+  includefoot,%
+  footskip=2\baselineskip%
+}
 %    \end{macrocode}
 % \section{(bx)jsbookのマクロ修正}
 %    \begin{macrocode}
@@ -628,11 +643,7 @@
 %    \end{macrocode}
 % \end{macro}
 %    \begin{macrocode}
-\ifgcmc@defaultbook
-  \pagestyle{gcmcheadings}
-\else
-  \pagestyle{plainfoot}
-\fi
+\pagestyle{plainfoot}
 
 %    \end{macrocode}
 % \begin{macro}{\@makechapterhead}
