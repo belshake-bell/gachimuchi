@@ -557,6 +557,8 @@
 % \file{geometry}が使えるのでそれを利用します．
 % パラメタは大和声学教程を参考にしました．
 %    \begin{macrocode}
+\def\reserved@a{bxjsbook}
+\ifx\reserved@a\gcmc@loadclass
 \setpagelayout*{%
   vmargin=20truemm,%
   hmargin={28truemm,18truemm},%
@@ -565,6 +567,8 @@
   includefoot,%
   footskip=2\baselineskip%
 }
+\fi
+
 %    \end{macrocode}
 % \section{(bx)jsbookのマクロ修正}
 %    \begin{macrocode}
