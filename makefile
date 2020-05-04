@@ -23,11 +23,11 @@ class: gachimuchi.cls gachimuchi.pdf
 macro: gachimuchimacro.sty gachimuchimacro.pdf
 patch: gachimuchipatch.sty gachimuchipatch.pdf
 clsinstl: gachimuchi.cls gachimuchi.pdf
-	make STRIPTARGET=gachimuchi.cls PDFTARGET=gachimuchi.pdf
+	make install STRIPTARGET=gachimuchi.cls PDFTARGET=gachimuchi.pdf
 mcrinstl: gachimuchimacro.sty gachimuchimacro.pdf
-	make STRIPTARGET=gachimuchimacro.sty PDFTARGET=gachimuchimacro.pdf
+	make install STRIPTARGET=gachimuchimacro.sty PDFTARGET=gachimuchimacro.pdf
 ptcinstl: gachimuchipatch.sty gachimuchipatch.pdf
-	make STRIPTARGET=gachimuchipatch.sty PDFTARGET=gachimuchipatch.pdf
+	make install STRIPTARGET=gachimuchipatch.sty PDFTARGET=gachimuchipatch.pdf
 .PHONY: install clean cleanstrip cleanall cleandoc movelog
 
 
