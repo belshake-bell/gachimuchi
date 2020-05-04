@@ -66,6 +66,7 @@
 \newcounter{@clineno}
 \def\mlineplus#1{\setcounter{@clineno}{\arabic{CodelineNo}}%
    \addtocounter{@clineno}{#1}\arabic{@clineno}}
+\def\envcmd#1{\texttt{#1}}
 \def\cmd#1{\cs{\expandafter\cmd@to@cs\string#1}}
 \def\cmd@to@cs#1#2{\char\number`#2\relax}
 \DeclareRobustCommand{\cs}[1]{\texttt{\char`\\#1}}
@@ -517,7 +518,7 @@
 %      （\texttt{twocolumn}では倍角単位に切り捨て）．\\
 %   js/bxjsclassではこの幅をヘッダの幅としています．
 %   \SI{40}{truemm}は「大和声学教程」から（両側のマージンがそれぞれ\SI{20}{mm}）．
-% \item \kern0pt\cmd{\textwidth}: $\min(\text{\cmd{\fullwidth}},40zw)$
+% \item \kern0pt\cmd{\textwidth}: $\min(\text{\cmd{\fullwidth}},40\text{zw})$
 %   js/bxjsclassではこの幅を本文領域の幅としています．
 % \item \cmd{\oddsidemargin}:
 %   $(\text{\cmd{\paperwidth}}-\text{\cmd{\fullwidth}}/2) - \SI{1}{truein}$
@@ -557,13 +558,18 @@
 %%==============================================================================
 %    \end{macrocode}
 % \begin{macro}{\descriptionlabel}
+% \envcmd{description}環境でラベルの文字列の前に\cmd{\textbullet}を追加します．
 %    \begin{macrocode}
 \renewcommand*{\descriptionlabel}[1]{%
   \textbullet\normalfont\headfont\quad#1\hfil}
 
 %    \end{macrocode}
 % \end{macro}
+% \paragraph{page styles}
+% 主にページの数字にEB Garamondを使うようにするための変更です．
+% （なんで\cmd{ps@plain}ﾅﾝﾁｬﾗを直接いじらないんですかね……．）
 % \begin{macro}{\ps@gcmcfoot}
+% フッタのみ．
 %    \begin{macrocode}
 \def\ps@gcmcfoot{%
   \let\@mkboth\@gobbletwo
@@ -575,6 +581,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\ps@gcmchead}
+% ヘッダのみ．
 %    \begin{macrocode}
 \def\ps@gcmchead{%
   \let\@mkboth\@gobbletwo
@@ -629,41 +636,52 @@
 
 %    \end{macrocode}
 % \begin{macro}{\@makechapterhead}
+% 章見出しの形式です．
+% 余白を狭めました．
 %    \begin{macrocode}
 \def\@makechapterhead#1{%
-  \vspace*{.2\Cvs}% 欧文は50pt
+% \vspace*{2\Cvs}% 欧文は50pt -bell
+  \vspace*{.2\Cvs}% +bell
   \begingroup
     \parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
       \if@mainmatter
         \huge\headfont \@chapapp\thechapter\@chappos
         \par\nobreak
-        \vskip .2\Cvs % 欧文は20pt
+%       \vskip \Cvs % 欧文は20pt -bell
+        \vskip .2\Cvs % +bell
       \fi
     \fi
   \interlinepenalty\@M
   \Huge \headfont #1\par\nobreak
-  \vskip 0.5\Cvs
+% \vskip 3\Cvs % 欧文は40pt -bell
+  \vskip 0.5\Cvs % +bell
   \endgroup
 } % 欧文は40pt
 
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\@makeschapterhead}
+% 星付き章見出しの形式です．
+% 余白を狭めました．
 %    \begin{macrocode}
 \def\@makeschapterhead#1{%
-  \vspace*{.2\Cvs}% 欧文は50pt
+% \vspace*{2\Cvs}% 欧文は50pt -bell
+  \vspace*{.2\Cvs}% +bell
   \begingroup
     \parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
     \Huge \headfont #1\par\nobreak
-    \vskip .5\Cvs
+%   \vskip 3\Cvs % 欧文は40pt -bell
+    \vskip .5\Cvs % +bell
   \endgroup
 } % 欧文は40pt
 
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\section}
+% 節見出しの形式です．
+% 余白を狭めました．
 %    \begin{macrocode}
 \if@twocolumn
   \renewcommand{\section}{%
@@ -681,6 +699,8 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\subsection}
+% 項（小節）見出しの形式です．
+% 余白を狭めました．
 %    \begin{macrocode}
 \if@twocolumn
   \renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
@@ -696,6 +716,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\subsubsection}
+% 目（小々）節見出しの形式です．
 %    \begin{macrocode}
 \if@twocolumn
   \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
@@ -711,6 +732,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\paragraph}
+% 段落見出しの形式です．
 %    \begin{macrocode}
 \if@twocolumn
   \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
@@ -725,6 +747,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\@listi}
+% \cmd{\topsep}を詰めました．
 %    \begin{macrocode}
 \def\@listi{\leftmargin\leftmargini
   \parsep \z@
@@ -743,6 +766,8 @@
 %% Table of contents まわり
 %%==============================================================================
 %    \end{macrocode}
+% \begin{macro}{\l@part}
+% ページ数をEB Garamondで表示します．
 %    \begin{macrocode}
 \renewcommand*{\l@part}[2]{%
   \ifnum \c@tocdepth >-2\relax
@@ -762,6 +787,12 @@
     \everypar{\global\@nobreakfalse\everypar{}}%
     \endgroup
   \fi}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\l@chapter}
+% ページ数をEB Garamondで表示します．
+%    \begin{macrocode}
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -780,6 +811,11 @@
       \penalty\@highpenalty
     \endgroup
   \fi}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@dottedtocline}
+% ページ数をEB Garamondで表示します．
+%    \begin{macrocode}
 \def\@dottedtocline#1#2#3#4#5{\ifnum #1>\c@tocdepth \else
   \vskip \z@ \@plus.2\jsc@mpt
   {\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
@@ -795,12 +831,14 @@
          \hfil\ebgaramond \normalcolor #5}\par}\fi} % +bell
 
 %    \end{macrocode}
+% \end{macro}
 % \section{初期設定}
 %    \begin{macrocode}
 %%==============================================================================
 %% 初期設定
 %%==============================================================================
 %    \end{macrocode}
+% 脚注の番号は通し番号にします．
 %    \begin{macrocode}
 \ifx\c@chapter\undefined\else
   \counterwithout*{footnote}{chapter}%
