@@ -306,8 +306,206 @@
   \init@volta@pos\lin@pos \advance\init@volta@pos-\volta@startcor  %+simick
 }%
 
+%    \end{macrocode}
+% \subsection{より小さな音符の導入}
+% \paragraph{概説}
+% \DescribeMacro{\tinymusicsize}
+% \cmd{\smallmusicsize}よりも小さな\cmd{\tinymusicsize}を導入します．
+% そのためにフォントを用意するのは大変なので，既存のフォントをスケールさせて
+% 対処してみます．
+% 
+% \paragraph{実装}
+% 各種フォントを定義します．
+%    \begin{macrocode}
+\font\musicnine musix11 at 9pt
+\font\xgregnine=xgreg11 at 9pt
+%    \end{macrocode}
+% \begin{macro}{\tinymusicsize}
+% 基底フォントサイズが13ptであるようなフォントを使うようにするマクロです．
+%    \begin{macrocode}
+\def\tinymusicsize{\musicsize\active \comput@specifics
+  \afterruleskip\si@\p@ \elemskip\fontdimen\si@\musicnorfont \clef@skip\z@}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\comput@fonts}
+% 各種フォントの設定をするマクロに新しく定義した小さなフォントを使うような
+% フックを組み込みます．
+% if文のネストがひどいですね……．
+%    \begin{macrocode}
+\def\comput@fonts{%
+  \ifnum\musicsize=\sixt@@n
+    \let\musicLargefont\musictwenty
+    \let\musiclargefont\musicsixteen
+    \let\musicnorfont\musicthirteen
+    \let\musicsmallfont\musiceleven
+    \let\musictinyfont\musicnine
+    \let\xgregLargefont\xgregtwenty
+    \let\xgreglargefont\xgregsixteen
+    \let\xgregnorfont\xgregthirteen
+    \let\xgregsmallfont\xgregeleven
+    \let\xgregtinyfont\xgregnine
+    \let\slurd\slurdsixteen \let\sluru\slurusixteen
+    \let\hslurd\hslurdsixteen \let\hsluru\hslurusixteen
+    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % version 1.16  RDT
+    \let\meterbigfont\twelvebf \let\meterlargefont\frtbf
+    \let\meterLargefont\svtbf
+    \let\tinyppff\ppfftwelve   % version 1.17  RDT
+    \let\smallppff\ppfftwelve
+    \let\normppff\ppffsixteen
+    \let\medppff\ppfftwenty
+    \def\txtfont{\ifdim\internote<.95\Internote \tinytype\it  % version 1.22 RDT
+    \else\ifdim\internote<1.19\Internote \smalltype\it
+    \else\ifdim\internote<1.43\Internote \Smalltype\it
+    \else\normtype\it\fi\fi\fi}%
+    \let\tabnorfnt\fivess \let\tablargefnt\sixss 
+    \let\tabLargefnt\eightss \let\tabsmallfnt\fourss
+    \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
+    \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \fourss  %  1.29   RDT
+    \else\ifdim\internote<1.19\Internote \fivess
+    \else\ifdim\internote<1.43\Internote \sevenss
+    \else\eightss\fi\fi\fi}%
+  \else
+  \ifnum\musicsize=\sixt@@n
+    \let\musicLargefont\musictwentyfour
+    \let\musiclargefont\musictwenty
+    \let\musicnorfont\musicsixteen
+    \let\musicsmallfont\musicthirteen
+    \let\musictinyfont\musiceleven
+    \let\xgregLargefont\xgregtwentyfour
+    \let\xgreglargefont\xgregtwenty
+    \let\xgregnorfont\xgregsixteen
+    \let\xgregsmallfont\xgregthirteen
+    \let\xgregtinyfont\xgregeleven
+    \let\slurd\slurdsixteen \let\sluru\slurusixteen
+    \let\hslurd\hslurdsixteen \let\hsluru\hslurusixteen
+    \let\meternorfont\tenbf \let\metersmallfont\eightbf  % version 1.16  RDT
+    \let\meterbigfont\twelvebf \let\meterlargefont\frtbf
+    \let\meterLargefont\svtbf
+    \let\tinyppff\ppfftwelve   % version 1.17  RDT
+    \let\smallppff\ppfftwelve
+    \let\normppff\ppffsixteen
+    \let\medppff\ppfftwenty
+    \def\txtfont{\ifdim\internote<.95\Internote \tinytype\it  % version 1.22 RDT
+    \else\ifdim\internote<1.19\Internote \smalltype\it
+    \else\ifdim\internote<1.43\Internote \Smalltype\it
+    \else\normtype\it\fi\fi\fi}%
+    \let\tabnorfnt\fivess \let\tablargefnt\sixss 
+    \let\tabLargefnt\eightss \let\tabsmallfnt\fourss
+    \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
+    \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \fourss  %  1.29   RDT
+    \else\ifdim\internote<1.19\Internote \fivess
+    \else\ifdim\internote<1.43\Internote \sevenss
+    \else\eightss\fi\fi\fi}%
+  \else\ifnum\musicsize=\@xxiv
+    \let\musicLargefont\musictwentynine
+    \let\musiclargefont\musictwentynine
+    \let\musicnorfont\musictwentyfour
+    \let\musicsmallfont\musictwenty
+    \let\musictinyfont\musicsixteen
+    \let\xgregLargefont\xgregtwentynine
+    \let\xgreglargefont\xgregtwentynine
+    \let\xgregnorfont\xgregtwentyfour
+    \let\xgregsmallfont\xgregtwenty
+    \let\xgregtinyfont\xgregsixteen
+    \let\sluru\slurutwenty \let\slurd\slurdtwenty
+    \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
+    \let\meternorfont\frtbf \let\metersmallfont\twelvebf % version 1.18  RDT
+    \let\meterbigfont\svtbf \let\meterlargefont\twtybf
+    \let\meterlargefont\twfvbf
+    \let\tinyppff\ppffsixteen  
+    \let\smallppff\ppfftwenty
+    \let\normppff\ppfftwentyfour
+    \let\medppff\ppfftwentynine
+    \def\txtfont{\ifdim\internote<.95\Internote \smalltype\it % version 1.22 RDT
+    \else\ifdim\internote<1.19\Internote \Smalltype\it
+    \else\ifdim\internote<1.43\Internote \normtype\it
+    \else\medtype\it\fi\fi\fi}%
+    \let\tabnorfnt\eightss \let\tablargefnt\niness 
+    \let\tabLargefnt\elevenss \let\tabsmallfnt\sixss
+    \let\tabnorcleffnt\twelvedc \let\tablargecleffnt\frtdc
+    \let\tabLargecleffnt\svtdc \let\tabsmallcleffnt\tendc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \sixss  %  1.29  RDT
+    \else\ifdim\internote<1.19\Internote \eightss
+    \else\ifdim\internote<1.43\Internote \niness
+    \else\twelvess\fi\fi\fi}%
+  \else\ifnum\musicsize=\@xxix
+    \let\musicLargefont\musictwentynine
+    \let\musiclargefont\musictwentynine
+    \let\musicnorfont\musictwentynine
+    \let\musicsmallfont\musictwentyfour
+    \let\musictinyfont\musictwenty
+    \let\xgregLargefont\xgregtwentynine
+    \let\xgreglargefont\xgregtwentynine
+    \let\xgregnorfont\xgregtwentynine
+    \let\xgregsmallfont\xgregtwentyfour
+    \let\xgregtinyfont\xgregtwenty
+    \let\sluru\slurutwenty \let\slurd\slurdtwenty
+    \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
+    \let\slurud\slurutwentyd \let\slurdd\slurdtwentyd %    +ickd
+    \let\hslurud\hslurutwentyd \let\hslurdd\hslurdtwentyd %+ickd
+    \let\meternorfont\svtbf \let\metersmallfont\frtbf     % version 1.18  RDT
+    \let\meterbigfont\twtybf \let\meterlargefont\twfvbf   % version 1.24 typos corrected
+    \let\meterLargefont\twfvbf
+    \let\tinyppff\ppfftwenty   
+    \let\smallppff\ppfftwentyfour
+    \let\normppff\ppfftwentynine
+    \let\medppff\ppfftwentynine
+    \def\txtfont{\ifdim\internote<.95\Internote \normtype\it  % version 1.22 RDT
+    \else\ifdim\internote<1.19\Internote \medtype\it
+    \else\ifdim\internote<1.43\Internote \bigfont\it
+    \else\Bigfont\it\fi\fi\fi}%
+    \let\tabnorfnt\niness \let\tablargefnt\elevenss 
+    \let\tabLargefnt\twelvess \let\tabsmallfnt\eightss
+    \let\tabnorcleffnt\frtdc \let\tablargecleffnt\svtdc
+    \let\tabLargecleffnt\twtydc \let\tabsmallcleffnt\twelvedc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \eightss  %  1.29  RDT
+    \else\ifdim\internote<1.19\Internote \niness
+    \else\ifdim\internote<1.43\Internote \twelvess
+    \else\frtss\fi\fi\fi}%
+\else
+    \ifnum\musicsize=\tw@nty
+    \else\ifnum\musicsize=\z@
+         \else\errmessage{\noexpand\musicsize=\the\musicsize\space not supported,
+           set to default of 20}%
+         \fi
+    \fi\musicsize\tw@nty
+    \let\musicLargefont\musictwentynine
+    \let\musiclargefont\musictwentyfour
+    \let\musicnorfont\musictwenty
+    \let\musicsmallfont\musicsixteen
+    \let\musictinyfont\musicthirteen
+    \let\xgreglargefont\xgregtwentyfour
+    \let\xgregLargefont\xgregtwentynine
+    \let\xgregnorfont\xgregtwenty
+    \let\xgregsmallfont\xgregsixteen
+    \let\xgregtinyfont\xgregthirteen
+    \let\sluru\slurutwenty \let\slurd\slurdtwenty
+    \let\hsluru\hslurutwenty \let\hslurd\hslurdtwenty
+    \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % version 1.18  RDT
+    \let\meterbigfont\frtbf \let\meterlargefont\svtbf
+    \let\meterLargefont\twtybf
+    \let\tinyppff\ppfftwelve  
+    \let\smallppff\ppffsixteen
+    \let\normppff\ppfftwenty
+    \let\medppff\ppfftwentyfour
+    \def\txtfont{\ifdim\internote<.95\Internote \smalltype\it
+    \else\ifdim\internote<1.19\Internote \Smalltype\it
+    \else\ifdim\internote<1.43\Internote \normtype\it
+    \else\medtype\it\fi\fi\fi}%
+    \let\tabnorfnt\sixss \let\tablargefnt\eightss 
+    \let\tabLargefnt\niness \let\tabsmallfnt\fivess
+    \let\tabnorcleffnt\tendc \let\tablargecleffnt\twelvedc
+    \let\tabLargecleffnt\frtdc \let\tabsmallcleffnt\eightdc
+    \def\tabstringfnt{\ifdim\internote<.95\Internote \fivess  %  1.29  RDT
+    \else\ifdim\internote<1.19\Internote \sixss
+    \else\ifdim\internote<1.43\Internote \eightss
+    \else\niness\fi\fi\fi}%
+\fi\fi\fi\fi}%
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\cmd{\ha}, \cmd{\qa}などが正常動作しなかった不具合のpatch}
 % \paragraph{概説}
 % \DescribeMacro{\xgetn@i}
@@ -564,6 +762,7 @@
 % 出力される連桁として\cmd{\chardef}される\cmd{\b@alk}で参照するフォントを
 % \cmd{\musixfont}から\cmd{\musixsixteen}に変更します．
 %    \begin{macrocode}
+%% 連桁改修 %%
 \def\@beam{% \y@ii : longueur, \b@p : pente, \y@i : altitude
   \ifnum\b@p=\z@
 % slope zero
