@@ -550,8 +550,59 @@
 \def\@lchar#1#2{\raise#1\internote\llap{#2}\endgroup\fi}
 \def\@cchar#1#2{\hroff{\raise#1\internote\lrlap{#2}}\endgroup\fi}
 
+%    \end{macrocode}
+% \subsection{連桁改修}\label{連桁改修}
+% \paragraph{概説}
+% 連桁のフォントを現在の\cmd{\musixfont}ではなく
+% \cmd{\musicsixteen}を参照するようにします．
+% 連桁はどのフォントも同じサイズなのですが，スケールさせて定義したフォントでは
+% 描画が崩れてしまうのでスケール指定されていないものの連桁を表示させることで
+% 対処するものです．
+% これによってより小さなフォントで楽譜を表示できるようになります．
+% \paragraph{実装}
+% \begin{macro}{\@beam}
+% 出力される連桁として\cmd{\chardef}される\cmd{\b@alk}で参照するフォントを
+% \cmd{\musixfont}から\cmd{\musixsixteen}に変更します．
+%    \begin{macrocode}
+\def\@beam{% \y@ii : longueur, \b@p : pente, \y@i : altitude
+  \ifnum\b@p=\z@
+% slope zero
+    \y@iii\y@i\y@iv\y@i
+    \advance\y@iii-\b@amthick \advance\y@iv\b@amthick
+    \vrule\@height\y@iv\@depth-\y@iii\@width\y@ii
+  \else\n@vi\z@
+% slope offset
+    \ifnum\b@p>\z@ \n@vi\b@p \multiply\n@vi\si@ \advance\n@vi-\si@ \fi
+    \ifnum\b@p<\z@ \n@vi-\b@p \multiply\n@vi\si@ \advance\n@vi58\fi
+% find longest possible character to avoid patchwork
+    \y@\tw@\p@
+    \b@adjust \b@adjust \b@adjust \b@adjust \b@adjust
+    \advance\n@vi128
+%   \chardef\b@alk\n@vi\musixfont
+    \chardef\b@alk\n@vi\musicsixteen
+%
+%    \curwidth=0pt \curheight=\y@i \curxpos=\completewidth
+%    \loop\ifdim\curwidth<\completewidth
+%      \advance\curxpos by -\beamwidth
+%      \ifdim\curxpos<0pt
+%         \comp@slope\curxpos
+%         \advance\curheight by \s@lope \kern\curxpos \fi
+%      \raise\curheight\hbox{\b@alk}%
+%      \advance\curwidth by \beamwidth
+%      \comp@slope\beamwidth
+%      \advance\curheight by \s@lope
+%    \repeat \fi
+%
+    \y@iv\z@ \y@iii\y@i \y@v\y@ii
+    \loop\ifdim\y@iv<\y@ii
+      \advance\y@v-\y@
+      \ifdim\y@v<\z@ \comp@slope\y@v \advance\y@iii\s@lope \kern\y@v \fi
+      \raise\y@iii\hbox{\b@alk}%
+      \advance\y@iv\y@ \comp@slope\y@ \advance\y@iii\s@lope
+    \repeat \fi}
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{skipscale改修}
 % \paragraph{概説}
 % 等差数列的スキップ・スケールおよび幾何数列的スキップ・スケールに
