@@ -1644,24 +1644,6 @@
 
 %    \end{macrocode}
 %    \begin{macrocode}
-\newcommand{\zchords}{\check@staff\begingroup\endcatcodesmusic\small\@zchord}
-\newcommand{\lchords}{\check@staff\begingroup\endcatcodesmusic\small\@lchord}
-\newcommand{\cchords}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
-\newcommand{\lrchords}{\check@staff\begingroup\endcatcodesmusic\small\@lrchord}
-
-%    \end{macrocode}
-%    \begin{macrocode}
-\newcommand{\zchordsc}
-  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchord}
-\newcommand{\lchordsc}
-  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lchord}
-\newcommand{\cchordsc}
-  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
-\newcommand{\lrchordsc}
-  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchord}
-
-%    \end{macrocode}
-%    \begin{macrocode}
 \def\gcmc@Factory@chord#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka chordl}%
     {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-8}}}%
@@ -1686,6 +1668,13 @@
 
 %    \end{macrocode}
 %    \begin{macrocode}
+\newcommand{\zchords}{\check@staff\begingroup\endcatcodesmusic\small\@zchord}
+\newcommand{\lchords}{\check@staff\begingroup\endcatcodesmusic\small\@lchord}
+\newcommand{\cchords}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
+\newcommand{\lrchords}{\check@staff\begingroup\endcatcodesmusic\small\@lrchord}
+
+%    \end{macrocode}
+%    \begin{macrocode}
 \def\gcmc@Factory@chords#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka chordsl}%
     {\expandonce{\csname \the\gcmc@test@temptoka chords\endcsname{-8}}}%
@@ -1707,6 +1696,17 @@
 \gcmc@Factory@chords{l}
 \gcmc@Factory@chords{c}
 \gcmc@Factory@chords{lr}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\zchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchord}
+\newcommand{\lchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lchord}
+\newcommand{\cchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
+\newcommand{\lrchordsc}
+  {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchord}
 
 %    \end{macrocode}
 %    \begin{macrocode}
