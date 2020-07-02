@@ -1502,6 +1502,57 @@
 
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\zcharf}
+%    \begin{macrocode}
+\newcommand{\zcharf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@zchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lcharf}
+%    \begin{macrocode}
+\newcommand{\lcharf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ccharf}
+%    \begin{macrocode}
+\newcommand{\ccharf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lrcharf}
+%    \begin{macrocode}
+\newcommand{\lrcharf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lrchar}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Factory@charf}
+%    \begin{macrocode}
+\def\gcmc@Factory@charf#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka charfl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charf\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka charfll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charf\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka charflll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charf\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka charfu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charf\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka charfuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charf\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka charfuuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka charf\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\gcmc@Factory@charf{z}
+\gcmc@Factory@charf{l}
+\gcmc@Factory@charf{c}
+\gcmc@Factory@charf{lr}
+
+%    \end{macrocode}
 % \begin{macro}{\zcharsc}
 %    \begin{macrocode}
 \newcommand{\zcharsc}
