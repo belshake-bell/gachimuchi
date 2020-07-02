@@ -1699,6 +1699,41 @@
 
 %    \end{macrocode}
 %    \begin{macrocode}
+\newcommand{\zchordf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@zchord}
+\newcommand{\lchordf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lchord}
+\newcommand{\cchordf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@cchar}
+\newcommand{\lrchordf}
+  {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lrchord}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\gcmc@Factory@chordf#1{\gcmc@test@temptoka{#1}%
+  \csedef{\the\gcmc@test@temptoka chordfl}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordf\endcsname{-8}}}%
+  \csedef{\the\gcmc@test@temptoka chordfll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordf\endcsname{-13}}}%
+  \csedef{\the\gcmc@test@temptoka chordflll}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordf\endcsname{-18}}}%
+  \csedef{\the\gcmc@test@temptoka chordfu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordf\endcsname{12}}}%
+  \csedef{\the\gcmc@test@temptoka chordfuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordf\endcsname{17}}}%
+  \csedef{\the\gcmc@test@temptoka chordfuuu}%
+    {\expandonce{\csname \the\gcmc@test@temptoka chordf\endcsname{22}}}%
+}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\gcmc@Factory@chordf{z}
+\gcmc@Factory@chordf{l}
+\gcmc@Factory@chordf{c}
+\gcmc@Factory@chordf{lr}
+
+%    \end{macrocode}
+%    \begin{macrocode}
 \newcommand{\zchordsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchord}
 \newcommand{\lchordsc}
