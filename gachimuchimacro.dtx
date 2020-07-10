@@ -267,7 +267,8 @@
 %%=============================================================================%
 %\NeedsTeXFormat{pLaTeX2e}% -bell 2020-01-23
 \NeedsTeXFormat{LaTeX2e}% +bell 2020-01-23
-\ProvidesPackage{gachimuchimacro}[2020/04/20 Gachimuchi Koza Macro set]
+\ProvidesPackage{gachimuchimacro}[2020/07/11 Gachimuchi Koza Macro set ver. 1.2]
+% \ProvidesPackage{gachimuchimacro}[2020/04/20 Gachimuchi Koza Macro set]
 %    \end{macrocode}
 % \subsection{\Omaginai}
 % いくつかのスタイル・ファイルを前提として読み込んでいます．
@@ -415,6 +416,39 @@
 % 同時に使用されるであろうカウンタを設定します．
 %    \begin{macrocode}
 \renewcommand{\thepiececnt}{\arabic{piececnt}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\subpiecelabel}
+% \changes{v1.2}{2020/07/11}
+%    {楽譜番号の小区分のために\cmd{\subpiecelabel}を実装．}
+% 小区分した楽譜環境用のラベルの命令を定義しています．
+%    \begin{macrocode}
+\newcommand{\piecelabel}[1]{\label{piece:#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\subpieceref}
+% \changes{v1.2}{2020/07/11}
+%    {楽譜番号の小区分のために\cmd{\subpieceref}を実装．}
+% 小区分した楽譜環境用の参照の命令を定義しています．
+% 
+%    \begin{macrocode}
+\newcommand{\subpieceref}[1]{譜例\ref{piece:#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\c@subpiececnt}
+% \changes{v1.2}{2020/07/11}
+%    {楽譜番号の小区分のために\cmd{\c@subpiececnt}を実装．}
+% 小区分した楽譜環境用のカウンタを設定します．
+%    \begin{macrocode}
+\newcounter{subpiececnt}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\thesubpiececnt}
+% \changes{v1.2}{2020/07/11}
+%    {楽譜番号の小区分のために\cmd{\thesubpiececnt}を実装．}
+% 小区分した楽譜環境用のカウンタを出力するコマンドを定義します．
+%    \begin{macrocode}
+\renewcommand{\thesubpiececnt}{\thepiececnt(\alph{subpiececnt})}
 %    \end{macrocode}
 % \end{macro}
 % \subsection{\Gakufu}
