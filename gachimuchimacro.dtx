@@ -469,19 +469,13 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\bell@piecenumbers}
+% \begin{macro}{\ifprintpiecenumber}
+% \changes{v1.2}{2020/07/11}
+%    {\cmd{\bell@piecenumbers}，\cmd{\nopiecenumbers}，\cmd{piecenumbers}を
+%     \textbf{削除}．
+%     \cmd{\ifprintpiecenumber}を代替として定義．}
 %    \begin{macrocode}
-\def\bell@piecenumbers{\nobarnumbers\let\bell@piecenum\@ne}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\nopiecenumbers}
-%    \begin{macrocode}
-\def\nopiecenumbers{\nobarnumbers\let\bell@piecenum\z@}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\piecenumbers}
-%    \begin{macrocode}
-\let\piecenumbers\bell@piecenumbers
+\newif\ifprintpiecenumber
 
 %    \end{macrocode}
 % \end{macro}
@@ -508,6 +502,10 @@
 %    {\file{luatexja}と\file{musixtex}の競合の解決.}
 % \changes{v1.1}{2020/01/23}
 %    {\file{bxjaprnind}対策にhookを設定.}
+% \changes{v1.2}{2020/07/11}
+%    {\cmd{\bell@piecenumbers}，\cmd{\nopiecenumbers}，\cmd{piecenumbers}を
+%     \textbf{削除}．
+%     \cmd{\ifprintpiecenumber}を代替として使用する．}
 % またここで\cmd{\addspace}命令，\cmd{\zh}命令および\cmd{\zw}命令を
 % \file{musixtex}のものに戻しています．
 %    \begin{macrocode}
@@ -518,7 +516,8 @@
   \advance\linewidth -\rightmargin
   \advance\linewidth -\leftmargin
   \advance\@totalleftmargin \leftmargin
-  \bell@piecenumbers
+  \printpiecenumbertrue
+  \nobarnumbers
   \SavePostHook{par}{\bell@reserved@MusicPostHook}% +bell 2020-01-29
   \ClearPostHook{par}% +bell 2020-01-29
   \PushPostHook{par}{\parshape\@ne \@totalleftmargin\linewidth \ignorespaces}%

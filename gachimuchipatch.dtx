@@ -228,7 +228,11 @@
 \stdstartbarrules
 
 %    \end{macrocode}
-% \DescribeMacro{\writ@staffs}
+% \begin{macro}{\writ@staffs}
+% \changes{v1.2}{2020/07/11}
+%    {\cmd{\bell@piecenumbers}，\cmd{\nopiecenumbers}，\cmd{piecenumbers}を
+%     \textbf{削除}．
+%     \cmd{\ifprintpiecenumber}を代替として使用する．}
 % \cmd{\writ@staffs}は楽譜開始時に呼び出される内部命令です.
 % 縦線の描画を内部でコーディングするのではなく, 外部の描画命令に
 % 任せることで分割機能をもたせました.
@@ -271,17 +275,27 @@
   \origin@lwrit@staffs
   \ifx\br@cks\empty\else\expandafter\@bracks\br@cks\ende\fi
 % PieceNumをClefの上に出す.
-  \ifx\bell@piecenum\@ne
-    \y@\altplancher \advance\y@\systemheight
-    \advance\y@\bell@raisepieceno
-    \raise\y@\rlap{\kern\bell@shiftpieceno\bell@writepieceno}%
-    \edef\@currentlabel{\bell@refcnt}%
-    \nopiecenumbers%
+  %\ifx\bell@piecenum\@ne
+  \ifdefined\ifprintpiecenumber
+    \ifprintpiecenumber
+      \y@\altplancher \advance\y@\systemheight
+      \advance\y@\bell@raisepieceno
+      \raise\y@\rlap{\kern\bell@shiftpieceno\bell@writepieceno}%
+%    \end{macrocode}
+% ブロックの中で\cmd{\@currentlabel}を定義し直しても
+% 出てくる時に巻き戻されてしまうので，\cmd{\bell@refcnt}にglobalに定義しておいて
+% 改めて\cmd{\@currentlabel}を定義し直す．
+%    \begin{macrocode}
+      \edef\@currentlabel{\bell@refcnt}% 
+      %\nopiecenumbers%
+      \printpiecenumberfalse%
+    \fi
   \fi
 % ここまで(PieceNumをClefの上に出す)
 }
 
 %    \end{macrocode}
+% \end{macro}
 % \DescribeMacro{\write@volta}
 % \cmd{\write@volta}は\cmd{\bar}を始めとする多くの縦線命令で呼び出されます.
 %    \begin{macrocode}
