@@ -1164,21 +1164,58 @@
 %% コードシンボル(graphicx，hyperref依存)
 %%==============================================================================
 %    \end{macrocode}
+% \begin{macro}{\Maj}
+% 長七の和音などのための\Maj 記号を出力するコマンドです．
 %    \begin{macrocode}
 \DeclareRobustCommand{\Maj}
   {\nobreak\textrm{M}}% Major
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Min}
+% 短三和音などのための\Min 記号を出力するコマンドです．
+%    \begin{macrocode}
 \DeclareRobustCommand{\Min}
   {\nobreak\textrm{m}}% Minor
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Dim}
+% 減七の和音のための\Dim 記号を出力するコマンドです．
+%    \begin{macrocode}
 \DeclareRobustCommand{\Dim}
   {\nobreak\eghostguarded{\raisebox{-.1zh}{$\circ$}}}% Diminish
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Dimt}
+% 減三和音のための\Dimt 記号を出力するコマンドです．
+%    \begin{macrocode}
 \DeclareRobustCommand{\Dimt}
   {\nobreak\eghostguarded{\raisebox{.4zh}{$\circ$}}}% Diminish triad
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\hDim}
+% 半減七の和音のための\hDim 記号を出力するコマンドです．
+%    \begin{macrocode}
 \DeclareRobustCommand{\hDim}
   {\nobreak\eghostguarded{\scalebox{0.9}{\o}}}% Half diminish
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Aug}
+% 増三和音のための\Aug 記号を出力するコマンドです．
+%    \begin{macrocode}
 \DeclareRobustCommand{\Aug}
   {\nobreak\eghostguarded{\raisebox{.4zh}{\scalebox{0.6}{\Plus}}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Triad}
+% 三和音であることを明示するための\Triad 記号を出力するコマンドです．
+%    \begin{macrocode}
 \DeclareRobustCommand{\Triad}
   {\nobreak\eghostguarded{\subsc\txTri}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Sus}
+% Suspendedコードのための\Sus 記号を出力するコマンドです．
+%    \begin{macrocode}
 \DeclareRobustCommand{\Sus}{%
   \texorpdfstring{% TeX
     \nobreak\eghostguarded{\textrm{sus}}%
@@ -1186,6 +1223,9 @@
 }% sus
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Minus}
+% マイナス記号\Minus を出力するコマンドです．
 %    \begin{macrocode}
 \newcommand{\Minus}{%
   \texorpdfstring{% TeX
@@ -1198,6 +1238,11 @@
     }}%
   }{-}% PDF
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Plus}
+% プラス記号\Plus を出力するコマンドです．
+%    \begin{macrocode}
 \newcommand{\Plus}{%
   \texorpdfstring{% TeX
     \eghostguarded{\raisebox{.1zh}{%
@@ -1210,6 +1255,10 @@
   }{+}% PDF
 }
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Slash}\marg{Slashed text}\par
+% 根音省略のための斜線(e.g.~\Slash{V})を
+% \marg{Slashed text}に引くためのコマンドです．
 %    \begin{macrocode}
 \DeclareRobustCommand{\Slash}[1]{%
   \texorpdfstring{%TeX
@@ -1227,22 +1276,41 @@
     }%
   }{\bell@Slash@onPDF}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@Slash@onPDF}
+% PDFのしおり情報に載せる\cmd{\Slash}の代替テキストです．
+%    \begin{macrocode}
 \def\bell@Slash@onPDF{根音省略}%
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\chordfrac}\marg{upper text}\marg{lower text}\par
+% USTのような，各和音を上下に置く分数コードのシンボルを出力するコマンドです．
 %    \begin{macrocode}
 \DeclareRobustCommand{\chordfrac}[2]{$\dfrac{\text{#1}}{\text{#2}}$}
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Mdline}
 %    \begin{macrocode}
 \newcommand{\Mdline}{\eghostguarded{\rule{1em}{.4pt}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Muline}
+%    \begin{macrocode}
 \newcommand{\Muline}{%
   \@tempdima\baselineskip\advance\@tempdima-.4pt\relax
   \eghostguarded{\rule[\@tempdima]{1em}{.4pt}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Mcline}
+%    \begin{macrocode}
 \newcommand{\Mcline}{%
   \@tempdima\h@lf\baselineskip\advance\@tempdima-.4pt\relax
   \eghostguarded{\rule[\@tempdima]{1em}{.4pt}}}
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\GeidaiSymbols}
 %   \changes{v1.2}{2020/05/04}{芸大和声から移植．}
 % 芸大和声の表記法のためのマクロ群です．
@@ -1252,7 +1320,7 @@
 %%==============================================================================
 %    \end{macrocode}
 % \begin{macro}{\onChordsc}\marg{chord}\marg{borrow key}\par
-% 借用和音表記（e.g. \onChordsc{V\subsc7}{V}）のためのマクロです．
+% 借用和音表記（e.g. \onChordsc{V}{V}\subsc7）のためのマクロです．
 %    \begin{macrocode}
 \DeclareRobustCommand{\onChordsc}[2]{%
   \texorpdfstring{%TeX
