@@ -467,8 +467,20 @@
   \refstepcounter{piececnt}#1\thepiececnt
   \xdef\bell@refcnt{\@currentlabel}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@piecenumbers}
+%    \begin{macrocode}
 \def\bell@piecenumbers{\nobarnumbers\let\bell@piecenum\@ne}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\nopiecenumbers}
+%    \begin{macrocode}
 \def\nopiecenumbers{\nobarnumbers\let\bell@piecenum\z@}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\piecenumbers}
+%    \begin{macrocode}
 \let\piecenumbers\bell@piecenumbers
 
 %    \end{macrocode}
