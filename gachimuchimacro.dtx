@@ -2223,10 +2223,13 @@
 \def\hochalt{\eghostguarded{\scalebox{.5}[1]{$<$}}}%嬰変化音 Hochalteration
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\Stellung}
+% \begin{macro}{\tiefgestellt}
+% \changes{v1.2}{2020/07/11}
+%   {下添え字のコマンドを\cmd{\Stellung}から\cmd{\tiefgestellt}に変更．
+%    \cmd{\Stellung}は後方互換のために残す．}
 % \marg{chord}\marg{bass}の形で低音を指定した和音表記をします．
 %    \begin{macrocode}
-\def\Stellung#1#2{%
+\def\tiefgestellt#1#2{%
   \eghostguarded{%
     \settowidth{\@tempdima}{#1}%
     \makebox[\@tempdima][c]{%
@@ -2241,6 +2244,15 @@
     }%
   }%
 }% バス音指定 Die Stellung
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Stellung}
+% \changes{v1.2}{2020/07/11}
+%   {下添え字のコマンドを\cmd{\Stellung}から\cmd{\tiefgestellt}に変更．
+%    \cmd{\Stellung}は後方互換のために残す．}
+% \marg{chord}\marg{bass}は後方互換のために残します．
+%    \begin{macrocode}
+\let\Stellung\tiefgestellt
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\Hochgestellt}
