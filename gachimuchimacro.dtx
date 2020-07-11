@@ -2255,10 +2255,25 @@
 \let\Stellung\tiefgestellt
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\Hochgestellt}
+% \begin{macro}{\hochgestellt}
+% \changes{v1.2}{2020/07/12}
+%   {上添え字のコマンドを\LaTeX の流儀に合わせて\cmd{\Hochgestellt}から
+%    \cmd{\hochgestellt}に変更．
+%    \cmd{\Hochgestellt}は後方互換のために残す．}
 % 右上の添え字を表記します．
 %    \begin{macrocode}
-\def\Hochgestellt#1{\supsc{#1}}% 右上添え字 
+\def\hochgestellt#1{\supsc{#1}}% 右上添え字 
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Hochgestellt}
+% \changes{v1.2}{2020/07/12}
+%   {上添え字のコマンドを\LaTeX の流儀に合わせて\cmd{\Hochgestellt}から
+%    \cmd{\hochgestellt}に変更．
+%    \cmd{\Hochgestellt}は後方互換のために残す．}
+% \cmd{\Hochgestellt}は後方互換のために残します．
+%    \begin{macrocode}
+\let\Hochgestellt\hochgestellt% 右上添え字 
 
 %    \end{macrocode}
 % \end{macro}
