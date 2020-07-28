@@ -54,7 +54,8 @@
 
 \makeatletter
 
-\newcommand*{\file}[1]{\textsf{#1}}
+\newrobustcmd*{\file}[1]{\mbox{\ttfamily#1}}
+\newrobustcmd*{\pkg}[1]{\mbox{\sffamily#1}}
 \newcommand*{\Lcount}[1]{\textsl{\small#1}}
 \newcommand*{\Lopt}[1]{\textsf{#1}}
 \newcounter{@clineno}
@@ -2172,6 +2173,9 @@
 % 主にドイツにて使われる機能和声表示を用いるためのコマンドです．
 % \TODO
 % いくつかのエイリアスを実装して使いやすくしたいです．
+% \par [2020/07/28]
+% \cmd{DeclareRobustCommand}で定義しているけど動く引数でうまく動かないです．
+% \pkg{etoolbox}の\cmd{\robustify}を使うと上手くいくのですが……．
 %    \begin{macrocode}
 \DeclareRobustCommand{\Funktion}{\begingroup\bell@Funktion}%
 %    \end{macrocode}
