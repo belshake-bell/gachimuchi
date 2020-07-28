@@ -729,7 +729,7 @@
 % キャレットをつけた数字を出力します．
 % アメリカでは単音の音高を度数で表す際に用いるようです．
 %    \begin{macrocode}
-\newcommand{\CrtNum}[1]{\^{#1}}
+\DeclareRobustCommand{\CrtNum}[1]{\^{#1}}
 
 %    \end{macrocode}
 % \end{macro}
@@ -2031,7 +2031,7 @@
 \def\gcmc@Posparabora@coeff{.5ex}
 \gcmc@dPos@skip=1pt
 
-\newcommand{\dPos}[1]{%
+\DeclareRobustCommand{\dPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
     \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
@@ -2040,7 +2040,7 @@
         parabola[parabola height=-\gcmc@Posparaboraheighta]
         +(\@tempdima,0);}}#1}}}
 
-\newcommand{\uPos}[1]{%
+\DeclareRobustCommand{\uPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
   \eghostguarded{%
@@ -2051,7 +2051,7 @@
         parabola[parabola height=\gcmc@Posparaboraheighta]
         +(\@tempdima,0);}}#1}}}
 
-\newcommand{\ddPos}[1]{%
+\DeclareRobustCommand{\ddPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
     \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
@@ -2062,7 +2062,7 @@
       \draw (.2\@tempdima,0) parabola[parabola height=-\gcmc@Posparaboraheightb]
             +(.6\@tempdima,0);}}#1}}}
 
-\newcommand{\duPos}[1]{%
+\DeclareRobustCommand{\duPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
     \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
@@ -2077,7 +2077,7 @@
               parabola[parabola height=\gcmc@Posparaboraheightb]
               +(.6\@tempdima,0);}}#1}}}
 
-\newcommand{\uuPos}[1]{%
+\DeclareRobustCommand{\uuPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
   \eghostguarded{%
@@ -2092,7 +2092,7 @@
       \draw (.2\@tempdima,0) parabola[parabola height=\gcmc@Posparaboraheightb]
               +(.6\@tempdima,0);}}#1}}}
 
-\newcommand{\udPos}[1]{%
+\DeclareRobustCommand{\udPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
   \eghostguarded{%
@@ -2109,7 +2109,7 @@
             parabola[parabola height=-\gcmc@Posparaboraheightb]
               +(.6\@tempdima,0);}}#1}}}
 
-\newcommand{\dPosdAlt}[1]{%
+\DeclareRobustCommand{\dPosdAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
     \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
@@ -2121,7 +2121,7 @@
       \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
             (.5\@tempdima,0) -- +(0,-\gcmc@Posparaboraheighta);}}#1}}}
 
-\newcommand{\dPosuAlt}[1]{%
+\DeclareRobustCommand{\dPosuAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
     \hbox\@to\@tempdima{\rlap{\tikz[baseline=\gcmc@dPos@skip]{%
@@ -2133,7 +2133,7 @@
       \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
             (.5\@tempdima,-\gcmc@Posparaboraheighta)
               -- +(0,\gcmc@Posparaboraheighta);}}#1}}}
-\newcommand{\uPosdAlt}[1]{%
+\DeclareRobustCommand{\uPosdAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
   \eghostguarded{%
@@ -2147,7 +2147,7 @@
             (.5\@tempdima,\gcmc@Posparaboraheighta)
               -- +(0,-\gcmc@Posparaboraheighta);}}#1}}}
 
-\newcommand{\uPosuAlt}[1]{%
+\DeclareRobustCommand{\uPosuAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
   \eghostguarded{%
@@ -2173,7 +2173,7 @@
 % \TODO
 % いくつかのエイリアスを実装して使いやすくしたいです．
 %    \begin{macrocode}
-\newcommand{\Funktion}{\begingroup\bell@Funktion}%
+\DeclareRobustCommand{\Funktion}{\begingroup\bell@Funktion}%
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\bell@Funktion}
