@@ -1271,7 +1271,7 @@
       \makebox[\@tempdima][c]{%
         \makebox[0pt][l]{%
           \tikz[baseline=\@tempdimc]
-            {\draw (0,.3\@tempdimb)--+(\@tempdima,.4\@tempdimb);}%
+            {\draw (0,.4\@tempdimb)--+(\@tempdima,.2\@tempdimb);}%
         }#1%
       }%
     }%
@@ -2213,6 +2213,36 @@
 \def\Wechsels{%
   \settowidth{\@tempdima}{s}\raisebox{1ex}{ss}%
 }% Wechselsubdominante
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\DoppelfunktionDs}
+% \changes{v1.3}{2020/11/06}
+%   {NEW: \cmd{\DoppelfunktionDs}\DoppelfunktionDs の新設}
+% 下属短三和音と上属長三和音の混合によって得られる減七の和音の表記です．
+%    \begin{macrocode}
+\def\DoppelfunktionDs{%
+  \settowidth{\@tempdima}{D}D\hspace{-\qu@rt\@tempdima}\raisebox{.5ex}{s}\hochgestellt{v}%
+}% Wechseldominante
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\DoppelfunktionDS}
+% \changes{v1.3}{2020/11/06}
+%   {NEW: \cmd{\DoppelfunktionDS}\DoppelfunktionDS の新設}
+% 下属長三和音と上属長三和音の混合によって得られる半減七の和音の表記です．
+%    \begin{macrocode}
+\def\DoppelfunktionDS{%
+  \settowidth{\@tempdima}{D}D\hspace{-\qu@rt\@tempdima}\raisebox{.5ex}{S}\hochgestellt{v}%
+}% Wechseldominante
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\WechselDOhne}
+% \changes{v1.3}{2020/11/06}
+%   {NEW: \cmd{\WechselDOhne}\WechselDOhne の新設}
+% トニカ短三和音とDoppeldominanteの混合によって得られる減七の和音の表記です．
+%    \begin{macrocode}
+\def\WechselDOhne{%
+  \raisebox{.5ex}{t}\WechselD\hochgestellt{v}%
+}% Wechseldominante
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\tiefalt}

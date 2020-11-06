@@ -58,7 +58,8 @@
 }
 
 \makeatletter
-\newrobustcmd*\file[1]{\mbox{\ttfamily#1}}
+\newrobustcmd*{\file}[1]{\mbox{\ttfamily#1}}
+\newrobustcmd*{\pkg}[1]{\mbox{\sffamily#1}}
 \newcommand{\jghost}{\jghostguarded{}}
 \newcommand{\eghost}{\eghostguarded{}}
 \newcommand*{\Lcount}[1]{\textsl{\small#1}}
