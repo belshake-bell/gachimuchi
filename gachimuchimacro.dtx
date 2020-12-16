@@ -2261,6 +2261,8 @@
 % \changes{v1.2}{2020/07/11}
 %   {下添え字のコマンドを\cmd{\Stellung}から\cmd{\tiefgestellt}に変更．
 %    \cmd{\Stellung}は後方互換のために残す．}
+% \changes{v1.3}{2020/07/11}
+%   {和音表記のdepthを考慮する形に変更．}
 % \marg{chord}\marg{bass}の形で低音を指定した和音表記をします．
 %    \begin{macrocode}
 \def\tiefgestellt#1#2{%
@@ -2272,8 +2274,10 @@
         \settowidth{\@tempdimb}{\scalebox{.7}{#2}}%
         \advance\@tempdima-\@tempdimb
         \hspace{\h@lf\@tempdima}%
+        \settodepth{\@tempdima}{#1}%
         \settoheight{\@tempdimb}{\scalebox{.7}{#2}}%
-        \raisebox{-1\qu@rt\@tempdimb}{\scalebox{.7}{#2}}%
+        \advance\@tempdima-1\qu@rt\@tempdimb
+        \raisebox{-\@tempdima}{\scalebox{.7}{#2}}%
       }#1%
     }%
   }%
