@@ -1948,11 +1948,16 @@
 \fi% \ifdefined\startpiece
 %    \end{macrocode}
 % \section{\texttt{biblatex}のパッチ}
+% ここでは\texttt{biblatex}の内部命令を書き換えるとかはしていないと思うので，
+% TeX Live 2020-10-01以降でも壊れないはず．
 %    \begin{macrocode}
 %%==============================================================================
 %% biblatex用のアレコレ
 %%==============================================================================
 \@ifpackageloaded{biblatex}{
+%    \end{macrocode}
+% \section{Garamondフォントを使うための準備}
+%    \begin{macrocode}
   \@ifpackageloaded{ebgaramond}{%
     \DeclareTextFontCommand{\textGaramond}{\ebgaramond}
     \newcommand*{\ebgaramondT}{\fontfamily{EBGaramond-TOsF}\fontseries{regular}\selectfont}
@@ -1969,6 +1974,9 @@
   }
   \newrobustcmd*{\mkbibGaramond}{\textGaramond}
   \newrobustcmd*{\mkbibGaramondT}{\textGaramondT}
+%    \end{macrocode}
+% \section{各フィールドの体裁の設定}
+%    \begin{macrocode}
   \DeclareFieldFormat{title}{\mkbibbold{#1}}
   \DeclareFieldFormat{date}{\mkbibGaramond{#1}}
   \DeclareFieldFormat{labelnumber}{\mkbibGaramondT{#1}}
@@ -1976,6 +1984,9 @@
   \DeclareFieldFormat{isrn}{\mkbibacro{ISRN}\addcolon\space \mkbibGaramond{#1}}
   \DeclareFieldFormat{issn}{\mkbibacro{ISSN}\addcolon\space \mkbibGaramond{#1}}
 
+%    \end{macrocode}
+% \section{書籍情報の翻訳}
+%    \begin{macrocode}
   \DefineBibliographyStrings{english}{%
     bibliography     = {参考文献},
     references       = {引用文献},
@@ -1998,6 +2009,9 @@
     byeditor         = {編\addcolon},
     bytranslator     = {訳\addcolon},
   }
+%    \end{macrocode}
+% \section{書籍情報の設定}
+%    \begin{macrocode}
   \DeclareBibliographyDriver{book}{%
     \usebibmacro{bibindex}%
     \usebibmacro{begentry}%
