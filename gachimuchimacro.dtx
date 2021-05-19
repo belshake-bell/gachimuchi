@@ -269,7 +269,8 @@
 %\NeedsTeXFormat{pLaTeX2e}% -bell 2020-01-23
 \NeedsTeXFormat{LaTeX2e}% +bell 2020-01-23
 \ProvidesPackage{gachimuchimacro}
-  [2020/07/11 Gachimuchi Koza Macro set ver. 1.2]
+  [2021/05/17 Gachimuchi Koza Macro set ver. 1.4]
+% [2020/07/11 Gachimuchi Koza Macro set ver. 1.2]
 % [2020/04/20 Gachimuchi Koza Macro set]
 %    \end{macrocode}
 % \subsection{\Omaginai}
@@ -1027,10 +1028,12 @@
 % コード・シンボルなどの下付き文字を出力します．
 % 通常の下付き文字なら\LaTeX カーネルの\cmd{\textsubscript}を
 % 使った方が良いんじゃないかと思います．
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
 %    \begin{macrocode}
 \DeclareRobustCommand{\subsc}[1]{%
   \texorpdfstring{%TeX
-    \nobreak\eghostguarded{\raisebox{-0.1zh}{\scalebox{0.8}{#1}}}%
+    \nobreak\eghostguarded{\raisebox{-0.1\bell@zh}{\scalebox{0.8}{#1}}}%
   }{#1}%
 }
 %    \end{macrocode}
@@ -1039,10 +1042,12 @@
 % コード・シンボルなどの上付き文字を出力します．
 % 通常の上付き文字なら\LaTeX カーネルの\cmd{\textsuperscript}を
 % 使った方が良いんじゃないかと思います．
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
 %    \begin{macrocode}
 \DeclareRobustCommand{\supsc}[1]{%
   \texorpdfstring{%TeX
-    \nobreak\eghostguarded{\raisebox{0.5zh}{\scalebox{0.8}{#1}}}%
+    \nobreak\eghostguarded{\raisebox{0.5\bell@zh}{\scalebox{0.8}{#1}}}%
   }{#1}%
 }
 
@@ -1107,38 +1112,52 @@
 \newlength{\lmhsclength}%
 %    \end{macrocode}
 % \begin{macro}{\lowsc}
-% \begin{macro}{\midsc}
-% \begin{macro}{\hisc}
-% \begin{macro}{\lmhsc}
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
 %    \begin{macrocode}
 \DeclareRobustCommand{\lowsc}[1]
-  {\nobreak\eghostguarded{\raisebox{-0.4zh}{\scalebox{0.6}{#1}}}}
+  {\nobreak\eghostguarded{\raisebox{-0.4\bell@zh}{\scalebox{0.6}{#1}}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\midsc}
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
+%    \begin{macrocode}
 \DeclareRobustCommand{\midsc}[1]
-  {\nobreak\eghostguarded{\raisebox{0.2zh}{\scalebox{0.6}{#1}}}}
+  {\nobreak\eghostguarded{\raisebox{0.2\bell@zh}{\scalebox{0.6}{#1}}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\hisc}
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
+%    \begin{macrocode}
 \DeclareRobustCommand{\hisc}[1]
-  {\nobreak\eghostguarded{\raisebox{0.8zh}{\scalebox{0.6}{#1}}}}
+  {\nobreak\eghostguarded{\raisebox{0.8\bell@zh}{\scalebox{0.6}{#1}}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lmhsc}
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
+%    \begin{macrocode}
 \DeclareRobustCommand{\lmhsc}[3]{%
   \texorpdfstring{%TeX
-    \settowidth{\lowsclength}{\raisebox{-0.4zh}{\scalebox{0.6}{#1}}}%
-    \settowidth{\midsclength}{\raisebox{0.2zh}{\scalebox{0.6}{#2}}}%
-    \settowidth{\hisclength}{\raisebox{0.8zh}{\scalebox{0.6}{#3}}}%
+    \settowidth{\lowsclength}{\raisebox{-0.4\bell@zh}{\scalebox{0.6}{#1}}}%
+    \settowidth{\midsclength}{\raisebox{0.2\bell@zh}{\scalebox{0.6}{#2}}}%
+    \settowidth{\hisclength}{\raisebox{0.8\bell@zh}{\scalebox{0.6}{#3}}}%
     \ifdim\lowsclength<\midsclength\setlength{\lmhsclength}{\midsclength}%
     \else\setlength{\lmhsclength}{\lowsclength}\fi%
     \ifdim\lmhsclength<\hisclength\setlength{\lmhsclength}{\hisclength}\fi%
     \nobreak\eghostguarded{%
       \hspace{0.5\lmhsclength}%\hspace{-0.2em}
-      \makebox[0pt][c]{\raisebox{-0.4zh}{\scalebox{0.6}{#1}}}%
-      \makebox[0pt][c]{\raisebox{0.2zh}{\scalebox{0.6}{#2}}}%
-      \makebox[0pt][c]{\raisebox{0.8zh}{\scalebox{0.6}{#3}}}%
+      \makebox[0pt][c]{\raisebox{-0.4\bell@zh}{\scalebox{0.6}{#1}}}%
+      \makebox[0pt][c]{\raisebox{0.2\bell@zh}{\scalebox{0.6}{#2}}}%
+      \makebox[0pt][c]{\raisebox{0.8\bell@zh}{\scalebox{0.6}{#3}}}%
       \hspace{0.5\lmhsclength}%
     }%
   }{#1#2#3}%
 }% 三段堆積
 
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \end{macro}
 % \subsection{\UsefulMacros}
 %    \begin{macrocode}
@@ -1181,16 +1200,20 @@
 % \end{macro}
 % \begin{macro}{\Dim}
 % 減七の和音のための\Dim 記号を出力するコマンドです．
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
 %    \begin{macrocode}
 \DeclareRobustCommand{\Dim}
-  {\nobreak\eghostguarded{\raisebox{-.1zh}{$\circ$}}}% Diminish
+  {\nobreak\eghostguarded{\raisebox{-.1\bell@zh}{$\circ$}}}% Diminish
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\Dimt}
 % 減三和音のための\Dimt 記号を出力するコマンドです．
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
 %    \begin{macrocode}
 \DeclareRobustCommand{\Dimt}
-  {\nobreak\eghostguarded{\raisebox{.4zh}{$\circ$}}}% Diminish triad
+  {\nobreak\eghostguarded{\raisebox{.4\bell@zh}{$\circ$}}}% Diminish triad
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\hDim}
@@ -1202,9 +1225,11 @@
 % \end{macro}
 % \begin{macro}{\Aug}
 % 増三和音のための\Aug 記号を出力するコマンドです．
+% \changes{v1.4}{2021/05/17}
+%    {単位\texttt{zh}を\cmd{\bell@zh}に変更．}
 %    \begin{macrocode}
 \DeclareRobustCommand{\Aug}
-  {\nobreak\eghostguarded{\raisebox{.4zh}{\scalebox{0.6}{\Plus}}}}
+  {\nobreak\eghostguarded{\raisebox{.4\bell@zh}{\scalebox{0.6}{\Plus}}}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\Triad}
