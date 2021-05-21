@@ -2375,20 +2375,41 @@
 \newif\if@lCProg
 \@lCProgfalse
 % 多分トークンレジスタ使った方が素直な実装になる気がする．
+%    \end{macrocode}
+%    \begin{macrocode}
 \def\CProg{\@ifstar{\def\tmp@CP@tokA{Minor: }\@CProg}%
                    {\def\tmp@CP@tokA{Major: }\@CProg}}
+%    \end{macrocode}
+%    \begin{macrocode}
 \def\CProgl{\@lCProgtrue\CProg}
+%    \end{macrocode}
+%    \begin{macrocode}
 \def\@CProg{\@ifnextchar-{\let\tmp@CP@tokA\relax\@vCProgtrue\@@CProg}%
                          {\@vCProgfalse\@@CProg-}}
+%    \end{macrocode}
+% \begin{macro}{\@@CProg}
+% \changes{v1.4}{2021/05/20}{%
+%   CNG: 区切り文字をセミコロンからアンパサンドに．
+%   これによりTL 2020Frozenでbabelでフランス語を使ったときに
+%   上手く区切られない問題を解消．}
+%    \begin{macrocode}
 \def\@@CProg#1#2{%
   \begingroup
     \if@lCProg\else \par\centering \fi
-    \tmp@CP@tokA\h@CProg#2;\relax;%
+    \tmp@CP@tokA\h@CProg#2&\relax&%
     \if@lCProg\else \par \fi
   \endgroup
   \@lCProgfalse
 }
-\def\h@CProg#1;#2;{%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\h@CProg}
+% \changes{v1.4}{2021/05/20}{%
+%   CNG: 区切り文字をセミコロンからアンパサンドに．
+%   これによりTL 2020Frozenでbabelでフランス語を使ったときに
+%   上手く区切られない問題を解消．}
+%    \begin{macrocode}
+\def\h@CProg#1&#2&{%
   \def\@CProg@a{#1:}\def\@CProg@b{#2}%
   \if@vCProg
     \fbox{\strut\expandafter\v@CProg@var\@CProg@a}%
@@ -2400,13 +2421,18 @@
     \let\n@xt\relax
   \else
     \ \Arrowright\ %
-    \let\n@xt\h@CProg\def\@CProg@b{#2;}%
+    \let\n@xt\h@CProg\def\@CProg@b{#2&}%
   \fi
   \expandafter\n@xt\@CProg@b%
 }%
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
 \def\v@CProg#1:#2:{%
   \raise-.5\baselineskip\vbox{\hbox{#1}\hbox{#2}}%
 }
+%    \end{macrocode}
+%    \begin{macrocode}
 \def\v@CProg@var#1:{#1}
 
 %    \end{macrocode}
