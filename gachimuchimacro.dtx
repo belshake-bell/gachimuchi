@@ -586,21 +586,29 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\fps@scorefigure}
+% float楽譜環境の既定の位置．
 %    \begin{macrocode}
 \def\fps@scorefigure{tbp}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\ftype@scorefigure}
+% \changes{v1.5}{2022/11/03}
+%    {\cmd{\ftype@scorefigure}に与える数字の意味を理解したので定義を変更．}
+% float楽譜環境のタイプ．
 %    \begin{macrocode}
-\def\ftype@scorefigure{1}
+\def\ftype@scorefigure{4}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\ext@scorefigure}
+% 外部出力される楽譜リストの拡張子（List Of Piece）．
 %    \begin{macrocode}
 \def\ext@scorefigure{lop}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\fnum@scorefigure}
+% キャプションで呼び出される識別用の番号（図．1とか）を出力するヤツ……
+% なんですが後述する\cmd{\piececaption}を基本的に使うので
+% 多分使われてないですし，この定義も滅茶苦茶だと思います．
 %    \begin{macrocode}
 \def\fnum@scorefigure{\scorefigure\nobreak\thefigure}
 %    \end{macrocode}
@@ -650,6 +658,11 @@
 % \cmd{\piececaption}\oarg{not used}\marg{caption}の形で
 % 楽譜環境にキャプションをつけます．
 % オプション引数は使われている形跡がありません……どうしようとしたのでしょう？
+%
+% [2022/11/03] \cmd{\caption}との類推からオプション引数は
+% 楽譜目次用のキャプションだと思います……が，筆者が楽譜目次を使わないので
+% 実装していないだけです．
+% 怠惰ですねぇ……
 %    \begin{macrocode}
 \newcommand*{\piececaption}{\@dblarg{\@piececaption}}
 \def\@piececaption[#1]#2{%
