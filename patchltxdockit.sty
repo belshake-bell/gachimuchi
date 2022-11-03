@@ -1,0 +1,25 @@
+
+\NeedsTeXFormat{pLaTeX2e}
+\ProvidesPackage{patchltxdockit}[2017/11/11 ltxdockit.styへのパッチ]
+
+\RequirePackage{ltxdockit}
+\renewenvironment*{ltxsyntax}
+  {\list{}{%
+     \setlength{\labelwidth}{\marglistwidth}%
+     \setlength{\labelsep}{0pt}%
+     \setlength{\leftmargin}{0pt}%
+     \renewcommand*{\makelabel}[1]{%
+       \hss\ltxsyntaxfont\ltxsyntaxlabelfont##1}}%
+   \parindent=1zw\relax % +bell
+   \let\csitem\ltd@csitem
+   \let\cmditem\ltd@cmditem
+   \let\envitem\ltd@envitem
+   \let\lenitem\ltd@csitem
+   \let\boolitem\ltd@boolitem
+   \let\cntitem\ltd@item
+   \let\optitem\ltd@item}
+  {\endlist}
+
+\endinput
+%%
+%% End of file `gachimuchimacro.sty'.
