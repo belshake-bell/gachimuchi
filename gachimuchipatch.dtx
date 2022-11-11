@@ -1607,6 +1607,7 @@
 % \subsection{bracketの追加}
 % \paragraph{概説}
 % \paragraph{実装}
+% \subparagraph{下準備}
 % \begin{macro}{\N@bracket}
 % bracketのID用のカウンタ・レジスタを用意します．
 %    \begin{macrocode}
@@ -1709,6 +1710,7 @@
 
 %    \end{macrocode}
 % \end{macro}
+% \subparagraph{始点}
 % \begin{macro}{\ibktu}\oarg{text}\marg{id}\marg{height}\par
 % 上向きbracketの始点を設定します．
 % \begin{itemize}
@@ -1770,12 +1772,18 @@
 
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\tbkt}
+% \subparagraph{終点}
+% \begin{macro}{\tbkt}\marg{id}\marg{height}\par
+% bracketの終点を設定します．
+% \begin{itemize}
+% \item \meta{id}は参照するbracket IDを設定します．
+% \item \meta{height}はbracketの出力される高さを設定します．
+% \end{itemize}
 %    \begin{macrocode}
 \def\tbkt{\t@bkt\h@lf}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\t@bkt}
+% \begin{macro}{\t@bkt}\marg{hoffset}\marg{id}\marg{height}\par
 %    \begin{macrocode}
 %% \t@bkt #1=hoffset #2=reference number #3=end note
 \def\t@bkt#1#2#3{%
