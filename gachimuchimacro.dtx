@@ -290,6 +290,11 @@
 %   ゴースト文字のため．
 % \item \file{tikz}:
 %   様々な描画のため．
+% \item \file{arrows.meta}:
+%   変位転位記号の矢印のため．
+%   \changes{v1.5}{2023/02/28}
+%      {変位転位記号の矢印のため\file{arrows.meta}が必要だったのに
+%       抜けていたので追加}
 % \item \file{hyperref}:
 %   \cmd{\texorpdfstring}のため．
 %   これさえどうにかなればなぁ．
@@ -324,6 +329,7 @@
 % \RequirePackage{pxghost}% -bell 2020-01-23
 \RequirePackage{bxghost}% +bell 2020-01-23
 \RequirePackage{tikz}
+\usetikzlibrary{arrows.meta}% +bell 2023-02-28
 \RequirePackageWithOptions{hyperref}
 \RequirePackage{ifptex}
 \ifptex
