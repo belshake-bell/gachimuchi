@@ -1606,10 +1606,11 @@
 % \end{macro}
 % \subsection{bracketの追加}
 % \paragraph{概説}
+% スラーと同様の方法でbracketを使えるようにします．
 % \paragraph{実装}
 % \subparagraph{下準備}
 % \begin{macro}{\N@bracket}
-% bracketのID用のカウンタ・レジスタを用意します．
+% 保留されたbracketの数を保持するカウンタ・レジスタを用意します．
 %    \begin{macrocode}
 %% bracketの追加
 %% registers for bracket
@@ -1633,13 +1634,32 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\@oldmaxbrackets}
-% 現在のbracket IDを保持します．
+% 現在の最大bracket IDを保持します．
 %    \begin{macrocode}
 \chardef\@oldmaxbrackets=\z@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\setmaxbrackets}\marg{max-ID number}\par
-% \meta{max-ID number}でbracket IDの最大値を設定します．
+% \meta{max-ID number}でbracket IDの最大値を設定し，
+% 各種パラメータを定義します．
+% \begin{itemize}
+% \item \cmd{\bracket@x}: 始点でのbracketの水平位置[dimen]
+% \item \cmd{\bracket@s}: bracketの向き(u, d)およびbracketが使用中ではないことを意味する
+%                 フラグ(x)
+% \item \cmd{\bracket@Y}: bracketの垂直方向のオフセット
+% \item \cmd{\bracket@a}: bracket開始時の\cmd{\altportee}
+% \item \cmd{\bracket@y}: 始点でのbracketの垂直位置[steps of internote]
+% \item \cmd{\bracket@N}: bracketの使われている楽器の番号
+% \item \cmd{\bracket@z}: (予定)bracketが\cmd{\breakbracket}により中断されたときに
+%                         指定する終了時の高さ[steps of internote]
+% \item \cmd{\bracket@t}: bracketの上または下に表示されるテキスト・トークン
+\iffalse
+% \item \cmd{\bracket@V}: 終点でのスラーの高さのオフセット；
+%                 それに伴い\cmd{\s@Y}は始点での垂直方向の
+%                 オフセットとして扱われる.
+\fi
+% \item \cmd{\bracket@o}: bracketの鉤の開き．
+% \end{itemize}
 %    \begin{macrocode}
 \def\setmaxbrackets#1{%
   \ifnum#1>\@oldmaxbrackets
@@ -1777,7 +1797,7 @@
 % bracketの終点を設定します．
 % \begin{itemize}
 % \item \meta{id}は参照するbracket IDを設定します．
-% \item \meta{height}はbracketの出力される高さを設定します．
+% \item \meta{height}はbracketの出力される終端部の高さを設定します．
 % \end{itemize}
 %    \begin{macrocode}
 \def\tbkt{\t@bkt\h@lf}
@@ -1814,6 +1834,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\writ@bkt}
+% bracketの描画部分です．
 %    \begin{macrocode}
 % #1 start pitch #2 end pitch #3 length #4 right hoffset
 \def\writ@bkt#1#2#3#4{\check@staff %  modified: sld... into slurd...   12.04.95 ick
@@ -1822,7 +1843,7 @@
   \else
     \edef\internote{\csname i@n\romannumeral\bracket@N\endcsname}%
   \fi
-%  \immediate\write16{\noexpand\writ@slur internote:\the\internote}%
+% \immediate\write16{\noexpand\writ@bkt internote:\the\internote}%
   \n@iv#1%
   \n@vi#2%
   \y@iii#3%
@@ -1832,6 +1853,7 @@
 %%   \n@vi=   vertical offset of second note(n@ii temp);
 %%   \y@i =   reference height of first note (pt);
 %%   \y@ii=   reference height of end note (pt);
+%%   \y@iii=  bracket length (pt);
 %%
   \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
   \n@i\n@iv \pl@base % \y@i = initial height
@@ -1868,6 +1890,10 @@
 \setmaxbrackets6
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\C@bracket}
+% （未実装）シンプルなbracket用マクロです．
+% ただし名前被りをどう避けるかが思いついてないので未実装です．
 % \end{macro}
 % \subsection{\cmd{\z@suspend}へのpatch}
 % \paragraph{概説}
