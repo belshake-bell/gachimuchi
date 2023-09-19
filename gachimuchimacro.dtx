@@ -1952,10 +1952,22 @@
 \newcount\figbass@cnta% 低音数字の配列のイテレータ
 \newdimen\figbass@dima%
 \newdimen\figbass@dimb%
-\newdimen\figbass@dimc%
-\def\figbass@coefficientOfSize{0.65}% 数字の大きさのスケーリング
 \figbass@dimb2.3\internote % 数字同士の縦の間隔
+\newdimen\figbass@dimc%
 %    \end{macrocode}
+% \begin{macro}{\figbass@coefficientOfSize}
+% 低音数字のスケーリング係数を設定します．
+%    \begin{macrocode}
+\def\figbass@coefficientOfSize{0.65}% 数字の大きさのスケーリング
+%    \end{macrocode}
+% \begin{macro}{\SetfigbassCoefficientOfSize}
+% \LaTeX 用のコマンド．
+%    \begin{macrocode}
+\newcommand{\SetfigbassCoefficientOfSize}[1]{%
+  \def\figbass@coefficientOfSize{#1}% 数字の大きさのスケーリング
+}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\figbass}
 % \cmd{\figbass}\oarg{figure-number 1}\oarg{figure-number 2}$\ldots$%
 %               \oarg{figure-number n}\marg{height}の形で
