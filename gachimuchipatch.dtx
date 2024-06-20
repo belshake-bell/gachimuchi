@@ -169,7 +169,8 @@
 %%=============================================================================%
 \NeedsTeXFormat{pLaTeX2e}
 \ProvidesPackage{gachimuchipatch}
-  [2020/07/11 Gachimuchi Koza patch set ver. 1.0]
+  [2024/06/21 Gachimuchi Koza patch set ver. 1.5.0]
+% [2020/07/11 Gachimuchi Koza patch set ver. 1.0]
 % [2020/01/16 Gachimuchi Koza patch set ver. 1.0]
 %    \end{macrocode}
 % \section{MusiXTeXのパッチ}
@@ -1984,6 +1985,25 @@
 
 \fi% \ifdefined\startpiece
 %    \end{macrocode}
+% \subsection{musix\TeX Version 1.37で\cmd{\updat@context}に混入したバグの修正．}
+% \paragraph{概説}
+% Version 1.37で\cmd{\updat@context}にバグが混入しています（Version 1.38で修正済み）．
+% TeXLive 2023ではVer1.37が収録されているのでこれを修正します．
+% \paragraph{実装}
+% \begin{macro}{\updat@context}
+% \changes{v1.5}{2024/06/21}
+%    {musix\TeX Version 1.37で\cmd{\updat@context}に混入したバグの修正．}
+% バージョン判定をして必要な場合にのみ修正します．
+%    \begin{macrocode}
+\def\reserved@a{\writ@newclefs
+    \T@bil \wbarno@x\Writ@newsigns\Writ@meters\lastbarpos\lin@pos\addspace\afterruleskip
+     \else\Writ@newsigns\z@suspend\contpiece \fi}
+\ifnum \mxminorvernumber=37\relax
+  \edef\updat@context{\expandafter\unexpanded\expandafter{\reserved@a}}
+\fi
+\let\reserved@a\relax
+%    \end{macrocode}
+% \end{macro}
 % \section{\texttt{biblatex}のパッチ}
 % ここでは\texttt{biblatex}の内部命令を書き換えるとかはしていないと思うので，
 % TeX Live 2020-10-01以降でも壊れないはず．
