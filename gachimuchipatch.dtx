@@ -2005,7 +2005,6 @@
   \def\hlthick{\h@lf\lthick}%
 \fi
 
-\fi% \ifdefined\startpiece
 %    \end{macrocode}
 % \subsection{musix\TeX Version 1.37で\cmd{\updat@context}に混入したバグの修正．}
 % \paragraph{概説}
@@ -2024,6 +2023,8 @@
   \edef\updat@context{\expandafter\unexpanded\expandafter{\reserved@a}}
 \fi
 \let\reserved@a\relax
+
+\fi% \ifdefined\startpiece
 %    \end{macrocode}
 % \end{macro}
 % \section{\texttt{biblatex}のパッチ}
