@@ -1983,6 +1983,28 @@
 
 \def\barre{\T@bil \@bar\else \stoppiec@\contpiece \fi}
 
+%    \end{macrocode}
+% \subsection{\cmd{\hlthick}の長さを元に戻す．}
+% \paragraph{概説}
+% バージョン1.36から\cmd{\hlthick}の定義が
+% \begin{verbatim}
+% \def\hlthick{\h@lf\lthick}
+% \end{verbatim}
+% から
+% \begin{verbatim}
+% \def\hlthick{0.4pt}
+% \end{verbatim}
+% に変更されています（\cmd{\lthick}と同じ値）．
+% これにより\cmd{\hlthick}に依存する加線の太さが太くなり，見栄えが良くないので
+% 元に戻します．
+% 
+% \paragraph{実装}
+%    \begin{macrocode}
+%% \hlthickの長さを元に戻す
+\ifnum\mxminorvernumber<36\else
+  \def\hlthick{\h@lf\lthick}%
+\fi
+
 \fi% \ifdefined\startpiece
 %    \end{macrocode}
 % \subsection{musix\TeX Version 1.37で\cmd{\updat@context}に混入したバグの修正．}
