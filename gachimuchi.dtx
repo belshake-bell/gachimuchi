@@ -336,14 +336,36 @@
 %    {バージョン番号のマクロ化．}
 %    \begin{macrocode}
 \NeedsTeXFormat{pLaTeX2e}
+%    \end{macrocode}
+% \begin{macro}{\gachimuchiclass@Version@Major}
+% このパッケージのメジャーバージョン番号です．
+%    \begin{macrocode}
 \newcommand{\gachimuchiclass@Version@Major}{1}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gachimuchiclass@Version@Minor}
+% このパッケージのマイナーバージョン番号です．
+%    \begin{macrocode}
 \newcommand{\gachimuchiclass@Version@Minor}{5}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gachimuchiclass@Version@Patch}
+% このパッケージのパッチバージョン番号です．
+%    \begin{macrocode}
 \newcommand{\gachimuchiclass@Version@Patch}{2}% 2024-11-20
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gachimuchiclass@Version}
+% このパッケージのバージョン番号です．
+%    \begin{macrocode}
 \newcommand{\gachimuchiclass@Version}{%
   \gachimuchiclass@Version@Major
   .\gachimuchiclass@Version@Minor
   .\gachimuchiclass@Version@Patch
 }
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
 \ProvidesClass{gachimuchi}
   [2024/11/20 Gachimuchi Koza Class ver.~\gachimuchiclass@Version]
 %    \end{macrocode}
