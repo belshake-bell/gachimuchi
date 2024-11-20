@@ -332,10 +332,20 @@
 %%=============================================================================%
 %    \end{macrocode}
 % \section{おまじないとか}
+% \changes{v1.5.2}{2024/11/20}
+%    {バージョン番号のマクロ化．}
 %    \begin{macrocode}
 \NeedsTeXFormat{pLaTeX2e}
+\newcommand{\gachimuchiclass@Version@Major}{1}
+\newcommand{\gachimuchiclass@Version@Minor}{5}
+\newcommand{\gachimuchiclass@Version@Patch}{2}% 2024-11-20
+\newcommand{\gachimuchiclass@Version}{%
+  \gachimuchiclass@Version@Major
+  .\gachimuchiclass@Version@Minor
+  .\gachimuchiclass@Version@Patch
+}
 \ProvidesClass{gachimuchi}
-  [2020/05/05 Gachimuchi Koza Class v1.2]
+  [2024/11/20 Gachimuchi Koza Class ver.~\gachimuchiclass@Version]
 %    \end{macrocode}
 % \section{オプション}
 % \subsection{基底クラス}

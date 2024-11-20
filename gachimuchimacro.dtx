@@ -240,6 +240,8 @@
 % \changes{v1.1}{2020/01/23}
 %    {依存部分を減らし，また条件分けすることで\pLaTeX を
 %     前提としなくした（不完全）．}
+% \changes{v1.5.2}{2024/11/20}
+%    {バージョン番号のマクロ化．}
 %
 %    \begin{macrocode}
 %<*macro>
@@ -268,8 +270,17 @@
 %%=============================================================================%
 %\NeedsTeXFormat{pLaTeX2e}% -bell 2020-01-23
 \NeedsTeXFormat{LaTeX2e}% +bell 2020-01-23
+\newcommand{\gachimuchimacro@Version@Major}{1}
+\newcommand{\gachimuchimacro@Version@Minor}{5}
+\newcommand{\gachimuchimacro@Version@Patch}{2}% 2024-11-20
+\newcommand{\gachimuchimacro@Version}{%
+  \gachimuchimacro@Version@Major
+  .\gachimuchimacro@Version@Minor
+  .\gachimuchimacro@Version@Patch
+}
 \ProvidesPackage{gachimuchimacro}
-  [2023/09/19 Gachimuchi Koza Macro set ver. 1.5.0]
+  [2024/11/20 Gachimuchi Koza Macro set ver.~\gachimuchimacro@Version]
+% [2023/09/19 Gachimuchi Koza Macro set ver. 1.5.0]
 % [2021/05/17 Gachimuchi Koza Macro set ver. 1.4]
 % [2020/07/11 Gachimuchi Koza Macro set ver. 1.2]
 % [2020/04/20 Gachimuchi Koza Macro set]
