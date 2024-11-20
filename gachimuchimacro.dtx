@@ -408,7 +408,7 @@
 \fi% +bell 2020-01-23
 
 %    \end{macrocode}
-% 
+%
 % \subsection{\TemporalVar}
 %    \begin{macrocode}
 %%==============================================================================
@@ -417,9 +417,14 @@
 %    \end{macrocode}
 % \begin{macro}{\gcmc@test@temptoka}
 % テンポラリなトークンレジスタを確保しています．
-% 
+%
 %    \begin{macrocode}
 \newtoks\gcmc@test@temptoka
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\thr@@qu@rt}
+% .75を定義しておきます．
+%    \begin{macrocode}
 \def\thr@@qu@rt{.75}
 %    \end{macrocode}
 % \end{macro}
@@ -441,7 +446,7 @@
 % \changes{v1.1}{2020/01/21}
 %    {\cmd{\Pieceref}から\cmd{\pieceref}へ}
 % 楽譜環境用の参照の命令を定義しています．
-% 
+%
 %    \begin{macrocode}
 \newcommand{\pieceref}[1]{譜例\ref{piece:#1}}
 %    \end{macrocode}
@@ -449,6 +454,7 @@
 % \begin{macro}{\c@piececnt}
 % \changes{v1.1}{2020/01/21}
 %    {\cmd{\c@pieceNum}から\cmd{\c@piececnt}へ}
+% 楽譜環境用のカウンタを設定します．
 %    \begin{macrocode}
 \newcounter{piececnt}
 %    \end{macrocode}
@@ -456,7 +462,7 @@
 % \begin{macro}{\thepiececnt}
 % \changes{v1.1}{2020/01/21}
 %    {\cmd{\thepieceNum}から\cmd{\thepiececnt}へ}
-% 同時に使用されるであろうカウンタを設定します．
+% 楽譜環境用のカウンタを出力するコマンドを定義します．
 %    \begin{macrocode}
 \renewcommand{\thepiececnt}{\arabic{piececnt}}
 %    \end{macrocode}
@@ -473,7 +479,7 @@
 % \changes{v1.2}{2020/07/11}
 %    {楽譜番号の小区分のために\cmd{\subpieceref}を実装．}
 % 小区分した楽譜環境用の参照の命令を定義しています．
-% 
+%
 %    \begin{macrocode}
 \newcommand{\subpieceref}[1]{譜例\ref{piece:#1}}
 %    \end{macrocode}
@@ -496,7 +502,7 @@
 % \end{macro}
 % \subsection{\Gakufu}
 % \file{musixtex}に依存しています．
-% 
+%
 %    \begin{macrocode}
 %%==============================================================================
 %% 楽譜番号
@@ -513,7 +519,7 @@
 % \end{macro}
 % \begin{macro}{\ifprintpiecenumber}
 % \changes{v1.2}{2020/07/11}
-%    {\cmd{\bell@piecenumbers}，\cmd{\nopiecenumbers}，\cmd{piecenumbers}を
+%    {\cmd{\bell@piecenumbers}，\cmd{\nopiecenumbers}，\cmd{\piecenumbers}を
 %     \textbf{削除}．
 %     \cmd{\ifprintpiecenumber}を代替として定義．}
 %    \begin{macrocode}
@@ -538,14 +544,15 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\bell@envMusic@default}
+% \begin{macro}{\bell@envMusic@default}\marg{score width}\par
 % 楽譜環境の先頭で初期化するための諸々を入れてます．
+% 引数は楽譜の幅を指定します．
 % \changes{v1.1}{2020/01/23}
 %    {\file{luatexja}と\file{musixtex}の競合の解決.}
 % \changes{v1.1}{2020/01/23}
 %    {\file{bxjaprnind}対策にhookを設定.}
 % \changes{v1.2}{2020/07/11}
-%    {\cmd{\bell@piecenumbers}，\cmd{\nopiecenumbers}，\cmd{piecenumbers}を
+%    {\cmd{\bell@piecenumbers}，\cmd{\nopiecenumbers}，\cmd{\piecenumbers}を
 %     \textbf{削除}．
 %     \cmd{\ifprintpiecenumber}を代替として使用する．}
 % またここで\cmd{\addspace}命令，\cmd{\zh}命令および\cmd{\zw}命令を
@@ -578,7 +585,7 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{environment}{Music}
+% \begin{environment}{Music}\oarg{score width}\par
 % 楽譜環境です．
 % 上下に余白を設けています．
 % 先に定義した\cmd{\bell@envMusic@default}を呼び出しています．
@@ -620,6 +627,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\thescorefigure}
+% float楽譜環境のために定義したカウンタを出力します
 %    \begin{macrocode}
 \renewcommand{\thescorefigure}
      {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@scorefigure}
@@ -654,11 +662,20 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\bell@scorefig}
+% float楽譜環境を始めるためのマクロです．
 %    \begin{macrocode}
 \def\bell@scorefig{\@float{scorefigure}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{environment}{floatMusic}\oarg{key-val opt.}\par
+% floatな楽譜環境を定義します．
+%
+% オプション引数はKey-val式で与えられて，
+% \begin{description}
+% \item[\meta{pos}] floatの位置を指定します. 規定は\Lopt{ht}．
+% \item[\meta{width}] 楽譜の横幅を指定します. 規定は|.85\linewidth|．
+% \end{description}
+% です．
 %    \begin{macrocode}
 \newenvironment{floatMusic}[1][]{%
   \setkeys[bell]{floatMusic}{#1}%
@@ -673,7 +690,8 @@
 %    \end{macrocode}
 % \end{environment}
 % \begin{macro}{\piecetitle}\oarg{composer}\marg{piece title}\par
-% 楽譜のタイトルを表示します．
+% \cmd{\startpiece}前に使用して楽譜のタイトルを表示します．
+% オプションの\meta{composer}は作曲者名，\meta{piece title}は楽曲名です．
 %    \begin{macrocode}
 \newcommand*{\piecetitle}[2][\empty]{%
 %  \begin{center}#2\end{center}\vspace{-1ex}%
@@ -753,6 +771,8 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\listofpiece}
+% 楽譜リストを出力するはずです．
+% 使ってないので分かりません．
 %    \begin{macrocode}
 \newcommand{\listofpiece}{%
   \if@twocolumn\@restonecoltrue\onecolumn
@@ -794,32 +814,52 @@
 %% 臨時記号(musixtex依存)
 %%==============================================================================
 %    \end{macrocode}
-% \begin{macro}{\qu@rtsmallvalue}
-% \begin{macro}{\tw@smallvalue}
-% \begin{macro}{\thr@@smallvalue}
-% \begin{macro}{\h@lfsmallvalue}
-% \begin{macro}{\@neh@lfsmallvalue}
-% \begin{macro}{\tw@h@lfsmallvalue}
-% \begin{macro}{\thr@@h@lfsmallvalue}
 % 数字定数マクロを定義します．
+% \begin{macro}{\qu@rtsmallvalue}
+% \cmd{\smallvalue}(0.8)の4分の1です．
 %    \begin{macrocode}
 \newcommand{\qu@rtsmallvalue}{.2}
-\newcommand{\tw@smallvalue}{1.6}
-\newcommand{\thr@@smallvalue}{2.4}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\h@lfsmallvalue}
+% \cmd{\smallvalue}(0.8)の2分の1です．
+%    \begin{macrocode}
 \newcommand{\h@lfsmallvalue}{.4}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@neh@lfsmallvalue}
+% \cmd{\smallvalue}(0.8)の1と2分の1です．
+%    \begin{macrocode}
 \newcommand{\@neh@lfsmallvalue}{1.2}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\tw@smallvalue}
+% \cmd{\smallvalue}(0.8)の2倍です．
+%    \begin{macrocode}
+\newcommand{\tw@smallvalue}{1.6}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\tw@h@lfsmallvalue}
+% \cmd{\smallvalue}(0.8)の2と2分の1です．
+%    \begin{macrocode}
 \newcommand{\tw@h@lfsmallvalue}{2.0}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\thr@@smallvalue}
+% \cmd{\smallvalue}(0.8)の3倍です．
+%    \begin{macrocode}
+\newcommand{\thr@@smallvalue}{2.4}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\thr@@h@lfsmallvalue}
+% \cmd{\smallvalue}(0.8)の3と2分の1です．
+%    \begin{macrocode}
 \newcommand{\thr@@h@lfsmallvalue}{2.8}
 
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \begin{macro}{\accidentaloffs@tunit}
+% 臨時記号のオフセット単位長を保存する寸法レジスタです．
 %    \begin{macrocode}
 \newdimen\accidentaloffs@tunit
 %    \end{macrocode}
@@ -834,67 +874,89 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\Flat}
-% \begin{macro}{\dFlat}
-% \begin{macro}{\Sharp}
-% \begin{macro}{\dSharp}
-% \begin{macro}{\Natural}
 %    \begin{macrocode}
 \newcommand{\Flat}  {\nobreak\supsc{\txFlat}\nobreak}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dFlat}
+%    \begin{macrocode}
 \newcommand{\dFlat} {\nobreak\supsc{\txdFlat}\nobreak}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Sharp}
+%    \begin{macrocode}
 \newcommand{\Sharp} {\nobreak\supsc{\txSharp}\nobreak}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dSharp}
+%    \begin{macrocode}
 \newcommand{\dSharp}{\nobreak\supsc{\txdSharp}\nobreak}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Natural}
+%    \begin{macrocode}
 \newcommand{\Natural}{\nobreak\supsc{\txNatural}\nobreak}
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \begin{macro}{\txFlat}
-% \begin{macro}{\txdFlat}
-% \begin{macro}{\txSharp}
-% \begin{macro}{\txdSharp}
-% \begin{macro}{\txNatural}
 %    \begin{macrocode}
 \newcommand{\txFlat}{\ensuremath{\flat}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\txdFlat}
+%    \begin{macrocode}
 \newcommand{\txSharp}{\ensuremath{\sharp}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\txSharp}
+%    \begin{macrocode}
 %\newcommand{\txdFlat}{\txFlat\hspace{-.1zw}\txFlat}%-bell 2020-01-23
 \newcommand{\txdFlat}{\txFlat\hspace{-.1em}\txFlat}%+bell 2020-01-23
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\txdSharp}
+%    \begin{macrocode}
 \newcommand{\txdSharp}{%
   %\settoheight{\@tempdima}{\musixchar53}%
   \settodepth{\@tempdimb}{\musixchar53}%
   %\advance\@tempdima\@tempdimb
   \eghostguarded{\raisebox{\@tempdimb}{\musixchar53}}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\txNatural}
+%    \begin{macrocode}
 \newcommand{\txNatural}{\ensuremath{\natural}}
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \begin{macro}{\txCirc}
-% \begin{macro}{\txTri}
-% \begin{macro}{\txSqr}
 %    \begin{macrocode}
 \newcommand{\txCirc}{\ensuremath{\bigcirc}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\txTri}
+%    \begin{macrocode}
 \newcommand{\txTri}{\ensuremath{\triangle}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\txSqr}
+%    \begin{macrocode}
 \newcommand{\txSqr}{\ensuremath{\square}}
 
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
 % \begin{macro}{\c@bell@shiftAccidentals}
-% \begin{macro}{\iftok@remain}
 %    \begin{macrocode}
 \newcounter{bell@shiftAccidentals}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\iftok@remain}
+%    \begin{macrocode}
 \newif\iftok@remain
 \tok@remainfalse
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \begin{macro}{\bell@getshift}\marg{offset chars}|\relax|\par
+% \begin{macro}{\bell@getshift}\marg{offset chars}\cmd{\relax}\par
 % 臨時記号のオフセットを指定して\cmd{\c@bell@shiftAccidentals}カウンタに代入します．
 % \meta{offset chars}は\texttt{l, r, h, q}からなる文字列であり，
 %    \begin{macrocode}
@@ -939,7 +1001,10 @@
 
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\na}
+% \begin{macro}{\na}\oarg{offset chars}\marg{pitch}\par
+% 楽譜中にて本位記号を出力します．
+% \meta{offset chars}は前述のものと同一です．
+% \meta{pitch}は\file{musixtex}でのものと同一です．
 %    \begin{macrocode}
 \let\orig@na\na
 \renewcommand{\na}[2][]{%
@@ -951,7 +1016,10 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\fl}
+% \begin{macro}{\fl}\oarg{offset chars}\marg{pitch}\par
+% 楽譜中にて変記号を出力します．
+% \meta{offset chars}は前述のものと同一です．
+% \meta{pitch}は\file{musixtex}でのものと同一です．
 %    \begin{macrocode}
 \let\orig@fl\fl
 \renewcommand{\fl}[2][]{%
@@ -963,7 +1031,10 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\sh}
+% \begin{macro}{\sh}\oarg{offset chars}\marg{pitch}\par
+% 楽譜中にて嬰記号を出力します．
+% \meta{offset chars}は前述のものと同一です．
+% \meta{pitch}は\file{musixtex}でのものと同一です．
 %    \begin{macrocode}
 \let\orig@sh\sh
 \renewcommand{\sh}[2][]{%
@@ -975,7 +1046,10 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\dfl}
+% \begin{macro}{\dfl}\oarg{offset chars}\marg{pitch}\par
+% 楽譜中にて重変記号を出力します．
+% \meta{offset chars}は前述のものと同一です．
+% \meta{pitch}は\file{musixtex}でのものと同一です．
 %    \begin{macrocode}
 \let\orig@dfl\dfl
 \renewcommand{\dfl}[2][]{%
@@ -987,7 +1061,10 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\dsh}
+% \begin{macro}{\dsh}\oarg{offset chars}\marg{pitch}\par
+% 楽譜中にて重嬰記号を出力します．
+% \meta{offset chars}は前述のものと同一です．
+% \meta{pitch}は\file{musixtex}でのものと同一です．
 %    \begin{macrocode}
 \let\orig@dsh\dsh
 \renewcommand{\dsh}[2][]{%
@@ -1034,14 +1111,37 @@
 
 %    \end{macrocode}
 % ここまでobsoluteなコマンドです．
+% \begin{macro}{\parna}\marg{pitch}\par
+% 括弧付き本位記号を出力します．
 %    \begin{macrocode}
 \newcommand{\parna}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\na{#1}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\parfl}\marg{pitch}\par
+% 括弧付き変記号を出力します．
+%    \begin{macrocode}
 \newcommand{\parfl}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\fl{#1}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\parsh}\marg{pitch}\par
+% 括弧付き嬰記号を出力します．
+%    \begin{macrocode}
 \newcommand{\parsh}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\sh{#1}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\pardfl}\marg{pitch}\par
+% 括弧付き重変記号を出力します．
+%    \begin{macrocode}
 \newcommand{\pardfl}[1]{\loffset{2.0}{\lpar{#1}\rpar{#1}}\loffset{.4}{\dfl{#1}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\pardsh}\marg{pitch}\par
+% 括弧付き重嬰記号を出力します．
+%    \begin{macrocode}
 \newcommand{\pardsh}[1]{\loffset{1.5}{\lpar{#1}\rpar{#1}}\loffset{.4}{\dsh{#1}}}
 
 %    \end{macrocode}
+% \end{macro}
 %
 %    \begin{macrocode}
 \newcommand{\aFlat}{\nobreak\Flat}
@@ -1117,6 +1217,11 @@
 % また単位\texttt{zh}を\cmd{\bell@zh}に変更しました．
 %    \begin{macrocode}
 \DeclareRobustCommand{\subsupsc}{\@ifstar{\gcmc@ssubsupsc}{\gcmc@subsupsc}}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@subsupsc}\marg{sub-text}\marg{sup-text}\par
+% 左揃え用内部マクロ．
+%    \begin{macrocode}
 \def\gcmc@subsupsc#1#2{%
   \texorpdfstring{%TeX
     \settowidth{\subsclength}{\scalebox{0.7}{#1}}%
@@ -1130,6 +1235,11 @@
     }%
   }{#1#2}%
 }% 左揃え
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@ssubsupsc}\marg{sub-text}\marg{sup-text}\par
+% 右揃え用内部マクロ．
+%    \begin{macrocode}
 \def\gcmc@ssubsupsc#1#2{%
   \texorpdfstring{%TeX
     \settowidth{\subsclength}{\scalebox{0.7}{#1}}%
@@ -1436,7 +1546,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\bell@ht}
-% 変位を含む和音の表記のための\cmd{\dimen}レジスタで，
+% 変位を含む和音の表記のための寸法レジスタで，
 % 文字の深さと高さを合わせた値を持たせるために使っています．
 % 多分テンポラリなレジスタでもいい気がします．
 %    \begin{macrocode}
@@ -1584,21 +1694,24 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\lrchar}\marg{pitch}\marg{\&-separated-text}\par\noindent
-% タブ記号\verb!&!で分割したテキストに対して，その前後で右詰め・左詰めにした
-% テキストを出力します．
+% タブ記号\eghostguarded{}\verb!&!\eghostguarded{}で分割したテキストに対して，
+% その前後で右詰め・左詰めにしたテキストを出力します．
 % 動作としては\cmd{\lchar}\marg{pitch}\marg{left-text}%
 % \cmd{\zchar}\marg{pitch}\marg{right-text}とほぼ同じです
 % （ただし\meta{left-text}および\meta{right-text}は
-%   それぞれ\verb!&!の左・右のテキスト）
+%   それぞれ\eghostguarded{}\verb!&!\eghostguarded{}の左・右のテキスト）
 % \changes{v1.1}{2020/02/23}%
 %         {Bug fix, remove unnecessary commands.}
 %    \begin{macrocode}
 \newcommand{\lrchar}{\check@staff\begingroup\endcatcodesmusic\@lrchar}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\@lrchar}
+% \begin{macro}{\@lrchar}\marg{pitch}\marg{\&-separated-text}\par\noindent
+% \cmd{\lrchar}の内部動作です．
+% 実際の動作は丸投げして，ここでは終端処理をしています．
 % \changes{v1.1}{2020/02/23}
-%         {Remove unnecessary commands. Change this to be defined by \noexpand\cmd{\def}.}
+%         {Remove unnecessary commands.
+%          Change this to be defined by \noexpand\cmd{\def}.}
 %    \begin{macrocode}
 \def\@lrchar#1#2{%
   \bell@lrchar{#1}#2\af@char
@@ -1606,7 +1719,11 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\bell@lrchar}
+% \begin{macro}{\bell@lrchar}%
+%   \marg{pitch}\marg{left-text}|&|\marg{right-text}\cmd{\af@char}\par\noindent
+% \cmd{\@lrchar}の内部動作です．
+% 上から投げられた\meta{\&-separated-text}を分離して
+% \cmd{\lchar}と\cmd{\zchar}でそれぞれを表示します．
 % \changes{v1.1}{2020/02/23}
 %         {Change this definition.}
 %    \begin{macrocode}
@@ -1616,34 +1733,47 @@
 % \end{macro}
 % \begin{macro}{\zchars}
 % \cmd{\zchar}の\cmd{\small}版です．
-% 内部で\cmd{@zchar}を読み込んでいます．
+% 内部で\cmd{\@zchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\zchars}{\check@staff\begingroup\endcatcodesmusic\small\@zchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\lchars}
 % \cmd{\lchar}の\cmd{\small}版です．
-% 内部で\cmd{@lchar}を読み込んでいます．
+% 内部で\cmd{\@lchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\lchars}{\check@staff\begingroup\endcatcodesmusic\small\@lchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\cchars}
 % \cmd{\cchar}の\cmd{\small}版です．
-% 内部で\cmd{@cchar}を読み込んでいます．
+% 内部で\cmd{\@cchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\cchars}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\lrchars}
 % \cmd{\lrchar}の\cmd{\small}版です．
-% 内部で\cmd{@lrchar}を読み込んでいます．
+% 内部で\cmd{\@lrchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\lrchars}{\check@staff\begingroup\endcatcodesmusic\small\@lrchar}
 
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\gcmc@Factory@char}
+% \begin{macro}{\gcmc@Factory@char}\marg{prefix}\par\noindent
+% \meta{prefix}を接頭辞とする\cmd{\xcharl}，\cmd{\xcharll}，\cmd{\xcharlll}，
+% \cmd{\xcharu}，\cmd{\xcharuu}，\cmd{\xcharuuu}を定義するマクロです
+% （ここで|x|は\meta{prefix}）．
+% ここではそれぞれ高さが
+% \begin{description}
+%   \item[xcharl] $-8$．
+%   \item[xcharll] $-13$．
+%   \item[xcharlll] $-18$．
+%   \item[xcharu] $12$．
+%   \item[xcharuu] $17$．
+%   \item[xcharuuu] $22$．
+% \end{description}
+% と定義されています．
 %    \begin{macrocode}
 \def\gcmc@Factory@char#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka charl}%
@@ -1669,7 +1799,19 @@
 
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\gcmc@Factory@chars}
+% \begin{macro}{\gcmc@Factory@chars}\marg{prefix}\par\noindent
+% \meta{prefix}を接頭辞とする\cmd{\xcharsl}，\cmd{\xcharll}，\cmd{\xcharslll}，
+% \cmd{\xcharsu}，\cmd{\xcharuu}，\cmd{\xcharsuuu}を定義するマクロです．
+% ここではそれぞれ高さが
+% \begin{description}
+%   \item[xcharsl] $-8$．
+%   \item[xcharsll] $-13$．
+%   \item[xcharslll] $-18$．
+%   \item[xcharsu] $12$．
+%   \item[xcharsuu] $17$．
+%   \item[xcharsuuu] $22$．
+% \end{description}
+% と定義されています．
 %    \begin{macrocode}
 \def\gcmc@Factory@chars#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka charsl}%
@@ -1696,31 +1838,40 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\zcharf}
+% \cmd{\zchar}の\cmd{\footnotesize}版です．
+% 内部で\cmd{\@zchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\zcharf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@zchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\lcharf}
+% \cmd{\lchar}の\cmd{\footnotesize}版です．
+% 内部で\cmd{\@lchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\lcharf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\ccharf}
+% \cmd{\cchar}の\cmd{\footnotesize}版です．
+% 内部で\cmd{\@cchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\ccharf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@cchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\lrcharf}
+% \cmd{\lrchar}の\cmd{\footnotesize}版です．
+% 内部で\cmd{\@lrchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\lrcharf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lrchar}
 
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\gcmc@Factory@charf}
+% \begin{macro}{\gcmc@Factory@charf}\marg{prefix}\par\noindent
+% \cmd{\gcmc@Factory@char}の\cmd{\footnote}版です．
 %    \begin{macrocode}
 \def\gcmc@Factory@charf#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka charfl}%
@@ -1747,24 +1898,32 @@
 
 %    \end{macrocode}
 % \begin{macro}{\zcharsc}
+% \cmd{\zchar}の\cmd{\scriptsize}版です．
+% 内部で\cmd{\@zchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\zcharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\lcharsc}
+% \cmd{\lchar}の\cmd{\scriptsize}版です．
+% 内部で\cmd{\@lchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\lcharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\ccharsc}
+% \cmd{\cchar}の\cmd{\scriptsize}版です．
+% 内部で\cmd{\@cchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\ccharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\lrcharsc}
+% \cmd{\lrchar}の\cmd{\scriptsize}版です．
+% 内部で\cmd{\@lrchar}を読み込んでいます．
 %    \begin{macrocode}
 \newcommand{\lrcharsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchar}
@@ -1772,6 +1931,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\gcmc@Factory@charsc}
+% \cmd{\gcmc@Factory@char}の\cmd{\scriptsize}版です．
 %    \begin{macrocode}
 \def\gcmc@Factory@charsc#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka charscl}%
@@ -1798,24 +1958,29 @@
 
 %    \end{macrocode}
 % \begin{macro}{\Startpiece}
+% \cmd{\afterruleskip}を入れる版の\cmd{\startpiece}です．
+% これにより調号や拍子記号の分の余白が確保されます．
 %    \begin{macrocode}
 \newcommand{\Startpiece}{\startpiece\addspace\afterruleskip}
 
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\octnumberup}
+% オクターブ線での8va.\ 表記を変更します．
 %    \begin{macrocode}
 \def\octnumberup{%
   \octnumberdefault\scalebox{0.8}{\txtfont va}\vrule width 0pt height2ex}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\octnumberdefault}
+% オクターブ線での8va.\ 表記および8vb.\ の「8」を変更します．
 %    \begin{macrocode}
 \def\octnumberdefault{%
   \smallppff8\nobreak}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\octnumberdown}
+% オクターブ線での8vb.\ 表記を変更します．
 %    \begin{macrocode}
 \def\octnumberdown{%
   \octnumberdefault\scalebox{0.8}{\txtfont vb}\vrule width 0pt depth \Internote}
@@ -2395,7 +2560,7 @@
 %    \cmd{\Hochgestellt}は後方互換のために残す．}
 % 右上の添え字を表記します．
 %    \begin{macrocode}
-\def\hochgestellt#1{\supsc{#1}}% 右上添え字 
+\def\hochgestellt#1{\supsc{#1}}% 右上添え字
 
 %    \end{macrocode}
 % \end{macro}
@@ -2406,7 +2571,7 @@
 %    \cmd{\Hochgestellt}は後方互換のために残す．}
 % \cmd{\Hochgestellt}は後方互換のために残します．
 %    \begin{macrocode}
-\let\Hochgestellt\hochgestellt% 右上添え字 
+\let\Hochgestellt\hochgestellt% 右上添え字
 
 %    \end{macrocode}
 % \end{macro}
@@ -2417,7 +2582,7 @@
 %% Chord Progressionの表記のため
 %%==============================================================================
 %    \end{macrocode}
-% \begin{macro}{\CProg}
+% \DescribeMacro{\CProg}
 % コード進行を表記するマクロです．
 % \cmd{\CProg}\marg{arg}を基本形としますが，
 % \cmd{\CProg*}, \cmd{\CProg-}, \cmd{\CProg*-}の形もあります．
@@ -2428,40 +2593,67 @@
 % \item \cmd{\CProg-}は音度記号を出力しない形です．
 % \item \cmd{\CProg*-}は\cmd{\CProg-}と同じ？
 % \end{itemize}
-% 
+%
 % \meta{arg}は次の方法で記述されます．
 % \begin{itemize}
-% \item 音度記号が必要なら，\meta{degree\_Symbol}|:|\meta{chord\_Symbol}|;|を
+% \item 音度記号が必要なら，\meta{degree-symbol}|\\|\meta{chord-symbol}|&|を
 %       連結させていきます．
-% \item 音度記号が不要な場合は\meta{chord\_Symbol}|;|を連結させていきます．
+% \item 音度記号が不要な場合は\meta{chord-symbol}|&|を連結させていきます．
 % \end{itemize}
 %
-% \begin{macro}{\CProgl}
-% 同様の記述方法で，インラインで使うための|\CProgl|が使用可能です．
-% \end{macro}
+% \DescribeMacro{\CProgl}
+% 同様の記述方法で，インラインで使うための\cmd{\CProgl}が使用可能です．
 % \paragraph{実装}
+% \begin{macro}{\if@vCProg}
 %    \begin{macrocode}
 \newif\if@vCProg
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\if@lCProg}
+%    \begin{macrocode}
 \newif\if@lCProg
 \@lCProgfalse
 % 多分トークンレジスタ使った方が素直な実装になる気がする．
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\CProg}\texttt{*-}\marg{arg}\par\noindent
+% コード進行を表記するマクロです．
+% 星付きの判定をして\cmd{\tmp@CP@tokA}に長短のいずれかを入れて
+% \cmd{\@CProg}に処理を投げます．
 %    \begin{macrocode}
 \def\CProg{\@ifstar{\def\tmp@CP@tokA{Minor: }\@CProg}%
                    {\def\tmp@CP@tokA{Major: }\@CProg}}
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\CProgl}\texttt{*-}\marg{arg}\par\noindent
+% インラインで使う用のマクロです．
+% 真贋変数\cs{if@lCProg}を真にして\cmd{\CProg}を呼びます．
 %    \begin{macrocode}
 \def\CProgl{\@lCProgtrue\CProg}
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@CProg}\texttt{-}\marg{arg}\par\noindent
+% マイナス付きかどうかを判定して，もしそうなら\cmd{\tmp@CP@tokA}を空にして
+%（つまり長短の区分を空にして）かつ真贋変数\cs{if@vCProg}を真にして
+% \cmd{\@@CProg}を呼びます：そうでないならば真贋変数\cs{if@vCProg}を偽にして
+% \cmd{\@@CProg}を呼びます．
 %    \begin{macrocode}
 \def\@CProg{\@ifnextchar-{\let\tmp@CP@tokA\relax\@vCProgtrue\@@CProg}%
                          {\@vCProgfalse\@@CProg-}}
 %    \end{macrocode}
-% \begin{macro}{\@@CProg}
+% \end{macro}
+% \begin{macro}{\@@CProg}\marg{hyphen}\marg{arg}\par\noindent
 % \changes{v1.4}{2021/05/20}{%
 %   CNG: 区切り文字をセミコロンからアンパサンドに．
 %   これによりTL 2020Frozenでbabelでフランス語を使ったときに
 %   上手く区切られない問題を解消．}
+% 第1引数はハイフンで固定．
+% 第2引数が処理されるトークン列になります．
+%
+% インラインフラグが立っていなければ改行してセンタリング処理をします．
+% その後長短あるいは空の\cmd{\tmp@CP@tokA}を出力して
+% 内部処理を\cmd{\h@CProg}に任せます．
+% 終端処理もここでやります．
 %    \begin{macrocode}
 \def\@@CProg#1#2{%
   \begingroup
@@ -2473,11 +2665,13 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\h@CProg}
+% \begin{macro}{\h@CProg}\marg{first arg}|&|\marg{left arg}|&|\par\noindent
 % \changes{v1.4}{2021/05/20}{%
 %   CNG: 区切り文字をセミコロンからアンパサンドに．
 %   これによりTL 2020Frozenでbabelでフランス語を使ったときに
 %   上手く区切られない問題を解消．}
+% 内部実装その1です．
+% 水平に並べる部分を担当します．
 %    \begin{macrocode}
 \def\h@CProg#1&#2&{%
   \def\@CProg@a{#1\\}\def\@CProg@b{#2}%
@@ -2497,17 +2691,23 @@
 }%
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\v@CProg}
+% \begin{macro}{\v@CProg}\marg{degree-symbol}|\\|%
+%                        \marg{chord-symbol}|\\|\par\noindent
 % \changes{v1.4}{2021/05/20}{%
 %   CNG: 区切り文字をコロンから|\\|に．
 %   これによりTL 2020Frozenでbabelでフランス語を使ったときに
 %   上手く区切られない問題を解消．}
+% 内部実装その2です．
+% 音度記号を出力するときに垂直に並べる部分を担当します．
 %    \begin{macrocode}
 \def\v@CProg#1\\#2\\{%
   \raise-.5\baselineskip\vbox{\hbox{#1}\hbox{#2}}%
 }
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\v@CProg@var}\marg{chord-symbol}|\\|\par\noindent
+% 内部実装その3です．
+% 音度記号を出力しないときの担当です．
 %    \begin{macrocode}
 \def\v@CProg@var#1\\{#1}
 
@@ -2521,12 +2721,18 @@
 %    \end{macrocode}
 % \subsubsection{over/under square bracket}
 % \paragraph{概要}
-% \begin{macro}{\Jovbkt}
-% \oarg{text}\marg{height}\marg{length}\oarg{ﾑﾆｬ}\marg{slope}の形で
-% 上付きの角括弧を作ります．
-% \begin{macro}{\Junbkt}
-% \oarg{text}\marg{height}\marg{length}\oarg{ﾑﾆｬ}\marg{slope}の形で
-% 下付きの角括弧を作ります．
+% \DescribeMacro{\Jovbkt}\oarg{text}%
+%                        \marg{pitch}%
+%                        \marg{length}%
+%                        \oarg{ﾑﾆｬ}%
+%                        \marg{slope}の形で上付きの角括弧を作ります．
+%
+% \DescribeMacro{\Junbkt}\oarg{text}%
+%                        \marg{pitch}%
+%                        \marg{length}%
+%                        \oarg{ﾑﾆｬ}%
+%                        \marg{slope}の形で下付きの角括弧を作ります．
+%
 % \begin{itemize}
 % \item 第1引数(optional)は角括弧の真ん中，上付きなら上に・
 %       下付きなら下に，引数に与えた文字を出します．
@@ -2540,6 +2746,12 @@
 % 内部的には後述する\cmd{\bell@bkt}を使っています．
 % \cmd{\Jovbkt}と\cmd{\Junbkt}の違いは，内部で\cmd{\reserved@e}に与えている
 % 数字の違いだけです．
+% \begin{macro}{\Jovbkt}\oarg{text}%
+%                       \marg{pitch}%
+%                       \marg{length}%
+%                       \oarg{ﾑﾆｬ}%
+%                       \marg{slope}\par\noindent
+% 上付きの角括弧を作ります．
 %    \begin{macrocode}
 %% over/under square bracket                                                  %%
 %% \Jovbkt, \Junbkt #1=text(optional)   #2=height[\internote]                 %%
@@ -2550,6 +2762,15 @@
   \@ifnextchar[{\bell@bkt[#1]{\n@i}{#3}}%
                {\bell@bkt[#1]{\n@i}{#3}[0pt]}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Junbkt}\oarg{text}%
+%                       \marg{pitch}%
+%                       \marg{length}%
+%                       \oarg{ﾑﾆｬ}%
+%                       \marg{slope}\par\noindent
+% 下付きの角括弧を作ります．
+%    \begin{macrocode}
 \newcommand{\Junbkt}[3][]{%
   \inhgetn@i#2\relax%
   \def\reserved@e{0}%
@@ -2559,9 +2780,12 @@
 
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \begin{macro}{\bell@bkt}
-% \oarg{text}\marg{height}\marg{length}\oarg{ﾑﾆｬ}\marg{slope}の形で
+% \begin{macro}{\bell@bkt}oarg{text}%
+%                        \marg{pitch}%
+%                        \marg{length}%
+%                        \oarg{ﾑﾆｬ}%
+%                        \marg{slope}\par\noindent
+% 角括弧の内部実装です．
 %    \begin{macrocode}
 %% bell@bkt #1=text(optional) #2=height[\internote] #3=length[noteskip]       %%
 %%          #4=slope(differ)[\internote] #5=bkt over/under[+1/-1]             %%
@@ -2589,25 +2813,37 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsubsection{left/right square bracket}
-% 音符の左・右に角括弧を作ります．
-% \begin{macro}{\Lbracket}
-% \begin{macro}{\Rbracket}
-% 上付き・下付きの角括弧を作ります．
+% \paragraph{概要}
+% \DescribeMacro{\Lbracket}\marg{pitch}%
+%                         \marg{height}の形で左付きの角括弧を作ります．
+%
+% \DescribeMacro{\Rbracket}\marg{pitch}%
+%                         \marg{height}の形で右付きの角括弧を作ります．
+%
 % \begin{itemize}
 % \item 第1引数は角括弧の下端の高さ[\meta{exp\_note}]を与えます．
-% \item 第2引数は角括弧の上端の高さ[|internote|]を与えます．
+% \item 第2引数は角括弧の下端から上端までの長さ[|internote|]を与えます．
 % \end{itemize}
-% 内部的には後述する|\bell@bracket|を使っています．
+% \paragraph{実装}
+% 内部的には後述する\cmd{\bell@bracket}を使っています．
+%
+% \begin{macro}{\Lbracket}
+% 左付きの角括弧を作ります．
 %    \begin{macrocode}
 %% left/right square bracket                                                  %%
 %% \Lbracket, \Rbracket                                                       %%
 %% #1: bottom height[\internote], #2: height length[internote]                %%
 \newcommand{\Lbracket}{\bell@bracket{\@ne}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\Rbracket}
+% 右付きの角括弧を作ります．
+%    \begin{macrocode}
 \newcommand{\Rbracket}{\bell@bracket{\m@ne}}
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
 % \begin{macro}{\bell@bracket}
+% 左右角括弧の内部実装です．
 %    \begin{macrocode}
 \newcommand{\bell@bracket}[3]{%
   %\inhgetn@i#2\relax

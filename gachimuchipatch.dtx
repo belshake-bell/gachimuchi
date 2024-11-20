@@ -142,7 +142,7 @@
 %
 % \changes{v1.5.2}{2024/11/20}
 %    {バージョン番号のマクロ化．}
-% 
+%
 %
 %    \begin{macrocode}
 %<*patch>
@@ -230,7 +230,7 @@
 % \DescribeMacro{\nopiecenumbers}
 % \cmd{\piecenumbers}は音部記号の上に譜例番号を描画します.
 % \cmd{\nopiecenumbers}は描画しません.
-% 
+%
 % \paragraph{実装}
 %    \begin{macrocode}
 \def\bell@raisepieceno{\f@ur\internote}
@@ -320,7 +320,7 @@
 % 出てくる時に巻き戻されてしまうので，\cmd{\bell@refcnt}にglobalに定義しておいて
 % 改めて\cmd{\@currentlabel}を定義し直す．
 %    \begin{macrocode}
-      \edef\@currentlabel{\bell@refcnt}% 
+      \edef\@currentlabel{\bell@refcnt}%
       %\nopiecenumbers%
       \printpiecenumberfalse%
     \fi
@@ -363,7 +363,7 @@
 % \cmd{\smallmusicsize}よりも小さな\cmd{\tinymusicsize}を導入します．
 % そのためにフォントを用意するのは大変なので，既存のフォントをスケールさせて
 % 対処してみます．
-% 
+%
 % \paragraph{実装}
 % 各種フォントを定義します．
 %    \begin{macrocode}
@@ -410,7 +410,7 @@
     \else\ifdim\internote<1.19\Internote \smalltype\it
     \else\ifdim\internote<1.43\Internote \Smalltype\it
     \else\normtype\it\fi\fi\fi}%
-    \let\tabnorfnt\fivess \let\tablargefnt\sixss 
+    \let\tabnorfnt\fivess \let\tablargefnt\sixss
     \let\tabLargefnt\eightss \let\tabsmallfnt\fourss
     \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
     \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
@@ -443,7 +443,7 @@
     \else\ifdim\internote<1.19\Internote \smalltype\it
     \else\ifdim\internote<1.43\Internote \Smalltype\it
     \else\normtype\it\fi\fi\fi}%
-    \let\tabnorfnt\fivess \let\tablargefnt\sixss 
+    \let\tabnorfnt\fivess \let\tablargefnt\sixss
     \let\tabLargefnt\eightss \let\tabsmallfnt\fourss
     \let\tabnorcleffnt\eightdc \let\tablargecleffnt\tendc
     \let\tabLargecleffnt\twelvedc \let\tabsmallcleffnt\sixdc
@@ -467,7 +467,7 @@
     \let\meternorfont\frtbf \let\metersmallfont\twelvebf % version 1.18  RDT
     \let\meterbigfont\svtbf \let\meterlargefont\twtybf
     \let\meterlargefont\twfvbf
-    \let\tinyppff\ppffsixteen  
+    \let\tinyppff\ppffsixteen
     \let\smallppff\ppfftwenty
     \let\normppff\ppfftwentyfour
     \let\medppff\ppfftwentynine
@@ -475,7 +475,7 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
-    \let\tabnorfnt\eightss \let\tablargefnt\niness 
+    \let\tabnorfnt\eightss \let\tablargefnt\niness
     \let\tabLargefnt\elevenss \let\tabsmallfnt\sixss
     \let\tabnorcleffnt\twelvedc \let\tablargecleffnt\frtdc
     \let\tabLargecleffnt\svtdc \let\tabsmallcleffnt\tendc
@@ -501,7 +501,7 @@
     \let\meternorfont\svtbf \let\metersmallfont\frtbf     % version 1.18  RDT
     \let\meterbigfont\twtybf \let\meterlargefont\twfvbf   % version 1.24 typos corrected
     \let\meterLargefont\twfvbf
-    \let\tinyppff\ppfftwenty   
+    \let\tinyppff\ppfftwenty
     \let\smallppff\ppfftwentyfour
     \let\normppff\ppfftwentynine
     \let\medppff\ppfftwentynine
@@ -509,7 +509,7 @@
     \else\ifdim\internote<1.19\Internote \medtype\it
     \else\ifdim\internote<1.43\Internote \bigfont\it
     \else\Bigfont\it\fi\fi\fi}%
-    \let\tabnorfnt\niness \let\tablargefnt\elevenss 
+    \let\tabnorfnt\niness \let\tablargefnt\elevenss
     \let\tabLargefnt\twelvess \let\tabsmallfnt\eightss
     \let\tabnorcleffnt\frtdc \let\tablargecleffnt\svtdc
     \let\tabLargecleffnt\twtydc \let\tabsmallcleffnt\twelvedc
@@ -539,7 +539,7 @@
     \let\meternorfont\twelvebf \let\metersmallfont\tenbf   % version 1.18  RDT
     \let\meterbigfont\frtbf \let\meterlargefont\svtbf
     \let\meterLargefont\twtybf
-    \let\tinyppff\ppfftwelve  
+    \let\tinyppff\ppfftwelve
     \let\smallppff\ppffsixteen
     \let\normppff\ppfftwenty
     \let\medppff\ppfftwentyfour
@@ -547,7 +547,7 @@
     \else\ifdim\internote<1.19\Internote \Smalltype\it
     \else\ifdim\internote<1.43\Internote \normtype\it
     \else\medtype\it\fi\fi\fi}%
-    \let\tabnorfnt\sixss \let\tablargefnt\eightss 
+    \let\tabnorfnt\sixss \let\tablargefnt\eightss
     \let\tabLargefnt\niness \let\tabsmallfnt\fivess
     \let\tabnorcleffnt\tendc \let\tablargecleffnt\twelvedc
     \let\tabLargecleffnt\frtdc \let\tabsmallcleffnt\eightdc
@@ -645,12 +645,12 @@
 % \def\qapp#1{\ppt{#1}\qa{#1}}  % 1.25  RDT
 % \end{verbatim}
 % ただし, 何か困ることがあったと思うので次のように定義しています.
-% 
+%
 % \paragraph{実装}
 %    \begin{macrocode}
 %% \hap, \happ, \qap, \qappの定義 %%
-%% in version 1.25, we have defined \qap, \qapp; 
-%% in version 1.27, we have defined \hap, \happ; 
+%% in version 1.25, we have defined \qap, \qapp;
+%% in version 1.27, we have defined \hap, \happ;
 \def\@qap#1{\getn@i#1\relax
   \ifnum\n@i>\thr@@
     \let\st@m\downst@m
@@ -678,6 +678,9 @@
 %    \end{macrocode}
 % \subsection{\cmd{\Dqb}, \cmd{\Tqb}, \cmd{\Qqb}のpatch}
 % \paragraph{概説}
+% \DescribeMacro{\C@Dq}
+% \DescribeMacro{\C@Tq}
+% \DescribeMacro{\C@Qq}
 % \file{musixtex.tex}では次のように定義されています.
 % \begin{verbatim}
 % \def\C@Dq#1#2{\B@i0{#1}{#2}1\qb0{#1}\B@ii0{#2}}
@@ -726,11 +729,11 @@
   \C@stem}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\@lqb}
-% \begin{macro}{\@rqb}
-% \begin{macro}{\@lqb}
-% \begin{macro}{\@rqb}
-% 
+% \DescribeMacro{\@lqb}
+% \DescribeMacro{\@rqb}
+% \DescribeMacro{\@lqb}
+% \DescribeMacro{\@rqb}
+%
 %    \begin{macrocode}
 \def\@lqb#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
               \advancefalse\kernm\qd@skip\g@q{#2}\kern\qd@skip}
@@ -739,14 +742,10 @@
 \def\lqb{\q@symbol\@lqb}
 \def\rqb{\q@symbol\@rqb}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \begin{macro}{\@lqbp}
-% \begin{macro}{\@rqbp}
-% \begin{macro}{\lqbp}
-% \begin{macro}{\rqbp}
+% \DescribeMacro{\@lqbp}
+% \DescribeMacro{\@rqbp}
+% \DescribeMacro{\lqbp}
+% \DescribeMacro{\rqbp}
 %    \begin{macrocode}
 \def\@lqbp#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
                \advancefalse\kernm\qd@skip\g@qp{#2}\kern\qd@skip}
@@ -755,14 +754,10 @@
 \def\lqbp{\q@symbol\@lqbp}%
 \def\rqbp{\q@symbol\@rqbp}%
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \begin{macro}{\@lqbpp}
-% \begin{macro}{\@rqbpp}
-% \begin{macro}{\lqbpp}
-% \begin{macro}{\rqbpp}
+% \DescribeMacro{\@lqbpp}
+% \DescribeMacro{\@rqbpp}
+% \DescribeMacro{\lqbpp}
+% \DescribeMacro{\rqbpp}
 %    \begin{macrocode}
 \def\@lqbpp#1#2{\s@l@ctbeam#1\relax \let\st@m\inv@beamst@m
                 \advancefalse\kernm\qd@skip\g@qp{#2}\kern\qd@skip}
@@ -770,17 +765,13 @@
                 \advancefalse\kern\qd@skip\g@qp{#2}\kernm\qd@skip}
 \def\lqbpp{\q@symbol\@lqbpp}%
 \def\rqbpp{\q@symbol\@rqbpp}%
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% 
-%    \begin{macrocode}
 
 %    \end{macrocode}
 % \subsection{pxrubrica対応のため}
 % \paragraph{概説}
+% \DescribeMacro{\zchar}
+% \DescribeMacro{\lchar}
+% \DescribeMacro{\cchar}
 % \cmd{\zchar}は次のように定義されています.
 % \begin{verbatim}
 % \def\zchar#1#2{\check@staff\raise#1\internote\rlap{#2}\fi}
@@ -907,7 +898,7 @@
 % \item \cmd{\s@z}: スラーが\cmd{\breakslur}により中断されたときに
 % \item \cmd{\s@d}: 点線のスラーかどうか; もしそうならば``d''に定義される.
 % \end{itemize}
-% 
+%
 % 新設するパラメータは
 % \begin{itemize}
 % \item \cmd{\s@V}: 終点でのスラーの高さのオフセット;
@@ -994,7 +985,7 @@
 % \begin{macro}{\@i@slur}
 % \cmd{\@i@slur}\oarg{beam}\marg{hoffset}\marg{voffset}\ignorespaces
 %             \marg{sense}\marg{ID}\marg{pitch};
-% 
+%
 % \cmd{\@ifnextchar}を使ったので内部動作を新しく別の命令\cmd{\@i@slur}にしました.
 %    \begin{macrocode}
 \def\@i@slur[#1]#2#3#4#5#6{%
@@ -1043,12 +1034,12 @@
 % \end{macro}
 % \begin{macro}{\@t@slur}
 % \cmd{\@t@slur}\oarg{beam}\marg{hoffset}\marg{ID}\marg{pitch};
-% 
+%
 % \cmd{\@ifnextchar}を使ったので内部動作を新しく別の命令\cmd{@t@slur}にしました.
 % また\cmd{@t@slur}では実際のスラーの描画を\TikZ{}にするかの
 % 分岐を入れています.
 %
-% \oarg{beam}はu, d, xのいずれかであり, それぞれ上向き連桁の上に付く, 
+% \oarg{beam}はu, d, xのいずれかであり, それぞれ上向き連桁の上に付く,
 % 下向き連桁の下に付く, 普通のスラー, を表します.
 %    \begin{macrocode}
 \def\@t@slur[#1]#2#3#4{%
@@ -1075,7 +1066,7 @@
 %% clip slur at eoline
   \ifdim\y@v>\y@ \y@v\y@ \advance\y@v\beforeruleskip \y@iv\beforeruleskip \fi
   \advance\y@v-\s@x
-%% if tie or not; 
+%% if tie or not;
   \ifx\T@i\@c \n@i\s@y \else \inhgetn@i#4\relax \fi
 %    \end{macrocode}
 % \TikZ{}を用いてスラーを描画する場合の場合分けをここでしています.
@@ -1345,15 +1336,15 @@
 %    \begin{macrocode}
 \def\bell@slur@drawslur{%-(\y@i>\y@ii?\y@ii:\y@i)
   \begin{tikzpicture}[baseline=0.0pt]%
-    \ifx\T@i\@c% if slur be called in ttie, max height of slur is 2\internote. 
+    \ifx\T@i\@c% if slur be called in ttie, max height of slur is 2\internote.
       \pgfmathsetlengthmacro {\bell@slur@m} {1.7\internote}% maxheight =30bp
       \pgfmathsetlengthmacro {\bell@slur@maxe}    {4bp}% maxangle = 40
-%      \if u\@sense 
+%      \if u\@sense
 %        \advance\y@i-\h@lf\internote
 %      \else
 %        \advance\y@i \h@lf\internote
 %      \fi
-    \else% in other case, max height of slur is 3\internote. 
+    \else% in other case, max height of slur is 3\internote.
       \pgfmathsetlengthmacro {\bell@slur@m} {2.2\internote}% maxheight =30pt
       \pgfmathsetlengthmacro {\bell@slur@maxe}    {9bp}% maxangle = 90
     \fi
@@ -1368,7 +1359,7 @@
       {\bell@slur@hgt*\bell@slur@b/cos(\bell@slur@rotate)}% aa: height of the slur
     \if d\@sense
       \bell@slur@HeightOfSlur=-\bell@slur@HeightOfSlur
-    \fi 
+    \fi
 %    \pgfmathsetlength{\bell@slur@HeightOfSlur}% height of the slur
 %      {\@meet\internote}
     \pgfmathsetlength{\bell@slur@xii}% length of the slur
@@ -1492,9 +1483,9 @@
 %                           {\bell@slur@rotate}
 %                           {(rotated slhBox north west)}%
 %  \draw[red]
-%    ($(rotated slhBox south west)+(startPoint)$) -- 
-%    ($(rotated slhBox south east)+(startPoint)$) -- 
-%    ($(rotated slhBox north east)+(startPoint)$) -- 
+%    ($(rotated slhBox south west)+(startPoint)$) --
+%    ($(rotated slhBox south east)+(startPoint)$) --
+%    ($(rotated slhBox north east)+(startPoint)$) --
 %    ($(rotated slhBox north west)+(startPoint)$) --cycle;
 %  \Tikz@coordinate@rotation{\pgfpointanchor{a1}{center}}
 %                           {\bell@slur@rotate} {(rotated a1)}%
@@ -1517,7 +1508,7 @@
   \pgfmathsetlengthmacro{\bell@slur@yr}{%
     \bell@slur@rotate * \bell@slur@HeightOfSlur >= 0
       ? \y@i/\internote : \y@ii/\internote}%
-  \pgfmathsetlengthmacro{\bell@slur@Nslh}  {\bell@slur@HeightOfSlur > 0 
+  \pgfmathsetlengthmacro{\bell@slur@Nslh}  {\bell@slur@HeightOfSlur > 0
       ? (\bell@slur@slh /\internote + \bell@slur@yr)/2
       : (\bell@slur@slh /\internote - \bell@slur@yr)/2}%
   \pgfmathsetmacro{\bell@slur@checki}
@@ -1724,8 +1715,8 @@
       % instrument number of that slur (to retrieve internote)
       \expandafter \noexpand@newcount \csname bracket@N\roman@c@\endcsname
       %
-      % vertical end position of slur [steps of internote], used from 
-      % \breakslur.  the value \maxdimen is used to decide, if 
+      % vertical end position of slur [steps of internote], used from
+      % \breakslur.  the value \maxdimen is used to decide, if
       % \breakslur is used or not (flag)
       \expandafter \noexpand@newcount \csname bracket@z\roman@c@\endcsname
       \csname bracket@z\roman@c@\endcsname\maxdimen
@@ -1873,7 +1864,7 @@
 % #1 start pitch #2 end pitch #3 length #4 right hoffset
 \def\writ@bkt#1#2#3#4{\check@staff %  modified: sld... into slurd...   12.04.95 ick
   \ifx\bracket@N\undefined
-    \relax % 
+    \relax %
   \else
     \edef\internote{\csname i@n\romannumeral\bracket@N\endcsname}%
   \fi
@@ -1955,7 +1946,7 @@
         \ifnum\s@z=\maxdimen \s@z\s@y \fi % flag (\breakslur not used -> tie)
         \ifuseTikzSlur
           \bell@slur@sethgt% height coefficient
-          \ifx\T@i\@c % if tie or not; 
+          \ifx\T@i\@c % if tie or not;
             \s@V\s@Y
           \else
             \if u\@sense \s@V1\p@seven\internote
@@ -2019,18 +2010,15 @@
 %    \end{macrocode}
 % \subsection{\cmd{\hlthick}の長さを元に戻す．}
 % \paragraph{概説}
+% \DescribeMacro{\hlthick}%
 % バージョン1.36から\cmd{\hlthick}の定義が
-% \begin{verbatim}
-% \def\hlthick{\h@lf\lthick}
-% \end{verbatim}
+% |\def\hlthick{\h@lf\lthick}|%
 % から
-% \begin{verbatim}
-% \def\hlthick{0.4pt}
-% \end{verbatim}
+% |\def\hlthick{0.4pt}|%
 % に変更されています（\cmd{\lthick}と同じ値）．
 % これにより\cmd{\hlthick}に依存する加線の太さが太くなり，見栄えが良くないので
 % 元に戻します．
-% 
+%
 % \paragraph{実装}
 % \changes{v1.5.1}{2024/11/19}
 %    {\cmd{\hlthick}の長さを元に戻す．}
@@ -2043,6 +2031,7 @@
 %    \end{macrocode}
 % \subsection{musix\TeX Version 1.37で\cmd{\updat@context}に混入したバグの修正．}
 % \paragraph{概説}
+% \DescribeMacro{\updat@context}%
 % Version 1.37で\cmd{\updat@context}にバグが混入しています（Version 1.38で修正済み）．
 % TeXLive 2023ではVer1.37が収録されているのでこれを修正します．
 % \paragraph{実装}
