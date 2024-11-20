@@ -1774,20 +1774,22 @@
 %   \item[xcharuuu] $22$．
 % \end{description}
 % と定義されています．
+% \changes{v1.5.3}{2024/11/20}
+%         {Fix macros' name.}
 %    \begin{macrocode}
 \def\gcmc@Factory@char#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka charl}%
-    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-8}}}%
+    {\expandonce{\csname \the\gcmc@test@temptoka char\endcsname{-8}}}%
   \csedef{\the\gcmc@test@temptoka charll}%
-    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-13}}}%
+    {\expandonce{\csname \the\gcmc@test@temptoka char\endcsname{-13}}}%
   \csedef{\the\gcmc@test@temptoka charlll}%
-    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{-18}}}%
+    {\expandonce{\csname \the\gcmc@test@temptoka char\endcsname{-18}}}%
   \csedef{\the\gcmc@test@temptoka charu}%
-    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{12}}}%
+    {\expandonce{\csname \the\gcmc@test@temptoka char\endcsname{12}}}%
   \csedef{\the\gcmc@test@temptoka charuu}%
-    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{17}}}%
+    {\expandonce{\csname \the\gcmc@test@temptoka char\endcsname{17}}}%
   \csedef{\the\gcmc@test@temptoka charuuu}%
-    {\expandonce{\csname \the\gcmc@test@temptoka chars\endcsname{22}}}%
+    {\expandonce{\csname \the\gcmc@test@temptoka char\endcsname{22}}}%
 }
 
 %    \end{macrocode}
