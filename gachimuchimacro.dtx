@@ -324,11 +324,18 @@
 %   ゴースト文字のため．
 % \item \file{tikz}:
 %   様々な描画のため．
-% \item \file{arrows.meta}:
-%   変位転位記号の矢印のため．
-%   \changes{v1.5}{2023/02/28}
-%      {変位転位記号の矢印のため\file{arrows.meta}が必要だったのに
-%       抜けていたので追加}
+%   \begin{itemize}
+%   \item \file{calc}:
+%     転位記号の座標計算のため．
+%     \changes{v1.5.3}{2025/11/15}
+%        {転位記号の座標計算のため\file{calc}が必要だったのに
+%         抜けていたので追加}
+%   \item \file{arrows.meta}:
+%     変位転位記号の矢印のため．
+%     \changes{v1.5}{2023/02/28}
+%        {変位転位記号の矢印のため\file{arrows.meta}が必要だったのに
+%         抜けていたので追加}
+%   \end{itemize}
 % \item \file{hyperref}:
 %   \cmd{\texorpdfstring}のため．
 %   これさえどうにかなればなぁ．
@@ -363,6 +370,7 @@
 % \RequirePackage{pxghost}% -bell 2020-01-23
 \RequirePackage{bxghost}% +bell 2020-01-23
 \RequirePackage{tikz}
+\usetikzlibrary{calc}% +bell 2025-11-15
 \usetikzlibrary{arrows.meta}% +bell 2023-02-28
 \RequirePackageWithOptions{hyperref}
 \RequirePackage{ifptex}
@@ -2285,13 +2293,34 @@
 %% 転位記号
 %%==============================================================================
 %    \end{macrocode}
+% \begin{macro}{\gcmc@dPos@skip}
+% 
 %    \begin{macrocode}
 \newdimen\gcmc@dPos@skip
-\newdimen\gcmc@Posparaboraheighta
-\newdimen\gcmc@Posparaboraheightb
-\def\gcmc@Posparabora@coeff{.5ex}
 \gcmc@dPos@skip=1pt
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Posparaboraheighta}
+% 
+%    \begin{macrocode}
+\newdimen\gcmc@Posparaboraheighta
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Posparaboraheightb}
+% 
+%    \begin{macrocode}
+\newdimen\gcmc@Posparaboraheightb
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Posparabora@coeff}
+% 
+%    \begin{macrocode}
+\def\gcmc@Posparabora@coeff{.5ex}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dPos}
+% 下方転位音\dPos{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\dPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
@@ -2300,7 +2329,11 @@
       \draw (0,0)
         parabola[parabola height=-\gcmc@Posparaboraheighta]
         +(\@tempdima,0);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\uPos}
+% 上方転位音\uPos{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\uPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
@@ -2311,7 +2344,11 @@
       \draw (0,0)
         parabola[parabola height=\gcmc@Posparaboraheighta]
         +(\@tempdima,0);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\ddPos}
+% 下方転位音の下方転位音\ddPos{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\ddPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
@@ -2322,7 +2359,11 @@
             +(\@tempdima,0);
       \draw (.2\@tempdima,0) parabola[parabola height=-\gcmc@Posparaboraheightb]
             +(.6\@tempdima,0);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\duPos}
+% 下方転位音の上方転位音\duPos{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\duPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
@@ -2337,7 +2378,11 @@
               -(0, -\gcmc@Posparaboraheightb)$)
               parabola[parabola height=\gcmc@Posparaboraheightb]
               +(.6\@tempdima,0);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\uuPos}
+% 上方転位音の上方転位音\uuPos{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\uuPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
@@ -2352,7 +2397,11 @@
               +(\@tempdima,0);
       \draw (.2\@tempdima,0) parabola[parabola height=\gcmc@Posparaboraheightb]
               +(.6\@tempdima,0);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\udPos}
+% 上方転位音の下方転位音\udPos{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\udPos}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
@@ -2369,7 +2418,11 @@
                - (0, \gcmc@Posparaboraheightb)$)
             parabola[parabola height=-\gcmc@Posparaboraheightb]
               +(.6\@tempdima,0);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dPosdAlt}
+% 下方転位音の下方変位音\dPosdAlt{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\dPosdAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
@@ -2381,7 +2434,11 @@
               +(\@tempdima,0);
       \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
             (.5\@tempdima,0) -- +(0,-\gcmc@Posparaboraheighta);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\dPosuAlt}
+% 下方転位音の上方変位音\dPosuAlt{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\dPosuAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \eghostguarded{%
@@ -2394,6 +2451,11 @@
       \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
             (.5\@tempdima,-\gcmc@Posparaboraheighta)
               -- +(0,\gcmc@Posparaboraheighta);}}#1}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\uPosdAlt}
+% 上方転位音の下方変位音\uPosdAlt{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\uPosdAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
@@ -2407,7 +2469,11 @@
       \draw[arrows ={-Stealth[length=.3ex,width=.25em,inset=.15ex]}]
             (.5\@tempdima,\gcmc@Posparaboraheighta)
               -- +(0,-\gcmc@Posparaboraheighta);}}#1}}}
-
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\uPosuAlt}
+% 上方転位音の上方変位音\uPosuAlt{1}を表します．
+%    \begin{macrocode}
 \DeclareRobustCommand{\uPosuAlt}[1]{%
   \settowidth{\@tempdima}{#1}%
   \settoheight{\@tempdimb}{#1}%
@@ -2422,6 +2488,7 @@
             (.5\@tempdima,0)
               -- +(0,\gcmc@Posparaboraheighta);}}#1}}}
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\Harmonie}
 %    \begin{macrocode}
 %%==============================================================================
