@@ -8,3 +8,12 @@
 logs/
 *.bat
 *.hd
+*.glo
+*.gls
+*.ilg
+*.log
+*.mx1
+*.mx2
+*.toc
+*.out
+*.aux
