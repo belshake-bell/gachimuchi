@@ -1922,15 +1922,16 @@
 % \end{macro}
 % \subsection{\cmd{\z@suspend}へのpatch}
 % \paragraph{概説}
+% スラーの中断やbracketの中断を追加したためそれに対処します．
 % \paragraph{実装}
+% \begin{macro}{\bell@z@suspend@slur}
+% スラーの中断．
+% \changes{v1.5.3}{2025/11/15}
+%    {スラーの中断のマクロ化．}
 %    \begin{macrocode}
-%% z@suspendへのpatch %%
-
-\let\bell@oldsuspend=\z@suspend
-
-\def\z@suspend{%
-% cut tikz slurs
-%  \tracingmacros2%
+\def\bell@z@suspend@slur{%
+%%cut tikz slurs
+%%\tracingmacros2%
   \ifnum\N@s>\z@%     % any pending slurs ?
     \n@viii\maxslurs % test all possible slur numbers [version 1.15] (Hiroaki)
     \advance\n@viii\m@ne
@@ -1970,8 +1971,18 @@
       \fi
     \advance\n@viii\m@ne \repeat
   \fi
-  \edef\oldN@s{\the\N@s}\N@s\z@%
-% cut tikz bracket
+  \edef\oldN@s{\the\N@s}%
+  \N@s\z@%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@z@suspend@bracket}
+% bracketの中断．
+% \changes{v1.5.3}{2025/11/15}
+%    {bracketの中断のマクロ化．}
+%    \begin{macrocode}
+\def\bell@z@suspend@bracket{%
+%% cut tikz bracket
   \ifnum\N@bracket>\z@%     % any pending slurs ?
     \n@viii\maxbrackets % test all possible slur numbers [version 1.15] (Hiroaki)
     \advance\n@viii\m@ne
@@ -1992,11 +2003,27 @@
       \fi
     \advance\n@viii\m@ne \repeat
   \fi
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\z@suspend}
+% \changes{v1.5.3}{2025/11/15}
+%    {スラーおよびbracketの中断のマクロ化．}
+% \cmd{\z@suspend}へのpatchをします．
+%    \begin{macrocode}
+%% z@suspendへのpatch %%
+
+\let\bell@oldsuspend=\z@suspend
+
+\def\z@suspend{%
+  \bell@z@suspend@slur
+  \bell@z@suspend@bracket
 % do all other mxtex stuff
-  \bell@oldsuspend\N@s\oldN@s%\tracingmacros0%
+  \bell@oldsuspend\N@s\oldN@s
 }
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\cmd{\alaligne}で調号を変えたときにmx1ファイルへの変更通知が行っていなかった件の修正.}
 % \paragraph{概説}
 % \paragraph{実装}
