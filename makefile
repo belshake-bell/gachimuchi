@@ -21,6 +21,7 @@ doc: $(PDFTARGET)
 
 class: gachimuchi.cls gachimuchi.pdf
 macro: gachimuchimacro.sty gachimuchimacro.pdf
+acci: gcmcacci.sty gcmcacci.pdf
 patch: gachimuchipatch.sty gachimuchipatch.pdf
 clsinstl: gachimuchi.cls gachimuchi.pdf
 	make install STRIPTARGET=gachimuchi.cls PDFTARGET=gachimuchi.pdf
@@ -39,6 +40,9 @@ gachimuchimacro.sty: gachimuchimacro.dtx
 
 gachimuchipatch.sty: gachimuchipatch.dtx
 	pdflatex gachimuchipatch.ins
+
+gcmcacci.sty: gcmcacci.dtx
+	pdflatex gcmcacci.ins
 
 
 .SUFFIXES: .dtx .dvi .pdf

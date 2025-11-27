@@ -1,0 +1,357 @@
+% ^^A -*- japanese-latex -*-
+%
+\ifx\epTeXinputencoding\undefined\else
+  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
+\fi
+%
+% \iffalse
+%
+%   gachimuchi.dtx
+%
+%<*driver>
+\documentclass[uplatex,dvipdfmx,a4paper,
+               jafontsize=12Q,line_length=48zw]{bxjsarticle}
+\usepackage{doc}
+\usepackage{metalogo}
+\providecommand*{\eTeX}{$\varepsilon$-\TeX}
+\providecommand*{\pLaTeX}{p\kern-.05em\LaTeX}
+\providecommand*{\pLaTeXe}{p\kern-.05em\LaTeXe}
+\providecommand*{\upTeX}{u\pTeX}
+\providecommand*{\XeTeX}{XeTeX}
+\usepackage{ifptex}
+\ifptex
+  \xspcode"5C=1 %% \
+  \xspcode"22=1 %% "
+\fi
+% \addtolength{\oddsidemargin}{1.5in}
+\setpagelayout{%
+  left=2in,
+}
+\setlength\marginparpush{0pt}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{hyperref}
+\ifptex
+  \usepackage{pxjahyper}
+\fi
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\definecolor{myblue}{rgb}{0,0,0.75}
+\definecolor{mygreen}{rgb}{0,0.45,0}
+\hypersetup{colorlinks,
+            hyperfootnotes=false,
+            linkcolor=myblue,
+            urlcolor=mygreen}
+\CodelineNumbered
+\EnableCrossrefs
+% \CodelineIndex
+\RecordChanges                  % Gather update information
+\setcounter{StandardModuleDepth}{1}
+
+\usepackage{gachimuchimacro}
+\usepackage{gcmcacci}
+
+\makeatletter
+\newrobustcmd*{\file}[1]{\mbox{\ttfamily#1}}
+\newrobustcmd*{\pkg}[1]{\mbox{\sffamily#1}}
+\newcommand*{\Lcount}[1]{\textsl{\small#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\newcounter{@clineno}
+\def\mlineplus#1{\setcounter{@clineno}{\arabic{CodelineNo}}%
+   \addtocounter{@clineno}{#1}\arabic{@clineno}}
+\def\cmd#1{\cs{\expandafter\cmd@to@cs\string#1}}
+\def\cmd@to@cs#1#2{\char\number`#2\relax}
+\DeclareRobustCommand{\cs}[1]{\texttt{\char`\\#1}}
+\DeclareRobustCommand{\env}[1]{\texttt{#1}}
+\providecommand{\marg}[1]{%
+  {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
+\providecommand{\oarg}[1]{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}}
+\def\TODO{\par\textsf{To Do:\ }}%
+
+\AddToHook{env/verbatim/end}{\vspace{-2zw}}
+\makeatother
+
+\GetFileInfo{gcmcacci.dtx}
+\begin{document}
+  \DocInput{gcmcacci.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+% \changes{v1.0}{2019/10/29}
+%   {make this .dtx file}
+% \iffalse TeX commands \fi
+% \DoNotIndex{\ ,\-,\/}
+% \DoNotIndex{\above,\abovedisplayshortskip,\abovedisplayskip}
+% \DoNotIndex{\abovewithdelims,\accent,\adjdemerits}
+% \DoNotIndex{\advance,\afterassignment,\aftergroup}
+% \DoNotIndex{\atop,\atopwithdelims}
+% \DoNotIndex{\badness,\baselineskip,\batchmode}
+% \DoNotIndex{\begingroup,\belowdisplayshortskip,\belowdisplayskip}
+% \DoNotIndex{\binoppenalty,\botmark,\box}
+% \DoNotIndex{\boxmaxdepth,\brokenpenalty}
+% \DoNotIndex{\catcode,\char,\chardef}
+% \DoNotIndex{\cleaders,\closein,\closeout}
+% \DoNotIndex{\clubpenalty,\copy,\count}
+% \DoNotIndex{\countdef,\cr,\crcr,\csname}
+% \DoNotIndex{\day,\cr,\crcr,\csname}
+% \DoNotIndex{\countdef,\deadcycles,\def,\defaulthyphenchar}
+% \DoNotIndex{\defaultskewchar,\delcode,\delimiter,\delimiterfactor}
+% \DoNotIndex{\delimitershortfall,\dimen,\dimendef,\discretionary}
+% \DoNotIndex{\displayindent,\displaylimits,\displaystyle,\displaywidowpenalty}
+% \DoNotIndex{\displaywidth,\divide,\doublehyphendemerits,\dp,\dump}
+% \DoNotIndex{\edef,\else,\emergencystretch,\end}
+% \DoNotIndex{\endcsname,\endgroup,\endinput,\endlinechar}
+% \DoNotIndex{\eqno,\errhelp,\errmessage,\errorcontextlines}
+% \DoNotIndex{\errorstopmode,\escapechar,\everycr,\everydisplay}
+% \DoNotIndex{\everyhbox,\everyjob,\everymath,\everypar}
+% \DoNotIndex{\everyvbox,\exhyphenpenalty,\expandafter}
+% \DoNotIndex{\fam,\fi,\finalhyphendemerits,\firstmark}
+% \DoNotIndex{\floatingpenalty,\font,\fontdimen,\fontname,\futurelet}
+% \DoNotIndex{\gdef,\global,\globaldefs}
+% \DoNotIndex{\halign,\hangafter,\hangindent,\hbadness}
+% \DoNotIndex{\hbox,\hfil,\hfill,\hfilneg}
+% \DoNotIndex{\hfuzz,\hoffset,\holdinginserts,\hrule}
+% \DoNotIndex{\hsize,\hskip,\hss,\ht}
+% \DoNotIndex{\hyphenation,\hyphenchar,\hyphenpenalty}
+% \DoNotIndex{\if,\ifcase,\ifcat,\ifdim}
+% \DoNotIndex{\ifeof,\iffalse,\ifhbox,\ifhmode}
+% \DoNotIndex{\ifinner,\ifmmode,\ifnum,\ifodd}
+% \DoNotIndex{\iftrue,\ifvbox,\ifvmode,\ifvoid}
+% \DoNotIndex{\ifx,\ignorespaces,\immediate,\indent}
+% \DoNotIndex{\input,\inputlineno,\insert,\insertpenalties,\interlinepenalty}
+% \DoNotIndex{\jobname}
+% \DoNotIndex{\kern}
+% \DoNotIndex{\language,\lastbox,\lastkern,\lastpenalty}
+% \DoNotIndex{\lastskip,\lccode,\leaders,\left}
+% \DoNotIndex{\lefthyphenmin,\leftskip,\leqno,\let}
+% \DoNotIndex{\limits,\linepenalty,\lineskip,\lineskiplimit}
+% \DoNotIndex{\long,\looseness,\lower,\lowercase}
+% \DoNotIndex{\mag,\mark,\mathaccent,\mathbin}
+% \DoNotIndex{\mathchar,\mathchardef,\mathchoice,\mathclose}
+% \DoNotIndex{\mathcode,\mathinner,\mathop,\mathopen}
+% \DoNotIndex{\mathord,\mathpunct,\mathrel,\mathsurround}
+% \DoNotIndex{\maxdeadcycles,\maxdepth,\meaning,\medmuskip}
+% \DoNotIndex{\message,\mkern,\month,\moveleft}
+% \DoNotIndex{\moveright,\mskip,\multiply,\muskip,\muskipdef}
+% \DoNotIndex{\newlinechar,\noalign,\noboundary,\noexpand}
+% \DoNotIndex{\noindent,\nolimits,\nonscript,\nonstopmode}
+% \DoNotIndex{\nulldelimiterspace,\nullfont,\number}
+% \DoNotIndex{\omit,\openin,\openout,\or}
+% \DoNotIndex{\outer,\output,\outputpenalty,\over}
+% \DoNotIndex{\overfullrule,\overline,\overwithdelims}
+% \DoNotIndex{\pagedepth,\pagefilllstretch,\pagefillstretch,\pagefilstretch}
+% \DoNotIndex{\pagegoal,\pageshrink,\pagestretch,\pagetotal}
+% \DoNotIndex{\par,\parfillskip,\parindent,\parshape}
+% \DoNotIndex{\parskip,\patterns,\pausing,\penalty}
+% \DoNotIndex{\postdisplaypenalty,\predisplaypenalty,\predisplaysize}
+% \DoNotIndex{\pretolerance,\prevdepth,\prevgraf}
+% \DoNotIndex{\radical,\raise,\read,\relax}
+% \DoNotIndex{\relpenalty,\right,\righthyphenmin,\rightskip,\romannumeral}
+% \DoNotIndex{\scriptfont,\scriptscriptfont,\scriptscriptstyle,\scriptspace}
+% \DoNotIndex{\scriptstyle,\scrollmode,\setbox,\setlanguage}
+% \DoNotIndex{\sfcode,\shipout,\show,\showbox}
+% \DoNotIndex{\showboxbreadth,\showboxdepth,\showlists,\showthe}
+% \DoNotIndex{\skewchar,\skip,\skipdef,\spacefactor}
+% \DoNotIndex{\spaceskip,\span,\special,\splitbotmark}
+% \DoNotIndex{\splitfirstmark,\splitmaxdepth,\splittopskip,\string}
+% \DoNotIndex{\tabskip,\textfont,\textstyle,\the}
+% \DoNotIndex{\thickmuskip,\thinmuskip,\time,\toks}
+% \DoNotIndex{\toksdef,\tolerance,\topmark,\topskip}
+% \DoNotIndex{\tracingcommands,\tracinglostchars,\tracingmacros,\tracingonline}
+% \DoNotIndex{\tracingoutput,\tracingpages,\tracingparagraphs,\tracingrestores}
+% \DoNotIndex{\tracingstats}
+% \DoNotIndex{\uccode,\uchyph,\underline,\unhbox}
+% \DoNotIndex{\unhcopy,\unkern,\unpenalty,\unskip}
+% \DoNotIndex{\unvbox,\unvcopy,\uppercase}
+% \DoNotIndex{\vadjust,\valign,\vbadness,\vbox}
+% \DoNotIndex{\vcenter,\vfil,\vfill,\vfilneg}
+% \DoNotIndex{\vfuzz,\voffset,\vrule,\vsize}
+% \DoNotIndex{\vskip,\vsplit,\vss,\vtop}
+% \DoNotIndex{\wd,\widowpenalty,\write}
+% \DoNotIndex{\xdef,\xleaders,\xspaceskip}
+% \DoNotIndex{\year}
+
+% \iffalse e-TeX commands \fi
+% \DoNotIndex{\protected,\detokenize,\unexpanded}
+% \DoNotIndex{\readline,\scantokens}
+% \DoNotIndex{\eTeXrevision,\eTeXversion,\currentgrouplevel,\currentgrouptype}
+% \DoNotIndex{\ifcsname,\ifdefined,\lastnodetype}
+% \DoNotIndex{\marks}
+% \DoNotIndex{\beginL,\beginR,\endL,\endR}
+% \DoNotIndex{\TeXXeTstate,\predisplaydirection}
+% \DoNotIndex{\interactionmode,\showgroups,\showtokens}
+% \DoNotIndex{\tracingscantokens,\tracinggroups}
+% \DoNotIndex{\everyeof,\middle,\unless}
+%
+% \MakeShortVerb{\|}
+%
+% \title{gachimuchi}
+% \author{bell}
+% \date{\filedate}
+% \maketitle
+% \tableofcontents
+%
+% \section{はじめに}
+%    \begin{macrocode}
+%<*macro>
+%%=============================================================================%
+%%                                                                             %
+%%   GGGGG          A          CCCCC    H       H    IIIII                     %
+%%  G     G        A A        C     C   H       H      I                       %
+%% G       G      A   A      C       C  H       H      I                       %
+%% G             A     A     C          H       H      I                       %
+%% G            A       A    C          HHHHHHHHH      I     --------          %
+%% G     GGGG   AAAAAAAAA    C          H       H      I                       %
+%% G       G    A       A    C       C  H       H      I                       %
+%%  G     GG    A       A     C     C   H       H      I                       %
+%%   GGGGG G    A       A      CCCCC    H       H    IIIII                     %
+%%                                                                             %
+%%                M         M   UUU     UUU    CCCCC    H       H    IIIII     %
+%%                MM       MM    U       U    C     C   H       H      I       %
+%%                M M     M M    U       U   C       C  H       H      I       %
+%%                M M     M M    U       U   C          H       H      I       %
+%%                M  M   M  M    U       U   C          HHHHHHHHH      I       %
+%%                M  M   M  M    U       U   C          H       H      I       %
+%%                M   M M   M    U       U   C       C  H       H      I       %
+%%                M   M M   M     U     U     C     C   H       H      I       %
+%%                M    M    M      UUUUU       CCCCC    H       H    IIIII     %
+%%                                                                             %
+%%=============================================================================%
+\NeedsTeXFormat{LaTeX2e}
+%    \end{macrocode}
+% \begin{macro}{\gcmcacci@Version@Major}
+% このパッケージのメジャーバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmcacci@Version@Major}{1}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmcacci@Version@Minor}
+% このパッケージのマイナーバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmcacci@Version@Minor}{0}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmcacci@Version@Patch}
+% このパッケージのパッチバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmcacci@Version@Patch}{0}% 2024-11-20
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gachimuchimacro@Version}
+% このパッケージのバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmcacci@Version}{%
+  \gcmcacci@Version@Major
+  .\gcmcacci@Version@Minor
+  .\gcmcacci@Version@Patch
+}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\ProvidesPackage{gachimuchimacro}
+  [2025/11/27 Gachimuchi Koza Macro set ver.~\gcmcacci@Version]
+%    \end{macrocode}
+% \subsection{微分音用臨時記号の導入}
+%    \begin{macrocode}
+\iffalse% まだ途中
+%    \end{macrocode}
+% 参考にするべき：\cmd{\na}の定義を追う．
+% \paragraph{\cmd{\na}の定義}
+% ……基本的に\cmd{\bigna}と考えてヨロシ．
+% \paragraph{\cmd{\bigna}の定義}
+% \begin{verbatim}
+% \def\bigna{\set@ba \let\@Tii\@Na \n@v\f@ur \C@acc}
+% \end{verbatim}
+% である．
+% \paragraph{\cmd{\set@ba}の定義}
+% \begin{verbatim}
+% \def\set@ba{\let\@Ti\writ@ba \n@vi\z@}
+% \end{verbatim}
+% である．
+% \paragraph{\cmd{\@Na}の定義}
+% \begin{verbatim}
+% \def\@Na{%
+%   \ifcase\n@ii
+%     \n@v\tw@ \or
+%     \n@v\f@ur \or
+%     \n@v\z@ \fi}
+% \end{verbatim}
+% である．
+% \paragraph{\cmd{\C@acc}の定義}
+% \begin{verbatim}
+% \def\C@acc#1{%
+%   \check@staff
+%   \inhgetn@i#1\relax
+%   \ifx\rel@sw\@ne
+%     \s@l@ctsigns \n@iii\n@i
+%     \advance\n@iii-\ut@ref \advance\n@iii-\ut@ref
+%     \loop\ifnum\n@iii>\si@ \advance\n@iii-\s@v@n \repeat
+%     \loop\ifnum\n@iii<\z@ \advance\n@iii\s@v@n \repeat
+%     \ifcase\n@iii
+%     \n@ii\si@      % mi
+%     \or\n@ii\@ne   % fa
+%     \or\n@ii\thr@@ % sol
+%     \or\n@ii\fiv@  % la
+%     \or\n@ii\s@v@n % si
+%     \or\n@ii\tw@   % do
+%     \or\n@ii\f@ur  % re
+%     \fi
+% % \n@ii positive signature limit, \n@ii-8 negative signature limit
+%     \advance\n@ii-\a@s \advance\n@ii\si@ \divide\n@ii\s@v@n
+%     \@Tii
+%   \fi \advance\n@v\@l \advance\n@v\n@vi \expandafter\@Ti % [version 1.15] (Hiroaki)
+%   \fi}
+% \end{verbatim}
+% である．
+% 調号ではないので最初のif文は
+% 飛ばせて（多分），ごちゃっとしながら\cmd{\@Ti}までたどり着ける．
+% \cmd{\@Ti}は\cmd{\set@ba}で\cmd{\writ@ba}に\cmd{\let}されている．
+% \paragraph{\cmd{\writ@ba}の定義}
+% \begin{verbatim}
+% \def\writ@ba{\pl@base\raise\y@i\llap{\musixchar\n@v\kern\accshift}}
+% \end{verbatim}
+% である．
+% とりあえずはここに手を加えるのがよさそう？
+%
+% \begin{macro}{\muaccidental}
+% \changes{v1.0.0-alpha1}{2025/11/26}
+%    {微分音用臨時記号の導入．}
+% フォントを読み込みます．
+%    \begin{macrocode}
+\font\muaccidental=muacci
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\muaccichar}
+% \changes{v1.0.0-alpha1}{2025/11/26}
+%    {微分音用臨時記号の導入．}
+% 文字コードから出力するマクロを定義します．
+%    \begin{macrocode}
+\def\muaccichar{\muaccidental\char}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@muacci@hflat}
+% \changes{v1.0.0-alpha1}{2025/11/26}
+%    {微分音用臨時記号の導入．}
+% 
+%    \begin{macrocode}
+\def\muaccichar{\muaccidental\char}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\fi% まだ途中
+%</macro>
+%    \end{macrocode}
+%
+% 以上で終わりです．
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
+%
+% \Finale
+% \PrintIndex \PrintChanges
+% \endinput
