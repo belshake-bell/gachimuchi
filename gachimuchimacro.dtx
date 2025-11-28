@@ -79,6 +79,30 @@
 %</driver>
 %
 % \fi
+% \makeatletter
+% \IndexPrologue{%
+%   \section*{索引}%
+%   \markboth{索引}{索引}%
+%   イタリック体の数字はその項目の記述されたページへの，
+%   下線の引かれた数字はその項目の定義された
+%   \ifcodeline@index
+%     コードの行
+%   \else
+%     ページ
+%   \fi
+%   への，ローマン体の数字はその項目の使われた
+%   \ifcodeline@index
+%     コードの行
+%   \else
+%     ページ
+%   \fi
+%   への参照となっている．
+% }
+% \GlossaryPrologue{%
+%   \section*{{変更履歴}}%
+%   \markboth{{変更履歴}}{{変更履歴}}%
+% }
+% \makeatother
 % \changes{v1.0}{2019/10/29}
 %   {make this .dtx file}
 % \iffalse TeX commands \fi
