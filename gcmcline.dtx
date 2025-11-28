@@ -1,0 +1,559 @@
+% ^^A -*- japanese-latex -*-
+%
+\ifx\epTeXinputencoding\undefined\else
+  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
+\fi
+%
+% \iffalse
+%
+%   gcmcline.dtx
+%
+%<*driver>
+\documentclass[uplatex,a4paper,12Q,dvipdfmx]{jsarticle}
+\usepackage{doc}
+\usepackage{metalogo}
+\providecommand*{\eTeX}{$\varepsilon$-\TeX}
+\providecommand*{\pLaTeX}{p\kern-.05em\LaTeX}
+\providecommand*{\pLaTeXe}{p\kern-.05em\LaTeXe}
+\providecommand*{\upTeX}{u\pTeX}
+\providecommand*{\XeTeX}{XeTeX}
+\usepackage{ifptex}
+\ifptex
+  \xspcode"5C=1 %% \
+  \xspcode"22=1 %% "
+\fi
+\addtolength{\textwidth}{-1.2in}
+%% \addtolength{\evensidemargin}{1.5in}
+\addtolength{\oddsidemargin}{1.5in}
+%% \addtolength{\marginparwidth}{1.5in}
+\setlength\marginparpush{0pt}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{hyperref}
+\ifptex
+  \usepackage{pxjahyper}
+\fi
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\definecolor{myblue}{rgb}{0,0,0.75}
+\definecolor{mygreen}{rgb}{0,0.45,0}
+\hypersetup{colorlinks,
+            hyperfootnotes=false,
+            linkcolor=myblue,
+            urlcolor=mygreen}
+\CodelineNumbered
+\EnableCrossrefs
+% \CodelineIndex
+\RecordChanges                  % Gather update information
+\setcounter{StandardModuleDepth}{1}
+
+\usepackage{musixtex}
+\usepackage{gcmcline}
+
+\makeatletter
+
+\newrobustcmd*{\file}[1]{\mbox{\ttfamily#1}}
+\newrobustcmd*{\pkg}[1]{\mbox{\sffamily#1}}
+\newcommand*{\Lcount}[1]{\textsl{\small#1}}
+\newcommand*{\Lopt}[1]{\textsf{#1}}
+\newcounter{@clineno}
+\def\mlineplus#1{\setcounter{@clineno}{\arabic{CodelineNo}}%
+   \addtocounter{@clineno}{#1}\arabic{@clineno}}
+\def\cmd#1{\cs{\expandafter\cmd@to@cs\string#1}}
+\def\cmd@to@cs#1#2{\char\number`#2\relax}
+\DeclareRobustCommand{\cs}[1]{\texttt{\char`\\#1}}
+\DeclareRobustCommand{\env}[1]{\texttt{#1}}
+\providecommand{\marg}[1]{%
+  {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
+\providecommand{\oarg}[1]{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}}
+\def\TODO{\par\textsf{To Do:\ }}%
+\makeatother
+
+\GetFileInfo{gcmcline.dtx}
+\begin{document}
+  \DocInput{gcmcline.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+% \makeatletter
+% \IndexPrologue{%
+%   \section*{索引}%
+%   \markboth{索引}{索引}%
+%   イタリック体の数字はその項目の記述されたページへの，
+%   下線の引かれた数字はその項目の定義された
+%   \ifcodeline@index
+%     コードの行
+%   \else
+%     ページ
+%   \fi
+%   への，ローマン体の数字はその項目の使われた
+%   \ifcodeline@index
+%     コードの行
+%   \else
+%     ページ
+%   \fi
+%   への参照となっている．
+% }
+% \GlossaryPrologue{%
+%   \section*{{変更履歴}}%
+%   \markboth{{変更履歴}}{{変更履歴}}%
+% }
+% \makeatother
+% \changes{v1.0}{2019/10/29}
+%   {make this .dtx file}
+% \iffalse TeX commands \fi
+% \DoNotIndex{\ ,\-,\/}
+% \DoNotIndex{\above,\abovedisplayshortskip,\abovedisplayskip}
+% \DoNotIndex{\abovewithdelims,\accent,\adjdemerits}
+% \DoNotIndex{\advance,\afterassignment,\aftergroup}
+% \DoNotIndex{\atop,\atopwithdelims}
+% \DoNotIndex{\badness,\baselineskip,\batchmode}
+% \DoNotIndex{\begingroup,\belowdisplayshortskip,\belowdisplayskip}
+% \DoNotIndex{\binoppenalty,\botmark,\box}
+% \DoNotIndex{\boxmaxdepth,\brokenpenalty}
+% \DoNotIndex{\catcode,\char,\chardef}
+% \DoNotIndex{\cleaders,\closein,\closeout}
+% \DoNotIndex{\clubpenalty,\copy,\count}
+% \DoNotIndex{\countdef,\cr,\crcr,\csname}
+% \DoNotIndex{\day,\cr,\crcr,\csname}
+% \DoNotIndex{\countdef,\deadcycles,\def,\defaulthyphenchar}
+% \DoNotIndex{\defaultskewchar,\delcode,\delimiter,\delimiterfactor}
+% \DoNotIndex{\delimitershortfall,\dimen,\dimendef,\discretionary}
+% \DoNotIndex{\displayindent,\displaylimits,\displaystyle,\displaywidowpenalty}
+% \DoNotIndex{\displaywidth,\divide,\doublehyphendemerits,\dp,\dump}
+% \DoNotIndex{\edef,\else,\emergencystretch,\end}
+% \DoNotIndex{\endcsname,\endgroup,\endinput,\endlinechar}
+% \DoNotIndex{\eqno,\errhelp,\errmessage,\errorcontextlines}
+% \DoNotIndex{\errorstopmode,\escapechar,\everycr,\everydisplay}
+% \DoNotIndex{\everyhbox,\everyjob,\everymath,\everypar}
+% \DoNotIndex{\everyvbox,\exhyphenpenalty,\expandafter}
+% \DoNotIndex{\fam,\fi,\finalhyphendemerits,\firstmark}
+% \DoNotIndex{\floatingpenalty,\font,\fontdimen,\fontname,\futurelet}
+% \DoNotIndex{\gdef,\global,\globaldefs}
+% \DoNotIndex{\halign,\hangafter,\hangindent,\hbadness}
+% \DoNotIndex{\hbox,\hfil,\hfill,\hfilneg}
+% \DoNotIndex{\hfuzz,\hoffset,\holdinginserts,\hrule}
+% \DoNotIndex{\hsize,\hskip,\hss,\ht}
+% \DoNotIndex{\hyphenation,\hyphenchar,\hyphenpenalty}
+% \DoNotIndex{\if,\ifcase,\ifcat,\ifdim}
+% \DoNotIndex{\ifeof,\iffalse,\ifhbox,\ifhmode}
+% \DoNotIndex{\ifinner,\ifmmode,\ifnum,\ifodd}
+% \DoNotIndex{\iftrue,\ifvbox,\ifvmode,\ifvoid}
+% \DoNotIndex{\ifx,\ignorespaces,\immediate,\indent}
+% \DoNotIndex{\input,\inputlineno,\insert,\insertpenalties,\interlinepenalty}
+% \DoNotIndex{\jobname}
+% \DoNotIndex{\kern}
+% \DoNotIndex{\language,\lastbox,\lastkern,\lastpenalty}
+% \DoNotIndex{\lastskip,\lccode,\leaders,\left}
+% \DoNotIndex{\lefthyphenmin,\leftskip,\leqno,\let}
+% \DoNotIndex{\limits,\linepenalty,\lineskip,\lineskiplimit}
+% \DoNotIndex{\long,\looseness,\lower,\lowercase}
+% \DoNotIndex{\mag,\mark,\mathaccent,\mathbin}
+% \DoNotIndex{\mathchar,\mathchardef,\mathchoice,\mathclose}
+% \DoNotIndex{\mathcode,\mathinner,\mathop,\mathopen}
+% \DoNotIndex{\mathord,\mathpunct,\mathrel,\mathsurround}
+% \DoNotIndex{\maxdeadcycles,\maxdepth,\meaning,\medmuskip}
+% \DoNotIndex{\message,\mkern,\month,\moveleft}
+% \DoNotIndex{\moveright,\mskip,\multiply,\muskip,\muskipdef}
+% \DoNotIndex{\newlinechar,\noalign,\noboundary,\noexpand}
+% \DoNotIndex{\noindent,\nolimits,\nonscript,\nonstopmode}
+% \DoNotIndex{\nulldelimiterspace,\nullfont,\number}
+% \DoNotIndex{\omit,\openin,\openout,\or}
+% \DoNotIndex{\outer,\output,\outputpenalty,\over}
+% \DoNotIndex{\overfullrule,\overline,\overwithdelims}
+% \DoNotIndex{\pagedepth,\pagefilllstretch,\pagefillstretch,\pagefilstretch}
+% \DoNotIndex{\pagegoal,\pageshrink,\pagestretch,\pagetotal}
+% \DoNotIndex{\par,\parfillskip,\parindent,\parshape}
+% \DoNotIndex{\parskip,\patterns,\pausing,\penalty}
+% \DoNotIndex{\postdisplaypenalty,\predisplaypenalty,\predisplaysize}
+% \DoNotIndex{\pretolerance,\prevdepth,\prevgraf}
+% \DoNotIndex{\radical,\raise,\read,\relax}
+% \DoNotIndex{\relpenalty,\right,\righthyphenmin,\rightskip,\romannumeral}
+% \DoNotIndex{\scriptfont,\scriptscriptfont,\scriptscriptstyle,\scriptspace}
+% \DoNotIndex{\scriptstyle,\scrollmode,\setbox,\setlanguage}
+% \DoNotIndex{\sfcode,\shipout,\show,\showbox}
+% \DoNotIndex{\showboxbreadth,\showboxdepth,\showlists,\showthe}
+% \DoNotIndex{\skewchar,\skip,\skipdef,\spacefactor}
+% \DoNotIndex{\spaceskip,\span,\special,\splitbotmark}
+% \DoNotIndex{\splitfirstmark,\splitmaxdepth,\splittopskip,\string}
+% \DoNotIndex{\tabskip,\textfont,\textstyle,\the}
+% \DoNotIndex{\thickmuskip,\thinmuskip,\time,\toks}
+% \DoNotIndex{\toksdef,\tolerance,\topmark,\topskip}
+% \DoNotIndex{\tracingcommands,\tracinglostchars,\tracingmacros,\tracingonline}
+% \DoNotIndex{\tracingoutput,\tracingpages,\tracingparagraphs,\tracingrestores}
+% \DoNotIndex{\tracingstats}
+% \DoNotIndex{\uccode,\uchyph,\underline,\unhbox}
+% \DoNotIndex{\unhcopy,\unkern,\unpenalty,\unskip}
+% \DoNotIndex{\unvbox,\unvcopy,\uppercase}
+% \DoNotIndex{\vadjust,\valign,\vbadness,\vbox}
+% \DoNotIndex{\vcenter,\vfil,\vfill,\vfilneg}
+% \DoNotIndex{\vfuzz,\voffset,\vrule,\vsize}
+% \DoNotIndex{\vskip,\vsplit,\vss,\vtop}
+% \DoNotIndex{\wd,\widowpenalty,\write}
+% \DoNotIndex{\xdef,\xleaders,\xspaceskip}
+% \DoNotIndex{\year}
+
+% \iffalse e-TeX commands \fi
+% \DoNotIndex{\protected,\detokenize,\unexpanded}
+% \DoNotIndex{\readline,\scantokens}
+% \DoNotIndex{\eTeXrevision,\eTeXversion,\currentgrouplevel,\currentgrouptype}
+% \DoNotIndex{\ifcsname,\ifdefined,\lastnodetype}
+% \DoNotIndex{\marks}
+% \DoNotIndex{\beginL,\beginR,\endL,\endR}
+% \DoNotIndex{\TeXXeTstate,\predisplaydirection}
+% \DoNotIndex{\interactionmode,\showgroups,\showtokens}
+% \DoNotIndex{\tracingscantokens,\tracinggroups}
+% \DoNotIndex{\everyeof,\middle,\unless}
+%
+% \title{gachimuchi}
+% \author{bell}
+% \date{\filedate}
+% \maketitle
+% \tableofcontents
+%
+% \MakeShortVerb{\|}
+%
+% \section{実装}
+%
+%    \begin{macrocode}
+%<*macro>
+%%=============================================================================%
+%%                                                                             %
+%%   GGGGG          A          CCCCC    H       H    IIIII                     %
+%%  G     G        A A        C     C   H       H      I                       %
+%% G       G      A   A      C       C  H       H      I                       %
+%% G             A     A     C          H       H      I                       %
+%% G            A       A    C          HHHHHHHHH      I     --------          %
+%% G     GGGG   AAAAAAAAA    C          H       H      I                       %
+%% G       G    A       A    C       C  H       H      I                       %
+%%  G     GG    A       A     C     C   H       H      I                       %
+%%   GGGGG G    A       A      CCCCC    H       H    IIIII                     %
+%%                                                                             %
+%%                M         M   UUU     UUU    CCCCC    H       H    IIIII     %
+%%                MM       MM    U       U    C     C   H       H      I       %
+%%                M M     M M    U       U   C       C  H       H      I       %
+%%                M M     M M    U       U   C          H       H      I       %
+%%                M  M   M  M    U       U   C          HHHHHHHHH      I       %
+%%                M  M   M  M    U       U   C          H       H      I       %
+%%                M   M M   M    U       U   C       C  H       H      I       %
+%%                M   M M   M     U     U     C     C   H       H      I       %
+%%                M    M    M      UUUUU       CCCCC    H       H    IIIII     %
+%%                                                                             %
+%%=============================================================================%
+\NeedsTeXFormat{LaTeX2e}% 
+%    \end{macrocode}
+% \begin{macro}{\gcmc@line@Version@Major}
+% このパッケージのメジャーバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmc@line@Version@Major}{1}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@line@Version@Minor}
+% このパッケージのマイナーバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmc@line@Version@Minor}{5}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@line@Version@Patch}
+% このパッケージのパッチバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmc@line@Version@Patch}{2}% 2024-11-20
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gachimuchimacro@Version}
+% このパッケージのバージョン番号です．
+%    \begin{macrocode}
+\newcommand{\gcmc@line@Version}{%
+  \gcmc@line@Version@Major
+  .\gcmc@line@Version@Minor
+  .\gcmc@line@Version@Patch
+}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+\ProvidesPackage{gcmcline}
+  [2025/11/28 Gachimuchi Koza Macro set ver.~\gcmc@line@Version]
+%    \end{macrocode}
+% \subsection{muslineの追加}
+% \paragraph{概説}
+% スラーと同様の方法で直線を使えるようにします．
+% \paragraph{実装}
+% \subparagraph{下準備}
+% \begin{macro}{\N@musline}
+% 保留された直線の数を保持するカウンタ・レジスタを用意します．
+%    \begin{macrocode}
+%% muslineの追加
+%% registers for musline
+\newcount\N@musline
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\test@muslinenum}
+% 参照すべきmusline IDが範囲外であるときに
+% エラー・メッセージを出す用のテストマクロです．
+%    \begin{macrocode}
+\def\test@muslinenum{%
+  \ifnum\n@i<\z@ \n@i\@c \fi
+  \ifnum\n@i<\maxmuslines \else
+    \count@\maxmuslines \advance\count@\m@ne
+    \errmessage{Wrong musline reference number \the\n@i!
+                (valid: 0 to \the\count@)}%
+    \n@i\z@
+  \fi
+  \advance\n@i\@ne}%
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@oldmaxmuslines}
+% 現在の最大musline IDを保持します．
+%    \begin{macrocode}
+\chardef\@oldmaxmuslines=\z@
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\setmaxmuslines}\marg{max-ID number}\par
+% \meta{max-ID number}でmusline IDの最大値を設定し，
+% 各種パラメータを定義します．
+% \begin{itemize}
+% \item \cmd{\musline@x}: 始点でのmuslineの水平位置[dimen]
+% \item \cmd{\musline@s}: muslineの向き(u, d)およびmuslineが使用中ではないことを意味する
+%                 フラグ(x)
+% \item \cmd{\musline@Y}: muslineの垂直方向のオフセット
+% \item \cmd{\musline@a}: musline開始時の\cmd{\altportee}
+% \item \cmd{\musline@y}: 始点でのmuslineの垂直位置[steps of internote]
+% \item \cmd{\musline@N}: muslineの使われている楽器の番号
+% \item \cmd{\musline@z}: (予定)muslineが\cmd{\breakmusline}により中断されたときに
+%                         指定する終了時の高さ[steps of internote]
+% \item \cmd{\musline@t}: muslineの上または下に表示されるテキスト・トークン
+\iffalse
+% \item \cmd{\musline@V}: 終点でのスラーの高さのオフセット；
+%                 それに伴い\cmd{\s@Y}は始点での垂直方向の
+%                 オフセットとして扱われる.
+\fi
+% \item \cmd{\musline@o}: muslineの鉤の開き．
+% \end{itemize}
+%    \begin{macrocode}
+\def\setmaxmuslines#1{%
+  \ifnum#1>\@oldmaxmuslines
+    \chardef\maxmuslines=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements
+                  is limited to \the\@c}
+      \chardef\maxmuslines=\@c
+    \fi
+    \count@\@oldmaxmuslines\loop
+      \advance\count@ by\@ne
+      % horizontal start position of musline
+      \expandafter \noexpand@newdimsk \csname musline@x\roman@c@\endcsname
+      %
+      % sense u,d and x (flag) for pending musline
+      \expandafter \noexpand@newtoks  \csname musline@s\roman@c@\endcsname
+      \csname musline@s\roman@c@\endcsname={x}%
+      %
+      % vertical offset of musline
+      \expandafter \noexpand@newdimsk \csname musline@Y\roman@c@\endcsname
+      %
+      % altportee of musline
+      \expandafter \noexpand@newskip  \csname musline@a\roman@c@\endcsname
+      %
+      % vertical start position of slur [steps of internote]
+      \expandafter \noexpand@newcount \csname musline@y\roman@c@\endcsname
+      %
+      % instrument number of that slur (to retrieve internote)
+      \expandafter \noexpand@newcount \csname musline@N\roman@c@\endcsname
+      %
+      % vertical end position of slur [steps of internote], used from
+      % \breakslur.  the value \maxdimen is used to decide, if
+      % \breakslur is used or not (flag)
+      \expandafter \noexpand@newcount \csname musline@z\roman@c@\endcsname
+      \csname musline@z\roman@c@\endcsname\maxdimen
+      %
+      % text token
+      \expandafter \noexpand@newtoks  \csname musline@t\roman@c@\endcsname
+      %
+      %
+      % open left/right token
+      \expandafter \noexpand@newtoks  \csname musline@o\roman@c@\endcsname
+      \csname musline@o\roman@c@\endcsname={x}%
+      %
+    \ifnum\count@<\maxmuslines\repeat
+    \expandafter\message\expandafter{maxmuslines=\the\maxmuslines}%
+    \chardef\@oldmaxmuslines=\maxmuslines\relax%
+    \normalnotesize\resetlayout
+  \fi}%
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\s@l@ctmusline}\marg{musline ID}\par
+% IDが\meta{musline ID}であるmuslineのパラメータを取得します．
+%    \begin{macrocode}
+\def\s@l@ctmusline#1\relax{%
+  \n@i#1\relax\test@muslinenum% [version 1.15] make it independent from beams
+  \edef\musline@a{\csname musline@a\roman@n@i}%  dimen (altportee)
+  \edef\musline@x{\csname musline@x\roman@n@i}%  dimen (hor start pos)
+  \edef\musline@y{\csname musline@y\roman@n@i}%  count (startnote [internote])
+  \edef\musline@N{\csname musline@N\roman@n@i}%  count (instrument number)
+  \edef\musline@z{\csname musline@z\roman@n@i}%  count (endnote [internote])
+  \edef\musline@Y{\csname musline@Y\roman@n@i}%  dimen (voffset)
+  \edef\musline@t{\csname musline@t\roman@n@i}%  token (text)
+  \edef\musline@s{\csname musline@s\roman@n@i}%  token (sense)
+  \edef\musline@o{\csname musline@o\roman@n@i}%  token (sense)
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \subparagraph{始点}
+% \begin{macro}{\imusline}\oarg{text}\marg{id}\marg{height}\par
+% muslineの始点を設定します．
+% \begin{itemize}
+% \item \meta{text}はmuslineの上に出力される文字を設定します．
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{height}はmuslineの出力される高さを設定します．
+% \end{itemize}
+%    \begin{macrocode}
+%% \ibktu/d #1=text(optional) #2=musline id #3=height[\internote]
+\newcommand{\imusline}[1][]{\@i@musline[#1]\@ne{1\p@seven\internote}u}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@i@musline}\oarg{text}\marg{hoffset}\marg{voffset}%
+%              \marg{sence}\marg{id}\marg{height}\par
+% muslineの始点を設定する内部マクロです．
+% \begin{itemize}
+% \item \meta{text}はmuslineの上または下に出力される文字を設定します．
+% \item \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
+%       単位は符頭の長さ\cmd{\qn@width}です．
+% \item \meta{voffset}は始点の高さから上へずらす長さを設定します．
+% \item \meta{sence}はmuslineの上下の向きを設定します．
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{height}はmuslineの出力される始点の高さを設定します．
+% \end{itemize}
+% 設定されたパラメータは\cmd{\musline@}から始まる
+% 各マクロあるいはレジスタに（グローバルに）定義あるいは代入されます．
+%    \begin{macrocode}
+%% \@i@musline #1=text #2=hoffset[\qn@width] #3=voffset
+%%         #4=musline sence(u,d) #5=musline id #6=height[\internote]
+\def\@i@musline[#1]#2#3#4#5#6{%
+  \check@staff
+    \global\advance\N@musline\@ne % update musline counter
+    \s@l@ctmusline#5\relax
+    % test for already invoked \islur
+    \if x\the\musline@s \else\errmessage{\@mis\noexpand\tmusline#5}\fi
+    \global\musline@Y#3%            store voffset (abs. dim. to rel. height)
+    \global\musline@s{#4}%          store sense (u,d)
+    \global\musline@t{#1}%          store text
+    \global\musline@N\noinstrum@nt% store instrument number
+    \inhgetn@i#6\relax
+    \global\musline@y\n@i %         start vpos (steps of internote)
+    \global\musline@a\altportee %   store altportee of current slur
+    \getcurpos
+    \advance\y@v#2\qn@width
+    \global\musline@x\y@v %         start hpos
+  \fi% start hpos (current pos including hoffset)
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \subparagraph{終点}
+% \begin{macro}{\tmusline}\marg{id}\marg{height}\par
+% muslineの終点を設定します．
+% \begin{itemize}
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{height}はmuslineの出力される終端部の高さを設定します．
+% \end{itemize}
+%    \begin{macrocode}
+\def\tmusline{\t@musline0}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\t@musline}\marg{hoffset}\marg{id}\marg{height}\par
+%    \begin{macrocode}
+%% \t@musline #1=hoffset #2=reference number #3=end note
+\def\t@musline#1#2#3{%
+  \check@staff
+    \s@l@ctmusline#2\relax
+    \y@iv#1\qn@width
+    \def\@sense{\the\musline@s}%
+% test for missing \ibkt
+    \if x\@sense \errmessage{\@mis\noexpand\imusline#2}\fi
+% compute length
+    \getcurpos
+    \advance\y@v\y@iv
+% eoline
+    \y@eol\advance\y@-\beforeruleskip
+% clip musline at eoline
+    \ifdim\y@v>\y@ \y@v\y@ \advance\y@v\beforeruleskip \y@iv\beforeruleskip \fi
+    \advance\y@v-\musline@x
+    \if r\the\musline@o \musline@o{l}\fi
+    \inhgetn@i#3\relax
+    \write@musline{\musline@y}{\n@i}{\y@v}{-\y@iv}%
+% reset sense of musline
+    \global\musline@s{x}\let\T@i\empty
+    \global\musline@o{x}\let\T@i\empty
+    \global\advance\N@musline\m@ne% update slur counter
+  \fi
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\write@musline}
+% muslineの描画部分です．
+%    \begin{macrocode}
+% #1 start pitch #2 end pitch #3 length #4 right hoffset
+\def\write@musline#1#2#3#4{\check@staff %
+  \ifx\musline@N\undefined
+    \relax %
+  \else
+    \edef\internote{\csname i@n\romannumeral\musline@N\endcsname}%
+  \fi
+% \immediate\write16{\noexpand\write@musline internote:\the\internote}%
+  \n@iv#1%
+  \n@vi#2%
+  \y@iii#3%
+%%
+%%   Get note vertical offsets
+%%   \n@iv=   vertical offset of first  note(n@i temp);
+%%   \n@vi=   vertical offset of second note(n@ii temp);
+%%   \y@i =   reference height of first note (pt);
+%%   \y@ii=   reference height of end note (pt);
+%%   \y@iii=  musline length (pt);
+%%
+  \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
+  \n@i\n@iv \pl@base % \y@i = initial height
+  \advance\y@i\musline@Y \advance\y@ii\musline@Y% add the voffsets
+  \ifx\@Ti\@ne
+    \advance\y@i\musline@a
+    \advance\y@ii\musline@a
+    \let\@Ti\empty
+  \fi% call from cutslur
+%%
+%% draw musline
+%%
+  \llap{%
+    \tikz[baseline=0.0ex]{%
+      \draw[semithick]
+         (0,\y@i)-- (\y@iii,\y@ii);
+      \node at ($(\h@lf\y@iii,\y@ii)+(0,\internote)$)
+         [above] {\the\musline@t};
+    }%
+    \hspace{-\y@iv}%
+  }%
+\fi} % end writ@musline
+\setmaxmuslines6
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\C@musline}
+% （未実装）シンプルなmusline用マクロです．
+% ただし名前被りをどう避けるかが思いついてないので未実装です．
+% \end{macro}
+%
+% 以上で終わりです．
+%    \begin{macrocode}
+%</macro>
+\endinput
+%    \end{macrocode}
+%
+% \Finale
+% \PrintIndex \PrintChanges
