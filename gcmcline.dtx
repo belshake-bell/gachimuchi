@@ -104,7 +104,7 @@
 %   \markboth{{変更履歴}}{{変更履歴}}%
 % }
 % \makeatother
-% \changes{v1.0}{2019/10/29}
+% \changes{v1.0.0}{2025/11/28}
 %   {make this .dtx file}
 % \iffalse TeX commands \fi
 % \DoNotIndex{\ ,\-,\/}
@@ -210,7 +210,7 @@
 % \DoNotIndex{\tracingscantokens,\tracinggroups}
 % \DoNotIndex{\everyeof,\middle,\unless}
 %
-% \title{gachimuchi}
+% \title{gcmcline}
 % \author{bell}
 % \date{\filedate}
 % \maketitle
@@ -218,6 +218,28 @@
 %
 % \MakeShortVerb{\|}
 %
+% \section{概説}
+% 楽譜上での直線を実装します．
+% 
+% \DescribeMacro{\imusline}\cmd{\imusline}は
+% \cmd{\imusline}\oarg{text}\marg{id}\marg{height}の形で直線を開始します．
+% \begin{itemize}
+% \item \meta{text}はmuslineの上に出力される文字を設定します．
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{height}はmuslineの出力される高さを設定します．
+% \end{itemize}
+%
+% このようにして開始した直線は
+% その地点の右側1.5\cmd{\qn@width}のところを始点とします．
+%
+% \DescribeMacro{\tmusline}\cmd{\tmusline}は
+% \cmd{\tmusline}\marg{id}\marg{height}の形で直線を終了します．
+% \begin{itemize}
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{height}はmuslineの出力される終端部の高さを設定します．
+% \end{itemize}
+%
+% \StopEventually{}
 % \section{実装}
 %
 %    \begin{macrocode}
@@ -256,13 +278,13 @@
 % \begin{macro}{\gcmc@line@Version@Minor}
 % このパッケージのマイナーバージョン番号です．
 %    \begin{macrocode}
-\newcommand{\gcmc@line@Version@Minor}{5}
+\newcommand{\gcmc@line@Version@Minor}{0}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\gcmc@line@Version@Patch}
 % このパッケージのパッチバージョン番号です．
 %    \begin{macrocode}
-\newcommand{\gcmc@line@Version@Patch}{2}% 2024-11-20
+\newcommand{\gcmc@line@Version@Patch}{0}% 2025-11-28
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\gachimuchimacro@Version}
@@ -391,7 +413,7 @@
 % IDが\meta{musline ID}であるmuslineのパラメータを取得します．
 %    \begin{macrocode}
 \def\s@l@ctmusline#1\relax{%
-  \n@i#1\relax\test@muslinenum% [version 1.15] make it independent from beams
+  \n@i#1\relax\test@muslinenum%
   \edef\musline@a{\csname musline@a\roman@n@i}%  dimen (altportee)
   \edef\musline@x{\csname musline@x\roman@n@i}%  dimen (hor start pos)
   \edef\musline@y{\csname musline@y\roman@n@i}%  count (startnote [internote])
@@ -554,6 +576,17 @@
 %</macro>
 \endinput
 %    \end{macrocode}
-%
+% \section{To Do}
+% \begin{itemize}
+% \item
+%   senceは存在判定にしか使っていないので整理できるのでは．
+% \item
+%   開始時・終了時に\meta{dimension}で指定できる垂直・水平オフセットを導入する．
+%   これは楽譜の五線ないし加線上から直線が引かれると見た目がよろしくないので，
+%   これを避けるためである．
+%   \pkg{keyval}式でもいいかも．
+% \item
+%   \file{gachimuchimacro}内の\cmd{\Mline}等との兼ね合い：引数の形について．
+% \end{itemize}
 % \Finale
 % \PrintIndex \PrintChanges
