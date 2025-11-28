@@ -1,0 +1,29 @@
+\documentclass[dvipdfmx,uplatex,b5paper,openany,jbase=12Q,nomag*,textwidth-limit=44%,draft
+               ]{gachimuchi}[2020/05/05]
+\usepackage{gachimuchimacro}
+\usepackage{../gcmcline}
+\makeindex
+
+\title{ガチムチ音楽理論講座 コード編 ver.~0.16}
+\author{bell}
+\date{\the\year/\the\month/\the\day}
+%\useTikzSlurtrue
+% TL2020Frozenではdvipdfmxを経由するとmusix13を使うときに臨時記号を使うと符頭がずれる現象があるので
+% 応急的な対処としてmusix16をスケールさせる．
+% \font\musicthirteen musix16 at 12.8pt\relax
+% 上の処置はadditional Packageで記述しているのでここでは不要
+\begin{document}\frontmatter
+\maketitle
+
+\begin{Music}[0.9\linewidth]
+  \nostartrule%
+  \Startpiece
+  \NOtes%
+  \imusline0{4}\hu{4}%
+  \tmusline0{5}\hu{5}%
+  \en%
+  \endpiece%
+\end{Music}
+
+\mainmatter
+\end{document}
