@@ -306,6 +306,10 @@
 % スラーと同様の方法で直線を使えるようにします．
 % \paragraph{実装}
 % \subparagraph{下準備}
+% \pkg{xkeyval}を読み込みます．
+%    \begin{macrocode}
+\RequirePackage{xkeyval}
+%    \end{macrocode}
 % \begin{macro}{\N@musline}
 % 保留された直線の数を保持するカウンタ・レジスタを用意します．
 %    \begin{macrocode}
@@ -427,6 +431,34 @@
 
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\gcmc@imusline@hoffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{hoffset}[1.5]{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@imusline@voffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{voffset}[\z@]{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@imusline@text}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{text}[]{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@imusline@textpos}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{textpos}[u]{}
+%    \end{macrocode}
+% \end{macro}
+% 定義したコマンドキーをプリセットとします．
+%    \begin{macrocode}
+\presetkeys[gcmc]{imusline}{hoffset,voffset,text,textpos}{}
+%    \end{macrocode}
 % \subparagraph{始点}
 % \begin{macro}{\imusline}\oarg{text}\marg{id}\marg{height}\par
 % muslineの始点を設定します．
@@ -435,47 +467,74 @@
 % \item \meta{id}は参照するmusline IDを設定します．
 % \item \meta{height}はmuslineの出力される高さを設定します．
 % \end{itemize}
+% 
 %    \begin{macrocode}
 %% \ibktu/d #1=text(optional) #2=musline id #3=height[\internote]
-\newcommand{\imusline}[1][]{\@i@musline[#1]{1.5}{\z@}u}
+\newcommand{\imusline}{%
+  \check@staff\begingroup\endcatcodesmusic\gcmc@imusline
+}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\@i@musline}\oarg{text}\marg{hoffset}\marg{voffset}%
-%              \marg{sence}\marg{id}\marg{height}\par
+% \begin{macro}{\gcmc@imusline}\par
+%    \begin{macrocode}
+\def\gcmc@imusline{%
+\@ifnextchar[%]
+  {%
+    \gcmc@i@musline%
+  }{%
+    \gcmc@i@musline[]%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@i@musline}\oarg{key-val}%
+%              \marg{id}\marg{height}\par
 % muslineの始点を設定する内部マクロです．
 % \begin{itemize}
-% \item \meta{text}はmuslineの上または下に出力される文字を設定します．
-% \item \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
-%       単位は符頭の長さ\cmd{\qn@width}です．
-% \item \meta{voffset}は始点の高さから上へずらす長さを設定します．
-% \item \meta{sence}はmuslineの上下の向きを設定します．
+% \item \meta{key-val}はmuslineの上または下に出力される文字を設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{text}はmuslineの上または下に出力される文字を設定します．
+%   \item
+%     \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%   \item
+%     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%   \item
+%     \meta{textpos}はmuslineでの文字の出力される上(u)，下(dまたはl)を
+%     設定します．
+%     規定値は上(u)です．
+%   \end{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
 % \item \meta{height}はmuslineの出力される始点の高さを設定します．
 % \end{itemize}
 % 設定されたパラメータは\cmd{\musline@}から始まる
 % 各マクロあるいはレジスタに（グローバルに）定義あるいは代入されます．
 %    \begin{macrocode}
-%% \@i@musline #1=text #2=hoffset[\qn@width] #3=voffset
-%%         #4=musline sence(u,d) #5=musline id #6=height[\internote]
-\def\@i@musline[#1]#2#3#4#5#6{%
-  \check@staff
-    \global\advance\N@musline\@ne % update musline counter
-    \s@l@ctmusline#5\relax
-    % test for already invoked \islur
-    \if x\the\musline@s \else\errmessage{\@mis\noexpand\tmusline#5}\fi
-    \global\musline@Y#3%            store voffset (abs. dim. to rel. height)
-    \global\musline@s{#4}%          store sense (u,d)
-    \global\musline@t{#1}%          store text
-    \global\musline@N\noinstrum@nt% store instrument number
-    \inhgetn@i#6\relax
-    \global\musline@y\n@i %         start vpos (steps of internote)
-    \global\musline@a\altportee %   store altportee of current slur
-    \getcurpos
-    \advance\y@v#2\qn@width
-    \global\musline@x\y@v %         start hpos
-  \fi% start hpos (current pos including hoffset)
+%% \gcmc@i@musline
+%%   #1=key-val{text, hoffset[\qn@width], voffset, textpos}
+%%   #2=musline id
+%%   #3=height[\internote]
+\def\gcmc@i@musline[#1]#2#3{%
+  \global\advance\N@musline\@ne % update musline counter
+  \s@l@ctmusline#2\relax
+  % test for already invoked \islur
+  \if x\the\musline@s \else\errmessage{\@mis\noexpand\tmusline#2}\fi
+  \setkeys[gcmc]{imusline}{#1}%
+  \global\musline@Y\cmdgcmc@imusline@voffset% store voffset
+  \expandafter\global\expandafter\musline@s\expandafter
+    {\cmdgcmc@imusline@textpos}%  store sense (u,d)
+  \expandafter\global\expandafter\musline@t\expandafter
+    {\cmdgcmc@imusline@text}%     store text
+  \global\musline@N\noinstrum@nt% store instrument number
+  \inhgetn@i#3\relax
+  \global\musline@y\n@i %         start vpos (steps of internote)
+  \global\musline@a\altportee %   store altportee of current slur
+  \getcurpos
+  \advance\y@v\cmdgcmc@imusline@hoffset\qn@width
+  \global\musline@x\y@v %         start hpos
+  \endgroup\fi%
 }
-
 %    \end{macrocode}
 % \end{macro}
 % \subparagraph{終点}
@@ -555,9 +614,26 @@
   \llap{%
     \tikz[baseline=0.0ex]{%
       \draw[semithick]
-         (0,\y@i)-- (\y@iii,\y@ii);
-      \node at ($(\h@lf\y@iii,\y@ii)+(0,\internote)$)
-         [above] {\the\musline@t};
+        (0,\y@i)-- (\y@iii,\y@ii);
+      \if u\the\musline@s
+        \node at ($(\h@lf\y@iii,\y@ii)+(0,\internote)$)
+        [above]
+        {\the\musline@t};
+      \else
+        \if d\the\musline@s
+          \node at ($(\h@lf\y@iii,\y@ii)-(0,\internote)$)
+          [below]
+          {\the\musline@t};
+        \else
+          \if l\the\musline@s
+            \node at ($(\h@lf\y@iii,\y@ii)-(0,\internote)$)
+            [below]
+            {\the\musline@t};
+          \else
+            \PackageError{gcmcline}{unexpacted sence \the\musline@s: u, d or l}%
+          \fi
+        \fi
+      \fi
     }%
     \hspace{-\y@iv}%
   }%
