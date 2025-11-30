@@ -1,9 +1,9 @@
 % ^^A -*- japanese-latex -*-
-%
-\ifx\epTeXinputencoding\undefined\else
-  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
-\fi
-%
+%\catcode`\<=14
+%<macrobase>\ifx\epTeXinputencoding\undefined\else
+%<macrobase>  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
+%<macrobase>\fi
+%\catcode`\<=12
 % \iffalse
 %
 %   gcmcline.dtx
@@ -263,7 +263,7 @@
 % \section{実装}
 %
 %    \begin{macrocode}
-%<*macro>
+%<*macrobase>
 %%=============================================================================%
 %%                                                                             %
 %%   GGGGG          A          CCCCC    H       H    IIIII                     %
@@ -320,6 +320,8 @@
 %    \begin{macrocode}
 \ProvidesPackage{gcmcline}
   [2025/11/28 Gachimuchi Koza Macro set ver.~\gcmc@line@Version]
+%</macrobase>
+%<*macro>
 %    \end{macrocode}
 % \subsection{muslineの追加}
 % \paragraph{概説}
