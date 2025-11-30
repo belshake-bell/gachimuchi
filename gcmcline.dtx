@@ -222,21 +222,41 @@
 % 楽譜上での直線を実装します．
 % 
 % \DescribeMacro{\imusline}\cmd{\imusline}は
-% \cmd{\imusline}\oarg{text}\marg{id}\marg{height}の形で直線を開始します．
+% \cmd{\imusline}\oarg{key-val}\marg{id}\marg{height}の形で直線を開始します．
 % \begin{itemize}
-% \item \meta{text}はmuslineの上に出力される文字を設定します．
+% \item \meta{key-val}は様々なオプションを設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{hoffset}は始点の水平位置から右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%   \item
+%     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%   \item
+%     \meta{text}はmuslineの上または下に出力される文字を設定します．
+%   \item
+%     \meta{textpos}はmuslineでの文字の出力される上(u)，下(dまたはl)を
+%     設定します．
+%     規定値は上(u)です．
+%   \end{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
-% \item \meta{height}はmuslineの出力される高さを設定します．
+% \item \meta{start pitch}はmuslineの出力される高さを設定します．
 % \end{itemize}
 %
 % このようにして開始した直線は
 % その地点の右側1.5\cmd{\qn@width}のところを始点とします．
 %
 % \DescribeMacro{\tmusline}\cmd{\tmusline}は
-% \cmd{\tmusline}\marg{id}\marg{height}の形で直線を終了します．
+% \cmd{\tmusline}\oarg{key-val}\marg{id}\marg{end pitch}の形で直線を終了します．
 % \begin{itemize}
+% \item \meta{key-val}は様々なオプションを設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{hoffset}は終点の水平位置から右へずらす長さを設定します．
+%   \item
+%     \meta{voffset}は終点の高さから上へずらす長さを設定します．
+%   \end{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
-% \item \meta{height}はmuslineの出力される終端部の高さを設定します．
+% \item \meta{end pitch}はmuslineの出力される終端部の高さを設定します．
 % \end{itemize}
 %
 % \StopEventually{}
@@ -459,7 +479,7 @@
 % \item \meta{key-val}は様々なオプションを設定します．
 %   \begin{itemize}
 %   \item
-%     \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
+%     \meta{hoffset}は始点の水平位置から右へずらす長さの係数を設定します．
 %     単位は符頭の長さ\cmd{\qn@width}です．
 %   \item
 %     \meta{voffset}は始点の高さから上へずらす長さを設定します．
@@ -500,7 +520,7 @@
 % \item \meta{key-val}は様々なオプションを設定します．
 %   \begin{itemize}
 %   \item
-%     \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
+%     \meta{hoffset}は始点の水平位置から右へずらす長さの係数を設定します．
 %     単位は符頭の長さ\cmd{\qn@width}です．
 %   \item
 %     \meta{voffset}は始点の高さから上へずらす長さを設定します．
@@ -566,10 +586,9 @@
 % \item \meta{key-val}は様々なオプションを設定します．
 %   \begin{itemize}
 %   \item
-%     \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
-%     単位は符頭の長さ\cmd{\qn@width}です．
+%     \meta{hoffset}は終点の水平位置から右へずらす長さを設定します．
 %   \item
-%     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%     \meta{voffset}は終点の高さから上へずらす長さを設定します．
 %   \end{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
 % \item \meta{end pitch}はmuslineの出力される終端部の高さを設定します．
