@@ -447,7 +447,13 @@
 % \begin{macro}{\gcmc@imusline@hoffset}
 % コマンドキーを定義します．
 %    \begin{macrocode}
-\define@cmdkey[gcmc]{imusline}{hoffset}[1.5]{}
+\define@cmdkey[gcmc]{imusline}{hoffset}[\z@]{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@imusline@hpos}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{hpos}[1.5]{}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\gcmc@imusline@voffset}
@@ -470,7 +476,7 @@
 % \end{macro}
 % 定義したコマンドキーをプリセットとします．
 %    \begin{macrocode}
-\presetkeys[gcmc]{imusline}{hoffset,voffset,text,textpos}{}
+\presetkeys[gcmc]{imusline}{hoffset,hpos,voffset,text,textpos}{}
 %    \end{macrocode}
 % \subparagraph{始点}
 % \begin{macro}{\imusline}\oarg{key-val}\marg{id}\marg{start pitch}\par
@@ -479,8 +485,11 @@
 % \item \meta{key-val}は様々なオプションを設定します．
 %   \begin{itemize}
 %   \item
-%     \meta{hoffset}は始点の水平位置から右へずらす長さの係数を設定します．
+%     \meta{hoffset}は始点の水平位置から右へずらす長さを設定します．
+%   \item
+%     \meta{hpos}は始点の水平位置から右へずらす長さの係数を設定します．
 %     単位は符頭の長さ\cmd{\qn@width}です．
+%     既定値は\texttt{1.5}です．
 %   \item
 %     \meta{voffset}は始点の高さから上へずらす長さを設定します．
 %   \item
@@ -520,8 +529,11 @@
 % \item \meta{key-val}は様々なオプションを設定します．
 %   \begin{itemize}
 %   \item
-%     \meta{hoffset}は始点の水平位置から右へずらす長さの係数を設定します．
+%     \meta{hoffset}は始点の水平位置から右へずらす長さを設定します．
+%   \item
+%     \meta{hpos}は始点の水平位置から右へずらす長さの係数を設定します．
 %     単位は符頭の長さ\cmd{\qn@width}です．
+%     既定値は\texttt{1.5}です．
 %   \item
 %     \meta{voffset}は始点の高さから上へずらす長さを設定します．
 %   \item
@@ -557,7 +569,8 @@
   \global\musline@y\n@i %         start vpos (steps of internote)
   \global\musline@a\altportee %   store altportee of current slur
   \getcurpos
-  \advance\y@v\cmdgcmc@imusline@hoffset\qn@width
+  \advance\y@v\cmdgcmc@imusline@hoffset
+  \advance\y@v\cmdgcmc@imusline@hpos\qn@width
   \global\musline@x\y@v %         start hpos
   \endgroup\fi%
 }
@@ -570,6 +583,12 @@
 \define@cmdkey[gcmc]{tmusline}{hoffset}[\z@]{}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\gcmc@tmusline@hpos}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{tmusline}{hpos}[-0.5]{}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\gcmc@tmusline@voffset}
 % コマンドキーを定義します．
 %    \begin{macrocode}
@@ -578,7 +597,7 @@
 % \end{macro}
 % 定義したコマンドキーをプリセットとします．
 %    \begin{macrocode}
-\presetkeys[gcmc]{tmusline}{hoffset,voffset}{}
+\presetkeys[gcmc]{tmusline}{hoffset,hpos,voffset}{}
 %    \end{macrocode}
 % \begin{macro}{\tmusline}\oarg{key-val}\marg{id}\marg{end pitch}\par
 % muslineの終点を設定します．
@@ -587,6 +606,10 @@
 %   \begin{itemize}
 %   \item
 %     \meta{hoffset}は終点の水平位置から右へずらす長さを設定します．
+%   \item
+%     \meta{hpos}は終点の水平位置から右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%     既定値は\texttt{-0.5}です．
 %   \item
 %     \meta{voffset}は終点の高さから上へずらす長さを設定します．
 %   \end{itemize}
@@ -620,7 +643,7 @@
 % \end{itemize}
 %    \begin{macrocode}
     \setkeys[gcmc]{tmusline}{#1}%
-    \y@iv\cmdgcmc@tmusline@hoffset
+    \y@iv\dimexpr\cmdgcmc@tmusline@hoffset+\cmdgcmc@tmusline@hpos\qn@width\relax
     \def\@sense{\the\musline@s}%
 % test for missing \ibkt
     \if x\@sense \errmessage{\@mis\noexpand\imusline#2}\fi
