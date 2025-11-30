@@ -1,9 +1,9 @@
 % ^^A -*- japanese-latex -*-
-%
-\ifx\epTeXinputencoding\undefined\else
-  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
-\fi
-%
+%\catcode`\<=14
+%<patch>\ifx\epTeXinputencoding\undefined\else
+%<patch>  \epTeXinputencoding utf8 % ^^A added (2017-10-04)
+%<patch>\fi
+%\catcode`\<=12
 % \iffalse
 %
 %   gachimuchi.dtx
@@ -229,9 +229,11 @@
 % [2024/06/21 Gachimuchi Koza patch set ver. 1.5.0]
 % [2020/07/11 Gachimuchi Koza patch set ver. 1.0]
 % [2020/01/16 Gachimuchi Koza patch set ver. 1.0]
+%</patch>
 %    \end{macrocode}
 % \section{MusiXTeXのパッチ}
 %    \begin{macrocode}
+%<*musixtex>
 %%==============================================================================
 %% MusiXTeX package
 %%==============================================================================
@@ -2100,12 +2102,14 @@
 \let\reserved@a\relax
 
 \fi% \ifdefined\startpiece
+%</musixtex>
 %    \end{macrocode}
 % \end{macro}
 % \section{\texttt{biblatex}のパッチ}
 % ここでは\texttt{biblatex}の内部命令を書き換えるとかはしていないと思うので，
 % TeX Live 2020-10-01以降でも壊れないはず．
 %    \begin{macrocode}
+%<*biblatex>
 %%==============================================================================
 %% biblatex用のアレコレ
 %%==============================================================================
@@ -2215,14 +2219,10 @@
       {}%
     \usebibmacro{finentry}}
 }{}
-
-%</patch>
+%</biblatex>
 %    \end{macrocode}
 %
 % 以上で終わりです.
-%    \begin{macrocode}
-\endinput
-%    \end{macrocode}
 %
 %
 % \Finale

@@ -2,4 +2,9 @@
 \input docstrip.tex
 \keepsilent
 
-\generateFile{gachimuchipatch.sty}{f}{\from{gachimuchipatch.dtx}{patch}}
+\generateFile{gachimuchipatch.sty}{f}{%
+  \from{gachimuchipatch.dtx}{patch}%
+  \from{gachimuchipatch.dtx}{musixtex}%
+  \from{gcmcline.dtx}{macro}%
+  \from{gachimuchipatch.dtx}{biblatex}%
+}
