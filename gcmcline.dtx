@@ -583,16 +583,16 @@
 % muslineの描画部分です．
 %    \begin{macrocode}
 % #1 start pitch #2 end pitch #3 length #4 right hoffset
-\def\write@musline#1#2#3#4{\check@staff %
-  \ifx\musline@N\undefined
-    \relax %
-  \else
-    \edef\internote{\csname i@n\romannumeral\musline@N\endcsname}%
-  \fi
-% \immediate\write16{\noexpand\write@musline internote:\the\internote}%
-  \n@iv#1%
-  \n@vi#2%
-  \y@iii#3%
+\def\write@musline#1#2#3#4{%
+  \check@staff %
+    \ifx\musline@N\undefined
+      \relax %
+    \else
+      \edef\internote{\csname i@n\romannumeral\musline@N\endcsname}%
+    \fi
+    \n@iv#1%
+    \n@vi#2%
+    \y@iii#3%
 %%
 %%   Get note vertical offsets
 %%   \n@iv=   vertical offset of first  note(n@i temp);
@@ -601,44 +601,46 @@
 %%   \y@ii=   reference height of end note (pt);
 %%   \y@iii=  musline length (pt);
 %%
-  \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
-  \n@i\n@iv \pl@base % \y@i = initial height
-  \advance\y@i\musline@Y \advance\y@ii\musline@Y% add the voffsets
-  \ifx\@Ti\@ne
-    \advance\y@i\musline@a
-    \advance\y@ii\musline@a
-    \let\@Ti\empty
-  \fi% call from cutslur
+    \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
+    \n@i\n@iv \pl@base % \y@i = initial height
+    \advance\y@i\musline@Y \advance\y@ii\musline@Y% add the voffsets
+    \ifx\@Ti\@ne
+      \advance\y@i\musline@a
+      \advance\y@ii\musline@a
+      \let\@Ti\empty
+    \fi% call from cutslur
 %%
 %% draw musline
 %%
-  \llap{%
-    \tikz[baseline=0.0ex]{%
-      \draw[semithick]
-        (0,\y@i)-- (\y@iii,\y@ii);
-      \if u\the\musline@s
-        \node at ($(\h@lf\y@iii,\y@ii)+(0,\internote)$)
-        [above]
-        {\the\musline@t};
-      \else
-        \if d\the\musline@s
-          \node at ($(\h@lf\y@iii,\y@ii)-(0,\internote)$)
-          [below]
+    \llap{%
+      \tikz[baseline=0.0ex]{%
+        \draw[semithick]
+          (0,\y@i)-- (\y@iii,\y@ii);
+        \if u\the\musline@s
+          \node at ($(\h@lf\y@iii,\y@ii)+(0,\internote)$)
+          [above]
           {\the\musline@t};
         \else
-          \if l\the\musline@s
+          \if d\the\musline@s
             \node at ($(\h@lf\y@iii,\y@ii)-(0,\internote)$)
             [below]
             {\the\musline@t};
           \else
-            \PackageError{gcmcline}{unexpacted sence \the\musline@s: u, d or l}%
+            \if l\the\musline@s
+              \node at ($(\h@lf\y@iii,\y@ii)-(0,\internote)$)
+              [below]
+              {\the\musline@t};
+            \else
+              \PackageError{gcmcline}
+                           {unexpacted sence \the\musline@s: u, d or l}%
+            \fi
           \fi
         \fi
-      \fi
+      }%
+      \hspace{-\y@iv}%
     }%
-    \hspace{-\y@iv}%
-  }%
-\fi} % end writ@musline
+  \fi
+} % end writ@musline
 \setmaxmuslines6
 
 %    \end{macrocode}
