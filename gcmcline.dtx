@@ -453,10 +453,23 @@
 \presetkeys[gcmc]{imusline}{hoffset,voffset,text,textpos}{}
 %    \end{macrocode}
 % \subparagraph{始点}
-% \begin{macro}{\imusline}\oarg{text}\marg{id}\marg{start pitch}\par
+% \begin{macro}{\imusline}\oarg{key-val}\marg{id}\marg{start pitch}\par
 % muslineの始点を設定します．
 % \begin{itemize}
-% \item \meta{text}はmuslineの上に出力される文字を設定します．
+% \item \meta{key-val}は様々なオプションを設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%   \item
+%     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%   \item
+%     \meta{text}はmuslineの上または下に出力される文字を設定します．
+%   \item
+%     \meta{textpos}はmuslineでの文字の出力される上(u)，下(dまたはl)を
+%     設定します．
+%     規定値は上(u)です．
+%   \end{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
 % \item \meta{start pitch}はmuslineの出力される高さを設定します．
 % \end{itemize}
@@ -484,15 +497,15 @@
 %              \marg{id}\marg{start pitch}\par
 % muslineの始点を設定する内部マクロです．
 % \begin{itemize}
-% \item \meta{key-val}はmuslineの上または下に出力される文字を設定します．
+% \item \meta{key-val}は様々なオプションを設定します．
 %   \begin{itemize}
-%   \item
-%     \meta{text}はmuslineの上または下に出力される文字を設定します．
 %   \item
 %     \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
 %     単位は符頭の長さ\cmd{\qn@width}です．
 %   \item
 %     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%   \item
+%     \meta{text}はmuslineの上または下に出力される文字を設定します．
 %   \item
 %     \meta{textpos}はmuslineでの文字の出力される上(u)，下(dまたはl)を
 %     設定します．
@@ -505,7 +518,7 @@
 % 各マクロあるいはレジスタに（グローバルに）定義あるいは代入されます．
 %    \begin{macrocode}
 %% \gcmc@i@musline
-%%   #1=key-val{text, hoffset[\qn@width], voffset, textpos}
+%%   #1=key-val{hoffset[\qn@width], voffset, text, textpos}
 %%   #2=musline id
 %%   #3=start pitch[\internote]
 \def\gcmc@i@musline[#1]#2#3{%
@@ -547,9 +560,17 @@
 %    \begin{macrocode}
 \presetkeys[gcmc]{tmusline}{hoffset,voffset}{}
 %    \end{macrocode}
-% \begin{macro}{\tmusline}\marg{id}\marg{end pitch}\par
+% \begin{macro}{\tmusline}\oarg{key-val}\marg{id}\marg{end pitch}\par
 % muslineの終点を設定します．
 % \begin{itemize}
+% \item \meta{key-val}は様々なオプションを設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{hoffset}は現在のカーソルから右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%   \item
+%     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%   \end{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
 % \item \meta{end pitch}はmuslineの出力される終端部の高さを設定します．
 % \end{itemize}
@@ -563,9 +584,9 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\t@musline}\marg{hoffset}\marg{id}\marg{end pitch}\par
+% \begin{macro}{\t@musline}\oarg{key-val}\marg{id}\marg{end pitch}\par
 %    \begin{macrocode}
-%% \t@musline #1=hoffset #2=reference number #3=end note
+%% \t@musline #1=key-val #2=reference number #3=end note
 \def\t@musline[#1]#2#3{%
   \check@staff
     \s@l@ctmusline#2\relax
