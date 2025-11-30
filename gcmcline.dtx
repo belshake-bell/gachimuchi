@@ -359,7 +359,6 @@
 %                 それに伴い\cmd{\s@Y}は始点での垂直方向の
 %                 オフセットとして扱われる.
 \fi
-% \item \cmd{\musline@o}: muslineの鉤の開き．
 % \end{itemize}
 %    \begin{macrocode}
 \def\setmaxmuslines#1{%
@@ -400,11 +399,6 @@
       % text token
       \expandafter \noexpand@newtoks  \csname musline@t\roman@c@\endcsname
       %
-      %
-      % open left/right token
-      \expandafter \noexpand@newtoks  \csname musline@o\roman@c@\endcsname
-      \csname musline@o\roman@c@\endcsname={x}%
-      %
     \ifnum\count@<\maxmuslines\repeat
     \expandafter\message\expandafter{maxmuslines=\the\maxmuslines}%
     \chardef\@oldmaxmuslines=\maxmuslines\relax%
@@ -426,7 +420,6 @@
   \edef\musline@Y{\csname musline@Y\roman@n@i}%  dimen (voffset)
   \edef\musline@t{\csname musline@t\roman@n@i}%  token (text)
   \edef\musline@s{\csname musline@s\roman@n@i}%  token (sense)
-  \edef\musline@o{\csname musline@o\roman@n@i}%  token (sense)
 }
 
 %    \end{macrocode}
@@ -554,6 +547,16 @@
 \def\t@musline#1#2#3{%
   \check@staff
     \s@l@ctmusline#2\relax
+%    \end{macrocode}
+% \begin{itemize}
+% \item
+%   \cmd{\y@iv}: \meta{hoffset}.
+% \item
+%   \cmd{\@sense}: \cmd{\musline@s}.
+% \item
+%   \cmd{\y@v}: \meta{duration from x1 to x2}.
+% \end{itemize}
+%    \begin{macrocode}
     \y@iv#1\qn@width
     \def\@sense{\the\musline@s}%
 % test for missing \ibkt
@@ -566,12 +569,10 @@
 % clip musline at eoline
     \ifdim\y@v>\y@ \y@v\y@ \advance\y@v\beforeruleskip \y@iv\beforeruleskip \fi
     \advance\y@v-\musline@x
-    \if r\the\musline@o \musline@o{l}\fi
     \inhgetn@i#3\relax
     \write@musline{\musline@y}{\n@i}{\y@v}{-\y@iv}%
 % reset sense of musline
     \global\musline@s{x}\let\T@i\empty
-    \global\musline@o{x}\let\T@i\empty
     \global\advance\N@musline\m@ne% update slur counter
   \fi
 }
