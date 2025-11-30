@@ -4,7 +4,7 @@ DOCTARGET = gachimuchi gachimuchimacro gachimuchipatch gcmcline
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
 LATEXENGINE := uplatex #lualatex
-LOGSUFFIXES = .aux .log .toc .mx1 .mx2 .bcf .bbl .blg .idx .ind .ilg .out .run.xml .glo .gls
+LOGSUFFIXES = .aux .log .toc .mx1 .mx2 .bcf .bbl .blg .idx .ind .ilg .out .run.xml .glo .gls .hd
 
 define move
 	$(foreach tempsuffix,$(LOGSUFFIXES),$(call movebase,$1,$(tempsuffix)))
@@ -12,6 +12,15 @@ define move
 endef
 define movebase
 	if [ -e $(addsuffix $2,$1) ]; then mv $(addsuffix $2,$1) ./logs; fi
+	
+endef
+
+define remove
+	$(foreach tempsuffix,$(LOGSUFFIXES),$(call movebase,$1,$(tempsuffix)))
+	
+endef
+define removebase
+	if [ -e $(addsuffix $2,$1) ]; then rm -f $(addsuffix $2,$1) ; fi
 	
 endef
 
@@ -31,13 +40,13 @@ ptcinstl: gachimuchipatch.sty gachimuchipatch.pdf
 .PHONY: install clean cleanstrip cleanall cleandoc movelog
 
 
-gachimuchi.cls: gachimuchi.dtx
+gachimuchi.cls: gachimuchi.dtx gachimuchi.ins
 	pdflatex gachimuchi.ins
 
-gachimuchimacro.sty: gachimuchimacro.dtx
+gachimuchimacro.sty: gachimuchimacro.dtx gachimuchimacro.ins
 	pdflatex gachimuchimacro.ins
 
-gachimuchipatch.sty: gachimuchipatch.dtx
+gachimuchipatch.sty: gachimuchipatch.dtx gachimuchipatch.ins gcmcline.dtx
 	pdflatex gachimuchipatch.ins
 
 gcmcline.sty: gcmcline.dtx gcmcline.ins
@@ -59,11 +68,11 @@ else
 .dtx.dvi:
 	uplatex $<
 	if [ -e $(basename $<).idx ]; then makeindex -s gind.ist $(basename $<); fi
-	if [ -e $(basename $<).glo ]; then makeindex -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<)); fi
+	if [ -e $(basename $<).glo ];\
+		then makeindex -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<)); fi
 	uplatex -synctex=1 $<
-	rm -f $(addsuffix .toc,$(basename $<)) \
-	$(addsuffix .out,$(basename $<)) \
-	$(addsuffix .aux,$(basename $<))
+	$(MAKE) movelog DOCTARGET=$(basename $(notdir $<))
+
 .dvi.pdf:
 	dvipdfmx $<
 endif
@@ -79,16 +88,7 @@ movelog:
 	$(foreach temp,$(DOCTARGET),$(call move,$(temp)))
 
 clean:
-	rm -f \
-	$(addsuffix .idx,$(DOCTARGET)) \
-	$(addsuffix .ind,$(DOCTARGET)) \
-	$(addsuffix .ilg,$(DOCTARGET)) \
-	$(addsuffix .glo,$(DOCTARGET)) \
-	$(addsuffix .gls,$(DOCTARGET)) \
-	$(addsuffix .aux,$(DOCTARGET)) \
-	$(addsuffix .toc,$(DOCTARGET)) \
-	$(addsuffix .mx1,$(DOCTARGET)) \
-	$(addsuffix .log,$(DOCTARGET))
+	$(foreach temp,$(DOCTARGET),$(call remove,$(temp)))
 
 cleanall:
 	rm -f $(PDFTARGET) \
