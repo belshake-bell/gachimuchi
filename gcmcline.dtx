@@ -453,16 +453,16 @@
 \presetkeys[gcmc]{imusline}{hoffset,voffset,text,textpos}{}
 %    \end{macrocode}
 % \subparagraph{始点}
-% \begin{macro}{\imusline}\oarg{text}\marg{id}\marg{height}\par
+% \begin{macro}{\imusline}\oarg{text}\marg{id}\marg{start pitch}\par
 % muslineの始点を設定します．
 % \begin{itemize}
 % \item \meta{text}はmuslineの上に出力される文字を設定します．
 % \item \meta{id}は参照するmusline IDを設定します．
-% \item \meta{height}はmuslineの出力される高さを設定します．
+% \item \meta{start pitch}はmuslineの出力される高さを設定します．
 % \end{itemize}
 % 
 %    \begin{macrocode}
-%% \ibktu/d #1=text(optional) #2=musline id #3=height[\internote]
+%% \ibktu/d #1=text(optional) #2=musline id #3=start pitch
 \newcommand{\imusline}{%
   \check@staff\begingroup\endcatcodesmusic\gcmc@imusline
 }
@@ -481,7 +481,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\gcmc@i@musline}\oarg{key-val}%
-%              \marg{id}\marg{height}\par
+%              \marg{id}\marg{start pitch}\par
 % muslineの始点を設定する内部マクロです．
 % \begin{itemize}
 % \item \meta{key-val}はmuslineの上または下に出力される文字を設定します．
@@ -499,7 +499,7 @@
 %     規定値は上(u)です．
 %   \end{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
-% \item \meta{height}はmuslineの出力される始点の高さを設定します．
+% \item \meta{start pitch}はmuslineの出力される始点の高さを設定します．
 % \end{itemize}
 % 設定されたパラメータは\cmd{\musline@}から始まる
 % 各マクロあるいはレジスタに（グローバルに）定義あるいは代入されます．
@@ -507,7 +507,7 @@
 %% \gcmc@i@musline
 %%   #1=key-val{text, hoffset[\qn@width], voffset, textpos}
 %%   #2=musline id
-%%   #3=height[\internote]
+%%   #3=start pitch[\internote]
 \def\gcmc@i@musline[#1]#2#3{%
   \global\advance\N@musline\@ne % update musline counter
   \s@l@ctmusline#2\relax
@@ -531,17 +531,17 @@
 %    \end{macrocode}
 % \end{macro}
 % \subparagraph{終点}
-% \begin{macro}{\tmusline}\marg{id}\marg{height}\par
+% \begin{macro}{\tmusline}\marg{id}\marg{end pitch}\par
 % muslineの終点を設定します．
 % \begin{itemize}
 % \item \meta{id}は参照するmusline IDを設定します．
-% \item \meta{height}はmuslineの出力される終端部の高さを設定します．
+% \item \meta{end pitch}はmuslineの出力される終端部の高さを設定します．
 % \end{itemize}
 %    \begin{macrocode}
 \def\tmusline{\t@musline0}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\t@musline}\marg{hoffset}\marg{id}\marg{height}\par
+% \begin{macro}{\t@musline}\marg{hoffset}\marg{id}\marg{end pitch}\par
 %    \begin{macrocode}
 %% \t@musline #1=hoffset #2=reference number #3=end note
 \def\t@musline#1#2#3{%
