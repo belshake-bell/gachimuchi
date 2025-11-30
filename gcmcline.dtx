@@ -49,7 +49,7 @@
 % \CodelineIndex
 \RecordChanges                  % Gather update information
 \setcounter{StandardModuleDepth}{1}
-
+\NewDocElement[printtype=key]{Keyvalkey}{keyvalkey}
 \usepackage{musixtex}
 \usepackage{gcmcline}
 
@@ -446,36 +446,36 @@
 
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\gcmc@imusline@hoffset}
+% \begin{keyvalkey}{hoffset}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{imusline}{hoffset}[\z@]{}
 %    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\gcmc@imusline@hpos}
+% \end{keyvalkey}
+% \begin{keyvalkey}{hpos}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{imusline}{hpos}[1.5]{}
 %    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\gcmc@imusline@voffset}
+% \end{keyvalkey}
+% \begin{keyvalkey}{voffset}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{imusline}{voffset}[\z@]{}
 %    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\gcmc@imusline@text}
+% \end{keyvalkey}
+% \begin{keyvalkey}{text}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{imusline}{text}[]{}
 %    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\gcmc@imusline@textpos}
+% \end{keyvalkey}
+% \begin{keyvalkey}{textpos}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{imusline}{textpos}[u]{}
 %    \end{macrocode}
-% \end{macro}
+% \end{keyvalkey}
 % 定義したコマンドキーをプリセットとします．
 %    \begin{macrocode}
 \presetkeys[gcmc]{imusline}{hoffset,hpos,voffset,text,textpos}{}
@@ -579,24 +579,24 @@
 %    \end{macrocode}
 % \end{macro}
 % \subparagraph{終点}
-% \begin{macro}{\gcmc@tmusline@hoffset}
+% \begin{keyvalkey}{hoffset}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{tmusline}{hoffset}[\z@]{}
 %    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\gcmc@tmusline@hpos}
+% \end{keyvalkey}
+% \begin{keyvalkey}{hpos}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{tmusline}{hpos}[-0.5]{}
 %    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\gcmc@tmusline@voffset}
+% \end{keyvalkey}
+% \begin{keyvalkey}{voffset}
 % コマンドキーを定義します．
 %    \begin{macrocode}
 \define@cmdkey[gcmc]{tmusline}{voffset}[\z@]{}
 %    \end{macrocode}
-% \end{macro}
+% \end{keyvalkey}
 % 定義したコマンドキーをプリセットとします．
 %    \begin{macrocode}
 \presetkeys[gcmc]{tmusline}{hoffset,hpos,voffset}{}
