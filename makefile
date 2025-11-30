@@ -94,5 +94,5 @@ cleanall:
 	make clean
 
 makelog:
-	git log --oneline --decorate --graph --all 1> "log_all.txt"
-	git log --oneline --decorate --graph 1> "log.txt"
+	git log --graph --date=short --all --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log_all.gitlog"
+	git log --graph --date=short       --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log.gitlog"

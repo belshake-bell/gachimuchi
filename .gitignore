@@ -12,6 +12,7 @@ logs/
 *.gls
 *.ilg
 *.log
+*.gitlog
 *.mx1
 *.mx2
 *.toc
