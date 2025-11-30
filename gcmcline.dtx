@@ -347,7 +347,7 @@
 % \item \cmd{\musline@x}: 始点でのmuslineの水平位置[dimen]
 % \item \cmd{\musline@s}: muslineの向き(u, d)およびmuslineが使用中ではないことを意味する
 %                 フラグ(x)
-% \item \cmd{\musline@Y}: muslineの垂直方向のオフセット
+% \item \cmd{\musline@Y}: 始点でのmuslineの垂直方向のオフセット
 % \item \cmd{\musline@a}: musline開始時の\cmd{\altportee}
 % \item \cmd{\musline@y}: 始点でのmuslineの垂直位置[steps of internote]
 % \item \cmd{\musline@N}: muslineの使われている楽器の番号
@@ -378,7 +378,7 @@
       \expandafter \noexpand@newtoks  \csname musline@s\roman@c@\endcsname
       \csname musline@s\roman@c@\endcsname={x}%
       %
-      % vertical offset of musline
+      % vertical offset of musline start position
       \expandafter \noexpand@newdimsk \csname musline@Y\roman@c@\endcsname
       %
       % altportee of musline
@@ -417,7 +417,7 @@
   \edef\musline@y{\csname musline@y\roman@n@i}%  count (startnote [internote])
   \edef\musline@N{\csname musline@N\roman@n@i}%  count (instrument number)
   \edef\musline@z{\csname musline@z\roman@n@i}%  count (endnote [internote])
-  \edef\musline@Y{\csname musline@Y\roman@n@i}%  dimen (voffset)
+  \edef\musline@Y{\csname musline@Y\roman@n@i}%  dimen (start voffset)
   \edef\musline@t{\csname musline@t\roman@n@i}%  token (text)
   \edef\musline@s{\csname musline@s\roman@n@i}%  token (sense)
 }
@@ -514,7 +514,7 @@
   % test for already invoked \islur
   \if x\the\musline@s \else\errmessage{\@mis\noexpand\tmusline#2}\fi
   \setkeys[gcmc]{imusline}{#1}%
-  \global\musline@Y\cmdgcmc@imusline@voffset% store voffset
+  \global\musline@Y\cmdgcmc@imusline@voffset% store start voffset
   \expandafter\global\expandafter\musline@s\expandafter
     {\cmdgcmc@imusline@textpos}%  store sense (u,d)
   \expandafter\global\expandafter\musline@t\expandafter
@@ -531,6 +531,22 @@
 %    \end{macrocode}
 % \end{macro}
 % \subparagraph{終点}
+% \begin{macro}{\gcmc@tmusline@hoffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{tmusline}{hoffset}[\z@]{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@tmusline@voffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{tmusline}{voffset}[\z@]{}
+%    \end{macrocode}
+% \end{macro}
+% 定義したコマンドキーをプリセットとします．
+%    \begin{macrocode}
+\presetkeys[gcmc]{tmusline}{hoffset,voffset}{}
+%    \end{macrocode}
 % \begin{macro}{\tmusline}\marg{id}\marg{end pitch}\par
 % muslineの終点を設定します．
 % \begin{itemize}
@@ -538,13 +554,19 @@
 % \item \meta{end pitch}はmuslineの出力される終端部の高さを設定します．
 % \end{itemize}
 %    \begin{macrocode}
-\def\tmusline{\t@musline0}
+\def\tmusline{\@ifnextchar[%]
+  {%
+    \t@musline%
+  }{%
+    \t@musline[]%
+  }%
+}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\t@musline}\marg{hoffset}\marg{id}\marg{end pitch}\par
 %    \begin{macrocode}
 %% \t@musline #1=hoffset #2=reference number #3=end note
-\def\t@musline#1#2#3{%
+\def\t@musline[#1]#2#3{%
   \check@staff
     \s@l@ctmusline#2\relax
 %    \end{macrocode}
@@ -557,7 +579,8 @@
 %   \cmd{\y@v}: \meta{duration from x1 to x2}.
 % \end{itemize}
 %    \begin{macrocode}
-    \y@iv#1\qn@width
+    \setkeys[gcmc]{tmusline}{#1}%
+    \y@iv\cmdgcmc@tmusline@hoffset
     \def\@sense{\the\musline@s}%
 % test for missing \ibkt
     \if x\@sense \errmessage{\@mis\noexpand\imusline#2}\fi
@@ -603,7 +626,8 @@
 %%
     \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
     \n@i\n@iv \pl@base % \y@i = initial height
-    \advance\y@i\musline@Y \advance\y@ii\musline@Y% add the voffsets
+    \advance\y@i \musline@Y% add the voffsets
+    \advance\y@ii\cmdgcmc@tmusline@voffset% add the voffsets
     \ifx\@Ti\@ne
       \advance\y@i\musline@a
       \advance\y@ii\musline@a
