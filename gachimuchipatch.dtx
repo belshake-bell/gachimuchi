@@ -225,8 +225,16 @@
 % \end{macro}
 % \changes{v1.6.0}{2025/11/30}
 %    {スラーライクな直線マクロ(\file{gcmcline.dtx})の実装．}
+% \changes{v1.6.1}{2025/12/02}
+%    {スラーライクな直線マクロをこのファイルに統合．
+%     単独テスト用のファイルも出力できるように書き換えを進めて
+%     使用感は維持したつもり．}
 %    \begin{macrocode}
-\ProvidesPackage{gachimuchipatch}
+%</patch>
+%<patchPvP>\ProvidesPackage{gachimuchipatch}
+%<musixtexPvP>\ProvidesPackage{gcmcpatchmusix}
+%<muslinePvP>\ProvidesPackage{gcmcline}
+%<*patch>
   [2025/11/30 Gachimuchi Koza patch set ver. 1.6.0]
 % [2024/11/20 Gachimuchi Koza patch set ver. 1.5.2]
 % [2024/06/21 Gachimuchi Koza patch set ver. 1.5.0]
@@ -1949,6 +1957,421 @@
 % （未実装）シンプルなbracket用マクロです．
 % ただし名前被りをどう避けるかが思いついてないので未実装です．
 % \end{macro}
+%</musixtex>
+%<*musline>
+%    \end{macrocode}
+% \subsection{muslineの追加}
+% \paragraph{概説}
+% スラーと同様の方法で直線を使えるようにします．
+% \paragraph{実装}
+% \subparagraph{下準備}
+% \pkg{xkeyval}を読み込みます．
+%    \begin{macrocode}
+\RequirePackage{xkeyval}
+%    \end{macrocode}
+% \begin{macro}{\N@musline}
+% 保留された直線の数を保持するカウンタ・レジスタを用意します．
+%    \begin{macrocode}
+%% muslineの追加
+%% registers for musline
+\newcount\N@musline
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\test@muslinenum}
+% 参照すべきmusline IDが範囲外であるときに
+% エラー・メッセージを出す用のテストマクロです．
+%    \begin{macrocode}
+\def\test@muslinenum{%
+  \ifnum\n@i<\z@ \n@i\@c \fi
+  \ifnum\n@i<\maxmuslines \else
+    \count@\maxmuslines \advance\count@\m@ne
+    \errmessage{Wrong musline reference number \the\n@i!
+                (valid: 0 to \the\count@)}%
+    \n@i\z@
+  \fi
+  \advance\n@i\@ne}%
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@oldmaxmuslines}
+% 現在の最大musline IDを保持します．
+%    \begin{macrocode}
+\chardef\@oldmaxmuslines=\z@
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\setmaxmuslines}\marg{max-ID number}\par
+% \meta{max-ID number}でmusline IDの最大値を設定し，
+% 各種パラメータを定義します．
+% \begin{itemize}
+% \item \cmd{\musline@x}: 始点でのmuslineの水平位置[dimen]
+% \item \cmd{\musline@s}: muslineの向き(u, d)およびmuslineが使用中ではないことを意味する
+%                 フラグ(x)
+% \item \cmd{\musline@Y}: 始点でのmuslineの垂直方向のオフセット
+% \item \cmd{\musline@a}: musline開始時の\cmd{\altportee}
+% \item \cmd{\musline@y}: 始点でのmuslineの垂直位置[steps of internote]
+% \item \cmd{\musline@N}: muslineの使われている楽器の番号
+% \item \cmd{\musline@z}: (予定)muslineが\cmd{\breakmusline}により中断されたときに
+%                         指定する終了時の高さ[steps of internote]
+% \item \cmd{\musline@t}: muslineの上または下に表示されるテキスト・トークン
+\iffalse
+% \item \cmd{\musline@V}: 終点でのスラーの高さのオフセット；
+%                 それに伴い\cmd{\s@Y}は始点での垂直方向の
+%                 オフセットとして扱われる.
+\fi
+% \end{itemize}
+%    \begin{macrocode}
+\def\setmaxmuslines#1{%
+  \ifnum#1>\@oldmaxmuslines
+    \chardef\maxmuslines=#1\relax
+    \ifnum#1>\@c
+      \errmessage{The maximum reference number of elements
+                  is limited to \the\@c}
+      \chardef\maxmuslines=\@c
+    \fi
+    \count@\@oldmaxmuslines\loop
+      \advance\count@ by\@ne
+      % horizontal start position of musline
+      \expandafter \noexpand@newdimsk \csname musline@x\roman@c@\endcsname
+      %
+      % sense u,d and x (flag) for pending musline
+      \expandafter \noexpand@newtoks  \csname musline@s\roman@c@\endcsname
+      \csname musline@s\roman@c@\endcsname={x}%
+      %
+      % vertical offset of musline start position
+      \expandafter \noexpand@newdimsk \csname musline@Y\roman@c@\endcsname
+      %
+      % altportee of musline
+      \expandafter \noexpand@newskip  \csname musline@a\roman@c@\endcsname
+      %
+      % vertical start position of slur [steps of internote]
+      \expandafter \noexpand@newcount \csname musline@y\roman@c@\endcsname
+      %
+      % instrument number of that slur (to retrieve internote)
+      \expandafter \noexpand@newcount \csname musline@N\roman@c@\endcsname
+      %
+      % vertical end position of slur [steps of internote], used from
+      % \breakslur.  the value \maxdimen is used to decide, if
+      % \breakslur is used or not (flag)
+      \expandafter \noexpand@newcount \csname musline@z\roman@c@\endcsname
+      \csname musline@z\roman@c@\endcsname\maxdimen
+      %
+      % text token
+      \expandafter \noexpand@newtoks  \csname musline@t\roman@c@\endcsname
+      %
+    \ifnum\count@<\maxmuslines\repeat
+    \expandafter\message\expandafter{maxmuslines=\the\maxmuslines}%
+    \chardef\@oldmaxmuslines=\maxmuslines\relax%
+    \normalnotesize\resetlayout
+  \fi}%
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\s@l@ctmusline}\marg{musline ID}\par
+% IDが\meta{musline ID}であるmuslineのパラメータを取得します．
+%    \begin{macrocode}
+\def\s@l@ctmusline#1\relax{%
+  \n@i#1\relax\test@muslinenum%
+  \edef\musline@a{\csname musline@a\roman@n@i}%  dimen (altportee)
+  \edef\musline@x{\csname musline@x\roman@n@i}%  dimen (hor start pos)
+  \edef\musline@y{\csname musline@y\roman@n@i}%  count (startnote [internote])
+  \edef\musline@N{\csname musline@N\roman@n@i}%  count (instrument number)
+  \edef\musline@z{\csname musline@z\roman@n@i}%  count (endnote [internote])
+  \edef\musline@Y{\csname musline@Y\roman@n@i}%  dimen (start voffset)
+  \edef\musline@t{\csname musline@t\roman@n@i}%  token (text)
+  \edef\musline@s{\csname musline@s\roman@n@i}%  token (sense)
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{keyvalkey}{hoffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{hoffset}[\z@]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% \begin{keyvalkey}{hpos}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{hpos}[1.5]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% \begin{keyvalkey}{voffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{voffset}[\z@]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% \begin{keyvalkey}{text}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{text}[]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% \begin{keyvalkey}{textpos}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{imusline}{textpos}[u]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% 定義したコマンドキーをプリセットとします．
+%    \begin{macrocode}
+\presetkeys[gcmc]{imusline}{hoffset,hpos,voffset,text,textpos}{}
+%    \end{macrocode}
+% \subparagraph{始点}
+% \begin{macro}{\imusline}\oarg{key-val}\marg{id}\marg{start pitch}\par
+% muslineの始点を設定します．
+% \begin{itemize}
+% \item \meta{key-val}は様々なオプションを設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{hoffset}は始点の水平位置から右へずらす長さを設定します．
+%   \item
+%     \meta{hpos}は始点の水平位置から右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%     既定値は\texttt{1.5}です．
+%   \item
+%     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%   \item
+%     \meta{text}はmuslineの上または下に出力される文字を設定します．
+%   \item
+%     \meta{textpos}はmuslineでの文字の出力される上(u)，下(dまたはl)を
+%     設定します．
+%     規定値は上(u)です．
+%   \end{itemize}
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{start pitch}はmuslineの出力される高さを設定します．
+% \end{itemize}
+% 
+%    \begin{macrocode}
+%% \ibktu/d #1=text(optional) #2=musline id #3=start pitch
+\newcommand{\imusline}{%
+  \check@staff\begingroup\endcatcodesmusic\gcmc@imusline
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@imusline}\par
+%    \begin{macrocode}
+\def\gcmc@imusline{%
+\@ifnextchar[%]
+  {%
+    \gcmc@i@musline%
+  }{%
+    \gcmc@i@musline[]%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@i@musline}\oarg{key-val}%
+%              \marg{id}\marg{start pitch}\par
+% muslineの始点を設定する内部マクロです．
+% \begin{itemize}
+% \item \meta{key-val}は様々なオプションを設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{hoffset}は始点の水平位置から右へずらす長さを設定します．
+%   \item
+%     \meta{hpos}は始点の水平位置から右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%     既定値は\texttt{1.5}です．
+%   \item
+%     \meta{voffset}は始点の高さから上へずらす長さを設定します．
+%   \item
+%     \meta{text}はmuslineの上または下に出力される文字を設定します．
+%   \item
+%     \meta{textpos}はmuslineでの文字の出力される上(u)，下(dまたはl)を
+%     設定します．
+%     規定値は上(u)です．
+%   \end{itemize}
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{start pitch}はmuslineの出力される始点の高さを設定します．
+% \end{itemize}
+% 設定されたパラメータは\cmd{\musline@}から始まる
+% 各マクロあるいはレジスタに（グローバルに）定義あるいは代入されます．
+%    \begin{macrocode}
+%% \gcmc@i@musline
+%%   #1=key-val{hoffset[\qn@width], voffset, text, textpos}
+%%   #2=musline id
+%%   #3=start pitch[\internote]
+\def\gcmc@i@musline[#1]#2#3{%
+  \global\advance\N@musline\@ne % update musline counter
+  \s@l@ctmusline#2\relax
+  % test for already invoked \islur
+  \if x\the\musline@s \else\errmessage{\@mis\noexpand\tmusline#2}\fi
+  \setkeys[gcmc]{imusline}{#1}%
+  \global\musline@Y\cmdgcmc@imusline@voffset% store start voffset
+  \expandafter\global\expandafter\musline@s\expandafter
+    {\cmdgcmc@imusline@textpos}%  store sense (u,d)
+  \expandafter\global\expandafter\musline@t\expandafter
+    {\cmdgcmc@imusline@text}%     store text
+  \global\musline@N\noinstrum@nt% store instrument number
+  \inhgetn@i#3\relax
+  \global\musline@y\n@i %         start vpos (steps of internote)
+  \global\musline@a\altportee %   store altportee of current slur
+  \getcurpos
+  \advance\y@v\cmdgcmc@imusline@hoffset
+  \advance\y@v\cmdgcmc@imusline@hpos\qn@width
+  \global\musline@x\y@v %         start hpos
+  \endgroup\fi%
+}
+%    \end{macrocode}
+% \end{macro}
+% \subparagraph{終点}
+% \begin{keyvalkey}{hoffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{tmusline}{hoffset}[\z@]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% \begin{keyvalkey}{hpos}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{tmusline}{hpos}[-0.5]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% \begin{keyvalkey}{voffset}
+% コマンドキーを定義します．
+%    \begin{macrocode}
+\define@cmdkey[gcmc]{tmusline}{voffset}[\z@]{}
+%    \end{macrocode}
+% \end{keyvalkey}
+% 定義したコマンドキーをプリセットとします．
+%    \begin{macrocode}
+\presetkeys[gcmc]{tmusline}{hoffset,hpos,voffset}{}
+%    \end{macrocode}
+% \begin{macro}{\tmusline}\oarg{key-val}\marg{id}\marg{end pitch}\par
+% muslineの終点を設定します．
+% \begin{itemize}
+% \item \meta{key-val}は様々なオプションを設定します．
+%   \begin{itemize}
+%   \item
+%     \meta{hoffset}は終点の水平位置から右へずらす長さを設定します．
+%   \item
+%     \meta{hpos}は終点の水平位置から右へずらす長さの係数を設定します．
+%     単位は符頭の長さ\cmd{\qn@width}です．
+%     既定値は\texttt{-0.5}です．
+%   \item
+%     \meta{voffset}は終点の高さから上へずらす長さを設定します．
+%   \end{itemize}
+% \item \meta{id}は参照するmusline IDを設定します．
+% \item \meta{end pitch}はmuslineの出力される終端部の高さを設定します．
+% \end{itemize}
+%    \begin{macrocode}
+\def\tmusline{\@ifnextchar[%]
+  {%
+    \t@musline%
+  }{%
+    \t@musline[]%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\t@musline}\oarg{key-val}\marg{id}\marg{end pitch}\par
+%    \begin{macrocode}
+%% \t@musline #1=key-val #2=reference number #3=end note
+\def\t@musline[#1]#2#3{%
+  \check@staff
+    \s@l@ctmusline#2\relax
+%    \end{macrocode}
+% \begin{itemize}
+% \item
+%   \cmd{\y@iv}: \meta{hoffset}.
+% \item
+%   \cmd{\@sense}: \cmd{\musline@s}.
+% \item
+%   \cmd{\y@v}: \meta{duration from x1 to x2}.
+% \end{itemize}
+%    \begin{macrocode}
+    \setkeys[gcmc]{tmusline}{#1}%
+    \y@iv\dimexpr\cmdgcmc@tmusline@hoffset+\cmdgcmc@tmusline@hpos\qn@width\relax
+    \def\@sense{\the\musline@s}%
+% test for missing \ibkt
+    \if x\@sense \errmessage{\@mis\noexpand\imusline#2}\fi
+% compute length
+    \getcurpos
+    \advance\y@v\y@iv
+% eoline
+    \y@eol\advance\y@-\beforeruleskip
+% clip musline at eoline
+    \ifdim\y@v>\y@ \y@v\y@ \advance\y@v\beforeruleskip \y@iv\beforeruleskip \fi
+    \advance\y@v-\musline@x
+    \inhgetn@i#3\relax
+    \write@musline{\musline@y}{\n@i}{\y@v}{-\y@iv}%
+% reset sense of musline
+    \global\musline@s{x}\let\T@i\empty
+    \global\advance\N@musline\m@ne% update slur counter
+  \fi
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\write@musline}
+% muslineの描画部分です．
+%    \begin{macrocode}
+% #1 start pitch #2 end pitch #3 length #4 right hoffset
+\def\write@musline#1#2#3#4{%
+  \check@staff %
+    \ifx\musline@N\undefined
+      \relax %
+    \else
+      \edef\internote{\csname i@n\romannumeral\musline@N\endcsname}%
+    \fi
+    \n@iv#1%
+    \n@vi#2%
+    \y@iii#3%
+%%
+%%   Get note vertical offsets
+%%   \n@iv=   vertical offset of first  note(n@i temp);
+%%   \n@vi=   vertical offset of second note(n@ii temp);
+%%   \y@i =   reference height of first note (pt);
+%%   \y@ii=   reference height of end note (pt);
+%%   \y@iii=  musline length (pt);
+%%
+    \n@i\n@vi \pl@base \y@ii\y@i \n@ii\n@vi% \y@ii = end height
+    \n@i\n@iv \pl@base % \y@i = initial height
+    \advance\y@i \musline@Y% add the voffsets
+    \advance\y@ii\cmdgcmc@tmusline@voffset% add the voffsets
+    \ifx\@Ti\@ne
+      \advance\y@i\musline@a
+      \advance\y@ii\musline@a
+      \let\@Ti\empty
+    \fi% call from cutslur
+%%
+%% draw musline
+%%
+    \llap{%
+      \tikz[baseline=0.0ex]{%
+        \draw[semithick]
+          (0,\y@i)-- (\y@iii,\y@ii);
+        \if u\the\musline@s
+          \node at ($(\h@lf\y@iii,\y@ii)+(0,\internote)$)
+          [above]
+          {\the\musline@t};
+        \else
+          \if d\the\musline@s
+            \node at ($(\h@lf\y@iii,\y@ii)-(0,\internote)$)
+            [below]
+            {\the\musline@t};
+          \else
+            \if l\the\musline@s
+              \node at ($(\h@lf\y@iii,\y@ii)-(0,\internote)$)
+              [below]
+              {\the\musline@t};
+            \else
+              \PackageError{gcmcline}
+                           {unexpacted sence \the\musline@s: u, d or l}%
+            \fi
+          \fi
+        \fi
+      }%
+      \hspace{-\y@iv}%
+    }%
+  \fi
+} % end writ@musline
+\setmaxmuslines6
+
+%</musline>
+%    \end{macrocode}
+% \end{macro}
 % \subsection{\cmd{\z@suspend}へのpatch}
 % \paragraph{概説}
 % スラーの中断やbracketの中断を追加したためそれに対処します．
@@ -1958,6 +2381,7 @@
 % \changes{v1.5.3}{2025/11/15}
 %    {スラーの中断のマクロ化．}
 %    \begin{macrocode}
+%<*musixtex>
 \def\bell@z@suspend@slur{%
 %%cut tikz slurs
 %%\tracingmacros2%

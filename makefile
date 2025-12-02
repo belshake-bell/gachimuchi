@@ -46,10 +46,10 @@ gachimuchi.cls: gachimuchi.dtx gachimuchi.ins
 gachimuchimacro.sty: gachimuchimacro.dtx gachimuchimacro.ins
 	pdflatex gachimuchimacro.ins
 
-gachimuchipatch.sty: gachimuchipatch.dtx gachimuchipatch.ins gcmcline.dtx
+gachimuchipatch.sty: gachimuchipatch.dtx gachimuchipatch.ins
 	pdflatex gachimuchipatch.ins
 
-gcmcline.sty: gcmcline.dtx gcmcline.ins
+gcmcline.sty: gachimuchipatch.dtx gcmcline.ins
 	pdflatex gcmcline.ins
 
 
