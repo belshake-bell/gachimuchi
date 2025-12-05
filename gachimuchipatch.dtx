@@ -45,9 +45,11 @@
 \RecordChanges                  % Gather update information
 \setcounter{StandardModuleDepth}{1}
 
+\NewDocElement[printtype=key]{Keyvalkey}{keyvalkey}
 \makeatletter
 \def\TikZ{Ti\emph{k}Z}
 \newcommand*{\file}[1]{\texttt{#1}}
+\newrobustcmd*{\pkg}[1]{\mbox{\sffamily#1}}
 \newcommand*{\Lcount}[1]{\textsl{\small#1}}
 \newcommand*{\Lopt}[1]{\textsf{#1}}
 \newcounter{@clineno}
@@ -1957,6 +1959,7 @@
 % （未実装）シンプルなbracket用マクロです．
 % ただし名前被りをどう避けるかが思いついてないので未実装です．
 % \end{macro}
+%    \begin{macrocode}
 %</musixtex>
 %<*musline>
 %    \end{macrocode}

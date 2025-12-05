@@ -1,6 +1,6 @@
 TEXMFLOCAL = $(shell kpsewhich --var-value TEXMFLOCAL)
-STRIPTARGET = gachimuchi.cls gachimuchimacro.sty gachimuchipatch.sty gcmcline.sty
-DOCTARGET = gachimuchi gachimuchimacro gachimuchipatch gcmcline
+STRIPTARGET = gachimuchi.cls gachimuchimacro.sty gachimuchipatch.sty
+DOCTARGET = gachimuchi gachimuchimacro gachimuchipatch
 PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
 DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
 LATEXENGINE := uplatex #lualatex
