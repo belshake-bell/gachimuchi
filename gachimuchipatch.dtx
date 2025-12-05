@@ -835,15 +835,17 @@
 % \subsection{連桁改修}\label{連桁改修}
 % \paragraph{概説}
 % 連桁のフォントを現在の\cmd{\musixfont}ではなく
-% \cmd{\musicsixteen}を参照するようにします．
+% \cmd{\musictwenty}を参照するようにします．
 % 連桁はどのフォントも同じサイズなのですが，スケールさせて定義したフォントでは
 % 描画が崩れてしまうのでスケール指定されていないものの連桁を表示させることで
 % 対処するものです．
 % これによってより小さなフォントで楽譜を表示できるようになります．
 % \paragraph{実装}
 % \begin{macro}{\@beam}
+% \changes{v1.6.3-alpha.1}{2025/12/05}
+%    {連桁の参照フォントを\cmd{\musixsixteen}から\cmd{\musictwenty}に変更．}
 % 出力される連桁として\cmd{\chardef}される\cmd{\b@alk}で参照するフォントを
-% \cmd{\musixfont}から\cmd{\musixsixteen}に変更します．
+% \cmd{\musixfont}から\cmd{\musictwenty}に変更します．
 %    \begin{macrocode}
 %% 連桁改修 %%
 \def\@beam{% \y@ii : longueur, \b@p : pente, \y@i : altitude
@@ -861,7 +863,7 @@
     \b@adjust \b@adjust \b@adjust \b@adjust \b@adjust
     \advance\n@vi128
 %   \chardef\b@alk\n@vi\musixfont
-    \chardef\b@alk\n@vi\musicsixteen
+    \chardef\b@alk\n@vi\musictwenty
 %
 %    \curwidth=0pt \curheight=\y@i \curxpos=\completewidth
 %    \loop\ifdim\curwidth<\completewidth
