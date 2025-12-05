@@ -1,17 +1,18 @@
-TEXMFLOCAL = $(shell kpsewhich --var-value TEXMFLOCAL)
-STRIPTARGET = gachimuchi.cls gachimuchimacro.sty gachimuchipatch.sty
-DOCTARGET = gachimuchi gachimuchimacro gachimuchipatch
-PDFTARGET = $(addsuffix .pdf,$(DOCTARGET))
-DVITARGET = $(addsuffix .dvi,$(DOCTARGET))
+TEXMFLOCAL   = $(shell kpsewhich --var-value TEXMFLOCAL)
+STRIPTARGET  = gachimuchi.cls gachimuchimacro.sty gachimuchipatch.sty
+DOCTARGET    = gachimuchi gachimuchimacro gachimuchipatch
+PDFTARGET    = $(addsuffix .pdf,$(DOCTARGET))
+DVITARGET    = $(addsuffix .dvi,$(DOCTARGET))
 LATEXENGINE := uplatex #lualatex
-LOGSUFFIXES = .aux .log .toc .mx1 .mx2 .bcf .bbl .blg .idx .ind .ilg .out .run.xml .glo .gls .hd
+LATEXOpt    := -interaction batchmode
+LOGSUFFIXES  = .aux .log .toc .mx1 .mx2 .bcf .bbl .blg .idx .ind .ilg .out .run.xml .glo .gls .hd
 
 define move
 	$(foreach tempsuffix,$(LOGSUFFIXES),$(call movebase,$1,$(tempsuffix)))
 	
 endef
 define movebase
-	if [ -e $(addsuffix $2,$1) ]; then mv $(addsuffix $2,$1) ./logs; fi
+	@if [ -e $(addsuffix $2,$1) ]; then mv $(addsuffix $2,$1) ./logs; fi
 	
 endef
 
@@ -20,7 +21,7 @@ define remove
 	
 endef
 define removebase
-	if [ -e $(addsuffix $2,$1) ]; then rm -f $(addsuffix $2,$1) ; fi
+	@if [ -e $(addsuffix $2,$1) ]; then rm -f $(addsuffix $2,$1) ; fi
 	
 endef
 
@@ -56,46 +57,43 @@ gcmcline.sty: gachimuchipatch.dtx gcmcline.ins
 .SUFFIXES: .dtx .dvi .pdf
 
 ifeq ($(LATEXENGINE),lualatex)
-.dtx.pdf:
-	lualatex $<
-	makeindex -s gind.ist $(basename $<)
-	makeindex -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<))
-	lualatex -synctex=1 $<
-	rm -f $(addsuffix .toc,$(basename $<)) \
-	$(addsuffix .out,$(basename $<)) \
-	$(addsuffix .aux,$(basename $<))
-else
-.dtx.dvi:
-	uplatex $<
-	if [ -e $(basename $<).idx ]; then makeindex -s gind.ist $(basename $<); fi
+%.pdf: %.dtx
+	lualatex $(LATEXOpt) $<
+	if [ -e $(basename $<).idx ]; then makeindex -q -s gind.ist $(basename $<); fi
 	if [ -e $(basename $<).glo ];\
-		then makeindex -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<)); fi
-	uplatex -synctex=1 $<
+		then makeindex -q -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<)); fi
+	lualatex $(LATEXOpt) -synctex=1 $<
+	$(MAKE) movelog DOCTARGET=$(basename $(notdir $<))
+else
+%.dvi: %.dtx
+	$(LATEXENGINE) $(LATEXOpt) $<
+	if [ -e $(basename $<).idx ]; then makeindex -q -s gind.ist $(basename $<); fi
+	if [ -e $(basename $<).glo ];\
+		then makeindex -q -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<)); fi
+	$(LATEXENGINE) $(LATEXOpt) -synctex=1 $<
 	$(MAKE) movelog DOCTARGET=$(basename $(notdir $<))
 
-.dvi.pdf:
+%.pdf: %.dvi
 	dvipdfmx $<
 endif
 
 install: $(STRIPTARGET) $(PDFTARGET)
-	mkdir -p $(TEXMFLOCAL)/tex/platex/bellMacros
+	@mkdir -p $(TEXMFLOCAL)/tex/platex/bellMacros
 	install $(STRIPTARGET) $(TEXMFLOCAL)/tex/platex/bellMacros
-	mkdir -p $(TEXMFLOCAL)/doc/platex/bellMacros
+	@mkdir -p $(TEXMFLOCAL)/doc/platex/bellMacros
 	install $(PDFTARGET) $(TEXMFLOCAL)/doc/platex/bellMacros
 
 movelog:
-	mkdir -p ./logs
+	@mkdir -p ./logs
 	$(foreach temp,$(DOCTARGET),$(call move,$(temp)))
 
 clean:
 	$(foreach temp,$(DOCTARGET),$(call remove,$(temp)))
 
 cleanall:
-	rm -f $(PDFTARGET) \
-	$(DVITARGET) \
-	$(STRIPTARGET) \
+	@rm -f $(PDFTARGET) $(DVITARGET) $(STRIPTARGET)
 	make clean
 
 makelog:
-	git log --graph --date=short --all --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log_all.gitlog"
-	git log --graph --date=short       --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log.gitlog"
+	@git log --graph --date=short --all --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log_all.gitlog"
+	@git log --graph --date=short       --pretty="format:(%C(yellow)%h) %C(cyan)%ad \"%C(green)%an\"%C(reset)%x09%C(red)%d%C(reset) %s" 1> "log.gitlog"
