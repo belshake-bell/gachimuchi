@@ -15,7 +15,7 @@ define move
 	
 endef
 define movebase
-	if [ -e $(addsuffix $2,$1) ]; then mv $(addsuffix $2,$1) ./logs; fi
+	@if [ -e $(addsuffix $2,$1) ]; then mv $(addsuffix $2,$1) ./logs; fi
 	
 endef
 
@@ -48,7 +48,7 @@ makeindex: $(MDXTARGET)
 	upmendex -s gcmc.ist -d dictU.dic -f $(notdir $<)
 
 movelog:
-	mkdir -p ./logs
+	@mkdir -p ./logs
 	$(foreach temp,$(TARGET),$(call move,$(temp)))
 
 clean:

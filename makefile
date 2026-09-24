@@ -63,7 +63,7 @@ ifeq ($(LATEXENGINE),lualatex)
 	if [ -e $(basename $<).glo ];\
 		then makeindex -q -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<)); fi
 	lualatex $(LATEXOpt) -synctex=1 $<
-	$(MAKE) movelog DOCTARGET=$(basename $(notdir $<))
+#	$(MAKE) movelog DOCTARGET=$(basename $(notdir $<))
 else
 %.dvi: %.dtx
 	$(LATEXENGINE) $(LATEXOpt) $<
@@ -71,7 +71,7 @@ else
 	if [ -e $(basename $<).glo ];\
 		then makeindex -q -s gglo.ist -o $(addsuffix .gls,$(basename $<)) $(addsuffix .glo,$(basename $<)); fi
 	$(LATEXENGINE) $(LATEXOpt) -synctex=1 $<
-	$(MAKE) movelog DOCTARGET=$(basename $(notdir $<))
+#	$(MAKE) movelog DOCTARGET=$(basename $(notdir $<))
 
 %.pdf: %.dvi
 	dvipdfmx $<
