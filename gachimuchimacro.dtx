@@ -2035,14 +2035,30 @@
 %% 和声記号配置(musixtex依存)
 %%==============================================================================
 %    \end{macrocode}
+% \begin{macro}{\zchord}
+% 和声記号用にやや左方向にシフトした文字出力をします．
 %    \begin{macrocode}
 \newcommand{\zchord}{\check@staff\begingroup\endcatcodesmusic\@zchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lchord}
+%    \begin{macrocode}
 \newcommand{\lchord}{\check@staff\begingroup\endcatcodesmusic\@lchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\cchord}
+%    \begin{macrocode}
 \newcommand{\cchord}{\cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lrchord}
+%    \begin{macrocode}
 \newcommand{\lrchord}{%
   \check@staff\begingroup\endcatcodesmusic\catcode\`&=4\@lrchord}
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Factory@chord}
 %    \begin{macrocode}
 \def\gcmc@Factory@chord#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka chordl}%
@@ -2060,6 +2076,7 @@
 }
 
 %    \end{macrocode}
+% \end{macro}
 %    \begin{macrocode}
 \gcmc@Factory@chord{z}
 \gcmc@Factory@chord{l}
@@ -2067,13 +2084,28 @@
 \gcmc@Factory@chord{lr}
 
 %    \end{macrocode}
+% \begin{macro}{\zchords}
 %    \begin{macrocode}
 \newcommand{\zchords}{\check@staff\begingroup\endcatcodesmusic\small\@zchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lchords}
+%    \begin{macrocode}
 \newcommand{\lchords}{\check@staff\begingroup\endcatcodesmusic\small\@lchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\cchords}
+%    \begin{macrocode}
 \newcommand{\cchords}{\check@staff\begingroup\endcatcodesmusic\small\@cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lrchords}
+%    \begin{macrocode}
 \newcommand{\lrchords}{\check@staff\begingroup\endcatcodesmusic\small\@lrchord}
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Factory@chords}
 %    \begin{macrocode}
 \def\gcmc@Factory@chords#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka chordsl}%
@@ -2091,6 +2123,7 @@
 }
 
 %    \end{macrocode}
+% \end{macro}
 %    \begin{macrocode}
 \gcmc@Factory@chords{z}
 \gcmc@Factory@chords{l}
@@ -2098,17 +2131,32 @@
 \gcmc@Factory@chords{lr}
 
 %    \end{macrocode}
+% \begin{macro}{\zchordf}
 %    \begin{macrocode}
 \newcommand{\zchordf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@zchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lchordf}
+%    \begin{macrocode}
 \newcommand{\lchordf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\cchordf}
+%    \begin{macrocode}
 \newcommand{\cchordf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lrchordf}
+%    \begin{macrocode}
 \newcommand{\lrchordf}
   {\check@staff\begingroup\endcatcodesmusic\footnotesize\@lrchord}
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Factory@chordf}
 %    \begin{macrocode}
 \def\gcmc@Factory@chordf#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka chordfl}%
@@ -2126,6 +2174,7 @@
 }
 
 %    \end{macrocode}
+% \end{macro}
 %    \begin{macrocode}
 \gcmc@Factory@chordf{z}
 \gcmc@Factory@chordf{l}
@@ -2133,17 +2182,32 @@
 \gcmc@Factory@chordf{lr}
 
 %    \end{macrocode}
+% \begin{macro}{\zchordsc}
 %    \begin{macrocode}
 \newcommand{\zchordsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@zchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lchordsc}
+%    \begin{macrocode}
 \newcommand{\lchordsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lchord}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\cchordsc}
+%    \begin{macrocode}
 \newcommand{\cchordsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@cchar}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\lrchordsc}
+%    \begin{macrocode}
 \newcommand{\lrchordsc}
   {\check@staff\begingroup\endcatcodesmusic\scriptsize\@lrchord}
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\gcmc@Factory@chordsc}
 %    \begin{macrocode}
 \def\gcmc@Factory@chordsc#1{\gcmc@test@temptoka{#1}%
   \csedef{\the\gcmc@test@temptoka chordscl}%
@@ -2161,6 +2225,7 @@
 }
 
 %    \end{macrocode}
+% \end{macro}
 %    \begin{macrocode}
 \gcmc@Factory@chordsc{z}
 \gcmc@Factory@chordsc{l}
@@ -2168,6 +2233,7 @@
 \gcmc@Factory@chordsc{lr}
 
 %    \end{macrocode}
+% \begin{macro}{\@lrchord}
 %    \begin{macrocode}
 \newcommand{\@lrchord}[2]{%
   \def\reserved@a{#1}\def\reserved@b{#2}%
@@ -2176,13 +2242,24 @@
 }
 
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@zchord}
 %    \begin{macrocode}
 \newcommand{\@zchord}[2]{\@zchar{#1}{\hspace{-.1\wn@width}#2}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\@lchord}
+%    \begin{macrocode}
 \newcommand{\@lchord}[2]{\@lchar{#1}{#2\hspace{.1\wn@width}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\bell@lrchord}
+%    \begin{macrocode}
 \def\bell@lrchord#1&#2\af@chord{%
   \lchord{\reserved@a}{#1}\zchord{\reserved@a}{#2}}
 
 %    \end{macrocode}
+% \end{macro}
 % \subsection{\FigureBass}
 %    \begin{macrocode}
 %%==============================================================================
